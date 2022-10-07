@@ -1,0 +1,489 @@
+{
+  "summary": {
+    "stats": {
+      "count": 16,
+      "occurrences": 18,
+      "hint": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "info": {
+        "count": 1,
+        "occurrences": 1,
+        "rules": {
+          "oas2-get-collection-sort-parameter": 1
+        }
+      },
+      "warning": {
+        "count": 10,
+        "occurrences": 11,
+        "rules": {
+          "authenticate-requests": 1,
+          "contact-properties": 1,
+          "license-url": 1,
+          "oas2-get-collection-max-parameter-link-header-required-possible": 2,
+          "openapi-tags": 1,
+          "operation-default-response": 1,
+          "operation-operationId": 1,
+          "operation-tags": 1,
+          "reason-phrase": 1,
+          "tracking-id-header-requirement": 1
+        }
+      },
+      "error": {
+        "count": 5,
+        "occurrences": 6,
+        "rules": {
+          "date-response-header-requirement": 1,
+          "oas2-collections-returned-as-arrays": 1,
+          "oas2-get-collection-max-parameter-link-header-required-likely": 2,
+          "oas2-https-only": 1,
+          "oas2-path-based-versioning-error": 1
+        }
+      }
+    }
+  },
+  "findings": {
+    "error": {
+      "rules": {
+        "date-response-header-requirement": {
+          "message": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+          "mitigation": "Please add a date header for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200"
+              ],
+              "range": {
+                "start": {
+                  "line": 34,
+                  "column": 17
+                },
+                "end": {
+                  "line": 34,
+                  "column": 17
+                }
+              }
+            }
+          ]
+        },
+        "oas2-collections-returned-as-arrays": {
+          "message": "Collections are returned as arrays encapsulated with a named field such as 'items'.",
+          "mitigation": "Please update response for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200",
+                "schema",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 37,
+                  "column": 23
+                },
+                "end": {
+                  "line": 37,
+                  "column": 23
+                }
+              }
+            }
+          ]
+        },
+        "oas2-get-collection-max-parameter-link-header-required-likely": {
+          "message": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+          "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            },
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200"
+              ],
+              "range": {
+                "start": {
+                  "line": 34,
+                  "column": 17
+                },
+                "end": {
+                  "line": 34,
+                  "column": 17
+                }
+              }
+            }
+          ]
+        },
+        "oas2-https-only": {
+          "message": "My API supports HTTPS only.",
+          "mitigation": "Please use HTTPS.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "schemes",
+                "0"
+              ],
+              "range": {
+                "start": {
+                  "line": 18,
+                  "column": 5
+                },
+                "end": {
+                  "line": 18,
+                  "column": 5
+                }
+              }
+            }
+          ]
+        },
+        "oas2-path-based-versioning-error": {
+          "message": "API uses path-based versioning.",
+          "mitigation": "Please update headers for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [],
+              "range": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hint": {
+      "rules": null
+    },
+    "info": {
+      "rules": {
+        "oas2-get-collection-sort-parameter": {
+          "message": "Sorting collections is designed with a 'sort' query parameter.",
+          "mitigation": "Please use `sort` query parameter for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "warning": {
+      "rules": {
+        "authenticate-requests": {
+          "message": "API.REST.SECURITY.03: My API authenticates and authorizes all requests",
+          "mitigation": "Please update authentication for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            }
+          ]
+        },
+        "contact-properties": {
+          "message": "Contact object should have `name`, `url` and `email`.",
+          "mitigation": "Please update contact object.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "info",
+                "contact"
+              ],
+              "range": {
+                "start": {
+                  "line": 8,
+                  "column": 15
+                },
+                "end": {
+                  "line": 8,
+                  "column": 15
+                }
+              }
+            }
+          ]
+        },
+        "license-url": {
+          "message": "License object should include `url`.",
+          "mitigation": "Please add url in license object",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "info",
+                "license"
+              ],
+              "range": {
+                "start": {
+                  "line": 11,
+                  "column": 15
+                },
+                "end": {
+                  "line": 11,
+                  "column": 15
+                }
+              }
+            }
+          ]
+        },
+        "oas2-get-collection-max-parameter-link-header-required-possible": {
+          "message": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+          "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            },
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200"
+              ],
+              "range": {
+                "start": {
+                  "line": 34,
+                  "column": 17
+                },
+                "end": {
+                  "line": 34,
+                  "column": 17
+                }
+              }
+            }
+          ]
+        },
+        "openapi-tags": {
+          "message": "OpenAPI object should have non-empty `tags` array.",
+          "mitigation": "Please add tag values for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [],
+              "range": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            }
+          ]
+        },
+        "operation-default-response": {
+          "message": "Operations must have a default response.",
+          "mitigation": "Please add a default response for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 21
+                },
+                "end": {
+                  "line": 33,
+                  "column": 21
+                }
+              }
+            }
+          ]
+        },
+        "operation-operationId": {
+          "message": "Operation should have an `operationId`.",
+          "mitigation": "Please add operationId for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            }
+          ]
+        },
+        "operation-tags": {
+          "message": "Operation should have non-empty `tags` array.",
+          "mitigation": "Please add operation tag values for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 13
+                },
+                "end": {
+                  "line": 28,
+                  "column": 13
+                }
+              }
+            }
+          ]
+        },
+        "reason-phrase": {
+          "message": "Reason phrase needs to match",
+          "mitigation": "Please update reason phrase for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200",
+                "description"
+              ],
+              "range": {
+                "start": {
+                  "line": 35,
+                  "column": 28
+                },
+                "end": {
+                  "line": 35,
+                  "column": 28
+                }
+              }
+            }
+          ]
+        },
+        "tracking-id-header-requirement": {
+          "message": "All responses must include a 'TrackingID' header.",
+          "mitigation": "Please add a `TrackingID` response header for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200"
+              ],
+              "range": {
+                "start": {
+                  "line": 34,
+                  "column": 17
+                },
+                "end": {
+                  "line": 34,
+                  "column": 17
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

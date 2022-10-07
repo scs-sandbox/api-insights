@@ -1,0 +1,743 @@
+{
+  "compliance": {
+    "compliant": true,
+    "profilescompliance": []
+  },
+  "description": null,
+  "identifier": "e7f445d4-8d8e-4ffb-b7d5-d8e0291e957c",
+  "link_doc": null,
+  "name": "playground.api.apiregistry",
+  "risk": "UNKNOWN",
+  "score": {
+    "api": {
+      "additional_info": [],
+      "api": null,
+      "avg_vulnerability_duration": 0,
+      "categories": {
+        "api-specification": {
+          "additional_info": [],
+          "confidence": "MEDIUM",
+          "counters_history": {
+            "critical": [
+              1
+            ],
+            "high": [
+              2
+            ],
+            "low": [
+              1
+            ],
+            "medium": [
+              12
+            ],
+            "unclassified": [
+              1
+            ],
+            "timestamp": [
+              "2022-08-17T05:48:12.952"
+            ]
+          },
+          "critical": {
+            "count": 1,
+            "findings": [
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "SAN001",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get"
+                    ],
+                    "severity": "CRITICAL",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 5,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "critical",
+                    "crankshaft_class_id": "3b4d4b32-1fec-4c5f-92d4-b8acb7ddf765",
+                    "crankshaft_severity": "CRITICAL",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the spec does not define neither a global nor a operation specific security scheme. It is highly recommended that all API operations support a security scheme, which means supporting proper authentication and authorization. \nIn principle this can be achieved without a global security scheme, by specifying a security scheme for each API operation. However it is a good practice to have a global one instead of individual ones. This makes maintenance easy and avoids that new API operations are added without any security scheme association.",
+                "mitigation": "Make sure all API operations have a security scheme associated and as a good practice add a global security scheme.",
+                "name": "Missing security scheme both in operation and globally",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "3b4d4b32-1fec-4c5f-92d4-b8acb7ddf765"
+              }
+            ]
+          },
+          "high": {
+            "count": 2,
+            "findings": [
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"/\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "SAN002",
+                    "location": [
+                      "/"
+                    ],
+                    "severity": "HIGH",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 7,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "high",
+                    "crankshaft_class_id": "196fdf77-f17b-4685-a6e3-e82a322814e5",
+                    "crankshaft_severity": "HIGH",
+                    "crankshaft_category": "api-specification"
+                  }
+                ],
+                "description": "Spec analyzer detected that the spec does not define a  security definition. It is highly recommended that all API operations support a security definition, which means supporting proper authentication and authorization. ",
+                "mitigation": "Make sure all API operations have a security definition associated.",
+                "name": "Missing Security Definition ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "196fdf77-f17b-4685-a6e3-e82a322814e5"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\", 200, \"schema\", \"type\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "TDT001",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses",
+                      200,
+                      "schema",
+                      "type"
+                    ],
+                    "severity": "HIGH",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 16,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "high",
+                    "crankshaft_class_id": "d306a6ea-01d0-4549-a21c-bf30727a3953",
+                    "crankshaft_severity": "HIGH",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']['200']['schema']['type']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the definition of an array  attribute carried in an API operation does not specify the maximum length.\nThis prevents client and server to have an upperbound on the array lenght they can expect, which make them expose to possible buffer overflow attacks. ",
+                "mitigation": "Make sure all array definition include the maximum length.\n",
+                "name": "Missing max for array length",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "d306a6ea-01d0-4549-a21c-bf30727a3953"
+              }
+            ]
+          },
+          "low": {
+            "count": 1,
+            "findings": [
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"/\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "SAN029",
+                    "location": [
+                      "/"
+                    ],
+                    "severity": "low",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 6,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "low",
+                    "crankshaft_class_id": "02e7293f-d0ba-4b24-86d6-a91766b89a4c",
+                    "crankshaft_severity": "low",
+                    "crankshaft_category": "api-specification"
+                  }
+                ],
+                "description": "Spec analyzer detected that the spec does not define a global security scheme. It is highly recommended that all API operations support a security scheme, which means supporting proper authentication and authorization. \nIn principle this can be achieved without a global security scheme, by specifying a security scheme for each API operation. However it is a good practice to have a global one instead of individual ones. This makes maintenance easy and avoids that new API operations are added without any security scheme association.",
+                "mitigation": "Make sure all API operations have a global security scheme defined.",
+                "name": "Missing global security scheme ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "02e7293f-d0ba-4b24-86d6-a91766b89a4c"
+              }
+            ]
+          },
+          "medium": {
+            "count": 12,
+            "findings": [
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "RDT002",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 0,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "e4443eb7-a97c-412a-9ac5-cd33735d11b4",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']"
+                  }
+                ],
+                "description": "Specifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error. All operations, but HEAD operation, must support the  client error  status-code  -400 Bad Request-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+                "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+                "name": "Missing response  definition for 400  status-code. ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "e4443eb7-a97c-412a-9ac5-cd33735d11b4"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "RDT003",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 1,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "3d821bc0-66fa-4dfa-ad23-0a5630f6ca82",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']"
+                  }
+                ],
+                "description": "Specifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error.  All operations for methods GET, PUT, HEAD, and DELETE  must support the client error  status-code -404  Not Found-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+                "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+                "name": "Missing response  definition for 404  status-code. ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "3d821bc0-66fa-4dfa-ad23-0a5630f6ca82"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "RDT005",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 2,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "f2219677-a4d7-4801-b71b-0702b3b79b82",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']"
+                  }
+                ],
+                "description": "Specifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error. All operations, but HEAD operation, must support the  client error  status-code -429 Too Many Requests-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+                "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+                "name": "Missing response  definition for 429  status-code. ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "f2219677-a4d7-4801-b71b-0702b3b79b82"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "RDT006",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 3,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "35ad374f-0587-461d-90c3-c968efd4952b",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']"
+                  }
+                ],
+                "description": "Specifications must always include response  definitions for all supported  status-codes. \n5xx status-codes are used to signal the failure of an API operation because of a server error. All operations, but HEAD operation, must support the  client error  status-code -500 Internal Server Error-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+                "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+                "name": "Missing response  definition for 500  status-code. ",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "35ad374f-0587-461d-90c3-c968efd4952b"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\", \"responses\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "RDT015",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get",
+                      "responses"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 4,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "f76ded35-e7c9-42f6-993d-8fb49c1b3104",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']['responses']"
+                  }
+                ],
+                "description": "Specifications must always include response  definitions for all supported  status-codes. \nIt's a good practice to add a default response definitions for all status-codes that are supported but not explicitely defined.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+                "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+                "name": "Missing default response definition",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "f76ded35-e7c9-42f6-993d-8fb49c1b3104"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"schemes\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "STR001",
+                    "location": [
+                      "schemes"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 8,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "246468f9-b0d0-4fc9-a329-b77becda3109",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['schemes']"
+                  }
+                ],
+                "description": "It is highly recommended to use encrypted transport, i.e. HTTPS,  for all API operations. Unencrypted transport allows for anyone able to watch traffic to access all data being transported. Such access may cause sensitive data leakage and moreover gives the ability  to gain information that could be exploited to attack API clients and servers.\n\n",
+                "mitigation": "Make sure only encrypted transport (HTTPS) is allowed , i.e. server schemes only allow for https traffic.\n",
+                "name": "Unencrypted transport",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "246468f9-b0d0-4fc9-a329-b77becda3109"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"id\", \"type\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "TDT004",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "id",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 10,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "3ea97caa-7bf5-4ee1-8076-ddc2410a09ec",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['id']['type']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the definition of a numeric attribute carried in an API operation does not specify the maximum value.\nAll attributes carried over API operations should be specified as precisely as possible, to allow API clients and servers to perform accurate attribue validation.\nLoosely specified attributes prevent rigorous automatic validation checks on requests and responses, allowing malicious clients (or servers) to attempt triggering unexpected behaviors on servers (or client) which could be potentially exploited for various attacks.",
+                "mitigation": "Make sure all numeric attribute definition include the maximum value.",
+                "name": "Missing maximum value for a numeric attribute",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "3ea97caa-7bf5-4ee1-8076-ddc2410a09ec"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"id\", \"type\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "TDT005",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "id",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 11,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "dec8bdf9-19f8-4732-8229-30577d61b44d",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['id']['type']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the definition of a numeric attribute carried in an API operation does not specify the minumum value.\nAll attributes carried over API operations should be specified as precisely as possible, to allow API clients and servers to perform accurate attribue validation.\nLoosely specified attributes prevent rigorous automatic validation checks on requests and responses, allowing malicious clients (or servers) to attempt triggering unexpected behaviors on servers (or client) which could be potentially exploited for various attacks.",
+                "mitigation": "Make sure all numeric attribute definition include the minimum value.",
+                "name": "Missing minimum value for a numeric attribute",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "dec8bdf9-19f8-4732-8229-30577d61b44d"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"name\", \"type\"]"
+                    }
+                  },
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"tag\", \"type\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "TDT007",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "name",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 12,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "53e2fde1-032c-42b5-8b48-cdf983885aeb",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['name']['type']"
+                  },
+                  {
+                    "code": "TDT007",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "tag",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 13,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "53e2fde1-032c-42b5-8b48-cdf983885aeb",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['tag']['type']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the definition of an array  attribute carried in an API operation does not specify the maximum length.\nThis prevents client and server to have an upperbound on the array lenght they can expect, which make them expose to possible buffer overflow attacks. ",
+                "mitigation": "Make sure all array definition include the maximum length.\n",
+                "name": "Missing max for array length",
+                "occurrences": 2,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "53e2fde1-032c-42b5-8b48-cdf983885aeb"
+              },
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"name\", \"type\"]"
+                    }
+                  },
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"definitions\", \"Pet\", \"properties\", \"tag\", \"type\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "TDT008",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "name",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 14,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "3f2d1ef6-930a-48ca-95a8-a3b9eb4d4832",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['name']['type']"
+                  },
+                  {
+                    "code": "TDT008",
+                    "location": [
+                      "definitions",
+                      "Pet",
+                      "properties",
+                      "tag",
+                      "type"
+                    ],
+                    "severity": "MEDIUM",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 15,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "medium",
+                    "crankshaft_class_id": "3f2d1ef6-930a-48ca-95a8-a3b9eb4d4832",
+                    "crankshaft_severity": "MEDIUM",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['definitions']['Pet']['properties']['tag']['type']"
+                  }
+                ],
+                "description": "Spec analyzer detected that the definition of a string attribute carried in an API operation does not specify the pattern.\nAll attributes carried over API operations should be specified as precisely as possible, to allow API clients and servers to perform accurate attribue validation.\nLoosely specified attributes prevent rigorous automatic validation checks on requests and responses, allowing malicious clients (or servers) to attempt triggering unexpected behaviors on servers (or client) which could be potentially exploited for various attacks.",
+                "mitigation": "Make sure all string attribute definition include the most restricive possible pattern definition.",
+                "name": "Missing pattern for string attribute",
+                "occurrences": 2,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "3f2d1ef6-930a-48ca-95a8-a3b9eb4d4832"
+              }
+            ]
+          },
+          "name": "api-specification",
+          "risk": "CRITICAL",
+          "scorer_version": 1,
+          "trend": "STABLE",
+          "unclassified": {
+            "count": 1,
+            "findings": [
+              {
+                "additional_info": [
+                  {
+                    "affected_endpoints": null,
+                    "affected_spec_paths": null,
+                    "entries": {
+                      "Location": "[\"paths\", \"/pets\", \"get\"]"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "code": "FSE004",
+                    "location": [
+                      "paths",
+                      "/pets",
+                      "get"
+                    ],
+                    "severity": "UNKNOWN",
+                    "cr_raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                    "cr_finding_index": 9,
+                    "affected_endpoints": [],
+                    "source": "oas_analyser",
+                    "severity_category": "unknown",
+                    "crankshaft_class_id": "de780303-676f-4dc4-9177-d30c1f55c93a",
+                    "crankshaft_severity": "UNKNOWN",
+                    "crankshaft_category": "api-specification",
+                    "crankshaft_jsonpath": "$['paths']['/pets']['get']"
+                  }
+                ],
+                "description": "The spec defines multiple bodies for an API Request or Reply.  This is an ambiguous definition which may cause issues with automatic code generation potentially used by client and servers, triggering in turn unexpected and insecure behavior. ",
+                "mitigation": "Make sure the specification is fully valid and in line with the standard format.",
+                "name": "Multiple body definition",
+                "occurrences": 1,
+                "raw_finding_id": "bc8bb256-7803-4e88-8863-e4ae2d146ce2",
+                "source": "oas_analyser",
+                "type_id": "de780303-676f-4dc4-9177-d30c1f55c93a"
+              }
+            ]
+          }
+        }
+      },
+      "confidence": "MEDIUM",
+      "counters_history": {
+        "critical": [
+          1
+        ],
+        "high": [
+          2
+        ],
+        "low": [
+          1
+        ],
+        "medium": [
+          12
+        ],
+        "unclassified": [
+          1
+        ],
+        "timestamp": [
+          "2022-08-17T05:48:12.952"
+        ]
+      },
+      "endpoints": [],
+      "last_finding_date": "1970-01-01T00:00:00.000Z",
+      "last_vulnerability_date": "1970-01-01T01:00:00.000Z",
+      "risk": "CRITICAL",
+      "scorer_version": 1,
+      "trend": "STABLE"
+    },
+    "identifier": "9b5e6318-c584-4d60-a03b-4e121285d0e1",
+    "provider": null,
+    "status": null,
+    "timestamp": "2022-08-17T05:48:12.974Z"
+  },
+  "status": null,
+  "status_description": null,
+  "creation_timestamp": "2022-08-17T05:48:08.207Z",
+  "clientWorkloads": [],
+  "classification": [],
+  "provider": null
+}

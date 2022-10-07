@@ -1,0 +1,2142 @@
+{
+  "added": [
+    {
+      "path": "/networks/{networkId}/webhooks/payloadTemplates",
+      "method": "GET",
+      "description": "List the webhook payload templates for a network",
+      "message": "/networks/{networkId}/webhooks/payloadTemplates - Added"
+    },
+    {
+      "path": "/networks/{networkId}/webhooks/payloadTemplates",
+      "method": "POST",
+      "description": "Create a webhook payload template for a network",
+      "message": "/networks/{networkId}/webhooks/payloadTemplates - Added"
+    },
+    {
+      "path": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}",
+      "method": "GET",
+      "description": "Get the webhook payload template for a network",
+      "message": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId} - Added"
+    },
+    {
+      "path": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}",
+      "method": "PUT",
+      "description": "Update a webhook payload template for a network",
+      "message": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId} - Added"
+    },
+    {
+      "path": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}",
+      "method": "DELETE",
+      "description": "Destroy a webhook payload template for a network",
+      "message": "/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId} - Added"
+    }
+  ],
+  "deleted": null,
+  "deprecated": null,
+  "modified": [
+    {
+      "old": {
+        "description": "Get the sent and received bytes for each uplink of a network.",
+        "operationId": "getNetworkApplianceUplinksUsageHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The beginning of the timespan for the data. The maximum lookback period is 365 days from today.",
+            "in": "query",
+            "name": "t0",
+            "type": "string"
+          },
+          {
+            "description": "The end of the timespan for the data. t1 can be a maximum of 14 days after t0.",
+            "in": "query",
+            "name": "t1",
+            "type": "string"
+          },
+          {
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 14 days. The default is 10 minutes.",
+            "format": "float",
+            "in": "query",
+            "name": "timespan",
+            "type": "number"
+          },
+          {
+            "description": "The time resolution in seconds for returned data. The valid resolutions are: 60, 300, 600, 1800, 3600, 86400. The default is 60.",
+            "in": "query",
+            "name": "resolution",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "byInterface": [
+                    {
+                      "interface": "wan1",
+                      "received": 9528787,
+                      "sent": 1562063
+                    },
+                    {
+                      "interface": "wan2",
+                      "received": 2747782,
+                      "sent": 396646
+                    }
+                  ],
+                  "endTime": "2021-07-22T03:00:00Z",
+                  "startTime": "2021-07-22T02:00:00Z"
+                },
+                {
+                  "byInterface": [
+                    {
+                      "interface": "wan1",
+                      "received": 12253346,
+                      "sent": 6326222
+                    },
+                    {
+                      "interface": "wan2",
+                      "received": 2981021,
+                      "sent": 402850
+                    }
+                  ],
+                  "endTime": "2021-07-22T04:00:00Z",
+                  "startTime": "2021-07-22T03:00:00Z"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Get the sent and received bytes for each uplink of a network.",
+        "tags": [
+          "appliance",
+          "monitor",
+          "uplinks",
+          "usageHistory"
+        ]
+      },
+      "new": {
+        "description": "Get the sent and received bytes for each uplink of a network.",
+        "operationId": "getNetworkApplianceUplinksUsageHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The beginning of the timespan for the data. The maximum lookback period is 365 days from today.",
+            "in": "query",
+            "name": "t0",
+            "type": "string"
+          },
+          {
+            "description": "The end of the timespan for the data. t1 can be a maximum of 31 days after t0.",
+            "in": "query",
+            "name": "t1",
+            "type": "string"
+          },
+          {
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.",
+            "format": "float",
+            "in": "query",
+            "name": "timespan",
+            "type": "number"
+          },
+          {
+            "description": "The time resolution in seconds for returned data. The valid resolutions are: 60, 300, 600, 1800, 3600, 86400. The default is 60.",
+            "in": "query",
+            "name": "resolution",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "byInterface": [
+                    {
+                      "interface": "wan1",
+                      "received": 9528787,
+                      "sent": 1562063
+                    },
+                    {
+                      "interface": "wan2",
+                      "received": 2747782,
+                      "sent": 396646
+                    }
+                  ],
+                  "endTime": "2021-07-22T03:00:00Z",
+                  "startTime": "2021-07-22T02:00:00Z"
+                },
+                {
+                  "byInterface": [
+                    {
+                      "interface": "wan1",
+                      "received": 12253346,
+                      "sent": 6326222
+                    },
+                    {
+                      "interface": "wan2",
+                      "received": 2981021,
+                      "sent": 402850
+                    }
+                  ],
+                  "endTime": "2021-07-22T04:00:00Z",
+                  "startTime": "2021-07-22T03:00:00Z"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Get the sent and received bytes for each uplink of a network.",
+        "tags": [
+          "appliance",
+          "monitor",
+          "uplinks",
+          "usageHistory"
+        ]
+      },
+      "path": "/networks/{networkId}/appliance/uplinks/usageHistory",
+      "method": "GET",
+      "summary": "Get the sent and received bytes for each uplink of a network.",
+      "description": "Get the sent and received bytes for each uplink of a network.",
+      "breaking": false,
+      "message": "###### Parameters:\n\nModified: `t1` in `query`\n\u003e The end of the timespan for the data. t1 can be a maximum of 31 days after t0.\n\nModified: `timespan` in `query`\n\u003e The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.\n\n\n",
+      "parameters": {
+        "breaking": false,
+        "message": "###### Parameters:\n\nModified: `t1` in `query`\n\u003e The end of the timespan for the data. t1 can be a maximum of 31 days after t0.\n\nModified: `timespan` in `query`\n\u003e The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.\n\n",
+        "details": [
+          {
+            "name": "t1",
+            "in": "query",
+            "description": "The end of the timespan for the data. t1 can be a maximum of 31 days after t0.",
+            "deprecated": false,
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified: `t1` in `query`\n\u003e The end of the timespan for the data. t1 can be a maximum of 31 days after t0.\n\n"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.",
+            "deprecated": false,
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified: `timespan` in `query`\n\u003e The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Add an HTTP server to a network",
+        "operationId": "createNetworkWebhooksHttpServer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createNetworkWebhooksHttpServer",
+            "required": true,
+            "schema": {
+              "example": {
+                "name": "Example Webhook Server",
+                "payloadTemplate": {
+                  "payloadTemplateId": "wpt_00001"
+                },
+                "sharedSecret": "shhh",
+                "url": "https://example.com"
+              },
+              "properties": {
+                "name": {
+                  "description": "A name for easy reference to the HTTP server",
+                  "type": "string"
+                },
+                "payloadTemplate": {
+                  "description": "The payload template to use when posting data to the HTTP server.",
+                  "properties": {
+                    "payloadTemplateId": {
+                      "description": "The ID of the payload template. Defaults to 'wpt_00001' for the Meraki template. For Webex, use 'wpt_00002'; for Slack, use 'wpt_00003'; for Microsoft Teams, use 'wpt_00004'.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "sharedSecret": {
+                  "description": "A shared secret that will be included in POSTs sent to the HTTP server. This secret can be used to verify that the request was sent by Meraki.",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL of the HTTP server. Once set, cannot be updated.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "url"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "id": "aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vbXlfY3VzdG9tX3dlYmhvb2s=",
+                "name": "Example Webhook Server",
+                "payloadTemplate": {
+                  "name": "Meraki",
+                  "payloadTemplateId": "wpt_00001"
+                },
+                "url": "https://www.example.com/my_custom_webhook"
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Add an HTTP server to a network",
+        "tags": [
+          "networks",
+          "configure",
+          "webhooks",
+          "httpServers"
+        ]
+      },
+      "new": {
+        "description": "Add an HTTP server to a network",
+        "operationId": "createNetworkWebhooksHttpServer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createNetworkWebhooksHttpServer",
+            "required": true,
+            "schema": {
+              "example": {
+                "name": "Example Webhook Server",
+                "payloadTemplate": {
+                  "name": "Meraki (included)",
+                  "payloadTemplateId": "wpt_00001"
+                },
+                "sharedSecret": "shhh",
+                "url": "https://example.com"
+              },
+              "properties": {
+                "name": {
+                  "description": "A name for easy reference to the HTTP server",
+                  "type": "string"
+                },
+                "payloadTemplate": {
+                  "description": "The payload template to use when posting data to the HTTP server.",
+                  "properties": {
+                    "name": {
+                      "description": "The name of the payload template.",
+                      "type": "string"
+                    },
+                    "payloadTemplateId": {
+                      "description": "The ID of the payload template. Defaults to 'wpt_00001' for the Meraki template. For Webex, use 'wpt_00002'; for Slack, use 'wpt_00003'; for Microsoft Teams, use 'wpt_00004'.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "sharedSecret": {
+                  "description": "A shared secret that will be included in POSTs sent to the HTTP server. This secret can be used to verify that the request was sent by Meraki.",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL of the HTTP server. Once set, cannot be updated.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "url"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "id": "aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vbXlfY3VzdG9tX3dlYmhvb2s=",
+                "name": "Example Webhook Server",
+                "payloadTemplate": {
+                  "name": "Meraki (included)",
+                  "payloadTemplateId": "wpt_00001"
+                },
+                "url": "https://www.example.com/my_custom_webhook"
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Add an HTTP server to a network",
+        "tags": [
+          "networks",
+          "configure",
+          "webhooks",
+          "httpServers"
+        ]
+      },
+      "path": "/networks/{networkId}/webhooks/httpServers",
+      "method": "POST",
+      "summary": "Add an HTTP server to a network",
+      "description": "Add an HTTP server to a network",
+      "breaking": false,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified property `payloadTemplate` (object)\n    \u003e The payload template to use when posting data to the HTTP server.\n\n    * Added property `name` (string)\n        \u003e The name of the payload template.\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified property `payloadTemplate` (object)\n    \u003e The payload template to use when posting data to the HTTP server.\n\n    * Added property `name` (string)\n        \u003e The name of the payload template.\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "payloadTemplate",
+                "type": "object",
+                "description": "The payload template to use when posting data to the HTTP server.",
+                "action": "modified",
+                "breaking": false,
+                "message": "* Modified property `payloadTemplate` (object)\n    \u003e The payload template to use when posting data to the HTTP server.\n\n",
+                "properties": [
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "description": "The name of the payload template.",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `name` (string)\n        \u003e The name of the payload template.\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Modified property `payloadTemplate` (object)\n    \u003e The payload template to use when posting data to the HTTP server.\n\n    * Added property `name` (string)\n        \u003e The name of the payload template.\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Send a test webhook for a network",
+        "operationId": "createNetworkWebhooksWebhookTest",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createNetworkWebhooksWebhookTest",
+            "required": true,
+            "schema": {
+              "example": {
+                "alertTypeId": "power_supply_down",
+                "payloadTemplateId": "wpt_00001",
+                "sharedSecret": "shhh",
+                "url": "https://www.example.com/path"
+              },
+              "properties": {
+                "alertTypeId": {
+                  "default": "power_supply_down",
+                  "description": "The type of alert which the test webhook will send. Optional. Defaults to power_supply_down.",
+                  "type": "string"
+                },
+                "payloadTemplateId": {
+                  "description": "The ID of the payload template of the test webhook. Defaults to the HTTP server's template ID if one exists for the given URL, or Generic template ID otherwise",
+                  "type": "string"
+                },
+                "sharedSecret": {
+                  "default": "",
+                  "description": "The shared secret the test webhook will send. Optional. Defaults to an empty string.",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL where the test webhook will be sent",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "id": "1234",
+                "status": "enqueued",
+                "url": "https://www.example.com/path"
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Send a test webhook for a network",
+        "tags": [
+          "networks",
+          "configure",
+          "webhooks",
+          "webhookTests"
+        ]
+      },
+      "new": {
+        "description": "Send a test webhook for a network",
+        "operationId": "createNetworkWebhooksWebhookTest",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createNetworkWebhooksWebhookTest",
+            "required": true,
+            "schema": {
+              "example": {
+                "alertTypeId": "power_supply_down",
+                "payloadTemplateId": "wpt_00001",
+                "sharedSecret": "shhh",
+                "url": "https://www.example.com/path"
+              },
+              "properties": {
+                "alertTypeId": {
+                  "default": "power_supply_down",
+                  "description": "The type of alert which the test webhook will send. Optional. Defaults to power_supply_down.",
+                  "type": "string"
+                },
+                "payloadTemplateId": {
+                  "description": "The ID of the payload template of the test webhook. Defaults to the HTTP server's template ID if one exists for the given URL, or Generic template ID otherwise",
+                  "type": "string"
+                },
+                "payloadTemplateName": {
+                  "description": "The name of the payload template.",
+                  "type": "string"
+                },
+                "sharedSecret": {
+                  "default": "",
+                  "description": "The shared secret the test webhook will send. Optional. Defaults to an empty string.",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "The URL where the test webhook will be sent",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "id": "1234",
+                "status": "enqueued",
+                "url": "https://www.example.com/path"
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Send a test webhook for a network",
+        "tags": [
+          "networks",
+          "configure",
+          "webhooks",
+          "webhookTests"
+        ]
+      },
+      "path": "/networks/{networkId}/webhooks/webhookTests",
+      "method": "POST",
+      "summary": "Send a test webhook for a network",
+      "description": "Send a test webhook for a network",
+      "breaking": false,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `payloadTemplateName` (string)\n    \u003e The name of the payload template.\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `payloadTemplateName` (string)\n    \u003e The name of the payload template.\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "payloadTemplateName",
+                "type": "string",
+                "description": "The name of the payload template.",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `payloadTemplateName` (string)\n    \u003e The name of the payload template.\n\n",
+                "properties": null
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `payloadTemplateName` (string)\n    \u003e The name of the payload template.\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Update the VPN settings for the SSID",
+        "operationId": "updateNetworkWirelessSsidVpn",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "updateNetworkWirelessSsidVpn",
+            "schema": {
+              "example": {
+                "splitTunnel": {
+                  "enabled": true,
+                  "rules": [
+                    {
+                      "comment": "split tunnel rule 1",
+                      "destCidr": "1.1.1.1/32",
+                      "destPort": "any",
+                      "policy": "allow",
+                      "protocol": "Any"
+                    },
+                    {
+                      "comment": "split tunnel rule 2",
+                      "destCidr": "foo.com",
+                      "destPort": "any",
+                      "policy": "deny"
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "splitTunnel": {
+                  "description": "The VPN split tunnel settings for this SSID.",
+                  "properties": {
+                    "enabled": {
+                      "description": "If true, VPN split tunnel is enabled.",
+                      "type": "boolean"
+                    },
+                    "rules": {
+                      "description": "List of VPN split tunnel rules.",
+                      "items": {
+                        "properties": {
+                          "comment": {
+                            "description": "Description for this split tunnel rule (optional).",
+                            "type": "string"
+                          },
+                          "destCidr": {
+                            "description": "Destination for this split tunnel rule. IP address, fully-qualified domain names (FQDN) or 'any'.",
+                            "type": "string"
+                          },
+                          "destPort": {
+                            "description": "Destination port for this split tunnel rule, (integer in the range 1-65535), or 'any'.",
+                            "type": "string"
+                          },
+                          "policy": {
+                            "description": "Traffic policy specified for this split tunnel rule, 'allow' or 'deny'.",
+                            "type": "string"
+                          },
+                          "protocol": {
+                            "description": "Protocol for this split tunnel rule.",
+                            "enum": [
+                              "Any",
+                              "TCP",
+                              "UDP"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "destCidr",
+                          "policy"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "splitTunnel": {
+                  "enabled": true,
+                  "rules": [
+                    {
+                      "comment": "split tunnel rule 1",
+                      "destCidr": "1.1.1.1/32",
+                      "destPort": "any",
+                      "policy": "allow",
+                      "protocol": "Any"
+                    },
+                    {
+                      "comment": "split tunnel rule 2",
+                      "destCidr": "foo.com",
+                      "destPort": "any",
+                      "policy": "deny"
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Update the VPN settings for the SSID",
+        "tags": [
+          "wireless",
+          "configure",
+          "ssids",
+          "vpn"
+        ]
+      },
+      "new": {
+        "description": "Update the VPN settings for the SSID",
+        "operationId": "updateNetworkWirelessSsidVpn",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "networkId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "updateNetworkWirelessSsidVpn",
+            "schema": {
+              "example": {
+                "failover": {
+                  "heartbeatInterval": 10,
+                  "idleTimeout": 30,
+                  "requestIp": "1.1.1.1"
+                },
+                "splitTunnel": {
+                  "enabled": true,
+                  "rules": [
+                    {
+                      "comment": "split tunnel rule 1",
+                      "destCidr": "1.1.1.1/32",
+                      "destPort": "any",
+                      "policy": "allow",
+                      "protocol": "Any"
+                    },
+                    {
+                      "comment": "split tunnel rule 2",
+                      "destCidr": "foo.com",
+                      "destPort": "any",
+                      "policy": "deny"
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "failover": {
+                  "description": "Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.",
+                  "properties": {
+                    "heartbeatInterval": {
+                      "description": "Idle timer interval in seconds.",
+                      "type": "integer"
+                    },
+                    "idleTimeout": {
+                      "description": "Idle timer timeout in seconds.",
+                      "type": "integer"
+                    },
+                    "requestIp": {
+                      "description": "IP addressed reserved on DHCP server where SSID will terminate.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "splitTunnel": {
+                  "description": "The VPN split tunnel settings for this SSID.",
+                  "properties": {
+                    "enabled": {
+                      "description": "If true, VPN split tunnel is enabled.",
+                      "type": "boolean"
+                    },
+                    "rules": {
+                      "description": "List of VPN split tunnel rules.",
+                      "items": {
+                        "properties": {
+                          "comment": {
+                            "description": "Description for this split tunnel rule (optional).",
+                            "type": "string"
+                          },
+                          "destCidr": {
+                            "description": "Destination for this split tunnel rule. IP address, fully-qualified domain names (FQDN) or 'any'.",
+                            "type": "string"
+                          },
+                          "destPort": {
+                            "description": "Destination port for this split tunnel rule, (integer in the range 1-65535), or 'any'.",
+                            "type": "string"
+                          },
+                          "policy": {
+                            "description": "Traffic policy specified for this split tunnel rule, 'allow' or 'deny'.",
+                            "type": "string"
+                          },
+                          "protocol": {
+                            "description": "Protocol for this split tunnel rule.",
+                            "enum": [
+                              "Any",
+                              "TCP",
+                              "UDP"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "destCidr",
+                          "policy"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "failover": {
+                  "heartbeatInterval": 10,
+                  "idleTimeout": 30,
+                  "requestIp": "1.1.1.1"
+                },
+                "splitTunnel": {
+                  "enabled": true,
+                  "rules": [
+                    {
+                      "comment": "split tunnel rule 1",
+                      "destCidr": "1.1.1.1/32",
+                      "destPort": "any",
+                      "policy": "allow",
+                      "protocol": "Any"
+                    },
+                    {
+                      "comment": "split tunnel rule 2",
+                      "destCidr": "foo.com",
+                      "destPort": "any",
+                      "policy": "deny"
+                    }
+                  ]
+                }
+              }
+            },
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Update the VPN settings for the SSID",
+        "tags": [
+          "wireless",
+          "configure",
+          "ssids",
+          "vpn"
+        ]
+      },
+      "path": "/networks/{networkId}/wireless/ssids/{number}/vpn",
+      "method": "PUT",
+      "summary": "Update the VPN settings for the SSID",
+      "description": "Update the VPN settings for the SSID",
+      "breaking": true,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `failover` (object)\n    \u003e Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": true,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `failover` (object)\n    \u003e Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "failover",
+                "type": "object",
+                "description": "Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `failover` (object)\n    \u003e Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.\n\n",
+                "properties": null
+              }
+            ],
+            "breaking": true,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `failover` (object)\n    \u003e Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "List the organizations that the user has privileges on",
+        "operationId": "getOrganizations",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "api": {
+                    "enabled": true
+                  },
+                  "id": "2930418",
+                  "name": "My organization",
+                  "url": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "properties": {
+                  "api": {
+                    "description": "api related settings",
+                    "properties": {
+                      "enabled": {
+                        "description": "enable api access",
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "organization id",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "organization name",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "organization url",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List the organizations that the user has privileges on",
+        "tags": [
+          "organizations",
+          "configure"
+        ]
+      },
+      "new": {
+        "description": "List the organizations that the user has privileges on",
+        "operationId": "getOrganizations",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "api": {
+                    "enabled": true
+                  },
+                  "id": "2930418",
+                  "licensing": {
+                    "model": "co-term"
+                  },
+                  "name": "My organization",
+                  "url": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "properties": {
+                  "api": {
+                    "description": "API related settings",
+                    "properties": {
+                      "enabled": {
+                        "description": "Enable API access",
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "id": {
+                    "description": "Organization ID",
+                    "type": "string"
+                  },
+                  "licensing": {
+                    "description": "Licensing related settings",
+                    "properties": {
+                      "model": {
+                        "description": "Organization licensing model. Can be 'co-term', 'per-device', or 'subscription'.",
+                        "enum": [
+                          "co-term",
+                          "per-device",
+                          "subscription"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "Organization name",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "Organization URL",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List the organizations that the user has privileges on",
+        "tags": [
+          "organizations",
+          "configure"
+        ]
+      },
+      "path": "/organizations",
+      "method": "GET",
+      "summary": "List the organizations that the user has privileges on",
+      "description": "List the organizations that the user has privileges on",
+      "breaking": false,
+      "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n        * Modified property `id` (string)\n            \u003e Organization ID\n\n        * Modified property `name` (string)\n            \u003e Organization name\n\n        * Modified property `url` (string)\n            \u003e Organization URL\n\n        * Modified property `api` (object)\n            \u003e API related settings\n\n\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": {
+        "breaking": false,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n        * Modified property `id` (string)\n            \u003e Organization ID\n\n        * Modified property `name` (string)\n            \u003e Organization name\n\n        * Modified property `url` (string)\n            \u003e Organization URL\n\n        * Modified property `api` (object)\n            \u003e API related settings\n\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n        * Modified property `id` (string)\n            \u003e Organization ID\n\n        * Modified property `name` (string)\n            \u003e Organization name\n\n        * Modified property `url` (string)\n            \u003e Organization URL\n\n        * Modified property `api` (object)\n            \u003e API related settings\n\n",
+                "properties": [
+                  {
+                    "name": "items",
+                    "type": "array",
+                    "description": "",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "",
+                    "properties": [
+                      {
+                        "name": "licensing",
+                        "type": "object",
+                        "description": "Licensing related settings",
+                        "action": "added",
+                        "breaking": false,
+                        "message": "        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "id",
+                        "type": "string",
+                        "description": "Organization ID",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `id` (string)\n            \u003e Organization ID\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "description": "Organization name",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `name` (string)\n            \u003e Organization name\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "url",
+                        "type": "string",
+                        "description": "Organization URL",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `url` (string)\n            \u003e Organization URL\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "api",
+                        "type": "object",
+                        "description": "API related settings",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `api` (object)\n            \u003e API related settings\n\n",
+                        "properties": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "200",
+            "description": "Successful operation",
+            "action": "modified",
+            "breaking": false,
+            "message": "Modified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n        * Modified property `id` (string)\n            \u003e Organization ID\n\n        * Modified property `name` (string)\n            \u003e Organization name\n\n        * Modified property `url` (string)\n            \u003e Organization URL\n\n        * Modified property `api` (object)\n            \u003e API related settings\n\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Return an organization",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "api": {
+                  "enabled": true
+                },
+                "id": "2930418",
+                "name": "My organization",
+                "url": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview"
+              }
+            },
+            "schema": {
+              "properties": {
+                "api": {
+                  "description": "api related settings",
+                  "properties": {
+                    "enabled": {
+                      "description": "enable api access",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "organization id",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "organization name",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "organization url",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Return an organization",
+        "tags": [
+          "organizations",
+          "configure"
+        ]
+      },
+      "new": {
+        "description": "Return an organization",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": {
+                "api": {
+                  "enabled": true
+                },
+                "id": "2930418",
+                "licensing": {
+                  "model": "co-term"
+                },
+                "name": "My organization",
+                "url": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview"
+              }
+            },
+            "schema": {
+              "properties": {
+                "api": {
+                  "description": "API related settings",
+                  "properties": {
+                    "enabled": {
+                      "description": "Enable API access",
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "Organization ID",
+                  "type": "string"
+                },
+                "licensing": {
+                  "description": "Licensing related settings",
+                  "properties": {
+                    "model": {
+                      "description": "Organization licensing model. Can be 'co-term', 'per-device', or 'subscription'.",
+                      "enum": [
+                        "co-term",
+                        "per-device",
+                        "subscription"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "name": {
+                  "description": "Organization name",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "Organization URL",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "Return an organization",
+        "tags": [
+          "organizations",
+          "configure"
+        ]
+      },
+      "path": "/organizations/{organizationId}",
+      "method": "GET",
+      "summary": "Return an organization",
+      "description": "Return an organization",
+      "breaking": false,
+      "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n    * Modified property `api` (object)\n        \u003e API related settings\n\n        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n    * Modified property `id` (string)\n        \u003e Organization ID\n\n    * Modified property `name` (string)\n        \u003e Organization name\n\n    * Modified property `url` (string)\n        \u003e Organization URL\n\n\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": {
+        "breaking": false,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n    * Modified property `api` (object)\n        \u003e API related settings\n\n        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n    * Modified property `id` (string)\n        \u003e Organization ID\n\n    * Modified property `name` (string)\n        \u003e Organization name\n\n    * Modified property `url` (string)\n        \u003e Organization URL\n\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/json`\n    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n    * Modified property `api` (object)\n        \u003e API related settings\n\n        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n    * Modified property `id` (string)\n        \u003e Organization ID\n\n    * Modified property `name` (string)\n        \u003e Organization name\n\n    * Modified property `url` (string)\n        \u003e Organization URL\n\n",
+                "properties": [
+                  {
+                    "name": "licensing",
+                    "type": "object",
+                    "description": "Licensing related settings",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "api",
+                    "type": "object",
+                    "description": "API related settings",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "    * Modified property `api` (object)\n        \u003e API related settings\n\n",
+                    "properties": [
+                      {
+                        "name": "enabled",
+                        "type": "boolean",
+                        "description": "Enable API access",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n",
+                        "properties": null
+                      }
+                    ]
+                  },
+                  {
+                    "name": "id",
+                    "type": "string",
+                    "description": "Organization ID",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "    * Modified property `id` (string)\n        \u003e Organization ID\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "description": "Organization name",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "    * Modified property `name` (string)\n        \u003e Organization name\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "url",
+                    "type": "string",
+                    "description": "Organization URL",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "    * Modified property `url` (string)\n        \u003e Organization URL\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "name": "200",
+            "description": "Successful operation",
+            "action": "modified",
+            "breaking": false,
+            "message": "Modified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n    * Modified property `api` (object)\n        \u003e API related settings\n\n        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n    * Modified property `id` (string)\n        \u003e Organization ID\n\n    * Modified property `name` (string)\n        \u003e Organization name\n\n    * Modified property `url` (string)\n        \u003e Organization URL\n\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "description": "List the status of every Meraki device in the organization",
+        "operationId": "getOrganizationDevicesStatuses",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.",
+            "in": "query",
+            "name": "perPage",
+            "type": "integer"
+          },
+          {
+            "description": "A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "in": "query",
+            "name": "startingAfter",
+            "type": "string"
+          },
+          {
+            "description": "A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "in": "query",
+            "name": "endingBefore",
+            "type": "string"
+          },
+          {
+            "description": "Optional parameter to filter devices by network ids.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "networkIds",
+            "type": "array"
+          },
+          {
+            "description": "Optional parameter to filter devices by serials.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "serials",
+            "type": "array"
+          },
+          {
+            "description": "Optional parameter to filter devices by statuses. Valid statuses are [\"online\", \"alerting\", \"offline\", \"dormant\"].",
+            "in": "query",
+            "items": {
+              "enum": [
+                "online",
+                "alerting",
+                "offline",
+                "dormant"
+              ],
+              "type": "string"
+            },
+            "name": "statuses",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter to filter device statuses by product type. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway, and sensor.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "wireless",
+                "appliance",
+                "switch",
+                "systemsManager",
+                "camera",
+                "cellularGateway",
+                "sensor"
+              ],
+              "type": "string"
+            },
+            "name": "productTypes",
+            "type": "array"
+          },
+          {
+            "description": "components",
+            "in": "query",
+            "name": "components",
+            "properties": {},
+            "type": "object"
+          },
+          {
+            "description": "Optional parameter to filter devices by models.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "models",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter to filter devices by tags. The filtering is case-sensitive. If tags are included, 'tagsFilterType' should also be included (see below).",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tags",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter of value 'withAnyTags' or 'withAllTags' to indicate whether to return devices which contain ANY or ALL of the included tags. If no type is included, 'withAnyTags' will be selected.",
+            "enum": [
+              "withAnyTags",
+              "withAllTags"
+            ],
+            "in": "query",
+            "name": "tagsFilterType",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "components": {
+                    "powerSupplies": []
+                  },
+                  "gateway": "1.2.3.5",
+                  "ipType": "dhcp",
+                  "lanIp": "1.2.3.4",
+                  "lastReportedAt": "2018-02-11T00:00:00.090210Z",
+                  "mac": "00:11:22:33:44:55",
+                  "model": "MR34",
+                  "name": "My AP",
+                  "networkId": "N_24329156",
+                  "primaryDns": "8.8.8.8",
+                  "productType": null,
+                  "publicIp": "123.123.123.1",
+                  "secondaryDns": "8.8.4.4",
+                  "serial": "Q234-ABCD-5678",
+                  "status": "online",
+                  "tags": [
+                    "tag1",
+                    "tag2"
+                  ]
+                }
+              ]
+            },
+            "headers": {
+              "Link": {
+                "description": "A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List the status of every Meraki device in the organization",
+        "tags": [
+          "organizations",
+          "monitor",
+          "devices",
+          "statuses"
+        ]
+      },
+      "new": {
+        "description": "List the status of every Meraki device in the organization",
+        "operationId": "getOrganizationDevicesStatuses",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.",
+            "in": "query",
+            "name": "perPage",
+            "type": "integer"
+          },
+          {
+            "description": "A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "in": "query",
+            "name": "startingAfter",
+            "type": "string"
+          },
+          {
+            "description": "A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.",
+            "in": "query",
+            "name": "endingBefore",
+            "type": "string"
+          },
+          {
+            "description": "Optional parameter to filter devices by network ids.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "networkIds",
+            "type": "array"
+          },
+          {
+            "description": "Optional parameter to filter devices by serials.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "serials",
+            "type": "array"
+          },
+          {
+            "description": "Optional parameter to filter devices by statuses. Valid statuses are [\"online\", \"alerting\", \"offline\", \"dormant\"].",
+            "in": "query",
+            "items": {
+              "enum": [
+                "online",
+                "alerting",
+                "offline",
+                "dormant"
+              ],
+              "type": "string"
+            },
+            "name": "statuses",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter to filter device statuses by product type. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway, and sensor.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "wireless",
+                "appliance",
+                "switch",
+                "systemsManager",
+                "camera",
+                "cellularGateway",
+                "sensor"
+              ],
+              "type": "string"
+            },
+            "name": "productTypes",
+            "type": "array"
+          },
+          {
+            "description": "Optional parameter to filter devices by models.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "models",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter to filter devices by tags. The filtering is case-sensitive. If tags are included, 'tagsFilterType' should also be included (see below).",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tags",
+            "type": "array"
+          },
+          {
+            "description": "An optional parameter of value 'withAnyTags' or 'withAllTags' to indicate whether to return devices which contain ANY or ALL of the included tags. If no type is included, 'withAnyTags' will be selected.",
+            "enum": [
+              "withAnyTags",
+              "withAllTags"
+            ],
+            "in": "query",
+            "name": "tagsFilterType",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "components": {
+                    "powerSupplies": []
+                  },
+                  "gateway": "1.2.3.5",
+                  "ipType": "dhcp",
+                  "lanIp": "1.2.3.4",
+                  "lastReportedAt": "2018-02-11T00:00:00.090210Z",
+                  "mac": "00:11:22:33:44:55",
+                  "model": "MR34",
+                  "name": "My AP",
+                  "networkId": "N_24329156",
+                  "primaryDns": "8.8.8.8",
+                  "productType": null,
+                  "publicIp": "123.123.123.1",
+                  "secondaryDns": "8.8.4.4",
+                  "serial": "Q234-ABCD-5678",
+                  "status": "online",
+                  "tags": [
+                    "tag1",
+                    "tag2"
+                  ]
+                }
+              ]
+            },
+            "headers": {
+              "Link": {
+                "description": "A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List the status of every Meraki device in the organization",
+        "tags": [
+          "organizations",
+          "monitor",
+          "devices",
+          "statuses"
+        ]
+      },
+      "path": "/organizations/{organizationId}/devices/statuses",
+      "method": "GET",
+      "summary": "List the status of every Meraki device in the organization",
+      "description": "List the status of every Meraki device in the organization",
+      "breaking": true,
+      "message": "###### Parameters:\n\nDeleted: `components` in `query`\n\u003e components\n\n\n",
+      "parameters": {
+        "breaking": true,
+        "message": "###### Parameters:\n\nDeleted: `components` in `query`\n\u003e components\n\n",
+        "details": [
+          {
+            "name": "components",
+            "in": "query",
+            "description": "components",
+            "deprecated": false,
+            "breaking": false,
+            "action": "deleted",
+            "message": "Deleted: `components` in `query`\n\u003e components\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+        "operationId": "getOrganizationSummaryTopClientsByUsage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The beginning of the timespan for the data.",
+            "in": "query",
+            "name": "t0",
+            "type": "string"
+          },
+          {
+            "description": "The end of the timespan for the data. t1 can be a maximum of 31 days after t0.",
+            "in": "query",
+            "name": "t1",
+            "type": "string"
+          },
+          {
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.",
+            "format": "float",
+            "in": "query",
+            "name": "timespan",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "id": "k74272e",
+                  "mac": "22:33:44:55:66:77",
+                  "name": "Office Switch",
+                  "network": {
+                    "id": "N_24329156",
+                    "name": "Main Office"
+                  },
+                  "usage": {
+                    "downstream": 10000,
+                    "percentage": 80.2,
+                    "total": 18000,
+                    "upstream": 8000
+                  }
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "description": "ID of client",
+                    "type": "string"
+                  },
+                  "mac": {
+                    "description": "MAC address of client",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of client",
+                    "type": "string"
+                  },
+                  "network": {
+                    "description": "",
+                    "properties": {
+                      "id": {
+                        "description": "ID of network",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "Name of network",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "usage": {
+                    "description": "Data usage information",
+                    "properties": {
+                      "downstream": {
+                        "description": "Downstream data usage by client",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "percentage": {
+                        "description": "Percentage of total data usage by client",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "total": {
+                        "description": "Total data usage by client",
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "upstream": {
+                        "description": "Upstream data usage by client",
+                        "format": "float",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+        "tags": [
+          "organizations",
+          "monitor",
+          "summary",
+          "top",
+          "clients",
+          "byUsage"
+        ]
+      },
+      "new": {
+        "description": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+        "operationId": "getOrganizationSummaryTopClientsByUsage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The beginning of the timespan for the data.",
+            "in": "query",
+            "name": "t0",
+            "type": "string"
+          },
+          {
+            "description": "The end of the timespan for the data. t1 can be a maximum of 31 days after t0.",
+            "in": "query",
+            "name": "t1",
+            "type": "string"
+          },
+          {
+            "description": "The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.",
+            "format": "float",
+            "in": "query",
+            "name": "timespan",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        },
+        "summary": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+        "tags": [
+          "organizations",
+          "monitor",
+          "summary",
+          "top",
+          "clients",
+          "byUsage"
+        ]
+      },
+      "path": "/organizations/{organizationId}/summary/top/clients/byUsage",
+      "method": "GET",
+      "summary": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+      "description": "Return metrics for organization's top 10 clients by data usage (in mb) over given time range.",
+      "breaking": true,
+      "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Deleted content type: `application/json`\n\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": {
+        "breaking": true,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Deleted content type: `application/json`\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "deleted",
+                "breaking": false,
+                "message": "\n* Deleted content type: `application/json`\n",
+                "properties": null
+              }
+            ],
+            "name": "200",
+            "description": "Successful operation",
+            "action": "modified",
+            "breaking": true,
+            "message": "Modified response: **200 OK**\n\u003e Successful operation\n\n* Deleted content type: `application/json`\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Return a list of alert types to be used with managing webhook alerts",
+        "operationId": "getOrganizationWebhooksAlertTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "alertData": {},
+                  "alertId": "0000000000000000",
+                  "alertLevel": "warning",
+                  "alertType": "APs went down",
+                  "alertTypeId": "stopped_reporting",
+                  "deviceMac": "00:11:22:33:44:55",
+                  "deviceModel": "MR34",
+                  "deviceName": "My AP",
+                  "deviceSerial": "Q234-ABCD-5678",
+                  "deviceTags": [
+                    "tag1",
+                    "tag2"
+                  ],
+                  "deviceUrl": "https://n1.meraki.com//n//manage/nodes/new_list/000000000000",
+                  "networkId": "N_24329156",
+                  "networkName": "Main Office",
+                  "networkUrl": "https://n1.meraki.com//n//manage/nodes/list",
+                  "occurredAt": "2018-02-11T00:00:00.123450Z",
+                  "organizationId": "2930418",
+                  "organizationName": "My organization",
+                  "organizationUrl": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview",
+                  "sentAt": "2020-07-11T00:03:12.331789Z",
+                  "sharedSecret": "secret",
+                  "version": "0.1"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return a list of alert types to be used with managing webhook alerts",
+        "tags": [
+          "organizations",
+          "monitor",
+          "webhooks",
+          "alertTypes"
+        ]
+      },
+      "new": {
+        "description": "Return a list of alert types to be used with managing webhook alerts",
+        "operationId": "getOrganizationWebhooksAlertTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Filter sample alerts to a specific product type",
+            "enum": [
+              "appliance",
+              "camera",
+              "cellularGateway",
+              "platform",
+              "sm",
+              "switch",
+              "wireless"
+            ],
+            "in": "query",
+            "name": "productType",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "examples": {
+              "application/json": [
+                {
+                  "alertData": {},
+                  "alertId": "0000000000000000",
+                  "alertLevel": "warning",
+                  "alertType": "APs went down",
+                  "alertTypeId": "stopped_reporting",
+                  "deviceMac": "00:11:22:33:44:55",
+                  "deviceModel": "MR34",
+                  "deviceName": "My AP",
+                  "deviceSerial": "Q234-ABCD-5678",
+                  "deviceTags": [
+                    "tag1",
+                    "tag2"
+                  ],
+                  "deviceUrl": "https://n1.meraki.com//n//manage/nodes/new_list/000000000000",
+                  "networkId": "N_24329156",
+                  "networkName": "Main Office",
+                  "networkUrl": "https://n1.meraki.com//n//manage/nodes/list",
+                  "occurredAt": "2018-02-11T00:00:00.123450Z",
+                  "organizationId": "2930418",
+                  "organizationName": "My organization",
+                  "organizationUrl": "https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview",
+                  "sentAt": "2020-07-11T00:03:12.331789Z",
+                  "sharedSecret": "secret",
+                  "version": "0.1"
+                }
+              ]
+            },
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "Return a list of alert types to be used with managing webhook alerts",
+        "tags": [
+          "organizations",
+          "monitor",
+          "webhooks",
+          "alertTypes"
+        ]
+      },
+      "path": "/organizations/{organizationId}/webhooks/alertTypes",
+      "method": "GET",
+      "summary": "Return a list of alert types to be used with managing webhook alerts",
+      "description": "Return a list of alert types to be used with managing webhook alerts",
+      "breaking": false,
+      "message": "###### Parameters:\n\nAdded: `productType` in `query`\n\u003e Filter sample alerts to a specific product type\n\n\n",
+      "parameters": {
+        "breaking": false,
+        "message": "###### Parameters:\n\nAdded: `productType` in `query`\n\u003e Filter sample alerts to a specific product type\n\n",
+        "details": [
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "Filter sample alerts to a specific product type",
+            "deprecated": false,
+            "breaking": false,
+            "action": "added",
+            "message": "Added: `productType` in `query`\n\u003e Filter sample alerts to a specific product type\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    }
+  ],
+  "breaking": true,
+  "message": "#### What's New\n\n##### `GET` /networks/{networkId}/webhooks/payloadTemplates\n\n\u003e List the webhook payload templates for a network\n\n##### `POST` /networks/{networkId}/webhooks/payloadTemplates\n\n\u003e Create a webhook payload template for a network\n\n##### `GET` /networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}\n\n\u003e Get the webhook payload template for a network\n\n##### `PUT` /networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}\n\n\u003e Update a webhook payload template for a network\n\n##### `DELETE` /networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}\n\n\u003e Destroy a webhook payload template for a network\n\n#### What's Modified\n\n##### `GET` /networks/{networkId}/appliance/uplinks/usageHistory\n\n\u003e Get the sent and received bytes for each uplink of a network.\n\n###### Parameters:\n\nModified: `t1` in `query`\n\u003e The end of the timespan for the data. t1 can be a maximum of 31 days after t0.\n\nModified: `timespan` in `query`\n\u003e The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 10 minutes.\n\n\n##### `POST` /networks/{networkId}/webhooks/httpServers\n\n\u003e Add an HTTP server to a network\n\n###### Request:\n\nModified content type: `application/json`\n\n* Modified property `payloadTemplate` (object)\n    \u003e The payload template to use when posting data to the HTTP server.\n\n    * Added property `name` (string)\n        \u003e The name of the payload template.\n\n\n##### `POST` /networks/{networkId}/webhooks/webhookTests\n\n\u003e Send a test webhook for a network\n\n###### Request:\n\nModified content type: `application/json`\n\n* Added property `payloadTemplateName` (string)\n    \u003e The name of the payload template.\n\n\n##### `PUT` /networks/{networkId}/wireless/ssids/{number}/vpn\n\n\u003e Update the VPN settings for the SSID\n\n###### Request:\n\nModified content type: `application/json`\n\n* Added property `failover` (object)\n    \u003e Secondary VPN concentrator settings. This is only used when two VPN concentrators are configured on the SSID.\n\n\n##### `GET` /organizations\n\n\u003e List the organizations that the user has privileges on\n\n###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `licensing` (object)\n            \u003e Licensing related settings\n\n        * Modified property `id` (string)\n            \u003e Organization ID\n\n        * Modified property `name` (string)\n            \u003e Organization name\n\n        * Modified property `url` (string)\n            \u003e Organization URL\n\n        * Modified property `api` (object)\n            \u003e API related settings\n\n\n##### `GET` /organizations/{organizationId}\n\n\u003e Return an organization\n\n###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Modified content type: `application/json`\n    * Added property `licensing` (object)\n        \u003e Licensing related settings\n\n    * Modified property `api` (object)\n        \u003e API related settings\n\n        * Modified property `enabled` (boolean)\n            \u003e Enable API access\n\n    * Modified property `id` (string)\n        \u003e Organization ID\n\n    * Modified property `name` (string)\n        \u003e Organization name\n\n    * Modified property `url` (string)\n        \u003e Organization URL\n\n\n##### `GET` /organizations/{organizationId}/devices/statuses\n\n\u003e List the status of every Meraki device in the organization\n\n###### Parameters:\n\nDeleted: `components` in `query`\n\u003e components\n\n\n##### `GET` /organizations/{organizationId}/summary/top/clients/byUsage\n\n\u003e Return metrics for organization's top 10 clients by data usage (in mb) over given time range.\n\n###### Response:\n\nModified response: **200 OK**\n\u003e Successful operation\n\n* Deleted content type: `application/json`\n\n##### `GET` /organizations/{organizationId}/webhooks/alertTypes\n\n\u003e Return a list of alert types to be used with managing webhook alerts\n\n###### Parameters:\n\nAdded: `productType` in `query`\n\u003e Filter sample alerts to a specific product type\n\n\n"
+}
