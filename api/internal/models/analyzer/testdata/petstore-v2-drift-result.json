@@ -1,0 +1,42 @@
+{
+  "summary": {
+    "stats": {
+      "count": 0,
+      "occurrences": 0,
+      "hint": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "info": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "warning": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "error": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      }
+    }
+  },
+  "findings": {
+    "error": {
+      "rules": null
+    },
+    "hint": {
+      "rules": null
+    },
+    "info": {
+      "rules": null
+    },
+    "warning": {
+      "rules": null
+    }
+  }
+}

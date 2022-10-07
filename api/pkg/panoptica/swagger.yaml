@@ -1,0 +1,1359 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Secure Application Management API (API Security partial only)"
+
+basePath: /api
+
+schemes:
+  - https
+
+externalDocs:
+  description: Product Documentation
+  url: https://appsecurity.readme.io/
+
+consumes: [ "application/json" ]
+produces: [ "application/json" ]
+
+tags:
+  - name: 'api security'
+    description: 'APIs used to manage Api Security'
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+
+paths:
+  /apiSecurity/api:
+    post:
+      summary: 'Register an API for scoring'
+      tags: [ 'api security' ]
+      parameters:
+        - in: 'body'
+          name: 'body'
+          required: true
+          schema:
+            $ref: '#/definitions/ApiSecurityApi'
+      responses:
+        '201':
+          description: 'the new api id'
+          schema:
+            type: object
+        '403':
+          description: 'Forbidden. Api Security is disabled for user'
+        '404':
+          description: 'Api with given catalogId does not exist'
+        '401':
+          description: 'Unauthorized.'
+
+  /apiSecurity/api/{catalogId}:
+    delete:
+      summary: 'Delete an API'
+      tags: [ 'api security' ]
+      parameters:
+        - $ref: '#/parameters/catalogId'
+      responses:
+        '204':
+          description: 'Success'
+        '401':
+          description: 'Unauthorized.'
+
+  /apiSecurity/externalCatalog:
+    get:
+      summary: 'Get a list of APIs and their compliance'
+      tags: [ 'api security' ]
+      parameters:
+        - $ref: '#/parameters/includeServiceWithNoSpec'
+        - $ref: '#/parameters/apiPolicyProfiles'
+        - $ref: '#/parameters/apiCatalogSortKey'
+        - $ref: '#/parameters/apiCatalogNameFilter'
+        - $ref: '#/parameters/sortDir'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/maxResults'
+        - $ref: '#/parameters/noPagination'
+      responses:
+        '200':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/ApiServiceListExternal'
+        '401':
+          description: 'Unauthorized.'
+
+  /apiSecurity/externalCatalog/{catalogId}:
+    get:
+      summary: 'Get information about a specific API'
+      tags: [ 'api security' ]
+      parameters:
+        - $ref: '#/parameters/catalogId'
+        - $ref: '#/parameters/apiPolicyProfiles'
+        - $ref: '#/parameters/downloadAsJson'
+      responses:
+        '200':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/ApiServiceDrillDownExternal'
+        '401':
+          description: 'Unauthorized.'
+
+  /apiSecurity/openApiSpecs/{catalogId}:
+    parameters:
+      - $ref: '#/parameters/catalogId'
+    get:
+      summary: 'Get provided and reconstructed open api specs for specific API'
+      tags: [ 'api security' ]
+      responses:
+        '200':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/OpenApiSpec'
+        '401':
+          description: 'Unauthorized.'
+    put:
+      summary: 'Add or edit a spec about a specific API for the account'
+      tags: [ 'api security' ]
+      parameters:
+        - in: 'body'
+          name: 'body'
+          required: true
+          schema:
+            description: 'Json or Yaml representing openapi spec V2 or V3'
+            type: string
+      responses:
+        '201':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/OpenApiSpec'
+        '401':
+          description: 'Unauthorized.'
+    delete:
+      summary: 'delete open api spec include all of it findings and scores'
+      tags: [ 'api security' ]
+      responses:
+        '204':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/OpenApiSpecScoreStatus'
+        '401':
+          description: 'Unauthorized.'
+
+  /apiSecurity/openApiSpecs/{catalogId}/getOpenApiSpecScoreStatus:
+    get:
+      summary: 'Get open api spec score status'
+      tags: [ 'api security' ]
+      parameters:
+        - $ref: '#/parameters/catalogId'
+      responses:
+        '200':
+          description: 'Success'
+          schema:
+            $ref: '#/definitions/OpenApiSpecScoreStatus'
+        '401':
+          description: 'Unauthorized.'
+
+parameters:
+  noPagination:
+    name: 'noPagination'
+    description: 'When true, the pagination params will be ignored'
+    in: 'query'
+    type: 'boolean'
+    required: false
+  includeServiceWithNoSpec:
+    name: 'includeServiceWithNoSpec'
+    description: 'When false, only services with specs wikk be returned'
+    in: 'query'
+    type: 'boolean'
+    required: false
+    default: true
+  catalogId:
+    name: 'catalogId'
+    in: 'path'
+    type: 'string'
+    format: 'uuid'
+    required: true
+  apiPolicyProfiles:
+    name: 'apiPolicyProfiles'
+    description: 'Names of the Api Policy Profiles'
+    in: 'query'
+    type: 'array'
+    items:
+      type: 'string'
+    required: false
+  downloadAsJson:
+    name: 'downloadAsJson'
+    description: 'When true, the API will return an json file, and pagination will be ignored'
+    in: 'query'
+    type: 'boolean'
+    required: false
+  apiCatalogSortKey:
+    name: 'sortKey'
+    description: 'the Api Catalog sort key'
+    in: 'query'
+    type: 'string'
+    enum:
+      - name
+      - risk
+  apiCatalogNameFilter:
+    name: 'name'
+    description: 'the Api Catalog name filter'
+    in: 'query'
+    type: 'string'
+  sortDir:
+    name: 'sortDir'
+    description: 'sorting direction'
+    in: 'query'
+    type: 'string'
+    enum:
+      - ASC
+      - DESC
+    required: false
+    default: 'ASC'
+  sortDirDesc:
+    name: 'sortDir'
+    description: 'sorting direction'
+    in: 'query'
+    type: 'string'
+    enum:
+      - ASC
+      - DESC
+    required: false
+    default: 'DESC'
+  offset:
+    name: 'offset'
+    description: 'Return entries from this offset (pagination)'
+    in: 'query'
+    type: number
+    required: false
+    default: 0
+  maxResults:
+    name: 'maxResults'
+    description: 'The number of entries to return (pagination)'
+    in: 'query'
+    type: number
+    required: false
+    default: 100
+    maximum: 200
+
+definitions:
+  ApiServiceListExternal:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/ApiServiceExternal'
+        title: Items
+        type: array
+    required:
+      - items
+    title: ApiServiceListExternal
+    type: object
+
+  ApiServiceExternal:
+    allOf:
+      - $ref: '#/definitions/ApiServiceBase'
+      - properties:
+          classification:
+            description: 'API classification label as determined by Crankshaft, e.g.
+              [''meetings'', ''messaging''] '
+            items:
+              type: string
+            title: Classification
+            type: array
+          provider_id:
+            description: API provider id
+            format: uuid
+            title: Provider Id
+            type: string
+          provider_name:
+            description: Provider name if provider_id is set.
+            title: Provider Name
+            type: string
+        type: object
+    type: object
+
+  ApiServiceBase:
+    properties:
+      compliance:
+        $ref: '#/definitions/ApiServiceCompliance_Simple'
+      description:
+        description: Textual description of the Service
+        title: Description
+        type: string
+      identifier:
+        description: Unique identifier of the subject API as assigned by Crankshaft
+        format: uuid
+        title: Identifier
+        type: string
+      link_doc:
+        description: Location of the documentation. This can be an URL for example
+        title: Link Doc
+        type: string
+      name:
+        description: API name (for external) or destination workload (for internal)
+        title: Name
+        type: string
+      openapi_spec_available:
+        description: Indicates whether the specification is present or not
+        title: Openapi Spec Present
+        type: boolean
+        default: false
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      status:
+        $ref: '#/definitions/ApiSecurityApiStatus'
+      status_description:
+        type: string
+      creation_timestamp:
+        format: date-time
+        title: Timestamp
+        type: string
+      clientWorkloads:
+        type: array
+        items:
+          $ref: '#/definitions/ApiServiceClientWorkload'
+      vulnerabilitiesSummary:
+        $ref: '#/definitions/VulnerabilitiesSummary'
+    required:
+      - identifier
+      - name
+    title: ApiServiceBase
+    type: object
+
+  ApiSecurityApi:
+    type: object
+    properties:
+      name:
+        description: API name, usually an FQDN as determined by crankshaft, it can
+          be logical or can correspond to one of the endpoints where the API is
+          reachable, i.e. api.webex.com
+        type: string
+    required:
+      - name
+
+  ProfileViolation:
+    properties:
+      condition_index:
+        description: Index of the condition violated in the API Policy Profile
+        title: Condition Index
+        type: integer
+      description:
+        description: Human readable description of the violation
+        title: Description
+        type: string
+    required:
+      - condition_index
+      - description
+    title: ProfileViolation
+    type: object
+
+  ApiOrConditionsBase:
+    discriminator: 'attribute'
+    properties:
+      attribute:
+        enum:
+          - ApiRisk
+          - ApiRiskTrend
+          - ApiRiskTrendIsNone
+          - ApiRiskConfidence
+          - ApiRiskConfidenceIsNone
+          - ApiAvgVulnerabilityDuration
+          - ApiAvgVulnerabilityDurationIsNone
+          - ApiName
+          - ApiClassification
+          - ApiClassificationIsNone
+        type: string
+    required:
+      - attribute
+    type: object
+
+  EndpointOrConditionsBase:
+    discriminator: attribute
+    properties:
+      attribute:
+        enum:
+          - EndpointRisk
+          - EndpointRiskTrend
+          - EndpointRiskTrendIsNone
+          - EndpointRiskConfidence
+          - EndpointRiskConfidenceIsNone
+          - EndpointLocation
+          - EndpointLocationIsNone
+          - EndpointHostV4
+          - EndpointHostV6
+          - EndpointHostname
+          - EndpointHostnameIsNone
+          - EndpointScheme
+          - EndpointSchemeIsNone
+          - EndpointProtocol
+          - EndpointPort
+        type: string
+    required:
+      - attribute
+    type: object
+
+  ProviderOrConditionsBase:
+    discriminator: attribute
+    properties:
+      attribute:
+        enum:
+          - ProviderRisk
+          - ProviderRiskTrend
+          - ProviderRiskTrendIsNone
+          - ProviderRiskConfidence
+          - ProviderRiskConfidenceIsNone
+          - ProviderAvgVulnerabilityDuration
+          - ProviderAvgVulnerabilityDurationIsNone
+          - ProviderName
+          - ProviderLocation
+          - ProviderLocationIsNone
+          - ProviderIndustry
+          - ProviderIndustryIsNone
+        type: string
+    required:
+      - attribute
+    type: object
+
+  ApiPolicyProfileCondition:
+    properties:
+      api_or_conditions:
+        items:
+          $ref: '#/definitions/ApiOrConditionsBase'
+        title: Api Or Conditions
+        type: array
+      endpoint_or_conditions:
+        items:
+          $ref: '#/definitions/EndpointOrConditionsBase'
+        title: Endpoint Or Conditions
+        type: array
+      provider_or_conditions:
+        items:
+          $ref: '#/definitions/ProviderOrConditionsBase'
+        title: Provider Or Conditions
+        type: array
+    title: ApiPolicyProfileCondition
+    type: object
+
+  ApiPolicyProfile:
+    properties:
+      compliant_on_missing_score:
+        title: Compliant On Missing Score
+        type: boolean
+      conditions:
+        description: List conditions defined in this policy profile. All conditions
+          are in AND.
+        items:
+          $ref: '#/definitions/ApiPolicyProfileCondition'
+        title: Conditions
+        type: array
+      name:
+        description: Name of the policy profile
+        title: Name
+        type: string
+    required:
+      - name
+      - conditions
+      - compliant_on_missing_score
+    title: ApiPolicyProfile
+    type: object
+  ApiServiceProfileCompliance:
+    properties:
+      api_id:
+        description: Api Service this compliance refers to
+        format: uuid
+        title: Api Id
+        type: string
+      compliant:
+        description: True if score is compliant with the profile. False otherwise.
+        title: Compliant
+        type: boolean
+      profile:
+        $ref: '#/definitions/ApiPolicyProfile'
+      score_id:
+        description: If existing, score used to compute the compliance
+        format: uuid
+        title: Score Id
+        type: string
+      violation:
+        $ref: '#/definitions/ProfileViolation'
+    required:
+      - api_id
+      - compliant
+      - profile
+    title: ApiServiceProfileCompliance
+    type: object
+  ApiServiceCompliance:
+    properties:
+      compliant:
+        title: Compliant
+        type: boolean
+      profilescompliance:
+        items:
+          $ref: '#/definitions/ApiServiceProfileCompliance'
+        title: Profilescompliance
+        type: array
+    required:
+      - compliant
+      - profilescompliance
+    title: ApiServiceCompliance
+    type: object
+
+  ApiProvider_Base:
+    properties:
+      identifier:
+        description: Unique id of the subject API as assigned by Crankshaft
+        format: uuid
+        title: id
+        type: string
+      industry:
+        title: Industry
+        type: string
+      location:
+        title: Location
+        type: string
+      name:
+        description: Name of the provider, typically an FQDN
+        title: Name
+        type: string
+    required:
+      - identifier
+      - name
+    title: ApiProvider_Base
+    type: object
+
+  ApiSecurityRiskSeverity:
+    description: An `enum`eration.
+    enum:
+      - NO_RISK
+      - UNKNOWN
+      - NEUTRAL
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+    title: RiskSeverity
+    type: string
+
+  AdditionalInfo:
+    properties:
+      affected_endpoints:
+        title: Affected Endpoints
+        type: array
+        items:
+          type: string
+      affected_spec_paths:
+        title: Affected Spec Paths
+        type: array
+        items:
+          type: string
+      entries:
+        additionalProperties:
+          type: string
+        title: Dictionary entries
+        type: object
+    title: AdditionalInfo
+    type: object
+
+  OpenApiSpecScoreStatus:
+    enum:
+      - SCORED
+      - NOT_SCORED
+    title: OpenApiSpecScoreStatus
+    type: string
+
+  OpenApiSpec:
+    properties:
+      preview:
+        $ref: '#/definitions/OpenApiSpecPreview'
+      scoreElements:
+        $ref: '#/definitions/OpenApiSpecScoreBase'
+
+  OpenApiSpecPreview:
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+      basePath:
+        type: string
+      description:
+        type: string
+      termsOfService:
+        type: string
+      contactMail:
+        type: string
+      licenseName:
+        type: string
+      licenseUrl:
+        type: string
+
+  ApiSecurityApiStatus:
+    description: Api status enumeration.
+    enum:
+      - PROCESSING
+      - VALID
+      - INVALID
+    title: ApiStatus
+    type: string
+
+  ApiService_Base:
+    properties:
+      classification:
+        description: 'API classification label as determined by Crankshaft, e.g.
+          [''meetings'', ''messaging''] '
+        items:
+          type: string
+        title: Classification
+        type: array
+      description:
+        description: Textual description of the Service
+        title: Description
+        type: string
+      identifier:
+        description: Unique id of the subject API as assigned by Crankshaft
+        format: uuid
+        title: id
+        type: string
+      name:
+        description: API name, usually an FQDN as determined by crankshaft, it can
+          be logical or can correspond to one of the endpoints where the API is
+          reachable, i.e. api.webex.com
+        title: Name
+        type: string
+      provider_id:
+        description: API provider id
+        format: uuid
+        title: Provider Id
+        type: string
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      status:
+        $ref: '#/definitions/ApiSecurityApiStatus'
+      status_description:
+        type: string
+      creation_timestamp:
+        format: date-time
+        title: Timestamp
+        type: string
+    required:
+      - identifier
+      - name
+    title: ApiService_Base
+    type: object
+
+  RiskConfidenceEnum:
+    description: An enumeration.
+    enum:
+      - HIGH
+      - MEDIUM
+      - LOW
+    title: RiskConfidenceEnum
+    type: string
+
+  CountersHistory:
+    properties:
+      critical:
+        title: Critical
+        type: array
+        items:
+          type: integer
+      high:
+        title: High
+        type: array
+        items:
+          type: integer
+      low:
+        title: Low
+        type: array
+        items:
+          type: integer
+      medium:
+        title: Medium
+        type: array
+        items:
+          type: integer
+      unclassified:
+        title: Unclassified
+        type: array
+        items:
+          type: integer
+      timestamp:
+        title: Timestamp
+        type: array
+        items:
+          type: string
+    title: History Counters
+    type: object
+
+  ScoreFinding:
+    properties:
+      additional_info:
+        description: Finding instance additional attributes
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      data:
+        description: Raw data filled in only for unclassified findings, when allowed
+        title: Data
+        type: object
+      description:
+        description: Finding description if finding has been classified, None otherwise
+        title: Description
+        type: string
+      mitigation:
+        description: Finding mitigation if finding has been classified, None otherwise
+        title: Mitigation
+        type: string
+      name:
+        description: Finding name
+        title: Name
+        type: string
+      occurrences:
+        description: Number of findings of the same type
+        title: Occurrences
+        type: integer
+      raw_finding_id:
+        description: Identifier of the raw finding if available
+        format: uuid
+        title: Raw Finding Id
+        type: string
+      source:
+        description: Finding source or filled in with 'Undisclosed' if source cannot
+          be revealed
+        title: Source
+        type: string
+      type_id:
+        description: Finding type identifier if finding has been classified, None
+          otherwise
+        format: uuid
+        title: Type Id
+        type: string
+    required:
+      - name
+      - source
+    title: ScoreFinding
+    type: object
+
+  ScoreFindingGroup:
+    properties:
+      count:
+        title: Count
+        type: integer
+      findings:
+        items:
+          $ref: '#/definitions/ScoreFinding'
+        title: Findings
+        type: array
+    required:
+      - count
+      - findings
+    title: ScoreFindingGroup
+    type: object
+
+  RiskTrendEnum:
+    description: An enumeration.
+    enum:
+      - IMPROVING
+      - STABLE
+      - DEGRADING
+    title: RiskTrendEnum
+    type: string
+
+  CategoryScoreGrade:
+    properties:
+      additional_info:
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      confidence:
+        $ref: '#/definitions/RiskConfidenceEnum'
+      counters_history:
+        $ref: '#/definitions/CountersHistory'
+      critical:
+        $ref: '#/definitions/ScoreFindingGroup'
+      high:
+        $ref: '#/definitions/ScoreFindingGroup'
+      low:
+        $ref: '#/definitions/ScoreFindingGroup'
+      medium:
+        $ref: '#/definitions/ScoreFindingGroup'
+      name:
+        title: Name
+        type: string
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      scorer_version:
+        title: Scorer Version
+        type: integer
+      trend:
+        $ref: '#/definitions/RiskTrendEnum'
+      unclassified:
+        $ref: '#/definitions/ScoreFindingGroup'
+    required:
+      - scorer_version
+      - risk
+      - name
+      - critical
+      - high
+      - medium
+      - low
+      - unclassified
+    title: CategoryScoreGrade
+    type: object
+
+
+  OpenApiSpecScoreElementsList:
+    properties:
+      elements:
+        type: array
+        items:
+          $ref: '#/definitions/OpenApiSpecScoreElement'
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+
+  OpenApiSpecScoreComponentsV3ElementsList:
+    allOf:
+      - $ref: '#/definitions/OpenApiSpecScoreElementsList'
+      - properties:
+          name:
+            title: Name
+            type: string
+
+  OpenApiSpecScoreElement:
+    properties:
+      name:
+        title: Name
+        type: string
+        description: Name of the Object
+      specPath:
+        type: string
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      findings:
+        $ref: '#/definitions/SpecScoreFindings'
+
+  OpenApiSpecScoreBase:
+    type: 'object'
+    discriminator: 'oapIVersion'
+    properties:
+      oapIVersion:
+        type: 'string'
+        enum:
+          - OpenApiSpecScoreV2
+          - OpenApiSpecScoreV3
+      tags:
+        $ref: '#/definitions/OpenApiSpecTags'
+      security:
+        $ref: '#/definitions/OpenApiSpecScoreElementsList'
+      general:
+        $ref: '#/definitions/OpenApiSpecScoreElementsList'
+
+  OpenApiSpecScoreV2:
+    allOf:
+      - $ref: '#/definitions/OpenApiSpecScoreBase'
+      - properties:
+          definitions:
+            $ref: '#/definitions/OpenApiSpecScoreElementsList'
+          parameters:
+            $ref: '#/definitions/OpenApiSpecScoreElementsList'
+          responses:
+            $ref: '#/definitions/OpenApiSpecScoreElementsList'
+          securityDefinitions:
+            $ref: '#/definitions/OpenApiSpecScoreElementsList'
+
+  OpenApiSpecScoreV3:
+    allOf:
+      - $ref: '#/definitions/OpenApiSpecScoreBase'
+      - properties:
+          servers:
+            $ref: '#/definitions/OpenApiSpecScoreElementsList'
+          components:
+            $ref: '#/definitions/OAPIV3Components'
+
+  OAPIV3Components:
+    properties:
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      elements:
+        type: array
+        items:
+          $ref: '#/definitions/OpenApiSpecScoreComponentsV3ElementsList'
+
+  OpenApiSpecTags:
+    properties:
+      elements:
+        type: array
+        items:
+          $ref: '#/definitions/OpenApiSpecTag'
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+
+  OpenApiSpecTag:
+    properties:
+      name:
+        type: 'string'
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      methods:
+        type: array
+        items:
+          $ref: '#/definitions/SpecMethod'
+
+  SpecMethod:
+    properties:
+      path:
+        type: 'string'
+      method:
+        $ref: '#/definitions/HttpMethod'
+      tag:
+        type: 'string'
+      description:
+        type: 'string'
+      severity:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      findings:
+        $ref: '#/definitions/SpecScoreFindings'
+
+  HttpMethod:
+    type: string
+    enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - HEAD
+      - CONNECT
+      - OPTIONS
+      - TRACE
+      - PATCH
+
+  SpecScoreFindings:
+    properties:
+      critical:
+        $ref: '#/definitions/SpecScoreFindingsList'
+      high:
+        $ref: '#/definitions/SpecScoreFindingsList'
+      medium:
+        $ref: '#/definitions/SpecScoreFindingsList'
+      low:
+        $ref: '#/definitions/SpecScoreFindingsList'
+      unclassified:
+        $ref: '#/definitions/SpecScoreFindingsList'
+
+  SpecScoreFindingsList:
+    properties:
+      count:
+        type: integer
+      elements:
+        type: array
+        items:
+          $ref: '#/definitions/SpecScoreElementFinding'
+
+  SpecScoreElementFinding:
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      mitigation:
+        type: string
+      specPath:
+        type: string
+
+  ApiServiceProfileCompliance_Simple:
+    properties:
+      compliant:
+        title: Compliant
+        type: boolean
+      profile:
+        title: Profile
+        type: string
+    required:
+      - profile
+      - compliant
+    title: ApiServiceProfileCompliance_Simple
+    type: object
+
+  ApiServiceCompliance_Simple:
+    properties:
+      compliant:
+        title: Compliant
+        type: boolean
+      profilescompliance:
+        items:
+          $ref: '#/definitions/ApiServiceProfileCompliance_Simple'
+        title: Profilescompliance
+        type: array
+    required:
+      - compliant
+      - profilescompliance
+    title: ApiServiceCompliance_Simple
+    type: object
+
+  IpProtoEnum:
+    description: An enumeration.
+    enum:
+      - TCP
+      - UDP
+    title: IpProtoEnum
+    type: string
+
+  UrlSchemeEnum:
+    description: An enumeration.
+    enum:
+      - HTTP
+      - HTTPS
+    title: UrlSchemeEnum
+    type: string
+
+  ApiEndpoint:
+    properties:
+      api_id:
+        description: API service this endpoint belongs to. Empty if still undetermined.
+        format: uuid
+        title: Api Id
+        type: string
+      compliance:
+        $ref: '#/definitions/ApiServiceCompliance_Simple'
+      host:
+        description: IP v4/v6 address of the API endpoint
+        title: Host
+        type: string
+      hostname:
+        description: Hostname of the API endpoint if known
+        title: Hostname
+        type: string
+      identifier:
+        description: Unique id of the Endpoint
+        format: uuid
+        title: id
+        type: string
+      location:
+        title: Location
+        type: string
+      port:
+        description: Port of the API endpoint
+        maximum: 65535.0
+        minimum: 0.0
+        title: Port
+        type: integer
+      proto:
+        $ref: '#/definitions/IpProtoEnum'
+      scheme:
+        $ref: '#/definitions/UrlSchemeEnum'
+    required:
+      - proto
+      - host
+      - port
+      - identifier
+    title: ApiEndpoint
+    type: object
+
+  ApiEndpointScoreGrade:
+    properties:
+      additional_info:
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      categories:
+        additionalProperties:
+          $ref: '#/definitions/CategoryScoreGrade'
+        title: Categories
+        type: object
+      confidence:
+        $ref: '#/definitions/RiskConfidenceEnum'
+      counters_history:
+        $ref: '#/definitions/CountersHistory'
+      endpoint:
+        $ref: '#/definitions/ApiEndpoint'
+      endpoint_id:
+        type: string
+        format: uuid
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      scorer_version:
+        title: Scorer Version
+        type: integer
+      trend:
+        $ref: '#/definitions/RiskTrendEnum'
+    required:
+      - scorer_version
+      - risk
+      - categories
+      - endpoint
+    title: ApiEndpointScoreGrade
+    type: object
+
+  ApiServiceScoreGrade:
+    properties:
+      additional_info:
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      api:
+        $ref: '#/definitions/ApiService_Base'
+      avg_vulnerability_duration:
+        title: Avg Vulnerability Duration
+        type: integer
+      categories:
+        additionalProperties:
+          $ref: '#/definitions/CategoryScoreGrade'
+        title: Categories
+        type: object
+      confidence:
+        $ref: '#/definitions/RiskConfidenceEnum'
+      counters_history:
+        $ref: '#/definitions/CountersHistory'
+      endpoints:
+        items:
+          $ref: '#/definitions/ApiEndpointScoreGrade'
+        title: Endpoints
+        type: array
+      last_finding_date:
+        format: date-time
+        title: Last Finding Date
+        type: string
+      last_vulnerability_date:
+        format: date-time
+        title: Last Vulnerability Date
+        type: string
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      scorer_version:
+        title: Scorer Version
+        type: integer
+      trend:
+        $ref: '#/definitions/RiskTrendEnum'
+    required:
+      - scorer_version
+      - risk
+      - categories
+      - api
+      - endpoints
+    title: ApiServiceScoreGrade
+    type: object
+
+  CategoryScoreGradeNoFindings:
+    properties:
+      additional_info:
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      confidence:
+        $ref: '#/definitions/RiskConfidenceEnum'
+      critical:
+        title: Critical
+        type: integer
+      high:
+        title: High
+        type: integer
+      low:
+        title: Low
+        type: integer
+      medium:
+        title: Medium
+        type: integer
+      name:
+        title: Name
+        type: string
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      scorer_version:
+        title: Scorer Version
+        type: integer
+      trend:
+        $ref: '#/definitions/RiskTrendEnum'
+      unclassified:
+        title: Unclassified
+        type: integer
+    required:
+      - scorer_version
+      - risk
+      - name
+      - critical
+      - high
+      - medium
+      - low
+      - unclassified
+    title: CategoryScoreGradeNoFindings
+    type: object
+
+  ApiProviderScoreGrade:
+    properties:
+      additional_info:
+        title: Additional Info
+        type: array
+        items:
+          $ref: '#/definitions/AdditionalInfo'
+      avg_vulnerability_duration:
+        title: Avg Vulnerability Duration
+        type: integer
+      categories:
+        additionalProperties:
+          $ref: '#/definitions/CategoryScoreGradeNoFindings'
+        title: Categories
+        type: object
+      confidence:
+        $ref: '#/definitions/RiskConfidenceEnum'
+      curated:
+        title: Curated
+        type: boolean
+      last_finding_date:
+        format: date-time
+        title: Last Finding Date
+        type: string
+      last_vulnerability_date:
+        format: date-time
+        title: Last Vulnerability Date
+        type: string
+      provider:
+        $ref: '#/definitions/ApiProvider_Base'
+      provider_id:
+        type: string
+        format: uuid
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      scorer_version:
+        title: Scorer Version
+        type: integer
+      trend:
+        $ref: '#/definitions/RiskTrendEnum'
+    required:
+      - scorer_version
+      - risk
+      - categories
+      - provider
+      - curated
+    title: ApiProviderScoreGrade
+    type: object
+
+  ScoreExitStatusEnum:
+    description: An enumeration.
+    enum:
+      - SUCCESS
+      - NETWORK_FAILURE
+      - TOO_LONG
+      - PARSE_ERROR
+      - GENERIC_FAILURE
+    title: ScoreExitStatusEnum
+    type: string
+
+  ApiServiceScore:
+    properties:
+      api:
+        $ref: '#/definitions/ApiServiceScoreGrade'
+      identifier:
+        format: uuid
+        title: id
+        type: string
+      provider:
+        $ref: '#/definitions/ApiProviderScoreGrade'
+      status:
+        $ref: '#/definitions/ScoreExitStatusEnum'
+      timestamp:
+        format: date-time
+        title: Timestamp
+        type: string
+    required:
+      - identifier
+      - status
+      - timestamp
+      - api
+      - provider
+    title: ApiServiceScore
+    type: object
+
+  ApiServiceClientWorkload:
+    properties:
+      workloadName:
+        type: string
+      namespace:
+        type: string
+      cluster:
+        type: string
+
+  ApiServiceDrillDownBase:
+    properties:
+      compliance:
+        $ref: '#/definitions/ApiServiceCompliance'
+      description:
+        description: Textual description of the Service
+        title: Description
+        type: string
+      identifier:
+        description: Unique identifier of the subject API as assigned by Crankshaft
+        format: uuid
+        title: Identifier
+        type: string
+      link_doc:
+        description: Location of the documentation. This can be an URL for example
+        title: Link Doc
+        type: string
+      name:
+        description: API name, usually an FQDN as determined by crankshaft, it can
+          be logical or can correspond to one of the endpoints where the API is
+          reachable, i.e. api.webex.com
+        title: Name
+        type: string
+      risk:
+        $ref: '#/definitions/ApiSecurityRiskSeverity'
+      score:
+        $ref: '#/definitions/ApiServiceScore'
+      status:
+        $ref: '#/definitions/ApiSecurityApiStatus'
+      status_description:
+        type: string
+      creation_timestamp:
+        format: date-time
+        title: Timestamp
+        type: string
+      clientWorkloads:
+        type: array
+        items:
+          $ref: '#/definitions/ApiServiceClientWorkload'
+    required:
+      - identifier
+      - name
+    title: ApiService
+    type: object
+
+  ApiServiceDrillDownExternal:
+    allOf:
+      - $ref: '#/definitions/ApiServiceDrillDownBase'
+      - properties:
+          classification:
+            description: 'API classification label as determined by Crankshaft, e.g.
+              [''meetings'', ''messaging''] '
+            items:
+              type: string
+            title: Classification
+            type: array
+          provider:
+            $ref: '#/definitions/ApiProvider_Base'
+        type: object
+    type: object
+
+  VulnerabilitiesSummary:
+    description: 'Vulnerabilities summary by severity'
+    type: 'object'
+    properties:
+      total:
+        type: integer
+        minimum: 0
+      unknown:
+        type: integer
+        minimum: 0
+      low:
+        type: integer
+        minimum: 0
+      medium:
+        type: integer
+        minimum: 0
+      high:
+        type: integer
+        minimum: 0
+      critical:
+        type: integer
+        minimum: 0
