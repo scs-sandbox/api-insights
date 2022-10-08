@@ -1,0 +1,18 @@
+@keyframes upload-button-busy {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.edit-group-button {
+  .icon-button {
+    margin-left: 8px;
+    font-size: 12px;
+    padding: 6px 8px;
+    font-weight: 400;
+  }
+}

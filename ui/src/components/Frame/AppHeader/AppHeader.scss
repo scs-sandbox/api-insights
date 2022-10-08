@@ -1,0 +1,27 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 18px;
+  height: 60px;
+  background-color: #000;
+  color: #fff;
+
+  .icon {
+    width: 130px;
+    height: 42px;
+    margin-right: 6px;
+    margin-top: 10px;
+    background: center / cover no-repeat url("./images/app-logo.svg");
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+
+    .api {
+      font-weight: 500;
+      margin-right: 4px;
+    }
+  }
+}

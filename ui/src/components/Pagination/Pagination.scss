@@ -1,0 +1,66 @@
+$color-primary: #555;
+$color-primary-dark: #000;
+$color-active-bg: #e8e8e8;
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+.pagination {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  color: $color-primary;
+  font-size: 14px;
+  align-items: center;
+  font-weight: 300;
+  list-style: none;
+
+  .page-btn {
+    flex: 0 0 auto;
+    margin: 0 4px;
+  }
+
+  .page-btn .page-btn-link {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    transition: none;
+    overflow: hidden;
+    text-decoration: none !important;
+
+    cursor: pointer;
+    transition: color 0.3s;
+    color: $color-primary;
+    text-decoration: none;
+    outline: none;
+
+    &:hover {
+      color: $color-primary-dark;
+    }
+  }
+
+  .move-btn .page-btn-link {
+    flex: 0 0 auto;
+    width: auto;
+    height: 26px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-btn.active .page-btn-link {
+    border-radius: 50%;
+    background-color: $color-active-bg;
+  }
+
+  .move-btn.disabled .page-btn-link {
+    opacity: 0.5;
+    cursor: default;
+  }
+}

@@ -1,0 +1,91 @@
+.trend-bar-chart {
+  display: flex;
+  flex-direction: column;
+
+  .chart-panel-box {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1.4em 0;
+  }
+
+  .chart-panel {
+    flex: 1 1 auto;
+    display: flex;
+
+    .axis-x {
+      flex: 0 0 auto;
+      display: flex;
+      padding-right: 2px;
+
+      .scale-list {
+        position: relative;
+
+        .scale-value {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          height: 0px;
+          line-height: 0;
+          box-sizing: border-box;
+        }
+      }
+
+      .axis-line {
+        margin-left: 4px;
+        border-radius: 10px;
+        width: 2px;
+        background: linear-gradient(to bottom,
+            #7adf2b 5%,
+            #8de548 15%,
+            #bfd85c 25%,
+            #fff066 35%,
+            #d7b713 45%,
+            #d85c5c 55%);
+      }
+    }
+
+    .chart-area {
+      flex: 1 1 0;
+      width: 0;
+      min-height: 240px;
+      position: relative;
+      padding-right: 2px;
+
+      .axis-x-lines {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        .axis-x-line {
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: 1px;
+        }
+      }
+
+      .bars {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .bar-col {
+          flex: 1 1 0%;
+          width: 0;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+
+          &:only-child {
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

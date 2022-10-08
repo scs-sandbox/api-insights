@@ -1,0 +1,45 @@
+$shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+
+  .tab-headers {
+    display: flex;
+
+    .tab-header {
+      border-radius: 4px 4px 0 0;
+      padding: 8px 10px;
+      background-color: #fff;
+      background-clip: padding-box;
+      border-bottom: solid 1px transparent;
+      cursor: pointer;
+      box-shadow: $shadow;
+
+      &.active {
+        border-bottom: solid 1px #fff;
+      }
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+  }
+  .tab-bodys {
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: $shadow;
+    border-radius: 0 4px 2px 2px;
+
+    .tab-body {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

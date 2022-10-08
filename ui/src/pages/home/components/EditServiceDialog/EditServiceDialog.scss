@@ -1,0 +1,28 @@
+.edit-service-dialog-body {
+
+  .light-bg,
+  .white-bg {
+    padding: 10px;
+  }
+
+  .block-title {
+    font-size: 20px;
+    padding: 10px 25px;
+  }
+
+  .field-item {
+    .field-name {
+      min-width: 213px;
+    }
+
+    .field-input {
+      .checkbox {
+        width: fit-content;
+      }
+    }
+  }
+}
+
+.edit-service-dialog .MuiDialog-paper {
+  max-width: 700px;
+}

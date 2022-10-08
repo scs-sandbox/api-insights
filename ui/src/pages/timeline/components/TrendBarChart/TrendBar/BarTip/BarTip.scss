@@ -1,0 +1,60 @@
+@keyframes show-trend-bar-tip-left {
+  from {
+    left: -4px;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes show-trend-bar-tip-right {
+  from {
+    left: 4px;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+.trend-bar-tip {
+  position: absolute;
+  transition: transform 0.3s;
+  pointer-events: none;
+
+  &.in-left {
+    animation: show-trend-bar-tip-left 0.3s;
+  }
+
+  &.in-right {
+    animation: show-trend-bar-tip-right 0.3s;
+
+    .tip-body {
+      transform: translate(-100%, -100%);
+      margin: -10px 0 0 -10px;
+    }
+  }
+
+  .tip-body {
+    background-color: #fff;
+    color: #444;
+    padding: 8px 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+    transform: translateY(-100%);
+    margin: -10px 0 0 10px;
+
+    .label {
+      white-space: nowrap;
+      font-weight: 400;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .score {
+      white-space: nowrap;
+      font-size: 14px;
+    }
+  }
+}

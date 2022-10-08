@@ -1,0 +1,23 @@
+.dialog-actions {
+  border-top: solid 1px #ddd;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8fcff;
+
+  button {
+    border-radius: 0;
+    padding: 12px 20px;
+    color: #1976d2;
+    background-color: #fff;
+    text-transform: capitalize;
+    min-width: 30%;
+
+    &:first-child {
+      border-right: solid 1px #ddd;
+    }
+
+    &:last-child {
+      border-left: solid 1px #ddd;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.field-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 25px;
+
+  .field-name {
+    flex: 0 0 auto;
+    padding-right: 20px;
+    font-weight: 300;
+    box-sizing: border-box;
+    text-align: right;
+  }
+
+  .field-input {
+    flex: 1 1 auto;
+
+    input {
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: solid 1px #ddd;
+      background-color: #fff;
+      padding: 10px;
+      width: 100%;
+      outline: none;
+      box-shadow: none;
+      font-size: 16px;
+      font-family: inherit;
+      font-weight: 300;
+      color: inherit;
+    }
+  }
+}

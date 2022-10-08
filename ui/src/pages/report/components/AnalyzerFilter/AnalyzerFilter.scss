@@ -1,0 +1,30 @@
+.analyzer-filter {
+  border-radius: 8px;
+  background-color: #fff;
+  flex: 0 0 auto;
+
+  .filter-list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    margin: 0 -8px;
+
+    .filter-item {
+      padding: 4px 8px;
+
+      .item-label {
+        display: flex;
+        cursor: pointer;
+
+        .text-part {
+          white-space: nowrap;
+        }
+
+        .analyze-failed {
+          font-weight: 400;
+          color: #b55f54;
+        }
+      }
+    }
+  }
+}

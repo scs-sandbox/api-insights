@@ -1,0 +1,110 @@
+.timeline-page {
+  .page-header {
+    .page-header-content {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 10px;
+    }
+  }
+
+  .page-body-content {
+    padding: 3% 6%;
+
+    .data-loading {
+      color: #888;
+      padding: 20px 0;
+    }
+
+    .no-result {
+      padding: 20px 0;
+    }
+
+    .page-title-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 26px;
+
+      .title {
+        font-weight: 300;
+        font-size: 28px;
+        line-height: 38px;
+        flex: 1 1 auto;
+      }
+
+      .action {
+        flex: 0 0 auto;
+        margin-right: 70px;
+      }
+
+      .help-button {
+        position: static;
+        flex: 0 0 auto;
+        margin-right: -35px;
+      }
+    }
+
+    .group-title-bar {
+      display: flex;
+
+      &.reconstructed-bar {
+        margin: 20px 0;
+        align-items: center;
+      }
+
+      .title {
+        font-size: 28px;
+        padding-right: 20px;
+        flex: 1 1 auto;
+        color: #333;
+      }
+    }
+
+    .spec-version-report-list {
+      margin-left: 15px;
+    }
+
+    .reconstruct-snapshot-button {
+      .icon-button {
+        background-color: rgba(0, 0, 0, 0.15);
+        color: #333;
+
+        .busy-icon {
+          color: #fff;
+        }
+      }
+    }
+
+    .blue-button {
+      .icon-button {
+        color: #0076d5;
+        background-color: #dee9f1;
+
+        &:hover {
+          background-color: #d6e3ef;
+        }
+
+        .recons-icon {
+          color: #fff;
+
+          .icon-release {
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+          }
+        }
+
+        .upload-icon {
+          background-color: #2f92e1;
+          color: #fff;
+        }
+      }
+    }
+
+    .full-button {
+      .icon-button {
+        display: block;
+        width: 100%;
+        border-radius: 4px;
+        padding: 1em;
+      }
+    }
+  }
+}
