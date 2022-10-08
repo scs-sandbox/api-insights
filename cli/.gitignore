@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+.config.json
+coverage.*
+release
+bin
