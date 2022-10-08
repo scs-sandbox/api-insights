@@ -1,0 +1,109 @@
+.snapshop-group {
+  margin-left: 48px;
+
+  .group-header {
+    margin-bottom: 8px;
+  }
+
+  .group-body {
+    border-radius: 6px;
+    list-style: none;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+
+    .group-brief {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 10px 0;
+
+      .info-col {
+        display: flex;
+        align-items: center;
+        flex: 1 1 auto;
+        padding: 16px 0 16px 25px;
+        font-size: 22px;
+        color: #bbb;
+
+        .bold {
+          margin-left: 8px;
+          font-weight: 400;
+          color: #fff;
+        }
+      }
+
+      .action-col {
+        flex: 0 0 auto;
+        padding: 0 25px 4px 10px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+
+        &::after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          color: #888;
+          border-left: solid 1px;
+          border-bottom: solid 1px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    .group-detail {
+      display: none;
+      padding: 25px 25px 25px 50px;
+      position: relative;
+
+      &.open {
+        display: block;
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 80px;
+        right: 40px;
+        height: 1px;
+        background-color: #555;
+      }
+
+      .snapshots-block {
+        .snapshot-list {
+          display: flex;
+          flex-wrap: wrap;
+
+          .snapshot-col {
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+
+            @media (min-width: 992px) {
+              width: 50%;
+            }
+          }
+        }
+
+        .view-more-block {
+          padding: 15px 25px;
+
+          .view-more {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            cursor: pointer;
+            color: #39cbf9;
+
+            &:hover {
+              color: #17a7d3;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.reconstruct-snapshot-button {
+  .icon-button {
+    font-size: 18px;
+
+    .recons-icon {
+      display: block;
+      position: relative;
+      padding: 4px;
+      width: 1.6em;
+      box-sizing: border-box;
+      margin: -3px;
+
+      .busy-icon {
+        position: absolute;
+        width: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@keyframes upload-icon-busy {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.upload-icon {
+  display: flex;
+  width: 1.25em;
+  height: 1.25em;
+  box-sizing: border-box;
+  border-radius: 50%;
+  position: relative;
+  font-style: normal;
+  background-color: #f0f0f0;
+  color: #444;
+
+  &::before {
+    content: '+';
+    display: block;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -0.1em;
+    bottom: 0;
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    align-items: center;
+    font-size: 140%;
+    font-weight: 100;
+  }
+
+  &.state-busy {
+    background-color: transparent;
+
+    &::before {
+      content: '';
+    }
+  }
+
+  .busy-icon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+  }
+}

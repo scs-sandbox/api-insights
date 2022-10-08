@@ -1,0 +1,31 @@
+.score-level {
+  &.level-alert {
+    color: #d85c5c;
+    background-color: #d85c5c;
+  }
+
+  &.level-warning {
+    color: #d7b713;
+    background-color: #d7b713;
+  }
+
+  &.level-atrisk {
+    color: #f4e345;
+    background-color: #f4e345;
+  }
+
+  &.level-good {
+    color: #bfd85c;
+    background-color: #bfd85c;
+  }
+
+  &.level-verygood {
+    color: #8de548;
+    background-color: #8de548;
+  }
+
+  &.level-excellent {
+    color: #7adf2b;
+    background-color: #7adf2b;
+  }
+}

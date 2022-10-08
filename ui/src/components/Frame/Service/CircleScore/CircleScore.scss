@@ -1,0 +1,37 @@
+.circle-score {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  .circle-part {
+    background-color: transparent;
+  }
+
+  .circle-part,
+  .score-track,
+  .score-value {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .score-track {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  .score-track.dark-track {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  .MuiCircularProgress-root {
+    stroke-linecap: round;
+  }
+
+  .value-label {
+    font-size: 22px;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,16 @@
+.service-dropdown-search-bar {
+  margin: 8px 20px;
+}
+
+.service-dropdown {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 80px;
+
+  .services-loading,
+  .services-message {
+    display: flex;
+    align-items: center;
+    margin: 4px 10px;
+  }
+}

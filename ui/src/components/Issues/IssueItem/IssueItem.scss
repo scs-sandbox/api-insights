@@ -1,0 +1,15 @@
+.issue-item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+
+  .issue-item-count {
+    margin-left: 5px;
+    font-weight: 400;
+  }
+
+  .issue-item-label {
+    margin-left: 5px;
+    color: #999;
+  }
+}

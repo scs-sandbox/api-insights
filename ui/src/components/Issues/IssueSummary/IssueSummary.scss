@@ -1,0 +1,11 @@
+.issue-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+
+  .issue-item {
+    margin: 8px;
+  }
+}

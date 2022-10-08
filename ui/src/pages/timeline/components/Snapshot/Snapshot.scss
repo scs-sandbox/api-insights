@@ -1,0 +1,36 @@
+.snapshot-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color 0.2s;
+
+  .snapshot-item-info {
+    padding: 0 15px;
+    flex: 1 1 0%;
+
+    .detail {
+      color: #f0f0f0;
+      font-size: 12px;
+    }
+
+    .snapshot-name {
+      color: #2cfff2;
+      margin-top: 2px;
+    }
+  }
+
+  .spec-download {
+    margin: 0 0 0 10px;
+
+    .download-icon {
+      color: #ddd;
+      cursor: pointer;
+
+      &:hover {
+        color: #eee;
+      }
+    }
+  }
+}

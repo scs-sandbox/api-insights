@@ -1,0 +1,23 @@
+.issue-icon {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  background: center / contain no-repeat;
+  background-image: url('./images/unknown.svg');
+
+  &.issue-icon-error {
+    background-image: url('./images/errors.svg');
+  }
+
+  &.issue-icon-hint {
+    background-image: url('./images/hint.svg');
+  }
+
+  &.issue-icon-info {
+    background-image: url('./images/info.svg');
+  }
+
+  &.issue-icon-warning {
+    background-image: url('./images/warnings.svg');
+  }
+}

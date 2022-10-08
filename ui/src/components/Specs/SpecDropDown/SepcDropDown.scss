@@ -1,0 +1,51 @@
+.dropdown.spec-dropdown {
+  display: inline-block;
+
+  .dropdown-value-box {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 0;
+
+    .placeholder {
+      font-size: 18px;
+      font-weight: 200;
+    }
+
+    .dropdown-value {
+      font-size: 28px;
+
+      .version-label {
+        font-weight: 200;
+        margin-right: 10px;
+      }
+    }
+
+    .drop-icon {
+      border: none;
+
+      &::after {
+        height: 6px;
+        width: 6px;
+        margin-top: -2px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.spec-menu-item {
+  .menu-item-label {
+    display: flex;
+    font-size: 16px;
+
+    .version-label {
+      margin-right: 10px;
+      font-weight: 200;
+    }
+
+    .revision-label {
+      font-weight: 300;
+    }
+  }
+}

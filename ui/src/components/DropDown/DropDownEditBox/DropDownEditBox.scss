@@ -1,0 +1,13 @@
+.dropdown {
+  .dropdown-value {
+    .dropdown-value-input {
+      border: none;
+      box-sizing: border-box;
+      width: 100%;
+
+      &[readonly] {
+        cursor: pointer;
+      }
+    }
+  }
+}

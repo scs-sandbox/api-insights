@@ -1,0 +1,203 @@
+@keyframes show-spec-report-item-menu {
+  from {
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.spec-version-report {
+  border-radius: 6px;
+  list-style: none;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+
+  .item-brief {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .info-col {
+      display: flex;
+      align-items: center;
+      flex: 1 1 auto;
+      padding: 16px 0;
+
+      .main-info {
+        display: flex;
+        align-items: center;
+        margin: 4px 15px;
+        flex: 1 1 auto;
+
+        .score-part {
+          flex: 0 0 auto;
+          margin-right: 15px;
+        }
+
+        .info-part {
+          flex: 1 1 auto;
+
+          .spec-info {
+            font-size: 22px;
+            color: #bbb;
+
+            .version-label {
+              margin-left: 8px;
+              font-weight: 400;
+              color: #fff;
+            }
+
+            .revision-label {
+              font-size: 18px;
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+
+      .status-part {
+        margin: 4px 15px;
+        flex: 0 0 auto;
+        padding: 10px 15px 10px 10px;
+        display: flex;
+        border-radius: 50px;
+
+        .button-rc {
+          display: none;
+          font-size: 12px;
+          margin-left: 10px;
+
+          @media (min-width: 1200px) {
+            display: inline-flex;
+          }
+
+          &:hover,
+          &.active {
+            background-color: grey;
+          }
+        }
+      }
+    }
+
+    .action-col {
+      flex: 0 0 auto;
+      padding: 0 25px 0 10px;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+
+      &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        color: #888;
+        border-left: solid 1px;
+        border-bottom: solid 1px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .item-detail {
+    display: none;
+    padding: 15px 20px 15px 50px;
+    position: relative;
+
+    &.open {
+      display: block;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 80px;
+      right: 40px;
+      height: 1px;
+      background-color: #555;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-wrap: wrap-reverse;
+
+      .revision-list {
+        flex: 1 1 auto;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px;
+
+        .view-more-block {
+          padding: 15px 25px;
+
+          .view-more {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            cursor: pointer;
+            color: #39cbf9;
+
+            &:hover {
+              color: #17a7d3;
+            }
+          }
+        }
+      }
+
+      .score-trends {
+        flex: 1 1 auto;
+        box-sizing: border-box;
+        width: 100%;
+        color: #eee;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+
+        .trend-title-bar {
+          display: flex;
+          align-items: center;
+
+          .title {
+            flex: 1 1 auto;
+          }
+
+          .action {
+            flex: 0 0 auto;
+            font-size: 12px;
+          }
+
+          .title-tag {
+            display: inline-flex;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: none;
+            outline: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7em 1em;
+            border-radius: 28px;
+            font-size: 12px;
+            font-weight: 300;
+            transition: background-color 0.2s;
+            text-decoration: none;
+          }
+        }
+
+        .trend-bar-chart {
+          flex: 1 1 auto;
+        }
+      }
+
+      @media (min-width: 1200px) {
+
+        .revision-list,
+        .score-trends {
+          width: 50%;
+        }
+      }
+    }
+  }
+}

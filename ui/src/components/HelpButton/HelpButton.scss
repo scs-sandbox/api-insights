@@ -1,0 +1,58 @@
+.help-container {
+  position: relative;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 50%);
+
+  &.show {
+    min-height: 200px;
+  }
+
+  .help-button {
+    color: black;
+    position: absolute;
+    right: 40px;
+    margin-top: 25px;
+
+    .icon-button {
+      right: 1px;
+      border-radius: 60px;
+      cursor: pointer;
+      position: absolute;
+      top: -103px;
+      padding: 0.7em 1.1em;
+
+      .text-col {
+        // color: black;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  .question-mark {
+    background: rgba(255, 255, 255, 0.64);
+    padding: 4px 10px;
+    border-radius: 26px;
+    display: inline;
+    margin-right: 9px;
+  }
+
+  .help-bar {
+    padding: 40px 100px;
+    text-align: left;
+
+    .title {
+      display: inline;
+      font-weight: 350;
+      font-size: 24px;
+    }
+
+    .description {
+      padding: 10px 0 0 10px;
+    }
+
+    .talk-icon {
+      margin-left: -45px;
+      margin-right: 5px;
+    }
+  }
+}

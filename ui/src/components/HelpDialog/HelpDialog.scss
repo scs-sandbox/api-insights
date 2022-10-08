@@ -1,0 +1,40 @@
+.help-dialog-content {
+  padding: 35px 25px 55px 25px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(24, 24, 24);
+
+  .field-item {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+
+    .field-name {
+      flex: 0 0 auto;
+      min-width: 70px;
+      padding-right: 20px;
+      font-weight: 400;
+    }
+
+    .field-input {
+      flex: 1 1 auto;
+
+      input {
+        box-sizing: border-box;
+        border: none;
+        border-bottom: solid 1px;
+        padding: 4px;
+        width: 100%;
+        outline: none;
+        box-shadow: none;
+        font-size: 16px;
+        font-family: inherit;
+        font-weight: 300;
+        color: inherit;
+        background-color: transparent;
+      }
+    }
+  }
+}
