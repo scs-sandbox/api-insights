@@ -2,6 +2,14 @@ import { useQuery, useMutation } from 'react-query';
 import Api from './api';
 
 export namespace SpecData {
+  export enum SpecState {
+    Archive = 'Archive',
+    Release = 'Release',
+    Development = 'Development',
+    Latest = 'Latest',
+    Reconstructed = 'Reconstructed',
+  }
+
   export type Spec = {
     created_at: string;
     updated_at: string;
@@ -12,7 +20,7 @@ export namespace SpecData {
     doc: string;
     doc_type: string;
     score: number;
-    state: string;
+    state: SpecState;
     valid: string;
   };
 

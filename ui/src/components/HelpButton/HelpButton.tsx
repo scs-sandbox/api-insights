@@ -18,11 +18,7 @@ export default function HelpButton(props: Props) {
 
   function renderButton() {
     return (
-      <IconButton
-        // icon={<HelpIcon/>}
-        onClick={() => setOpenDialog(!openDialog)}
-      >
-        {/* {props.children || 'Help'} */}
+      <IconButton onClick={() => setOpenDialog(!openDialog)}>
         ?
       </IconButton>
     );

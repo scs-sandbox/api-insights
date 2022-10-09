@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DownloadIcon from '../../../../components/DownloadIcon/DownloadIcon';
 import ScoreLevel from '../../../../components/Frame/Service/ScoreLevel/ScoreLevel';
-import SpecStateIcon, {
-  SpecState,
-} from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
+import SpecStateIcon from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import SpecTime from '../../../../components/Specs/SpecTime/SpecTime';
 import { buildApiAbsoluteUrl } from '../../../../query/api';
 import { SpecData } from '../../../../query/spec';
@@ -18,7 +16,7 @@ export type RevisionData = SpecData.Spec & {
 
 type Props = {
   data: RevisionData;
-  to?: string;
+  linkTo?: string;
   className?: string;
   onMouseEnter?: (item: RevisionData) => void;
   onMouseLeave?: (item: RevisionData) => void;
@@ -27,9 +25,9 @@ type Props = {
 };
 
 /**
- * TODO: comment
+ * render revision according to props.data
  * @param props props
- * @returns jsx
+ * @returns JSX.element
  */
 export default function Revision(props: Props) {
   const [openMenu, setOpenMenu] = useState(false);
@@ -94,11 +92,11 @@ export default function Revision(props: Props) {
     return (
       <div className="action-menu" onClick={onCloseMenu}>
         <div className="menu-item" onClick={onRelease}>
-          <SpecStateIcon value={SpecState.Release} />
+          <SpecStateIcon value={SpecData.SpecState.Release} />
           <div className="menu-item-label">Live</div>
         </div>
         <div className="menu-item" onClick={onArchive}>
-          <SpecStateIcon value={SpecState.Archive} />
+          <SpecStateIcon value={SpecData.SpecState.Archive} />
           <div className="menu-item-label">Archive</div>
         </div>
       </div>
@@ -115,7 +113,7 @@ export default function Revision(props: Props) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <SpecStateIcon value={data.state as SpecState} />
+      <SpecStateIcon value={data.state as SpecData.SpecState} />
       <div className="revision-item-info">
         <div className="detail">
           <SpecTime time={data.updated_at} />
@@ -132,7 +130,7 @@ export default function Revision(props: Props) {
         {menu}
       </div>
       <div className="revision-item-action">
-        <Link to={props.to} className="view-report button-rc">
+        <Link to={props.linkTo} className="view-report button-rc">
           View Full Report
         </Link>
       </div>

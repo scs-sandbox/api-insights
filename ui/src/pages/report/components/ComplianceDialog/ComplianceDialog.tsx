@@ -2,15 +2,15 @@ import { Dialog } from '@mui/material';
 import { MonacoDiffEditor } from 'react-monaco-editor';
 import CodeViewer from '../../../../components/CodeViewer/CodeViewer';
 import MarkdownViewer from '../../../../components/MarkdownViewer/MarkdownViewer';
-import { SpecState } from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import IssueItem from '../../../../components/Issues/IssueItem/IssueItem';
 import { ClickRowEventData } from '../ComplianceTable/ComplianceTable';
 import { ComplianceData } from '../../../../query/compliance';
+import { SpecData } from '../../../../query/spec';
 import './ComplianceDialog.scss';
 
 type Props = {
   open: boolean;
-  env: SpecState;
+  env: SpecData.SpecState;
   doc: string;
   data: ClickRowEventData;
   onClose: () => void;

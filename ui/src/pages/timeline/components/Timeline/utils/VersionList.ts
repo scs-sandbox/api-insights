@@ -1,4 +1,3 @@
-import { SpecState } from '../../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import { ComplianceData } from '../../../../../query/compliance';
 import { SpecData } from '../../../../../query/spec';
 import buildSortedListByStringField from '../../../../../utils/order';
@@ -89,7 +88,7 @@ export function filterNotEmptyVersionList(versionList: VersionData[]) {
   return versionList
     .map((v) => ({
       ...v,
-      revisions: v.revisions.filter((r) => r.state !== SpecState.Archive),
+      revisions: v.revisions.filter((r) => r.state !== SpecData.SpecState.Archive),
     }))
     .filter((v) => v.revisions.length);
 }

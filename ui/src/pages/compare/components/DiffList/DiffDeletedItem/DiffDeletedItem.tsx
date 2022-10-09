@@ -27,9 +27,6 @@ export default function DiffDeletedItem(props: Props) {
         {props.data?.path}
       </div>
       {props.data.breaking && <div className="row-breaking">Breaking</div>}
-      {/* <div className="detail">
-                  <MarkdownViewer text={i.message} />
-              </div> */}
     </div>
   );
 }

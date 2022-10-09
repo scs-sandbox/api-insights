@@ -8,8 +8,8 @@ import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import { groupServiceByProdcut, groupServiceByOrg } from '../../../../components/Frame/Service/ServiceDropDown/ServiceDropDown';
 import Searchbar from '../../../../components/SearchBar/SearchBar';
 import { OrganizationData } from '../../../../query/organization';
-import './Home.scss';
 import EditServiceDialog, { EditingEvent } from '../EditServiceDialog/EditServiceDialog';
+import './Home.scss';
 
 type Props = {
   orgName: string;
@@ -48,10 +48,6 @@ function keyFilterService(service: ServiceData.Service, keyword: string) {
   return service.title.includes(keyword) || service.name_id.includes(keyword);
 }
 
-function tagFilterService(service: ServiceData.Service, tag: string) {
-  return service.product_tag === tag;
-}
-
 function orgFilterService(service: ServiceData.Service, orgName: string) {
   return service.organization_id === orgName;
 }
@@ -71,32 +67,18 @@ function filterOrgsByName(
   };
 }
 
-function filterGroupsByName(groups: {[index: string]: ServiceData.Service[]}, name: string) {
-  if (name === 'all') return groups;
-
-  if (!groups[name]) return {};
-
-  return {
-    [name]: groups[name],
-  };
-}
-
 /**
  * Renders Home page showing available services
  * @returns JSX.Element
  */
 export default function Home(props: Props) {
   const { orgName } = props;
-  const [tagFilter, setTagFilter] = useState('all');
   const [showDialog, setShowDialog] = useState(false);
   const [serviceToEdit, setServiceToEdit] = useState(null);
   const [showEditService, setShowEditService] = useState(false);
   const {
     isLoading: isServicePatching,
-    isError: isServicePatchingError,
-    isSuccess: isServicePatchingSuccess,
     mutate: patchService,
-    reset: resetPatchServiceResult,
   } = usePatchService();
   // Filter by organization
   const orgFilteredServiceList = (orgName !== 'all' && props.serviceList)
@@ -106,11 +88,6 @@ export default function Home(props: Props) {
   const keyfilteredServiceList = (props.searchKey !== '' && props.serviceList)
     ? orgFilteredServiceList.filter((service) => keyFilterService(service, props.searchKey))
     : orgFilteredServiceList;
-  // Filter by product group tag
-  const filteredServiceList = (tagFilter !== 'all' && props.serviceList)
-    ? keyfilteredServiceList.filter((service) => tagFilterService(service, tagFilter))
-    : keyfilteredServiceList;
-
   const filteredOrgGroups = groupServiceByOrg(keyfilteredServiceList || []);
   const filteredProductGroups = groupServiceByProdcut(keyfilteredServiceList || []);
 
@@ -169,16 +146,6 @@ export default function Home(props: Props) {
       },
     });
   };
-  /**
-   * Set tag filers that will filter by product group
-   * @param value the string value of product group names
-   */
-  const handleFilterClick = (value) => {
-    setTagFilter(value);
-    if (props.onClearSearchKey) {
-      props.onClearSearchKey();
-    }
-  };
 
   const onSearchKeyChanged = (e) => {
     if (props.onSearchKeyChanged) {
@@ -196,20 +163,6 @@ export default function Home(props: Props) {
         }}
       >
         {org}
-      </div>
-    );
-  }
-
-  function renderTag(tag) {
-    return (
-      <div
-        key={tag}
-        className={`tag-option ${tagFilter === tag ? 'active' : ''}`}
-        onClick={() => {
-          handleFilterClick(tag);
-        }}
-      >
-        {tag}
       </div>
     );
   }
@@ -282,7 +235,6 @@ export default function Home(props: Props) {
     );
   }
 
-  // const renderGroups = filterGroupsByName(filteredProductGroups, tagFilter);
   const renderGroups = filterOrgsByName(filteredOrgGroups, orgName, props.organizationList);
   const groups = Object.keys(renderGroups)
     .map((key) => ({
@@ -291,9 +243,7 @@ export default function Home(props: Props) {
     } as ServiceCollection))
     .map(renderGroup);
 
-  const tags = Object.keys(filteredProductGroups).map(renderTag);
   const orgButtons = props.organizationList.map((org) => renderOrgButton(org.name_id));
-  // Object.keys(filteredOrgGroups).map(renderOrgButton);
 
   function renderGroupContent() {
     if (!props.serviceList) {
@@ -322,7 +272,6 @@ export default function Home(props: Props) {
             >
               View all
             </div>
-            {/* {tags} */}
             {orgButtons}
           </div>
           <div className="group-bar-right">

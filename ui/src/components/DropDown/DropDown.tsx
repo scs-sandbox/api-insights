@@ -16,6 +16,36 @@ type Props = {
   renderMenuItemLabel?: (option: unknown) => ReactNode;
 };
 
+/**
+ * DropDown Component, examples:
+ *
+ * function DropDown_Example1() {
+ *  const [value, setValue] = useState('');
+ *  const onChange = (e) => { setValue(e) };
+ *  const options = ['hello', 'world'];
+ *  return <DropDown value={value} options={options} onChange={onChange} />
+ * }
+ *
+ * function DropDown_Example2() {
+ *  const [value, setValue] = useState('');
+ *  const onChange = (e) => { setValue(e) };
+ *  const options = [{ id: '1', text: 'hello' }, { id: '2', text: 'world' }];
+    const requestOptionValue = (option: {id: string, text: string}) => option.id;
+    const renderValue = (value: string) => (
+      <div className="dropdown-value">{options.find((i) => i.id === value)?.text}</div>
+    );
+    const renderMenuItemLabel = (option: {id: string, text: string}) => (<div>{option.text}</div>);
+
+    return (
+      <DropDown
+        value={value}
+        options={options}
+        requestOptionValue={requestOptionValue}
+        renderValue={renderValue}
+        renderMenuItemLabel={renderMenuItemLabel}
+    );
+ * }
+ */
 export default function DropDown(props: Props) {
   const [anchorEl, setAnchorEl] = useState(null);
 

@@ -59,7 +59,7 @@ export default function VersionReport(props: Props) {
       key={data.id}
       className={data.id === highlightRevisionId ? 'highlight' : ''}
       data={data}
-      to={buildReportUrl(data.id)}
+      linkTo={buildReportUrl(data.id)}
       onMouseEnter={onSetHighlightRevision}
       onMouseLeave={onCancelHighlightRevision}
       onReleased={props.onReleased}

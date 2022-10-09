@@ -2,8 +2,8 @@ import { ButtonHTMLAttributes, useState } from 'react';
 import { Alert, Snackbar } from '@mui/material';
 import IconButton from '../../IconButton/IconButton';
 import BusyIcon, { BusyIconType } from '../../BusyIcon/BusyIcon';
-import EnvIcon, { SpecState } from '../SpecStateIcon/SpecStateIcon';
-import { useReconstructSnapshot } from '../../../query/spec';
+import EnvIcon from '../SpecStateIcon/SpecStateIcon';
+import { SpecData, useReconstructSnapshot } from '../../../query/spec';
 import classNames from '../../../utils/className';
 import { ApiError } from '../../../query/api';
 import './ReconstructSnapshotButton.scss';
@@ -74,7 +74,7 @@ export default function ReconstructSnapshotButton(props: Props) {
 
   const renderIcon = () => (
     <i className="recons-icon">
-      <EnvIcon value={SpecState.Release} />
+      <EnvIcon value={SpecData.SpecState.Release} />
       <BusyIcon type={BusyIconType.ArrowCircle} busy={isLoading} />
     </i>
   );

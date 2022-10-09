@@ -9,9 +9,7 @@ import {
   filterIsSelected,
 } from '../AnalyzerFilter/AnalyzerFilter';
 import IssueSummary from '../../../../components/Issues/IssueSummary/IssueSummary';
-import EnvIcon, {
-  SpecState,
-} from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
+import EnvIcon from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import UploadSpecButton, {
   UploadSpecParam,
 } from '../../../../components/Specs/UploadSpecButton/UploadSpecButton';
@@ -42,8 +40,7 @@ export default function Report(props: Props) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [analyzerFilterData, setAnalyzerFilterData] = useState(null);
   const [openComplianceRow, setOpenComplianceRow] = useState(null);
-  const analyzerFailed = props.complianceList?.filter((i) => i.status !== 'Analyzed') || [];
-  const btnDisalbed = props.service === undefined;
+
   const handleMessageClose = () => {
     if (props.onClearSpecUploadingError) {
       props.onClearSpecUploadingError();
@@ -76,7 +73,7 @@ export default function Report(props: Props) {
     return (
       <ComplianceDialog
         open
-        env={SpecState.Development}
+        env={SpecData.SpecState.Development}
         data={openComplianceRow}
         doc={props.selectedSpec.doc}
         onClose={onCloseComplianceDialog}
@@ -103,9 +100,7 @@ export default function Report(props: Props) {
         .map((i) => ({
           title: i.title,
           value: i.name_id,
-          status:
-              props.complianceList?.filter((x) => x.analyzer === i.name_id)[0]
-                ?.status || 'none',
+          status: props.complianceList?.find((x) => x.analyzer === i.name_id)?.status || 'none',
         }))
       : null;
 
@@ -119,19 +114,20 @@ export default function Report(props: Props) {
   };
 
   const renderComplianceAnalyzerBlock = (forDrift: boolean) => {
+    const analyzerFailed = props.complianceList?.filter((i) => i.status !== 'Analyzed') || [];
+    const analyzerFailedMessage = analyzerFailed.length > 0 ? (
+      <span className="failed-warning">Warning: Analyzer Failure</span>
+    ) : null;
+
     const textPart = (
       <div className="text-part">
-        <EnvIcon value={forDrift ? SpecState.Release : SpecState.Development} />
+        <EnvIcon value={forDrift ? SpecData.SpecState.Release : SpecData.SpecState.Development} />
         <span className="description">
           {forDrift ? 'Spec drift' : 'Analyzing spec'}
         </span>
         <span className="version-label">{props.selectedSpec?.version}</span>
         <span className="revision-label">{props.selectedSpec?.revision}</span>
-        {analyzerFailed.length > 0 ? (
-          <span className="failed-warning">Warning: Analyzer Failure</span>
-        ) : (
-          ''
-        )}
+        {analyzerFailedMessage}
       </div>
     );
 
@@ -162,18 +158,21 @@ export default function Report(props: Props) {
               && i.analyzer !== 'drift'))
       : null;
 
+    const complianceAnalyzerBlock = renderComplianceAnalyzerBlock(forDrift);
     const statistics = renderStatistics(list);
+    const recalculateButton = props.selectedSpec && (
+      <div className="reanalyze-button" onClick={onReanalyze}>
+        <span className="reanalyze-icon" />
+        Recalculate
+      </div>
+    );
 
     return (
       <div className={`tab-body${selectedTabIndex === index ? ' active' : ''}`}>
         <div className={`compliance-tab${forDrift ? ' for-drift' : ''}`}>
-          {renderComplianceAnalyzerBlock(forDrift)}
-
+          {complianceAnalyzerBlock}
           {statistics}
-          <div className="reanalyze-button" onClick={onReanalyze}>
-            <span className="reanalyze-icon" />
-            Recalculate
-          </div>
+          {recalculateButton}
           <div className="table-block">
             <ComplianceTable
               key={props.selectedSpec ? props.selectedSpec.id : ''}
@@ -192,11 +191,11 @@ export default function Report(props: Props) {
   const renderResult = () => {
     const headers = [
       <div key="Compliance" className="report-tab-header">
-        <EnvIcon value={SpecState.Development} />
+        <EnvIcon value={SpecData.SpecState.Development} />
         <div className="title">Compliance</div>
       </div>,
       <div key="Drift" className="report-tab-header">
-        <EnvIcon value={SpecState.Release} />
+        <EnvIcon value={SpecData.SpecState.Release} />
         <div className="title">Drift</div>
       </div>,
     ];
@@ -245,7 +244,7 @@ export default function Report(props: Props) {
       </div>
       <div className="upload-col">
         <UploadSpecButton
-          disabled={btnDisalbed}
+          disabled={!props.service}
           serviceId={props.service?.id}
           onUploaded={props.onSpecUploaded}
         />
