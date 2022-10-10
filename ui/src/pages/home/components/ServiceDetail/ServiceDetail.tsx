@@ -5,7 +5,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import PublicIcon from '@mui/icons-material/Public';
 import LinkIcon from '@mui/icons-material/Link';
 import EditIcon from '@mui/icons-material/Edit';
-import Timer from '../../../../components/Timer/Timer';
 import classNames from '../../../../utils/className';
 import CircleScore from '../../../../components/Frame/Service/CircleScore/CircleScore';
 import { ServiceData } from '../../../../query/service';
@@ -17,7 +16,6 @@ type Props = {
   isNewCreated: boolean;
   onClickService: (clickedService: ServiceData.Service, e: MouseEvent<HTMLElement>) => void;
   onClickEdit: (clickedService: ServiceData.Service, e: MouseEvent<HTMLElement>) => void;
-  onCancelNewServiceNotation: () => void;
 }
 
 export default function ServiceDetail(props: Props) {
@@ -34,9 +32,7 @@ export default function ServiceDetail(props: Props) {
   );
 
   const newMark = props.isNewCreated && (
-    <Timer ms={60 * 1000} onClose={props.onCancelNewServiceNotation}>
-      <span className="new-mark">NEW</span>
-    </Timer>
+    <span className="new-mark">NEW</span>
   );
 
   const noSpec = (!props.service.summary) ? (

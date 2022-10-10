@@ -225,7 +225,6 @@ export default function Home(props: Props) {
                     service={service}
                     onClickService={onClickService}
                     onClickEdit={onClickEdit}
-                    onCancelNewServiceNotation={onCancelNewServiceNotation}
                   />
                 </div>
               ))

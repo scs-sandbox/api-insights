@@ -1,7 +1,7 @@
 import { useEffect, useState, MouseEvent } from 'react';
 import MarkdownViewer from '../../../../components/MarkdownViewer/MarkdownViewer';
 import Pagination from '../../../../components/Pagination/Pagination';
-import IssueIcon from '../../../../components/Issues/IssueIcon/IssueIcon';
+import SeverityIcon from '../../../../components/Severity/SeverityIcon/SeverityIcon';
 import { AnalyserData } from '../../../../query/analyzer';
 import { ComplianceData } from '../../../../query/compliance';
 import capitalize from '../../../../utils/string';
@@ -175,17 +175,21 @@ export default function ComplianceTable(props: Props) {
       return <div className="detail">{summary}</div>;
     }
 
-    const detailRows = item.detail.map((i, idx) => (
-      <div
-        key={item.id}
-        className="item"
-        data-id={item.id}
-        data-index={idx}
-        onClick={onClickDetailItem}
-      >
-        {renderRowDetailContent(i)}
-      </div>
-    ));
+    const detailRows = item.detail.map((i, idx) => {
+      const key = `${item.id}-${idx}`;
+      const rowDetailConent = renderRowDetailContent(i);
+      return (
+        <div
+          key={key}
+          className="item"
+          data-id={item.id}
+          data-index={idx}
+          onClick={onClickDetailItem}
+        >
+          {rowDetailConent}
+        </div>
+      );
+    });
 
     return (
       <div className="detail open">
@@ -219,7 +223,7 @@ export default function ComplianceTable(props: Props) {
       <tr key={analyseTableRowData.id} data-id={analyseTableRowData.id} onClick={onClickRow}>
         {analyzerCell}
         <td className="center-cell">
-          <IssueIcon severity={analyseTableRowData.severity} />
+          <SeverityIcon severity={analyseTableRowData.severity} />
           <div>{severityTitle}</div>
         </td>
         <td className="left-cell">

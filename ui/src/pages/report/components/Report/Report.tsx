@@ -8,7 +8,7 @@ import {
   AnalyzerFilter,
   filterIsSelected,
 } from '../AnalyzerFilter/AnalyzerFilter';
-import IssueSummary from '../../../../components/Issues/IssueSummary/IssueSummary';
+import SeveritySummary from '../../../../components/Severity/SeveritySummary/SeveritySummary';
 import EnvIcon from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import UploadSpecButton, {
   UploadSpecParam,
@@ -86,7 +86,7 @@ export default function Report(props: Props) {
 
     return (
       <div className="statistics-block">
-        <IssueSummary data={data.map((i) => i.result.summary.stats)} showLabel />
+        <SeveritySummary data={data.map((i) => i.result.summary.stats)} showLabel />
       </div>
     );
   };

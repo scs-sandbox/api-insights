@@ -3,25 +3,20 @@ import Api from './api';
 
 export namespace ComplianceData {
   // #region Summary
-  export type ComplianceIssueRules = {
-    [index: string]: number;
+  export type ComplianceSeveritySummaryItem = {
+    count: number;
   };
 
-  export type ComplianceIssueItem = {
+  export type ComplianceSeveritySummary = {
     count: number;
-    rules?: ComplianceIssueRules;
-  };
-
-  export type ComplianceIssues = {
-    count: number;
-    warning?: ComplianceIssueItem;
-    info?: ComplianceIssueItem;
-    error?: ComplianceIssueItem;
-    hint?: ComplianceIssueItem;
+    warning?: ComplianceSeveritySummaryItem;
+    info?: ComplianceSeveritySummaryItem;
+    error?: ComplianceSeveritySummaryItem;
+    hint?: ComplianceSeveritySummaryItem;
   };
 
   export type ComplianceAnalyseSummary = {
-    stats?: ComplianceIssues;
+    stats?: ComplianceSeveritySummary;
   };
   // #endregion
 
@@ -67,21 +62,15 @@ export namespace ComplianceData {
     [index: string]: ComplianceRuleItem;
   };
 
-  export type ComplianceIssue = {
+  export type ComplianceFindingItem = {
     rules?: ComplianceRules;
   };
 
   export type ComplianceFindings = {
-    unclassified?: ComplianceIssue;
-    low?: ComplianceIssue;
-    medium?: ComplianceIssue;
-    high?: ComplianceIssue;
-    critical?: ComplianceIssue;
-    blocker?: ComplianceIssue;
-    warning?: ComplianceIssueItem;
-    info?: ComplianceIssueItem;
-    error?: ComplianceIssueItem;
-    hint?: ComplianceIssueItem;
+    warning?: ComplianceFindingItem;
+    info?: ComplianceFindingItem;
+    error?: ComplianceFindingItem;
+    hint?: ComplianceFindingItem;
   };
   // #endregion
 

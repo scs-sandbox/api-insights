@@ -2,7 +2,7 @@ import { Dialog } from '@mui/material';
 import { MonacoDiffEditor } from 'react-monaco-editor';
 import CodeViewer from '../../../../components/CodeViewer/CodeViewer';
 import MarkdownViewer from '../../../../components/MarkdownViewer/MarkdownViewer';
-import IssueItem from '../../../../components/Issues/IssueItem/IssueItem';
+import SeverityItem from '../../../../components/Severity/SeverityItem/SeverityItem';
 import { ClickRowEventData } from '../ComplianceTable/ComplianceTable';
 import { ComplianceData } from '../../../../query/compliance';
 import { SpecData } from '../../../../query/spec';
@@ -69,14 +69,14 @@ export default function ComplianceDialog(props: Props) {
         <div className="dialog-title">
           <div className="main-part">
             <div className="env">{props.env}</div>
-            <IssueItem severity={props.data.severity} showLabel />
+            <SeverityItem severity={props.data.severity} showLabel />
           </div>
           <div className="action-part">
             <div className="close-btn" onClick={props.onClose} />
           </div>
         </div>
         <div className="dialog-body">
-          <div className="issue-code-block">
+          <div className="message-block">
             <MarkdownViewer text={props.data.message} />
           </div>
           <div className="row-block">
