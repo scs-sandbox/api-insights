@@ -36,7 +36,7 @@ export default function HomePage() {
     refetchServiceList();
   };
 
-  const onServiceUpdated = (e?: ServiceData.Service) => {
+  const onServiceUpdated = () => {
     refetchServiceList();
   };
 

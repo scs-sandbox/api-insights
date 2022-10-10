@@ -10,8 +10,8 @@ import OrganizationDropDown from '../OrganizationDropDown/OrganizationDropDown';
 import ProductTagDropDown from '../ProductTagDropDown/ProductTagDropDown';
 import BusyIcon from '../../../../components/BusyIcon/BusyIcon';
 import IconButton from '../../../../components/IconButton/IconButton';
-import './EditServiceDialog.scss';
 import { ServiceData } from '../../../../query/service';
+import './EditServiceDialog.scss';
 
 export type EditingEvent = {
   title: string;
@@ -56,7 +56,6 @@ export default function EditServiceDialog(props: Props) {
       email: '',
     },
   });
-
   const { contact } = service;
 
   const [title, setTitle] = useState(service.title);

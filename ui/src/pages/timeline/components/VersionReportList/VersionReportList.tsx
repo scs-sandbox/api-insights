@@ -1,9 +1,8 @@
 import VersionReport, { VersionData } from '../VersionReport/VersionReport';
 import SpecTime from '../../../../components/Specs/SpecTime/SpecTime';
-import SpecStateIcon, {
-  SpecState,
-} from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
+import SpecStateIcon from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import { ServiceData } from '../../../../query/service';
+import { SpecData } from '../../../../query/spec';
 import './VersionReportList.scss';
 
 type Props = {
@@ -21,7 +20,7 @@ export default function VersionReportList(props: Props) {
       className="version-block-item"
     >
       <div className="item-line">
-        <SpecStateIcon value={data.latestRevision.state as SpecState} />
+        <SpecStateIcon value={data.latestRevision.state as SpecData.SpecState} />
       </div>
       <div className="item-content">
         <div className="item-content-time">

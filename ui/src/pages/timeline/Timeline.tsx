@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Timeline from './components/Timeline/Timeline';
 import { useFetchServiceCompliance } from '../../query/compliance';
@@ -9,6 +9,7 @@ import {
 } from '../../query/spec';
 
 export default function TimelinePage() {
+  const [timers] = useState({ refetchSpecTimerId: 0 });
   const { selectedService } = useOutletContext() as AppFrameContext;
   const {
     data: fullSpecList,
@@ -20,8 +21,12 @@ export default function TimelinePage() {
     isLoading: isComplianceListLoading,
     refetch: refetchComplianceList,
   } = useFetchServiceCompliance(selectedService?.id);
-  const specList = fullSpecList ? fullSpecList.filter((spec) => spec.state !== 'Reconstructed') : [];
-  const snapshots = fullSpecList ? fullSpecList.filter((spec) => spec.state === 'Reconstructed') : [];
+  const specList = fullSpecList ? fullSpecList.filter(
+    (spec: SpecData.Spec) => spec.state !== SpecData.SpecState.Reconstructed,
+  ) : [];
+  const snapshots = fullSpecList ? fullSpecList.filter(
+    (spec: SpecData.Spec) => spec.state === SpecData.SpecState.Reconstructed,
+  ) : [];
   const isSnapshotLoading = isSpecDataLoading;
 
   const refetchSpecCompliance = () => {
@@ -42,7 +47,11 @@ export default function TimelinePage() {
     );
     if (!needRefetchItem) return;
 
-    setTimeout(() => {
+    if (timers.refetchSpecTimerId) {
+      window.clearTimeout(timers.refetchSpecTimerId);
+    }
+
+    timers.refetchSpecTimerId = window.setTimeout(() => {
       refetchSpecCompliance();
     }, 2000);
   }, [specList]);

@@ -24,7 +24,7 @@ type Props = {
 
 export default function AppFrame(props: Props) {
   const { data: sysInfo } = useFetchInfo();
-  const { data: serviceList, refetch } = useFetchServiceList();
+  const { data: serviceList, refetch: refetchServiceList } = useFetchServiceList();
   const [searchParams, setSearchParams] = useSearchParams();
   const [specServiceSummary, setSpecServiceSummary] = useState(null);
   const serviceId = searchParams.get('service');
@@ -45,10 +45,6 @@ export default function AppFrame(props: Props) {
 
   const updateSpecSummary = (e: ServiceData.ServiceSummary) => {
     setSpecServiceSummary(e);
-  };
-
-  const refetchServiceList = () => {
-    refetch();
   };
 
   useEffect(() => {

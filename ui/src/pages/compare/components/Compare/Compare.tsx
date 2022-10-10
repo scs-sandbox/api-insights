@@ -7,7 +7,7 @@ import CircleScore from '../../../../components/Frame/Service/CircleScore/Circle
 import IconButton from '../../../../components/IconButton/IconButton';
 import PageFrame from '../../../../components/Frame/PageFrame/PageFrame';
 import HelpButton from '../../../../components/HelpButton/HelpButton';
-import IssueSummary from '../../../../components/Issues/IssueSummary/IssueSummary';
+import SeveritySummary from '../../../../components/Severity/SeveritySummary/SeveritySummary';
 import MarkdownViewer from '../../../../components/MarkdownViewer/MarkdownViewer';
 import DownloadIcon from '../../../../components/DownloadIcon/DownloadIcon';
 import { SpecData } from '../../../../query/spec';
@@ -76,7 +76,7 @@ function Compare(props: Props) {
         </div>
         <div className="summary-row">
           <div className="summary-cell">
-            <IssueSummary data={complianceList.map((i) => i.result.summary.stats)} />
+            <SeveritySummary data={complianceList.map((i) => i.result.summary.stats)} />
             <Link to={link} className="button-rc">
               View Report
             </Link>

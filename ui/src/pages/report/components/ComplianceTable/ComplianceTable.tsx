@@ -1,7 +1,7 @@
 import { useEffect, useState, MouseEvent } from 'react';
 import MarkdownViewer from '../../../../components/MarkdownViewer/MarkdownViewer';
 import Pagination from '../../../../components/Pagination/Pagination';
-import IssueIcon from '../../../../components/Issues/IssueIcon/IssueIcon';
+import SeverityIcon from '../../../../components/Severity/SeverityIcon/SeverityIcon';
 import { AnalyserData } from '../../../../query/analyzer';
 import { ComplianceData } from '../../../../query/compliance';
 import capitalize from '../../../../utils/string';
@@ -114,16 +114,17 @@ export default function ComplianceTable(props: Props) {
     return <div className="line-range">{text}</div>;
   };
 
-  const renderDetailChild = (complianceRuleData: ComplianceData.ComplianceRuleDataItem) => {
+  const renderRowDetailContent = (complianceRuleData: ComplianceData.ComplianceRuleDataItem) => {
+    const lineRange = renderLineRange(complianceRuleData);
     if (!complianceRuleData.path || !complianceRuleData.path.length) {
-      return <div className="path">{renderLineRange(complianceRuleData)}</div>;
+      return <div className="path">{lineRange}</div>;
     }
 
     if (complianceRuleData.path.length === 1) {
       return (
         <div className="path">
           <span className="url">{complianceRuleData.path[0]}</span>
-          {renderLineRange(complianceRuleData)}
+          {lineRange}
         </div>
       );
     }
@@ -136,18 +137,19 @@ export default function ComplianceTable(props: Props) {
         <div className="path">
           <span className={`method ${method}`}>{method}</span>
           <span className="url">{url}</span>
-          {renderLineRange(complianceRuleData)}
+          {lineRange}
         </div>
       );
     }
 
     const method = complianceRuleData.path[2].toLowerCase();
+    const url = complianceRuleData.path[1];
 
     return (
       <div className="path">
         <span className={`method ${method}`}>{method}</span>
-        <span className="url">{complianceRuleData.path[1]}</span>
-        {renderLineRange(complianceRuleData)}
+        <span className="url">{url}</span>
+        {lineRange}
       </div>
     );
   };
@@ -173,17 +175,21 @@ export default function ComplianceTable(props: Props) {
       return <div className="detail">{summary}</div>;
     }
 
-    const detailRows = item.detail.map((i, idx) => (
-      <div
-        key={item.id}
-        className="item"
-        data-id={item.id}
-        data-index={idx}
-        onClick={onClickDetailItem}
-      >
-        {renderDetailChild(i)}
-      </div>
-    ));
+    const detailRows = item.detail.map((i, idx) => {
+      const key = `${item.id}-${idx}`;
+      const rowDetailConent = renderRowDetailContent(i);
+      return (
+        <div
+          key={key}
+          className="item"
+          data-id={item.id}
+          data-index={idx}
+          onClick={onClickDetailItem}
+        >
+          {rowDetailConent}
+        </div>
+      );
+    });
 
     return (
       <div className="detail open">
@@ -210,12 +216,14 @@ export default function ComplianceTable(props: Props) {
 
   const renderRow = (analyseTableRowData: AnalyseTableRowData) => {
     const severityTitle = capitalize(analyseTableRowData.severity);
+    const analyzerCell = renderAnalyzerCell(analyseTableRowData.analyzer);
+    const rowDetail = renderRowDetail(analyseTableRowData);
 
     return (
       <tr key={analyseTableRowData.id} data-id={analyseTableRowData.id} onClick={onClickRow}>
-        {renderAnalyzerCell(analyseTableRowData.analyzer)}
+        {analyzerCell}
         <td className="center-cell">
-          <IssueIcon severity={analyseTableRowData.severity} />
+          <SeverityIcon severity={analyseTableRowData.severity} />
           <div>{severityTitle}</div>
         </td>
         <td className="left-cell">
@@ -223,7 +231,7 @@ export default function ComplianceTable(props: Props) {
             <div className="message">
               <MarkdownViewer text={analyseTableRowData.message} />
             </div>
-            {renderRowDetail(analyseTableRowData)}
+            {rowDetail}
           </div>
         </td>
         <td className="recomm-cell">

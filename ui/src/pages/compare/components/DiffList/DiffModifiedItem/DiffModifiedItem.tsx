@@ -21,7 +21,6 @@ export default function DiffModifiedItem(props: Props) {
         setShow(!show);
       }}
     >
-      {/* <div className="row-item row-text">{show === true ? <>&#708;</> : <>&#711;</>}</div> */}
       <div className="row-item row-icon">
         {props.data.breaking ? (
           <img src={Blue} className="icon" alt="React Logo" />

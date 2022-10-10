@@ -1,9 +1,6 @@
-import { useState, MouseEvent } from 'react';
-import { Menu } from '@mui/material';
 import { SpecData, useFetchSpecList } from '../../../query/spec';
-import classNames from '../../../utils/className';
-import './SepcDropDown.scss';
 import DropDown from '../../DropDown/DropDown';
+import './SepcDropDown.scss';
 
 type Props = {
   serviceId: string;

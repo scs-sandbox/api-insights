@@ -69,10 +69,10 @@ export function convertToTableData(
 
       let rows = [];
       Object.keys(findings).forEach((severity) => {
-        const issue = findings[severity] as ComplianceData.ComplianceIssue;
-        if (!issue) return;
+        const findingItem = findings[severity] as ComplianceData.ComplianceFindingItem;
+        if (!findingItem) return;
 
-        const { rules } = issue;
+        const { rules } = findingItem;
         if (!rules) return;
 
         Object.keys(rules).forEach((code) => {

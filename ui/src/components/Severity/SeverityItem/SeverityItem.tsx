@@ -1,15 +1,15 @@
 import capitalize from '../../../utils/string';
-import IssueIcon, { IssueType } from '../IssueIcon/IssueIcon';
-import './IssueItem.scss';
+import SeverityIcon, { Severity } from '../SeverityIcon/SeverityIcon';
+import './SeverityItem.scss';
 
 type Props = {
-  severity: IssueType;
+  severity: Severity;
   count?: number;
   showLabel?: boolean;
   label?: string;
 };
 
-export default function IssueItem(props: Props) {
+export default function SeverityItem(props: Props) {
   const labelText = props.label || capitalize(props.severity);
 
   function renderCount() {
@@ -17,22 +17,22 @@ export default function IssueItem(props: Props) {
 
     if (!hasCount) return null;
 
-    return <span className="issue-item-count">{props.count}</span>;
+    return <span className="severity-item-count">{props.count}</span>;
   }
 
   function renderLabel() {
     if (!props.showLabel) return null;
 
-    return <span className="issue-item-label">{labelText}</span>;
+    return <span className="severity-item-label">{labelText}</span>;
   }
 
   const count = renderCount();
   const label = renderLabel();
-  const className = `issue-item issue-item-${props.severity}`;
+  const className = `severity-item severity-item-${props.severity}`;
 
   return (
     <span className={className}>
-      <IssueIcon severity={props.severity} title={labelText} />
+      <SeverityIcon severity={props.severity} title={labelText} />
       {count}
       {label}
     </span>

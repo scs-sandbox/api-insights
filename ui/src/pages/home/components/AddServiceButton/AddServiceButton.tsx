@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import { ServiceData, useAddService } from '../../../../query/service';
 import EditServiceDialog, {
   EditingEvent,
@@ -7,8 +6,8 @@ import EditServiceDialog, {
 import IconButton from '../../../../components/IconButton/IconButton';
 import UploadIcon from '../../../../components/UploadIcon/UploadIcon';
 import SnackAlert from '../../../../components/SnackAlert/SnackAlert';
-import './AddServiceButton.scss';
 import { OrganizationData } from '../../../../query/organization';
+import './AddServiceButton.scss';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   authEnabled: boolean;

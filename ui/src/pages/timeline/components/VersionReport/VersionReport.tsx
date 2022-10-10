@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CircleScore from '../../../../components/Frame/Service/CircleScore/CircleScore';
 import buildSortedListByStringField from '../../../../utils/order';
 import TrendBarChart from '../TrendBarChart/TrendBarChart';
-import IssueSummary from '../../../../components/Issues/IssueSummary/IssueSummary';
+import SeveritySummary from '../../../../components/Severity/SeveritySummary/SeveritySummary';
 import Revision, { RevisionData } from '../Revision/Revision';
 import { ServiceData } from '../../../../query/service';
 import './VersionReport.scss';
@@ -59,7 +59,7 @@ export default function VersionReport(props: Props) {
       key={data.id}
       className={data.id === highlightRevisionId ? 'highlight' : ''}
       data={data}
-      to={buildReportUrl(data.id)}
+      linkTo={buildReportUrl(data.id)}
       onMouseEnter={onSetHighlightRevision}
       onMouseLeave={onCancelHighlightRevision}
       onReleased={props.onReleased}
@@ -116,7 +116,7 @@ export default function VersionReport(props: Props) {
   const revisonList = renderRevisionList();
   const trends = renderTrends();
 
-  const issueSummaryData = lastRevision.complianceList
+  const severitySummaryData = lastRevision.complianceList
     .filter((x) => x.analyzer !== 'drift')
     .map((i) => i.result.summary.stats);
 
@@ -137,8 +137,8 @@ export default function VersionReport(props: Props) {
             </div>
           </div>
           <div className="status-part block-item-light">
-            <IssueSummary
-              data={issueSummaryData}
+            <SeveritySummary
+              data={severitySummaryData}
             />
             <Link to={buildReportUrl(lastRevision.id)} className="button-rc">
               View Full Report

@@ -1,20 +1,13 @@
+import { SpecData } from '../../../query/spec';
 import './SpecStateIcon.scss';
 
-export enum SpecState {
-  Archive = 'Archive',
-  Release = 'Release',
-  Development = 'Development',
-  Latest = 'Latest',
-}
-
 type Props = {
-  value?: SpecState;
+  value?: SpecData.SpecState;
 };
 
 export default function EnvIcon(props: Props) {
-  const className = `env-icon icon-${(
-    props.value || SpecState.Development
-  ).toLowerCase()}`;
+  const value = (props.value || SpecData.SpecState.Development).toLowerCase();
+  const className = `env-icon icon-${value}`;
 
   return <i className={className} />;
 }
