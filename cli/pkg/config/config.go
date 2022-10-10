@@ -26,16 +26,16 @@ import (
 
 // Environment Variables
 const (
-	Host               = "APIX_HOST"
-	BasePath           = "APIX_BASE_PATH"
-	AuthType           = "APIX_AUTH_TYPE"
-	AuthUsername       = "APIX_USERNAME"
-	AuthPassword       = "APIX_PASSWORD"
-	AuthBearerToken    = "APIX_BEARER_TOKEN"
-	OAuth2GrantType    = "APIX_OAUTH2_GRANT_TYPE"
-	OAuth2TokenURL     = "APIX_OAUTH2_TOKEN_URL"
-	OAuth2ClientID     = "APIX_OAUTH2_CLIENT_ID"
-	OAuth2ClientSecret = "APIX_OAUTH2_CLIENT_SECRET"
+	Host               = "API_INSIGHTS_HOST"
+	BasePath           = "API_INSIGHTS_BASE_PATH"
+	AuthType           = "API_INSIGHTS_AUTH_TYPE"
+	AuthUsername       = "API_INSIGHTS_USERNAME"
+	AuthPassword       = "API_INSIGHTS_PASSWORD"
+	AuthBearerToken    = "API_INSIGHTS_BEARER_TOKEN"
+	OAuth2GrantType    = "API_INSIGHTS_OAUTH2_GRANT_TYPE"
+	OAuth2TokenURL     = "API_INSIGHTS_OAUTH2_TOKEN_URL"
+	OAuth2ClientID     = "API_INSIGHTS_OAUTH2_CLIENT_ID"
+	OAuth2ClientSecret = "API_INSIGHTS_OAUTH2_CLIENT_SECRET"
 )
 
 const (

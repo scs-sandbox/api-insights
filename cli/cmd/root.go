@@ -66,16 +66,16 @@ Environment variables:
 
 | Name                       | Description                                                   |
 |----------------------------|---------------------------------------------------------------|
-| $APIX_HOST                 | API host, such as https://host.example.com                    |
-| $APIX_BASE_PATH            | API base path, such as /v1/registry                           |
-| $APIX_AUTH_TYPE            | auth type, such as basic, bearer, oauth2                      |
-| $APIX_USERNAME             | username for 'basic' auth-type                                |
-| $APIX_PASSWORD             | password for 'basic' auth-type                                |
-| $APIX_BEARER_TOKEN         | bearer token for 'bearer-token' auth-type                     |
-| $APIX_OAUTH2_GRANT_TYPE    | grant type for 'oauth2' auth-type, such as client_credentials |
-| $APIX_OAUTH2_TOKEN_URL     | token URL for 'oauth2' auth-type                              |
-| $APIX_OAUTH2_CLIENT_ID     | client id for 'oauth2' auth-type                              |
-| $APIX_OAUTH2_CLIENT_SECRET | client secret for 'oauth2' auth-type                          |
+| $API_INSIGHTS_HOST                 | API host, such as https://host.example.com                    |
+| $API_INSIGHTS_BASE_PATH            | API base path, such as /v1/registry                           |
+| $API_INSIGHTS_AUTH_TYPE            | auth type, such as basic, bearer, oauth2                      |
+| $API_INSIGHTS_USERNAME             | username for 'basic' auth-type                                |
+| $API_INSIGHTS_PASSWORD             | password for 'basic' auth-type                                |
+| $API_INSIGHTS_BEARER_TOKEN         | bearer token for 'bearer-token' auth-type                     |
+| $API_INSIGHTS_OAUTH2_GRANT_TYPE    | grant type for 'oauth2' auth-type, such as client_credentials |
+| $API_INSIGHTS_OAUTH2_TOKEN_URL     | token URL for 'oauth2' auth-type                              |
+| $API_INSIGHTS_OAUTH2_CLIENT_ID     | client id for 'oauth2' auth-type                              |
+| $API_INSIGHTS_OAUTH2_CLIENT_SECRET | client secret for 'oauth2' auth-type                          |
 `
 
 // rootCmd represents the base command when called without any subcommands

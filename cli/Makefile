@@ -16,3 +16,8 @@ bin:
 	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o bin/windows/amd64/$(CLI_NAME) main.go
 	GOOS=darwin  GOARCH=amd64 CGO_ENABLED=0 go build -o bin/darwin/amd64/$(CLI_NAME)  main.go
 	GOOS=darwin  GOARCH=arm64 CGO_ENABLED=0 go build -o bin/darwin/arm64/$(CLI_NAME)  main.go
+
+# generate docs for CLI
+.PHONY: docgen
+docgen:
+	go run docgen.go
