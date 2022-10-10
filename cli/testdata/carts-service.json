@@ -1,0 +1,12 @@
+{
+  "organization_id": "Carts",
+  "product_tag": "Carts",
+  "name_id": "carts",
+  "title": "Carts APIs",
+  "description": "Carts APIs",
+  "contact": {
+    "name": "Carts Management Team",
+    "url": "https://carts.example.com",
+    "email": "carts@example.com"
+  }
+}
