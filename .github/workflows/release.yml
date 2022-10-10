@@ -55,7 +55,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: api
-          tags: ghcr.io/playground-monorepo/api-insights-api:${{ github.ref_name }}
+          tags: ghcr.io/cisco-developer/api-insights-api:${{ github.ref_name }}
           file: api/Dockerfile
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -69,7 +69,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ui
-          tags: ghcr.io/playground-monorepo/api-insights-ui:${{ github.ref_name }}
+          tags: ghcr.io/cisco-developer/api-insights-ui:${{ github.ref_name }}
           file: ui/Dockerfile
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache
