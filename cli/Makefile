@@ -20,4 +20,5 @@ bin:
 # generate docs for CLI
 .PHONY: docgen
 docgen:
-	go run docgen.go
+	mkdir -p docs
+	go run main.go docs
