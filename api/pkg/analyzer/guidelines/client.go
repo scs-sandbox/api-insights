@@ -20,13 +20,30 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/cisco-developer/api-insights/api/internal/models"
-	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
-	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"os"
 	"os/exec"
 	"time"
+
+	"github.com/cisco-developer/api-insights/api/internal/models"
+	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
+	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
+	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2/altsrc"
 )
+
+var guidelinesRuleset = "node_modules/@cisco-developer/api-insights-openapi-rulesets/api-insights-openapi-ruleset.js"
+
+func Flags() []cli.Flag {
+	return []cli.Flag{
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:        "guidelines-ruleset",
+			Usage:       "Guidelines ruleset",
+			Value:       guidelinesRuleset,
+			Destination: &guidelinesRuleset,
+			EnvVars:     []string{"GUIDELINES_RULESET"},
+		}),
+	}
+}
 
 func NewClient() (models.SpecDocAnalyzer, error) {
 	if err := preRunCheck(); err != nil {
@@ -46,7 +63,7 @@ func (c *cliClient) Analyze(doc models.SpecDoc, cfgMap analyzer.Config, serviceN
 			return nil, fmt.Errorf("analyzer: invalid config: %v", err)
 		}
 	}
-	cfg.SetDefaults()
+	cfg.SetRuleset(guidelinesRuleset)
 
 	var (
 		timestamp            = fmt.Sprintf("%v", time.Now().UnixNano())
@@ -88,8 +105,7 @@ func (c *cliClient) Analyze(doc models.SpecDoc, cfgMap analyzer.Config, serviceN
 		return nil, err
 	}
 	defer func() {
-		// TODO Uncomment after testing.
-		//_ = os.Remove(outputFilename)
+		_ = os.Remove(outputFilename)
 	}()
 
 	var result analyzer.SpectralResult
@@ -115,7 +131,7 @@ func (c *cliClient) commandFromOpts(ctx context.Context, cfg *analyzer.SpectralC
 
 	var args []string
 
-	args = append(args, "@cisco/cisco-openapi-ruleset")
+	args = append(args, "lint")
 
 	args = append(args, "-f", "json")
 
@@ -129,7 +145,7 @@ func (c *cliClient) commandFromOpts(ctx context.Context, cfg *analyzer.SpectralC
 
 	args = append(args, inputFilename)
 
-	return exec.CommandContext(ctx, "npx", args...)
+	return exec.CommandContext(ctx, "spectral", args...)
 }
 
 func preRunCheck() error {
