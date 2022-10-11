@@ -14,19 +14,36 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package main
+package cmd
 
 import (
-	"github.com/cisco-developer/api-insights/cli/cmd"
+	"github.com/spf13/cobra"
 	"github.com/spf13/cobra/doc"
 	"log"
 	"os"
 	"path/filepath"
 )
 
-func main() {
+func init() {
+	rootCmd.AddCommand(docsCmd())
+}
+
+func docsCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "docs",
+		Short: "Generate CLI docs",
+		Example: `  # Generate CLI docs
+  api-insights-cli docs`,
+		Run:    generateDocs,
+		Hidden: true,
+	}
+
+	return cmd
+}
+
+func generateDocs(cmd *cobra.Command, args []string) {
 	dir := "./docs"
-	err := doc.GenMarkdownTree(cmd.GetRootCmd(), dir)
+	err := doc.GenMarkdownTree(rootCmd, dir)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,7 +56,7 @@ func main() {
 	}
 	defer f.Close()
 
-	err = doc.GenMarkdownCustom(cmd.GetRootCmd(), f, func(s string) string {
+	err = doc.GenMarkdownCustom(rootCmd, f, func(s string) string {
 		return s
 	})
 	if err != nil {
