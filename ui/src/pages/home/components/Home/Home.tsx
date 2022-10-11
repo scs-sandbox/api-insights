@@ -90,8 +90,10 @@ function filterOrgsByName(
  * @returns JSX.Element
  */
 export default function Home(props: Props) {
-  const { orgName } = props;
-  const [showDialog, setShowDialog] = useState(false);
+  const {
+    orgName, authEnabled, newServiceId, searchKey,
+    serviceList, authorizedOrganizationList, organizationList,
+  } = props;
   const [serviceToEdit, setServiceToEdit] = useState(null);
   const [showEditService, setShowEditService] = useState(false);
   const {
@@ -99,12 +101,12 @@ export default function Home(props: Props) {
     mutate: patchService,
   } = usePatchService();
   // Filter by organization
-  const orgFilteredServiceList = (orgName !== 'all' && props.serviceList)
-    ? props.serviceList.filter((service) => orgFilterService(service, orgName))
-    : props.serviceList;
+  const orgFilteredServiceList = (orgName !== 'all' && serviceList)
+    ? serviceList.filter((service) => orgFilterService(service, orgName))
+    : serviceList;
   // Filter services by search key
-  const keyfilteredServiceList = (props.searchKey !== '' && props.serviceList)
-    ? orgFilteredServiceList.filter((service) => keyFilterService(service, props.searchKey))
+  const keyfilteredServiceList = (searchKey !== '' && serviceList)
+    ? orgFilteredServiceList.filter((service) => keyFilterService(service, searchKey))
     : orgFilteredServiceList;
   const filteredOrgGroups = groupServiceByOrg(keyfilteredServiceList || []);
   const filteredProductGroups = groupServiceByProdcut(keyfilteredServiceList || []);
@@ -121,26 +123,13 @@ export default function Home(props: Props) {
     }
   };
 
-  /**
-   * To show warning dialog for any services that aren't available yet.
-   * @param clickedService service seelcted
-   * @param e click event
-   */
-  const onClickService = (clickedService: ServiceData.Service, e: MouseEvent<HTMLElement>) => {
-    if (clickedService.product_tag === 'CX Cloud') {
-      e.stopPropagation();
-      e.preventDefault();
-      setShowDialog(true);
-    }
-  };
-
   const onClickEdit = (clickedService: ServiceData.Service) => {
     setServiceToEdit(clickedService);
     setShowEditService(true);
   };
 
   const onUpdatingService = (e: EditingEvent) => {
-    const visibilityField = props.authEnabled ? {
+    const visibilityField = authEnabled ? {
       visibility: e.visibility,
     } : {};
     const data = {
@@ -209,8 +198,8 @@ export default function Home(props: Props) {
   function renderAddServiceButton() {
     return (
       <AddServiceButton
-        authEnabled={props.authEnabled}
-        organizationList={props.authorizedOrganizationList}
+        authEnabled={authEnabled}
+        organizationList={authorizedOrganizationList}
         tags={Object.keys(filteredProductGroups)}
         onServiceCreated={props.onServiceCreated}
       />
@@ -238,10 +227,9 @@ export default function Home(props: Props) {
               .map((service) => (
                 <div key={service.id} className="group-col">
                   <ServiceDetail
-                    authEnabled={props.authEnabled}
-                    isNewCreated={props.newServiceId === service.id}
+                    authEnabled={authEnabled}
+                    isNewCreated={newServiceId === service.id}
                     service={service}
-                    onClickService={onClickService}
                     onClickEdit={onClickEdit}
                   />
                 </div>
@@ -252,7 +240,7 @@ export default function Home(props: Props) {
     );
   }
 
-  const renderGroups = filterOrgsByName(filteredOrgGroups, orgName, props.organizationList);
+  const renderGroups = filterOrgsByName(filteredOrgGroups, orgName, organizationList);
   const groups = Object.keys(renderGroups)
     .map((key) => ({
       name: key,
@@ -260,16 +248,16 @@ export default function Home(props: Props) {
     } as ServiceCollection))
     .map(renderGroup);
 
-  const orgButtons = props.organizationList.map((org) => renderOrgButton(org.name_id));
+  const orgButtons = organizationList.map((org) => renderOrgButton(org.name_id));
 
   function renderGroupContent() {
-    if (!props.serviceList) {
+    if (!serviceList) {
       return (
         <div className="service-loading">Loading...</div>
       );
     }
 
-    if (props.serviceList.length === 0) {
+    if (serviceList.length === 0) {
       const addServiceButton = renderAddServiceButton();
 
       return (
@@ -293,7 +281,7 @@ export default function Home(props: Props) {
           </div>
           <div className="group-bar-right">
             <Searchbar
-              searchKey={props.searchKey}
+              searchKey={searchKey}
               onSearchKeyChanged={onSearchKeyChanged}
               onSearchKeyCleared={props.onClearSearchKey}
             />
@@ -316,16 +304,9 @@ export default function Home(props: Props) {
         {addServiceButton}
       </div>
       <HelpButton
-        show={!Array.isArray(props.serviceList) || !props.serviceList.length}
+        show={!Array.isArray(serviceList) || !serviceList.length}
         title={"Welcome to your Org's Dashboard"}
         message="Add your services and sort them under different products. Once you have those services set up, the health of your services will show on each card to give you a convenient cross-section of your environment for servicing priority."
-      />
-      <HelpDialog
-        open={showDialog}
-        handleClose={() => {
-          setShowDialog(false);
-        }}
-        message="This service is not acessible at this moment."
       />
       {showEditService && (
         <EditServiceDialog
@@ -333,9 +314,9 @@ export default function Home(props: Props) {
           open={showEditService}
           busy={isServicePatching}
           productTagList={Object.keys(filteredProductGroups)}
-          authEnabled={props.authEnabled}
+          authEnabled={authEnabled}
           onEditing={onUpdatingService}
-          organizationList={props.authorizedOrganizationList}
+          organizationList={authorizedOrganizationList}
           handleClose={() => setShowEditService(false)}
         />
       )}

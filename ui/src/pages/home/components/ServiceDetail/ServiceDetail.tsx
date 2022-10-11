@@ -32,7 +32,6 @@ type Props = {
   authEnabled: boolean;
   service: ServiceData.Service;
   isNewCreated: boolean;
-  onClickService: (clickedService: ServiceData.Service, e: MouseEvent<HTMLElement>) => void;
   onClickEdit: (clickedService: ServiceData.Service, e: MouseEvent<HTMLElement>) => void;
 }
 
@@ -88,7 +87,6 @@ export default function ServiceDetail(props: Props) {
       id={`service-${props.service.id}`}
       onClick={(e) => {
         e.stopPropagation();
-        props.onClickService(props.service, e);
       }}
       className={className}
       to={`/timeline?service=${props.service.name_id || props.service.id}`}
