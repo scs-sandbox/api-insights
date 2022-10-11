@@ -1,0 +1,35 @@
+# GoReleaser configuration for publishing assets (e.g. CLI) in GitHub Releases. https://goreleaser.com
+
+builds:
+  - id: cli
+    dir: cli
+    binary: api-insights-cli
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: cli
+    name_template: "{{ .Binary }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+dist: goreleaser_artifacts
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^workflow:"
