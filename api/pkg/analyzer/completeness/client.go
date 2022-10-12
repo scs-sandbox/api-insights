@@ -20,18 +20,19 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"os/exec"
+	"time"
+
 	"github.com/cisco-developer/api-insights/api/internal/models"
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
-	"os"
-	"os/exec"
-	"time"
 )
 
 // completenessRuleset represents custom spectral ruleset for completeness.
-var completenessRuleset = "rules/completeness.json"
+var completenessRuleset = "node_modules/@cisco-developer/api-insights-openapi-rulesets/completeness.js"
 
 func Flags() []cli.Flag {
 	return []cli.Flag{
