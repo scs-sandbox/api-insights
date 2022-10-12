@@ -1,8 +1,8 @@
 {
   "name": "api-insights-ui",
   "version": "0.1.0",
-  "private": true,
   "title": "API Insights",
+  "license": "Apache-2.0",
   "homepage": ".",
   "options": {
     "allowedHosts": [
