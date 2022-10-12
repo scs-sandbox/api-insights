@@ -141,7 +141,7 @@ export default function DropDown(props: Props) {
 
     const rect = anchorEl.getBoundingClientRect();
     const itemStyle = {
-      width: `${rect.width}px`,
+      minWidth: `${rect.width}px`,
     };
 
     if (!options || !options.length) {

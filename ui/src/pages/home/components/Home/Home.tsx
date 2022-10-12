@@ -16,11 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import AddServiceButton from '../AddServiceButton/AddServiceButton';
 import { getScoreLevels } from '../../../../components/Frame/Service/ScoreLevel/ScoreLevel';
 import HelpButton from '../../../../components/HelpButton/HelpButton';
-import HelpDialog from '../../../../components/HelpDialog/HelpDialog';
 import { ServiceData, usePatchService } from '../../../../query/service';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import { groupServiceByProdcut, groupServiceByOrg } from '../../../../components/Frame/Service/ServiceDropDown/ServiceDropDown';
@@ -42,7 +41,6 @@ type Props = {
   onClearSearchKey: () => void;
   onSearchKeyChanged: (searchKey: string) => void;
   onOrgChanged: (org: string) => void;
-  onCancelNewServiceNotation: () => void;
 }
 
 export type UpdatingData = {
@@ -114,12 +112,6 @@ export default function Home(props: Props) {
   const onServiceUpdated = (e: ServiceData.Service) => {
     if (props.onServiceUpdated) {
       props.onServiceUpdated(e);
-    }
-  };
-
-  const onCancelNewServiceNotation = () => {
-    if (props.onCancelNewServiceNotation) {
-      props.onCancelNewServiceNotation();
     }
   };
 

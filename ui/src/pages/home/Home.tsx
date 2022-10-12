@@ -58,10 +58,6 @@ export default function HomePage() {
     refetchServiceList();
   };
 
-  const onCancelNewServiceNotation = () => {
-    setNewServiceId('');
-  };
-
   const onClearSearchKey = () => {
     setSearchParams({ search: '', org: orgName });
   };
@@ -97,7 +93,6 @@ export default function HomePage() {
       onClearSearchKey={onClearSearchKey}
       onSearchKeyChanged={onSearchKeyChanged}
       onOrgChanged={onOrgChanged}
-      onCancelNewServiceNotation={onCancelNewServiceNotation}
     />
   );
 }
