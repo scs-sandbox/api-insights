@@ -1,6 +1,6 @@
 # pull official base image
-#FROM node:18.10.0-alpine
-FROM node:16.17.1-alpine
+FROM node:18.10.0-alpine
+#FROM node:16.17.1-alpine
 # set working directory
 WORKDIR /app
 
@@ -16,6 +16,7 @@ COPY . ./
 # COPY ./tsconfig.json ./
 
 RUN npm install --ignore-scripts
+RUN npm rebuild node-sass
 
 ENV PORT 3000
 EXPOSE 3000
