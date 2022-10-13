@@ -54,8 +54,8 @@ api-insights:
 
   ## Docker Image values.
   docker:
-    backendImageTag: "v0.1.1-beta2"
-    frontendImageTag: "v0.1.1-beta2"
+    backendImageTag: "v0.1.1-beta3"
+    frontendImageTag: "v0.1.1-beta3"
     imagePullPolicy: Always
 
   replicaCount: 1
@@ -76,7 +76,7 @@ api-insights:
       memory: "200Mi"
       cpu: "100m"
     limits:
-      memory: "1000Mi"
+      memory: "3000Mi"
       cpu: "1000m"
 
   ## Resource limits for API Insights init container deployment

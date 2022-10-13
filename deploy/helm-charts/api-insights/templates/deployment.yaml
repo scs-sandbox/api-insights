@@ -48,7 +48,7 @@ spec:
           imagePullPolicy: {{ index .Values "api-insights" "docker" "imagePullPolicy" }}
           env:
             - name: REACT_APP_API_ENDPOINT_URL
-              value: "http://0.0.0.0:8080"
+              value: "http://localhost:8080"
             - name: BACKEND_API_ENDPOINT_URL
               value: "http://api-insights"
           securityContext:
