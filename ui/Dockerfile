@@ -13,5 +13,8 @@ RUN npm install --ignore-scripts
 
 ENV PORT 3000
 EXPOSE 3000
+
 # start app
-CMD [ "npm", "run", "dockerstart" ]
+#CMD [ "npm", "run", "dockerstart" ]
+
+CMD ["sh", "-c", "sh start.sh ${REACT_APP_API_ENDPOINT_URL}"]
