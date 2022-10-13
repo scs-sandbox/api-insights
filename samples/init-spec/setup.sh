@@ -15,6 +15,7 @@ product_tag="DevRel Store"
 
 base_spec_version=${1:-v0.0-rev1}
 updated_spec_version=${2:-v0.0-rev2}
+updated_spec_version2=${3:-v0.1-rev1}
 
 function ensure_exist() {
   [ -d "./$1" ] || (echo "$1" does not exist && exit 1)
@@ -56,6 +57,8 @@ function main {
   upload $base_spec_version
   sleep 5
   upload $updated_spec_version
+  sleep 5
+  upload $updated_spec_version2
 
   echo
   echo Done! Check the result in api-insights-ui

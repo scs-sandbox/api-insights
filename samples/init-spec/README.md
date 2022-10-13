@@ -21,8 +21,8 @@ v0.1-rev2: fix all the issues in v0.1-rev1 for catalogue
 ## Get started
 
 The `setup.sh` will create 5 services, and upload two versions of specs to it.
-You can specify the version in argument, default to `v0.0-rev1`, `v0.0-rev2`.
+You can specify the version in argument, default to `v0.0-rev1`, `v0.0-rev2`, `v0.1-rev1`.
 Change `host` in `.env` file can point to the api server, default to `http://localhost:8081`.
 ```
-./setup.sh v0.0-rev2 v0.1-rev1
+./setup.sh v0.0-rev2 v0.1-rev1 v0.1-rev2
 ```
