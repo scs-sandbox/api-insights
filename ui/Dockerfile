@@ -1,18 +1,15 @@
 # pull official base image
-FROM node:16.17.1-alpine
+FROM node:18.10.0-alpine
 # set working directory
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH
-ENV REACT_APP_API_ENDPOINT_URL $REACT_APP_API_ENDPOINT_URL
+ARG REACT_APP_API_ENDPOINT_URL $REACT_APP_API_ENDPOINT_URL
 
 # add app
 COPY . ./
-RUN rm -rf ./package-lock.json
 
-RUN sed -i 's/http:\/\/0.0.0.0:8081/${REACT_APP_API_ENDPOINT_URL}/g' package.json
-RUN npm install --ignore-scripts \
-    && npm rebuild node-sass
+RUN sed -i 's/0.0.0.0:8081/backend:8081/g' package.json
+RUN npm install --ignore-scripts
 
 ENV PORT 3000
 EXPOSE 3000
