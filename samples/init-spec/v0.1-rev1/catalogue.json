@@ -1,0 +1,1832 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v0.1",
+    "title": "Catalogue resources",
+    "description": "catalogue",
+    "contact": {
+      "name": "Tom",
+      "url": "http://test.com",
+      "email": "tom@test.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "tags": [
+    {
+      "description": "This is a sample tag.",
+      "name": "Sample"
+    }
+  ],
+  "host": "catalogue",
+  "basePath": "/v1",
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "description": "BearerAuth",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read": "Grants read access",
+        "write": "Grants write access",
+        "admin": "Grants read and write access to administrative information"
+      }
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "schemes": ["https"],
+  "consumes": ["application/json;charset=UTF-8"],
+  "produces": ["application/json;charset=UTF-8"],
+  "paths": {
+    "/catalogue": {
+      "get": {
+        "tags": ["Sample"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Catalogue API",
+        "operationId": "List-catalogue",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "max",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "offset",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "sort",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": ".*",
+            "type": "string"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "order",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Link": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "maxItems": 100,
+                  "minItems": 0,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Listresponse"
+                  }
+                }
+              },
+              "example": {
+                "item": [
+                  {
+                    "id": "id",
+                    "name": "name1",
+                    "description": "desc",
+                    "imageUrl": ["https://abc.com/1.png"],
+                    "price": 10,
+                    "count": 2,
+                    "tag": ["tag1"]
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/catalogue/personalize": {
+      "get": {
+        "tags": ["Sample"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Get personalize data per vendor's blacklist",
+        "operationId": "List-catalogue-personalize",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "max",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "offset",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "sort",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "order",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Link": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "maxItems": 100,
+                  "minItems": 0,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Listresponse"
+                  }
+                }
+              },
+              "example": {
+                "item": [
+                  {
+                    "id": "id",
+                    "name": "name1",
+                    "description": "desc",
+                    "imageUrl": ["https://abc.com/1.png"],
+                    "price": 10,
+                    "count": 2,
+                    "tag": ["tag1"]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalogue/{id}": {
+      "get": {
+        "tags": ["Sample"],
+        "description": "get",
+        "operationId": "Get-an-item",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "produces": ["application/json; charset=UTF-8"],
+        "parameters": [
+          {
+            "description": "catalogue id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Link": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getanitemresponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/catalogue/size": {
+      "get": {
+        "deprecated": true,
+        "description": "Get size",
+        "operationId": "Get-size",
+        "tags": ["Sample"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "max",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "offset",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "sort",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "order",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Link": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getsizeresponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/tag": {
+      "get": {
+        "description": "OK",
+        "operationId": "List_",
+        "tags": ["Sample"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "max",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "offset",
+            "maximum": 255,
+            "minimum": 1,
+            "format": "double",
+            "type": "number"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "sort",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          },
+          {
+            "description": "query",
+            "in": "query",
+            "name": "order",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Link": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Listresponse3"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "Date": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "ETag": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              },
+              "If-None-Match": {
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "[^/]*",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "example": {
+        "code": 2,
+        "message": "internal server"
+      },
+      "properties": {
+        "code": {
+          "format": "int32",
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "message": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "Listresponse": {
+      "title": "List response",
+      "type": "object",
+      "properties": {
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "imageUrls": {
+          "maxItems": 100,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        },
+        "price": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "maxItems": 100,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "imageUrls",
+        "price",
+        "count",
+        "tags"
+      ],
+      "example": {
+        "id": "id",
+        "name": "name1",
+        "description": "desc",
+        "imageUrls": ["https://abc.com/1.png"],
+        "price": 10,
+        "count": 2,
+        "tags": ["tag1"]
+      }
+    },
+    "Getanitemresponse": {
+      "title": "Get an item response",
+      "type": "object",
+      "properties": {
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "[^/]*",
+          "type": "string"
+        },
+        "imageUrls": {
+          "maxItems": 100,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        },
+        "price": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "tags": {
+          "maxItems": 100,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "imageUrls",
+        "price",
+        "count",
+        "tags"
+      ],
+      "example": {
+        "id": "id",
+        "name": "name1",
+        "description": "desc",
+        "imageUrls": ["https://abc.com/1.png"],
+        "price": 10,
+        "count": 2,
+        "tags": ["tag1"]
+      }
+    },
+    "Getsizeresponse": {
+      "title": "Get size response",
+      "type": "object",
+      "properties": {
+        "size": {
+          "maximum": 255,
+          "minimum": 1,
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": ["size"],
+      "example": {
+        "size": 10
+      }
+    },
+    "Listresponse3": {
+      "title": "List response3",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "maxItems": 100,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "[^/]*",
+            "type": "string"
+          }
+        }
+      },
+      "required": ["tags"],
+      "example": {
+        "tags": ["tag1", "tag2"]
+      }
+    }
+  }
+}
