@@ -26,6 +26,7 @@ services:
       - "0.0.0.0:3000:3000"
     environment:
       - REACT_APP_API_ENDPOINT_URL=http://0.0.0.0:3000
+      - BACKEND_API_ENDPOINT_URL=http://backend:8081
 
   backend:
     build: ./api
