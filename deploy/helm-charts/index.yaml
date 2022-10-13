@@ -1,25 +1,9 @@
-# Copyright 2022 Cisco Systems, Inc. and its affiliates.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# SPDX-License-Identifier: Apache-2.0
-
 apiVersion: v1
 entries:
   api-insights:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-10-12T17:47:38.558154-07:00"
+    created: "2022-10-13T11:09:02.043656-07:00"
     dependencies:
     - alias: api-insights-postgresql
       condition: api-insights-postgresql.enabled
@@ -27,7 +11,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 11.1.23
     description: Charts for API Insights deployment.
-    digest: 01328c9f10b1dc984a56f57b3f79ba08c585115f1b37df1da1cc0551848dbe62
+    digest: 9ad572fceabeda6e04dea4cb7bf6a054e1f16359b4e21157f4dd05e79eb574d0
     home: https://github.com/cisco-developer/api-insights
     maintainers:
     - name: API Insights
@@ -39,4 +23,4 @@ entries:
     urls:
     - api-insights/api-insights-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-12T17:47:38.547911-07:00"
+generated: "2022-10-13T11:09:02.031933-07:00"
