@@ -3,7 +3,7 @@ entries:
   api-insights:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-10-13T15:35:15.498976-07:00"
+    created: "2022-10-13T16:45:37.32588-07:00"
     dependencies:
     - alias: api-insights-postgresql
       condition: api-insights-postgresql.enabled
@@ -11,7 +11,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 11.1.23
     description: Charts for API Insights deployment.
-    digest: 4bced63fdb8b8f1de997d21ddaf4375596045b5f482d04c9cb4c9c7aabd54df5
+    digest: 08cb6c1e53f1a88c65f2cdc5d391f74d86d168b16e1a2608aca4de5db4edbcdd
     home: https://github.com/cisco-developer/api-insights
     maintainers:
     - name: API Insights
@@ -23,4 +23,4 @@ entries:
     urls:
     - api-insights/api-insights-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-13T15:35:15.485937-07:00"
+generated: "2022-10-13T16:45:37.318629-07:00"
