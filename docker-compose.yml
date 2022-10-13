@@ -18,6 +18,7 @@ version: '2'
 services:
   ui:
     build: ./ui
+    platform: "linux/amd64"
     depends_on:
     - "backend"
     - "mysql"
