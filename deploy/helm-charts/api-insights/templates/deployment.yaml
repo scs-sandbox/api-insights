@@ -49,6 +49,8 @@ spec:
           env:
             - name: REACT_APP_API_ENDPOINT_URL
               value: "http://0.0.0.0:8080"
+            - name: BACKEND_API_ENDPOINT_URL
+              value: "http://localhost:8081/"
           securityContext:
             {{- index .Values "api-insights" "securityContext" | toYaml | nindent 12 }}
           resources:
