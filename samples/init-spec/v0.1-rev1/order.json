@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v0.1",
+    "contact": {
+      "name": "Tom",
+      "url": "http://test.com",
+      "email": "tom@test.com"
+    },
+    "title": "Orders",
+    "description": "Service for processing orders",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "host": "orders",
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "description": "BearerAuth",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read": "Grants read access",
+        "write": "Grants write access",
+        "admin": "Grants read and write access to administrative information"
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This is a sample tag.",
+      "name": "Sample"
+    }
+  ],
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "consumes": ["application/json;charset=UTF-8", "text/plain"],
+  "produces": ["application/json;charset=UTF-8", "text/plain"],
+  "paths": {
+    "/orders": {
+      "post": {
+        "description": "Create an order",
+        "operationId": "/orders-POST",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/hal+json;charset=UTF-8"],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get orders",
+        "operationId": "/orders-GET",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/hal+json;charset=UTF-8"],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OrdersList"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "example": {
+        "code": 2,
+        "message": "internal server"
+      },
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "customer": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "null"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "addresses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "number": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "postcode": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "number",
+                  "street",
+                  "city",
+                  "postcode",
+                  "country"
+                ]
+              }
+            },
+            "cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "longNum": {
+                    "type": "string"
+                  },
+                  "expires": {
+                    "type": "string"
+                  },
+                  "ccv": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "longNum", "expires", "ccv"]
+              }
+            }
+          },
+          "required": [
+            "id",
+            "firstName",
+            "lastName",
+            "username",
+            "addresses",
+            "cards"
+          ]
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "null"
+            },
+            "number": {
+              "type": "string"
+            },
+            "street": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "postcode": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "number", "street", "city", "postcode", "country"]
+        },
+        "card": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "null"
+            },
+            "longNum": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string"
+            },
+            "ccv": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "longNum", "expires", "ccv"]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "itemId": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "unitPrice": {
+                "type": "number"
+              }
+            },
+            "required": ["id", "itemId", "quantity", "unitPrice"]
+          }
+        },
+        "shipment": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "name"]
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "customerId",
+        "customer",
+        "address",
+        "card",
+        "items",
+        "shipment",
+        "date",
+        "total"
+      ],
+      "example": {
+        "id": "id",
+        "customerId": "cId",
+        "customer": {
+          "id": null,
+          "firstName": "Tom",
+          "lastName": "Green",
+          "username": "tomg",
+          "addresses": [
+            {
+              "id": "id",
+              "number": "3",
+              "street": "Taiping",
+              "city": "Shanghai",
+              "postcode": "134433",
+              "country": "cn"
+            }
+          ],
+          "cards": [
+            {
+              "id": "id",
+              "longNum": "3",
+              "expires": "1h",
+              "ccv": "231"
+            }
+          ]
+        },
+        "address": {
+          "id": null,
+          "number": "3",
+          "street": "Taiping",
+          "city": "Shanghai",
+          "postcode": "134433",
+          "country": "cn"
+        },
+        "card": {
+          "id": null,
+          "longNum": "3",
+          "expires": "1h",
+          "ccv": "231"
+        },
+        "items": [
+          {
+            "id": "id",
+            "itemId": "itemId",
+            "quantity": 3,
+            "unitPrice": 3
+          }
+        ],
+        "shipment": {
+          "id": "id",
+          "name": "name"
+        },
+        "date": "1985-02-07T00:00:00.000Z",
+        "total": 1
+      }
+    },
+    "OrdersList": {
+      "type": "object",
+      "properties": {
+        "embedded": {
+          "type": "object",
+          "properties": {
+            "customerOrders": {
+              "type": "array",
+              "items": {}
+            }
+          },
+          "required": ["customerOrders"]
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "profile": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "search": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            }
+          },
+          "required": ["self", "profile", "search"]
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer"
+            },
+            "totalElements": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            }
+          },
+          "required": ["size", "totalElements", "totalPages", "number"]
+        }
+      },
+      "required": ["embedded", "links", "page"],
+      "example": {
+        "embedded": {
+          "customerOrders": []
+        },
+        "links": {
+          "self": {
+            "href": "href"
+          },
+          "profile": {
+            "href": "href"
+          },
+          "search": {
+            "href": "href"
+          }
+        },
+        "page": {
+          "size": 19,
+          "totalElements": 10,
+          "totalPages": 33,
+          "number": 55
+        }
+      }
+    }
+  }
+}
