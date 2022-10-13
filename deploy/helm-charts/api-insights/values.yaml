@@ -1,0 +1,136 @@
+# Copyright 2022 Cisco Systems, Inc. and its affiliates.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+#######################################################################################
+## Global Values
+
+global:
+  ## Docker image
+  ##
+  docker:
+    ## Configure registry
+    ##
+    backendRegistry: "ghcr.io/cisco-developer"
+    frontendRegistry: "ghcr.io/cisco-developer"
+
+  ## Whether or not persistence is enabled
+  ##
+  persistentVolume:
+    ## Persistent Volume size
+    ##
+    size: 100Mi
+
+    ## Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    # storageClass: ""
+
+## End of Global Values
+#######################################################################################
+
+#######################################################################################
+## API Insights Values
+
+api-insights:
+  name: "api-insights"
+
+  apiclarityUrl: "http://apiclarity-apiclarity.apiclarity.svc.cluster.local"
+
+  ## Docker Image values.
+  docker:
+    backendImageTag: "v0.1.0-beta0"
+    frontendImageTag: "v0.1.1-beta0"
+    imagePullPolicy: Always
+
+  replicaCount: 1
+
+  ## Logging level (debug, info, warning, error, fatal, panic).
+  logLevel: info
+
+  ## ServiceAccount settings
+  serviceAccount:
+    ## Enable/disable ServiceAccount creation. Set false to use a pre-existing account
+    create: true
+    ## Override name of ServiceAccount
+    name: api-insights
+
+  ## Resource limits for API Insights deployment
+  resources:
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+    limits:
+      memory: "1000Mi"
+      cpu: "1000m"
+
+  ## Resource limits for API Insights init container deployment
+  initResources:
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+    limits:
+      memory: "1000Mi"
+      cpu: "200m"
+
+  securityContext: { }
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+
+## End of API Insights Values
+#######################################################################################
+
+#######################################################################################
+## API Insights Postgres Values
+api-insights-postgresql:
+  enabled: true
+
+  ## Override postgres charts values
+  ## Authentication parameters
+  ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
+  ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run
+  ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  auth:
+    ## @param auth.postgresPassword Password for the "postgres" admin user. Ignored if `auth.existingSecret` with key `postgres-password` is provided
+    ##
+    postgresPassword: "api-insights"
+    ## @param auth.username Name for a custom user to create
+    ##
+    username: "api-insights"
+    ## @param auth.database Name for a custom database to create
+    ##
+    database: "api-insights"
+    ## @param auth.existingSecret Name of existing secret to use for PostgreSQL credentials. The secret must contain the keys `postgres-password` (which is the password for "postgres" admin user), `password` (which is the password for the custom user to create when `auth.username` is set) and `replication-password` (which is the password for replication user). `auth.postgresPassword`, `auth.password`, and `auth.replicationPassword` will be ignored and picked up from this secret. The secret might also contains the key `ldap-password` if LDAP is enabled. `ldap.bind_password` will be ignored and picked from this secret in this case.
+    ## The value is evaluated as a template.
+    ##
+    existingSecret: "api-insights-postgresql-secret"
+
+  ## Enable security context
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
+
+# End of API Insights Postgres Values
+#######################################################################################
