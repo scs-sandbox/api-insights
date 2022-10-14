@@ -80,8 +80,6 @@ spec:
               value: {{ index .Values "api-insights" "logLevel" }}
             - name: OPENAPI_DIFF_JAR_FILE
               value: /usr/lib/jvm/java-8-openjdk/jre/lib/openapi-diff.jar
-            - name: COMPLETENESS_RULESET
-              value: /config/completeness.json
             - name: APICLARITY_URL
               value: {{ index .Values "api-insights" "apiclarityUrl" }}
           livenessProbe:
