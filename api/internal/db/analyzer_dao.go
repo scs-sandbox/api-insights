@@ -169,7 +169,7 @@ func (dao *blobAnalyzerDAO) preloadDefaultAnalyzersSilently(ctx context.Context,
 		return
 	}
 
-	shared.LogDebugf("preloading default analyzers: %v ...", string(analyzersData))
+	shared.LogInfof("preloading default analyzers: %v ...", string(analyzersData))
 
 	var analyzers []*analyzer.Analyzer
 	err = json.Unmarshal(analyzersData, &analyzers)
