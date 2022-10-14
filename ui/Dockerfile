@@ -1,10 +1,11 @@
-# pull official base image
+# Node layer
 FROM node:18.10.0-alpine as builder
 # set working directory
 WORKDIR /app
 
 ENV REACT_APP_API_ENDPOINT_URL $REACT_APP_API_ENDPOINT_URL
 ENV BACKEND_API_ENDPOINT_URL $BACKEND_API_ENDPOINT_URL
+
 # install package dependencies
 COPY package.json ./
 RUN apk add --no-cache --virtual .gyp \
@@ -19,19 +20,18 @@ RUN npm rebuild node-sass
 COPY . ./
 RUN npm run build
 
-FROM nginx-alpine
+# Nginx layer
+FROM nginx:1.23.1-alpine
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
-RUN rm -rf /usr/share/nginx/html/*
+COPY ./start.sh /start.sh
 
-COPY --from=builder /app/dist /usr/share/nginx/html/api-insights-ui
+RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 ENV PORT 3000
 EXPOSE 3000
 
 # start app
-# TODO create new nginx startup script to modify backend api proxy url in nginx.conf and then start nginx
-# example: CMD ["sh", "-c", "sh start.sh ${BACKEND_API_ENDPOINT_URL}"]
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "sh start.sh ${BACKEND_API_ENDPOINT_URL}"]
 

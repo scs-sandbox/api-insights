@@ -16,17 +16,6 @@
 
 version: '2'
 services:
-  ngui:
-    build: ./ui
-    platform: "linux/amd64"
-    depends_on:
-      - "backend"
-      - "mysql"
-    ports: 
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_ENDPOINT_URL=http://localhost:3000
-      - BACKEND_API_ENDPOINT_URL=http://backend:8081
   ui:
     build: ./ui
     platform: "linux/amd64"
