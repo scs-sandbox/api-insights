@@ -1,22 +1,37 @@
-# pull official base image
-FROM node:14.18.1-alpine
+# Node layer
+FROM node:18.10.0-alpine as builder
 # set working directory
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH
+ENV REACT_APP_API_ENDPOINT_URL $REACT_APP_API_ENDPOINT_URL
+ENV BACKEND_API_ENDPOINT_URL $BACKEND_API_ENDPOINT_URL
 
-# add app
-COPY . ./
-
+# install package dependencies
+COPY package.json ./
 RUN apk add --no-cache --virtual .gyp \
     py3-pip \
     make \
-    g++ \
-    && npm install \
-    && apk del .gyp
+    g++ 
 
-ENV REACT_APP_API_ENDPOINT_URL $REACT_APP_API_ENDPOINT_URL
+RUN npm install --ignore-scripts
+RUN npm rebuild node-sass
+
+# load app and build
+COPY . ./
+RUN npm run build
+
+# Nginx layer
+FROM nginx:1.23.1-alpine
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./start.sh /start.sh
+
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist /usr/share/nginx/html
+
 ENV PORT 3000
 EXPOSE 3000
+
 # start app
-CMD [ "npm", "run", "dockerstart" ]
+CMD ["sh", "-c", "sh start.sh ${BACKEND_API_ENDPOINT_URL}"]
+

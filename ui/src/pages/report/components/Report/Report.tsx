@@ -54,6 +54,8 @@ type Props = {
   onClearSpecUploadingError?: () => void;
 };
 
+const DRIFT_ANALYZER = 'drift';
+
 export default function Report(props: Props) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [analyzerFilterData, setAnalyzerFilterData] = useState(null);
@@ -76,6 +78,7 @@ export default function Report(props: Props) {
   const onChangeTabIndex = (index: number) => {
     setSelectedTabIndex(index);
   };
+
   const onReanalyze = async () => {
     await TriggerReanalyze(
       props.service.id,
@@ -114,7 +117,8 @@ export default function Report(props: Props) {
 
     const analyzerList = props.analyzerList
       ? props.analyzerList
-        .filter((i) => i.name_id !== 'drift') // Drift analyzer will be it's own tab on the page
+        // Drift analyzer will be it's own tab on the page
+        .filter((i) => i.name_id !== DRIFT_ANALYZER)
         .map((i) => ({
           title: i.title,
           value: i.name_id,
@@ -169,12 +173,18 @@ export default function Report(props: Props) {
   };
 
   const renderComplianceTab = (forDrift: boolean, index: number) => {
-    const list = props.complianceList
-      ? props.complianceList.filter((i) => (forDrift
-        ? i.analyzer === 'drift'
-        : filterIsSelected(i.analyzer, analyzerFilterData)
-              && i.analyzer !== 'drift'))
-      : null;
+    const list = (!props.complianceList || !props.analyzerList)
+      ? null
+      : props.complianceList.filter((compliance) => {
+        if (forDrift) return compliance.analyzer === DRIFT_ANALYZER;
+
+        if (!analyzerFilterData) {
+          return props.analyzerList.find((analyzer) => analyzer.name_id === compliance.analyzer);
+        }
+
+        return (filterIsSelected(compliance.analyzer, analyzerFilterData)
+          && compliance.analyzer !== DRIFT_ANALYZER);
+      });
 
     const complianceAnalyzerBlock = renderComplianceAnalyzerBlock(forDrift);
     const statistics = renderStatistics(list);
