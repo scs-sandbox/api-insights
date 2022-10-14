@@ -18,18 +18,20 @@ RUN npm rebuild node-sass
 # load app and build
 COPY . ./
 RUN npm run build
-RUN ls -alh
 
-FROM arm64v8/nginx
+FROM nginx-alpine
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 
+COPY --from=builder /app/dist /usr/share/nginx/html/api-insights-ui
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 ENV PORT 3000
 EXPOSE 3000
 
 # start app
+# TODO create new nginx startup script to modify backend api proxy url in nginx.conf and then start nginx
+# example: CMD ["sh", "-c", "sh start.sh ${BACKEND_API_ENDPOINT_URL}"]
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
-#CMD ["sh", "-c", "sh start.sh ${BACKEND_API_ENDPOINT_URL}"]
+
