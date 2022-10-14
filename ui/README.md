@@ -19,4 +19,3 @@ After that, the backed is running. and we can run UI part.
 npm install
 npm start
 ```
-Browser will open a new tab that its address is http://0.0.0.0:3000, the page will say "This site can’t be reached" at first and after a while it will works well without doing anything but wait.
