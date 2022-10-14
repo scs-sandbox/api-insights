@@ -320,14 +320,6 @@
     "severity": "error"
   },
   {
-    "name_id": "oas2-schema",
-    "analyzer_name_id": "guidelines",
-    "title": "Validate structure of OpenAPI v2 specification.",
-    "description": "Validate structure of OpenAPI v2 specification.",
-    "mitigation": "Please update the spec structure.",
-    "severity": "error"
-  },
-  {
     "name_id": "oas2-unused-definition",
     "analyzer_name_id": "guidelines",
     "title": "Potentially unused definition has been detected.",
@@ -429,14 +421,6 @@
     "title": "Examples must be valid against their defined schema.",
     "description": "Examples must be valid against their defined schema.",
     "mitigation": "Please update examples for the items identified.",
-    "severity": "error"
-  },
-  {
-    "name_id": "oas3-schema",
-    "analyzer_name_id": "guidelines",
-    "title": "Validate structure of OpenAPI v3 specification.",
-    "description": "Validate structure of OpenAPI v3 specification.",
-    "mitigation": "Please update spec structure",
     "severity": "error"
   },
   {
