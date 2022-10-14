@@ -18,17 +18,17 @@ RUN npm rebuild node-sass
 # load app and build
 COPY . ./
 RUN npm run build
+RUN ls -alh
 
-
-FROM nginx:alpine
+FROM arm64v8/nginx
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 ENV PORT 3000
-EXPOSE 3000 80
+EXPOSE 3000
 
 # start app
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
