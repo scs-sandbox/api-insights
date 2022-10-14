@@ -17,7 +17,7 @@
 version: '2'
 services:
   ui:
-    image: ghcr.io/cisco-developer/api-insights-ui:v0.1.1-beta0
+    image: ghcr.io/cisco-developer/api-insights-ui:v0.1.1-beta5
     depends_on:
     - "backend"
     - "mysql"
@@ -27,7 +27,7 @@ services:
       - REACT_APP_API_ENDPOINT_URL=http://0.0.0.0:3000
 
   backend:
-    image: ghcr.io/cisco-developer/api-insights-api:v0.1.1-beta0
+    image: ghcr.io/cisco-developer/api-insights-api:v0.1.1-beta5
     ports:
       - "8081:8081"
     depends_on:
@@ -40,7 +40,7 @@ services:
       start_period: 5s
       timeout: 10s
     environment:
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
       - API_INSIGHTS_HOST=0.0.0.0
       - API_INSIGHTS_PORT=8081
       - DB_TYPE=mysql
