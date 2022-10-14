@@ -9,7 +9,7 @@ Check deployment status
 
 Steps to access the API Insights UI
     $ kubectl -n {{ .Release.Namespace }} port-forward svc/{{ index .Values "api-insights" "name" }} 8080:8080
-    $ Access UI at: http://localhost:8080/api-insights-ui
+    $ Access UI at: http://localhost:8080
 
 Steps to access the API Insights Service for CLI
     $ kubectl -n {{ .Release.Namespace }} port-forward svc/{{ index .Values "api-insights" "name" }} 8081:80

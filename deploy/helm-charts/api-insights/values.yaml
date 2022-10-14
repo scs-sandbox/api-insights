@@ -54,8 +54,8 @@ api-insights:
 
   ## Docker Image values.
   docker:
-    backendImageTag: "v0.1.1-beta3"
-    frontendImageTag: "v0.1.1-beta3"
+    backendImageTag: "v0.1.1-beta5"
+    frontendImageTag: "v0.1.1-beta5"
     imagePullPolicy: Always
 
   replicaCount: 1
