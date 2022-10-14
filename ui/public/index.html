@@ -20,7 +20,7 @@ SPDX-License-Identifier: Apache-2.0
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="API Insights"/>
     <title>API Insights</title>
@@ -28,13 +28,4 @@ SPDX-License-Identifier: Apache-2.0
   <body>
     <div id="root"></div>
   </body>
-  <script>
-    if (!window.location.pathname.includes('%PUBLIC_URL%')) {
-        window.history.replaceState(
-          '',
-          '',
-          '%PUBLIC_URL%' + window.location.pathname
-        );
-      }
-  </script>
 </html>
