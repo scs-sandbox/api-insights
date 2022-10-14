@@ -7,4 +7,4 @@
     docker-compose up
     ```
 
-2. Open http://localhost:8080
+2. Open http://localhost:3000
