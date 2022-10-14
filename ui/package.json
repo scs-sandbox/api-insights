@@ -17,7 +17,7 @@
     "prepare": "cd .. && husky install && npx husky set .husky/pre-commit \"cd ui && npm run pre-commit\"",
     "start": "HTTPS=false PORT=3000 react-scripts start",
     "dockerstart": "HTTPS=false HOST=0.0.0.0 PORT=3000 react-scripts start",
-    "build": "rm -rf dist && react-scripts build && mv build dist && mv package-dist.json ./dist/package.json",
+    "build": "rm -rf dist && react-scripts build && mv build dist",
     "build:docker": "rm -rf dist && react-scripts build && mkdir -p dist && mkdir  dist/api-insights-demo && mv -v build/* dist/api-insights-demo/ && mv package-dist.json ./dist/package.json",
     "test": "react-scripts test --coverage",
     "test:full": "react-scripts test --coverage --watchAll",
