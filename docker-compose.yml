@@ -40,7 +40,7 @@ services:
       start_period: 5s
       timeout: 10s
     environment:
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
       - API_INSIGHTS_HOST=0.0.0.0
       - API_INSIGHTS_PORT=8081
       - DB_TYPE=mysql
