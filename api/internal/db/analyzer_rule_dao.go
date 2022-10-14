@@ -18,9 +18,14 @@ package db
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"gorm.io/gorm/clause"
+	"io/ioutil"
+	"log"
+	"strings"
 )
 
 const batchSize = 100
@@ -36,6 +41,7 @@ type AnalyzerRuleDAO interface {
 
 // NewAnalyzerRuleDAO create AnalyzerRuleDAO
 var NewAnalyzerRuleDAO = func(config *shared.AppConfig) (AnalyzerRuleDAO, error) {
+	shared.LogInfof("init NewAnalyzerRuleDAO")
 	client, err := NewDBClient(config)
 	if err != nil {
 		return nil, err
@@ -46,6 +52,15 @@ var NewAnalyzerRuleDAO = func(config *shared.AppConfig) (AnalyzerRuleDAO, error)
 	}
 
 	dao := &blobAnalyzerRuleDAO{client: client, config: config}
+
+	err = dao.preloadDefaultAnalyzersSafely(context.Background(), "../data/", "rules")
+	shared.LogInfof("preloading rules")
+	if err != nil {
+		shared.LogWarnf("failed to preload rules: %s", err.Error())
+	} else {
+		shared.LogInfof("preloaded rules")
+	}
+
 	return dao, nil
 }
 
@@ -149,4 +164,41 @@ func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule)
 	}
 
 	return nil
+}
+
+func (dao blobAnalyzerRuleDAO) preloadDefaultAnalyzersSafely(ctx context.Context, dir, keyword string) error {
+	var paths []string
+
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		if f.IsDir() || !strings.Contains(f.Name(), keyword) {
+			continue
+		}
+
+		paths = append(paths, fmt.Sprintf("%s/%s", strings.TrimSuffix(dir, "/"), f.Name()))
+	}
+
+	var allRules []*analyzer.Rule
+	for _, path := range paths {
+		var rules []*analyzer.Rule
+		data, err := ioutil.ReadFile(path)
+		if err != nil {
+			shared.LogWarnf("failed to read file(%s), err: %s", path, err.Error())
+			continue
+		}
+
+		err = json.Unmarshal(data, &rules)
+		if err != nil {
+			shared.LogWarnf("failed to unmarshal data, err: %s", err.Error())
+			continue
+		}
+
+		allRules = append(allRules, rules...)
+	}
+
+	return dao.Import(ctx, allRules)
 }
