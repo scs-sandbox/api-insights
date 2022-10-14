@@ -23,12 +23,14 @@ import (
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"gorm.io/gorm/clause"
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 
-const batchSize = 100
+const (
+	analyzerRulesBatchSize = 100
+)
 
 // AnalyzerRuleDAO is the interface to access database
 type AnalyzerRuleDAO interface {
@@ -53,7 +55,7 @@ var NewAnalyzerRuleDAO = func(config *shared.AppConfig) (AnalyzerRuleDAO, error)
 
 	dao := &blobAnalyzerRuleDAO{client: client, config: config}
 
-	err = dao.preloadDefaultAnalyzersSafely(context.Background(), "../data/", "rules")
+	err = dao.preloadDefaultAnalyzerRulesSilently(context.Background(), "internal/data", "rules")
 	shared.LogInfof("preloading rules")
 	if err != nil {
 		shared.LogWarnf("failed to preload rules: %s", err.Error())
@@ -148,7 +150,7 @@ func (dao *blobAnalyzerRuleDAO) List(ctx context.Context, filter *ListFilter) ([
 	return ars, nil
 }
 
-func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule) error {
+func (dao *blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule) error {
 	span, ctx := shared.StartSpan(ctx)
 	defer span.Finish()
 
@@ -157,7 +159,7 @@ func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule)
 			Columns:   []clause.Column{{Name: "name_id"}},
 			UpdateAll: true,
 		}).
-		CreateInBatches(ars, batchSize).Error
+		CreateInBatches(ars, analyzerRulesBatchSize).Error
 	if err != nil {
 		shared.LogErrorf("failed to import %d analyzer rules: %s", len(ars), err.Error())
 		return err
@@ -166,10 +168,10 @@ func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule)
 	return nil
 }
 
-func (dao blobAnalyzerRuleDAO) preloadDefaultAnalyzersSafely(ctx context.Context, dir, keyword string) error {
+func (dao *blobAnalyzerRuleDAO) preloadDefaultAnalyzerRulesSilently(ctx context.Context, dir, keyword string) error {
 	var paths []string
 
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -185,7 +187,7 @@ func (dao blobAnalyzerRuleDAO) preloadDefaultAnalyzersSafely(ctx context.Context
 	var allRules []*analyzer.Rule
 	for _, path := range paths {
 		var rules []*analyzer.Rule
-		data, err := ioutil.ReadFile(path)
+		data, err := os.ReadFile(path)
 		if err != nil {
 			shared.LogWarnf("failed to read file(%s), err: %s", path, err.Error())
 			continue
