@@ -1,5 +1,5 @@
 # API Insights
-API Insights is a tool to enable organizations to manage versioned API specifications (Swagger2/Open API Spec-3) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, documents completeness and API security analysis (TBD: Analysis to be consumed from Secure Application Cloud). To help API consumers and developers, API Insights service  also supports generating API change-log including identification of backward compatibility breaking change between 2 version of API spec files.
+API Insights is a tool to enable organizations to manage versioned API specifications (Swagger2/Open API Spec-3) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, documents completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service  also supports generating API change-log including identification of backward compatibility breaking change between 2 version of API spec files.
 
 ## API Specifications Challenges
 
@@ -15,8 +15,9 @@ API Insights is a tool to enable organizations to manage versioned API specifica
    - **[API Insights API guidelines](https://developer.cisco.com/api-guidelines/)**
        - Guidelines are tested using **[API guidelines linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)**
    - API Document completeness  
-   - API Security analyzer (Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
-   - API Drift analyzer (Integrate with [API clarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
+   - API Drift analyzer (Integrate with [APIClarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
+   - API Security analyzer (Future: Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
+
 - API spec diff across multiple version/revision
   - Identify and alert on backward compatibility breaking changes.
   - API Insights CLI to enable runnning spec analyzer as part of API spec CICD or local commit pipleline.
@@ -42,15 +43,23 @@ API Insights user flow
   - Security Analysis of API
 
 ## Related Projects  and resources
-- [API Insights API Guidelines](https://developer.cisco.com/docs/api-insights/)
+- [API Insights VSCode Extension](https://github.com/cisco-developer/api-insights-extension-vscode)
 - [API Insights Guidelines Linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)
+- [API Insights site](https://developer.cisco.com/site/api-insights/)
+- [API Insights Doc](https://developer.cisco.com/docs/api-insights) 
 
+## Getting Started
+This repo contains a helm based deployer that can be deployed in local kubernetes cluster setup using like Rancher desktop, minikube etc. The detailed instructions are found [here](https://testing-developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
 
-## Development details
-
-# Build and start services using docker-compose
+## Development setup
+Build and start UI & backend services using docker-compose
 ```
 docker-compose up 
 ````
+One docker-compose is up UI and be access at http://localhost:8080
+
 **Note**: If need to install docker-compose, install [Rancher Desktop](https://rancherdesktop.io/) or licensed 'Docker Desktop'
 
+## Contribution
+
+We welcome contributions please find details in [CONTRIBUTING.md](CONTRIBUTING.md)
