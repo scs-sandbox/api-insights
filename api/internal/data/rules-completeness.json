@@ -108,7 +108,7 @@
     "analyzer_name_id": "completeness",
     "title": "Info object must have `contact` object.",
     "description": "Info object must have `contact` object.",
-    "mitigation": "Please add missing `contact` object. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself",
+    "mitigation": "Please add missing `contact` object. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself)",
     "severity": "warning"
   },
   {
@@ -116,7 +116,7 @@
     "analyzer_name_id": "completeness",
     "title": "Info object must have a non-empty `description`",
     "description": "Info object must have a non-empty `description`.",
-    "mitigation": "Please add missing `description`. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself",
+    "mitigation": "Please add missing `description`. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself)",
     "severity": "warning"
   },
   {
@@ -124,7 +124,7 @@
     "analyzer_name_id": "completeness",
     "title": "Info object must have `license` object.",
     "description": "Info object must have `license` object.",
-    "mitigation": "Please add missing `license` object. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself",
+    "mitigation": "Please add missing `license` object. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself)",
     "severity": "warning"
   },
   {
@@ -132,7 +132,7 @@
     "analyzer_name_id": "completeness",
     "title": "License object must have a `url`.",
     "description": "License object must have a `url`.",
-    "mitigation": "Please add missing `url`. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself",
+    "mitigation": "Please add missing `url`. [Reference](https://developer.cisco.com/docs/api-insights/#!documentation-completeness/meta-information-about-the-api-itself)",
     "severity": "warning"
   }
 ]
