@@ -1,0 +1,19 @@
+{
+  "host": "0.0.0.0",
+  "port": 8081,
+  "openapi-diff-jar-file": "/usr/lib/jvm/java-8-openjdk/jre/lib/openapi-diff.jar",
+  "openapi-diff-java-opts": "-Xms512m -Xmx1024m",
+  "completeness-ruleset": "node_modules/@cisco-developer/api-insights-openapi-rulesets/completeness.js",
+  "guidelines-ruleset": "node_modules/@cisco-developer/api-insights-openapi-rulesets/api-insights-openapi-ruleset.js",
+  "db-type": "mysql",
+  "db-host": "localhost",
+  "db-port": "3306",
+  "db-user": "root",
+  "db-password": "123456",
+  "db-database": "api-insights",
+  "apiclarity-url": "http://localhost:9981",
+  "panoptica-url": "http://localhost:9981",
+  "panoptica-access-key": "",
+  "panoptica-secret-key": "",
+  "auth-enabled": false
+}

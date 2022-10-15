@@ -1,0 +1,101 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.service-group-menu-item {
+  padding: 5px 0px;
+
+  .group-title {
+    cursor: pointer;
+    font-weight: 650;
+    padding: 2px 0;
+    padding-left: 20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    .count {
+      font-weight: 400;
+      display: inline;
+    }
+
+    .drop {
+      display: inline;
+      padding-left: 4px;
+      float: right;
+      margin-right: 13px;
+      font-weight: 400;
+      position: absolute;
+      right: 10px;
+    }
+  }
+
+  .selected {
+    background-color: rgba(0, 188, 235, 0.14);
+    width: 100%;
+
+    .drop {
+      display: inline;
+      padding-left: 4px;
+      float: right;
+      margin-right: 13px;
+      font-weight: 400;
+      color: black;
+    }
+  }
+
+  .group-selected {
+    color: #00a0c8;
+  }
+
+  .group-list {
+    min-width: 380px;
+    border-radius: 16px;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0px;
+
+    .item {
+      padding-left: 30px;
+      width: 100%;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+
+      .drop {
+        display: inline;
+        padding-left: 4px;
+        float: right;
+        margin-right: 13px;
+        font-weight: 400;
+        position: absolute;
+        right: 10px;
+      }
+
+      .selected {
+        background-color: rgba(0, 188, 235, 0.14);
+        width: 100%;
+      }
+    }
+  }
+
+  .group-list.hide {
+    display: none;
+  }
+}

@@ -1,0 +1,73 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@keyframes upload-icon-busy {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.upload-icon {
+  display: flex;
+  width: 1.25em;
+  height: 1.25em;
+  box-sizing: border-box;
+  border-radius: 50%;
+  position: relative;
+  font-style: normal;
+  background-color: #f0f0f0;
+  color: #444;
+
+  &::before {
+    content: '+';
+    display: block;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -0.1em;
+    bottom: 0;
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    align-items: center;
+    font-size: 140%;
+    font-weight: 100;
+  }
+
+  &.state-busy {
+    background-color: transparent;
+
+    &::before {
+      content: '';
+    }
+  }
+
+  .busy-icon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+  }
+}

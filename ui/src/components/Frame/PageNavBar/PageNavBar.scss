@@ -1,0 +1,76 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.page-nav-bar {
+  flex: 0 0 0%;
+  color: #fff;
+  background-color: #2c446a;
+
+  .nav-item-list {
+    margin: 0;
+    padding: 2px 8px;
+  }
+
+  .nav-item-box {
+    margin: 6px 0;
+    list-style: none;
+
+    .nav-item {
+      text-align: center;
+      display: block;
+      padding: 8px 6px;
+      text-decoration: none;
+      opacity: 0.6;
+      border-radius: 4px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &.active {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-item-icon {
+        margin: 0 auto;
+        width: 36px;
+        height: 36px;
+        background: center / contain no-repeat;
+
+        &.icon-timeline {
+          background-image: url('./images/page-timeline.svg');
+        }
+
+        &.icon-reports {
+          background-image: url('./images/page-report.svg');
+        }
+
+        &.icon-comparison {
+          background-image: url('./images/page-compare.svg');
+        }
+      }
+
+      .nav-item-name {
+        margin-top: 2px;
+        color: #fff;
+        font-size: 11px;
+      }
+    }
+  }
+}

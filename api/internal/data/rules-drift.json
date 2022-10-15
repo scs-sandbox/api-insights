@@ -1,0 +1,26 @@
+[
+  {
+    "name_id": "GENERAL_DIFF",
+    "analyzer_name_id": "drift",
+    "title": "GENERAL_DIFF",
+    "description": "General diff: a general diff has been detected",
+    "mitigation": "Please update the spec accordingly.",
+    "severity": "error"
+  },
+  {
+    "name_id": "ZOMBIE_DIFF",
+    "analyzer_name_id": "drift",
+    "title": "ZOMBIE_DIFF",
+    "description": "Zombie: a deprecated API has been detected",
+    "mitigation": "Please update clients to stop using deprecated APIs.",
+    "severity": "error"
+  },
+  {
+    "name_id": "SHADOW_DIFF",
+    "analyzer_name_id": "drift",
+    "title": "SHADOW_DIFF",
+    "description": "Shadow: an undocumented API has been detected",
+    "mitigation": "Please add the API in the spec.",
+    "severity": "error"
+  }
+]

@@ -1,0 +1,429 @@
+{
+  "summary": {
+    "stats": {
+      "count": 14,
+      "occurrences": 15,
+      "hint": {
+        "count": 1,
+        "occurrences": 1,
+        "rules": {
+          "FSE004": 1
+        }
+      },
+      "info": {
+        "count": 1,
+        "occurrences": 1,
+        "rules": {
+          "SAN029": 1
+        }
+      },
+      "warning": {
+        "count": 9,
+        "occurrences": 10,
+        "rules": {
+          "RDT002": 1,
+          "RDT003": 1,
+          "RDT005": 1,
+          "RDT006": 1,
+          "RDT015": 1,
+          "STR001": 1,
+          "TDT004": 1,
+          "TDT005": 1,
+          "TDT007": 2
+        }
+      },
+      "error": {
+        "count": 3,
+        "occurrences": 3,
+        "rules": {
+          "SAN001": 1,
+          "SAN002": 1,
+          "TDT001": 1
+        }
+      }
+    }
+  },
+  "findings": {
+    "error": {
+      "rules": {
+        "SAN001": {
+          "message": "Missing security scheme both in operation and globally\nSpec analyzer detected that the spec does not define neither a global nor a operation specific security scheme. It is highly recommended that all API operations support a security scheme, which means supporting proper authentication and authorization. \nIn principle this can be achieved without a global security scheme, by specifying a security scheme for each API operation. However it is a good practice to have a global one instead of individual ones. This makes maintenance easy and avoids that new API operations are added without any security scheme association.",
+          "mitigation": "Make sure all API operations have a security scheme associated and as a good practice add a global security scheme.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 14
+                },
+                "end": {
+                  "line": 28,
+                  "column": 14
+                }
+              }
+            }
+          ]
+        },
+        "SAN002": {
+          "message": "Missing Security Definition \nSpec analyzer detected that the spec does not define a  security definition. It is highly recommended that all API operations support a security definition, which means supporting proper authentication and authorization. ",
+          "mitigation": "Make sure all API operations have a security definition associated.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "/"
+              ],
+              "range": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            }
+          ]
+        },
+        "TDT001": {
+          "message": "Missing max for array length\nSpec analyzer detected that the definition of an array  attribute carried in an API operation does not specify the maximum length.\nThis prevents client and server to have an upperbound on the array lenght they can expect, which make them expose to possible buffer overflow attacks. ",
+          "mitigation": "Make sure all array definition include the maximum length.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200",
+                "schema",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 37,
+                  "column": 23
+                },
+                "end": {
+                  "line": 37,
+                  "column": 23
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hint": {
+      "rules": {
+        "FSE004": {
+          "message": "Multiple body definition\nThe spec defines multiple bodies for an API Request or Reply.  This is an ambiguous definition which may cause issues with automatic code generation potentially used by client and servers, triggering in turn unexpected and insecure behavior. ",
+          "mitigation": "Make sure the specification is fully valid and in line with the standard format.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get"
+              ],
+              "range": {
+                "start": {
+                  "line": 28,
+                  "column": 14
+                },
+                "end": {
+                  "line": 28,
+                  "column": 14
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "info": {
+      "rules": {
+        "SAN029": {
+          "message": "Missing global security scheme \nSpec analyzer detected that the spec does not define a global security scheme. It is highly recommended that all API operations support a security scheme, which means supporting proper authentication and authorization. \nIn principle this can be achieved without a global security scheme, by specifying a security scheme for each API operation. However it is a good practice to have a global one instead of individual ones. This makes maintenance easy and avoids that new API operations are added without any security scheme association.",
+          "mitigation": "Make sure all API operations have a global security scheme defined.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "/"
+              ],
+              "range": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "warning": {
+      "rules": {
+        "RDT002": {
+          "message": "Missing response  definition for 400  status-code. \nSpecifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error. All operations, but HEAD operation, must support the  client error  status-code  -400 Bad Request-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+          "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 22
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        },
+        "RDT003": {
+          "message": "Missing response  definition for 404  status-code. \nSpecifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error.  All operations for methods GET, PUT, HEAD, and DELETE  must support the client error  status-code -404  Not Found-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+          "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 22
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        },
+        "RDT005": {
+          "message": "Missing response  definition for 429  status-code. \nSpecifications must always include response  definitions for all supported  status-codes. \n4xx status-codes are used to signal the failure of an API operation because of a client error. All operations, but HEAD operation, must support the  client error  status-code -429 Too Many Requests-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+          "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 22
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        },
+        "RDT006": {
+          "message": "Missing response  definition for 500  status-code. \nSpecifications must always include response  definitions for all supported  status-codes. \n5xx status-codes are used to signal the failure of an API operation because of a server error. All operations, but HEAD operation, must support the  client error  status-code -500 Internal Server Error-.\nSpec analyzer found an API operation that does not define any response for such status-code.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+          "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 22
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        },
+        "RDT015": {
+          "message": "Missing default response definition\nSpecifications must always include response  definitions for all supported  status-codes. \nIt's a good practice to add a default response definitions for all status-codes that are supported but not explicitely defined.\n\nLack of such definitions prevents formal checks on the response, which may represent a risk for (1) API Servers who may unwillingly leak reserved data potentially exploitable by attachers, and (2)  API clients, which cannot effectively defend from code injection attampted by  API servers  \n\n",
+          "mitigation": "Make sure that the identified API operation includes response definitions for all supported status-codes.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 22
+                },
+                "end": {
+                  "line": 33,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        },
+        "STR001": {
+          "message": "Unencrypted transport\nIt is highly recommended to use encrypted transport, i.e. HTTPS,  for all API operations. Unencrypted transport allows for anyone able to watch traffic to access all data being transported. Such access may cause sensitive data leakage and moreover gives the ability  to gain information that could be exploited to attack API clients and servers.\n\n",
+          "mitigation": "Make sure only encrypted transport (HTTPS) is allowed , i.e. server schemes only allow for https traffic.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "schemes"
+              ],
+              "range": {
+                "start": {
+                  "line": 17,
+                  "column": 14
+                },
+                "end": {
+                  "line": 17,
+                  "column": 14
+                }
+              }
+            }
+          ]
+        },
+        "TDT004": {
+          "message": "Missing maximum value for a numeric attribute\nSpec analyzer detected that the definition of a numeric attribute carried in an API operation does not specify the maximum value.\nAll attributes carried over API operations should be specified as precisely as possible, to allow API clients and servers to perform accurate attribue validation.\nLoosely specified attributes prevent rigorous automatic validation checks on requests and responses, allowing malicious clients (or servers) to attempt triggering unexpected behaviors on servers (or client) which could be potentially exploited for various attacks.",
+          "mitigation": "Make sure all numeric attribute definition include the maximum value.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "definitions",
+                "Pet",
+                "properties",
+                "id",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 56,
+                  "column": 19
+                },
+                "end": {
+                  "line": 56,
+                  "column": 19
+                }
+              }
+            }
+          ]
+        },
+        "TDT005": {
+          "message": "Missing minimum value for a numeric attribute\nSpec analyzer detected that the definition of a numeric attribute carried in an API operation does not specify the minumum value.\nAll attributes carried over API operations should be specified as precisely as possible, to allow API clients and servers to perform accurate attribue validation.\nLoosely specified attributes prevent rigorous automatic validation checks on requests and responses, allowing malicious clients (or servers) to attempt triggering unexpected behaviors on servers (or client) which could be potentially exploited for various attacks.",
+          "mitigation": "Make sure all numeric attribute definition include the minimum value.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "definitions",
+                "Pet",
+                "properties",
+                "id",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 56,
+                  "column": 19
+                },
+                "end": {
+                  "line": 56,
+                  "column": 19
+                }
+              }
+            }
+          ]
+        },
+        "TDT007": {
+          "message": "Missing max for array length\nSpec analyzer detected that the definition of an array  attribute carried in an API operation does not specify the maximum length.\nThis prevents client and server to have an upperbound on the array lenght they can expect, which make them expose to possible buffer overflow attacks. ",
+          "mitigation": "Make sure all array definition include the maximum length.\n",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "definitions",
+                "Pet",
+                "properties",
+                "name",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 60,
+                  "column": 19
+                },
+                "end": {
+                  "line": 60,
+                  "column": 19
+                }
+              }
+            },
+            {
+              "type": "range",
+              "path": [
+                "definitions",
+                "Pet",
+                "properties",
+                "tag",
+                "type"
+              ],
+              "range": {
+                "start": {
+                  "line": 63,
+                  "column": 19
+                },
+                "end": {
+                  "line": 63,
+                  "column": 19
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

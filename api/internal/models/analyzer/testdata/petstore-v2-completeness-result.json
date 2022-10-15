@@ -1,0 +1,121 @@
+{
+  "summary": {
+    "stats": {
+      "count": 3,
+      "occurrences": 3,
+      "hint": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "info": {
+        "count": 0,
+        "occurrences": 0,
+        "rules": {}
+      },
+      "warning": {
+        "count": 1,
+        "occurrences": 1,
+        "rules": {
+          "oas2-meta-info": 1
+        }
+      },
+      "error": {
+        "count": 2,
+        "occurrences": 2,
+        "rules": {
+          "error-status-code": 1,
+          "examples-for-every-schema": 1
+        }
+      }
+    }
+  },
+  "findings": {
+    "error": {
+      "rules": {
+        "error-status-code": {
+          "message": "Some operations do not define errors.",
+          "mitigation": "Please add an error status code for the items identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses"
+              ],
+              "range": {
+                "start": {
+                  "line": 33,
+                  "column": 21
+                },
+                "end": {
+                  "line": 33,
+                  "column": 21
+                }
+              }
+            }
+          ]
+        },
+        "examples-for-every-schema": {
+          "message": "Examples are not provided for some of the schemas.",
+          "mitigation": "Please add examples for the schemas identified.",
+          "data": [
+            {
+              "type": "range",
+              "path": [
+                "paths",
+                "/pets",
+                "get",
+                "responses",
+                "200",
+                "schema"
+              ],
+              "range": {
+                "start": {
+                  "line": 36,
+                  "column": 22
+                },
+                "end": {
+                  "line": 36,
+                  "column": 22
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hint": {
+      "rules": null
+    },
+    "info": {
+      "rules": null
+    },
+    "warning": {
+      "rules": {
+        "oas2-meta-info": {
+          "message": "Some OpenAPI meta information are missing.",
+          "mitigation": "Please add the OpenAPI attributes identified as missing and provide values for these attributes.",
+          "data": [
+            {
+              "type": "range",
+              "path": [],
+              "range": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

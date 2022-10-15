@@ -1,0 +1,256 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+$border-color: #ddd;
+
+.report-page {
+  .result-table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    font-weight: 300;
+    font-size: 14px;
+
+    tbody tr {
+      cursor: pointer;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    th,
+    td {
+      border: solid 1px $border-color;
+    }
+
+    th {
+      text-align: left;
+      background-color: #eee;
+      padding: 12px 8px;
+      font-weight: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    td {
+      padding: 8px;
+    }
+
+    .status-col {
+      width: 80px;
+
+      @media (min-width: 1200px) {
+        width: 100px;
+      }
+    }
+
+    .analyzer-col {
+      width: 110px;
+    }
+
+    .analyzer-cell {
+      line-height: 1.5;
+    }
+
+    .violation-col {
+      width: 50%;
+    }
+
+    .line-col {
+      width: 100px;
+    }
+
+    .center-cell {
+      text-align: center;
+    }
+
+    .recomm-cell {
+      font-size: 12px;
+
+      word-break: break-all;
+    }
+
+    .sortable-header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: -12px -8px;
+      padding: 12px 8px;
+
+      .indicator {
+        width: 0;
+        height: 0;
+        box-sizing: border-box;
+        position: relative;
+        top: 1px;
+        margin-left: 2px;
+
+        &.asc {
+          border-left: solid 4px transparent;
+          border-right: solid 4px transparent;
+          border-bottom: solid 6px #777;
+        }
+
+        &.desc {
+          border-left: solid 4px transparent;
+          border-right: solid 4px transparent;
+          border-top: solid 5px #777;
+        }
+      }
+    }
+
+    .line-range {
+      opacity: 0.6;
+    }
+
+    .violation-block {
+      .detail {
+        margin: 10px 10px 10px 0;
+        display: inline-block;
+
+        &.open {
+          display: block;
+
+          .summary {
+            &::after {
+              transform: translateY(2px) rotate(135deg);
+            }
+          }
+        }
+
+        .summary {
+          display: flex;
+          align-items: center;
+          border-radius: 50px;
+          padding: 8px 15px;
+          background-color: #c3f0fa;
+
+          .analyzer {
+            margin-right: 6px;
+          }
+
+          .children {
+            flex: 1 1 auto;
+            padding-right: 8px;
+            font-weight: 400;
+          }
+
+          &::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-left: solid 1px;
+            border-bottom: solid 1px;
+            transform: translateY(-1px) rotate(-45deg);
+          }
+        }
+
+        .item {
+          margin: 10px 0;
+          padding: 5px 10px;
+
+          .path {
+            display: flex;
+            align-items: center;
+            background-color: #f2f6fa;
+            border-radius: 4px;
+            padding: 4px 8px;
+            min-height: 36px;
+
+            .method {
+              flex: 0 0 auto;
+              padding: 6px 12px;
+              border-radius: 4px;
+              color: #fff;
+              text-transform: uppercase;
+              font-weight: 400;
+              box-sizing: border-box;
+              min-width: 76px;
+              text-align: center;
+              background-color: #99aeb2;
+
+              &.get {
+                background-color: #72aff7;
+              }
+
+              &.post {
+                background-color: #70c895;
+              }
+
+              &.put,
+              &.patch {
+                background-color: #f0a44a;
+              }
+
+              &.delete {
+                background-color: #e64f47;
+              }
+
+              &.options {
+                background-color: #906ef6;
+              }
+
+              &.connect,
+              &.trace {
+                background-color: #58a8b5;
+              }
+            }
+
+            .url {
+              margin: 0 6px;
+              font-weight: 400;
+              flex: 1 1 auto;
+              word-break: break-all;
+            }
+
+            .line-range {
+              margin-left: 10px;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .compliance-pagination {
+    display: flex;
+    justify-content: center;
+    margin: 0 -5px;
+
+    &.top {
+      padding: 0 0 20px 0;
+    }
+
+    &.bottom {
+      padding: 15px 0;
+    }
+  }
+
+  .no-result,
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    border: solid 1px $border-color;
+    border-top: none;
+  }
+}

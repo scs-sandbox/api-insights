@@ -1,0 +1,106 @@
+[
+  {
+    "name_id": "oas2-schema",
+    "analyzer_name_id": "completeness",
+    "title": "Validate structure of OpenAPI v2 specification.",
+    "description": "Malformed OAS document, not adhering to the OpenAPI v2 specifications.",
+    "mitigation": "Please fix the items identified to adhere to the OpenAPI v2 specifications.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-schema",
+    "analyzer_name_id": "completeness",
+    "title": "Validate structure of OpenAPI v3 specification.",
+    "description": "Malformed OAS document, not adhering to the OpenAPI v3 specifications.",
+    "mitigation": "Please fix the items detected to adhere to the OpenAPI v3 specifications",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-missing-schema-defination",
+    "analyzer_name_id": "completeness",
+    "title": "There is no schema attribute for a component.",
+    "description": "Some schema definitions are missing.",
+    "mitigation": "Please add schema definitions for the items detected.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-missing-schema-defination",
+    "analyzer_name_id": "completeness",
+    "title": "There is no schema attribute for a component.",
+    "description": "Some schema definitions are missing.",
+    "mitigation": "Please add schema definitions for the items detected.",
+    "severity": "error"
+  },
+  {
+    "name_id": "general-schema-defination",
+    "analyzer_name_id": "completeness",
+    "title": "Some of the defined schema use object as a final field when describing their object structure.",
+    "description": "Some schemas are partially defined.",
+    "mitigation": "Please fully describe the schema for the items detected as using object.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-missing-returned-representation",
+    "analyzer_name_id": "completeness",
+    "title": "2XX (except 204) and 4xx responses must have a response schema defined.",
+    "description": "Some responses do not define a schema.",
+    "mitigation": "Please add a schema for the items detected.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-missing-returned-representation",
+    "analyzer_name_id": "completeness",
+    "title": "MRR – Missing Returned Representation. 2XX (except 204) and 4xx responses must have a response schema defined",
+    "description": "Some responses do not define a schema.",
+    "mitigation": "Please add a schema for the items detected.",
+    "severity": "error"
+  },
+  {
+    "name_id": "success-status-code",
+    "analyzer_name_id": "completeness",
+    "title": "For every operation in the OAS document, there should be at least one success status code defined.  A successful status code is in the 1xx, 2xx or 3xx range series, and generally a 200, 201 or 204.",
+    "description": "Some operations do not define a success status code.",
+    "mitigation": "Please add a success status code in the 1xx, 2xx or 3xx range for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "error-status-code",
+    "analyzer_name_id": "completeness",
+    "title": "There should be at least one error status code either 4xx or 5xx.",
+    "description": "Some operations do not define errors.",
+    "mitigation": "Please add an error status code for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "description-for-every-attribute",
+    "analyzer_name_id": "completeness",
+    "title": "DEA - Descriptions for Every Attribute",
+    "description": "Some attributes do not provide a description.",
+    "mitigation": "Please add a description for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas-version",
+    "analyzer_name_id": "completeness",
+    "title": "The document must be specify the OAS version it is supporting.",
+    "description": "The version of OpenAPI is not specified.",
+    "mitigation": "Please add the version of the OpenAPI specified used along the OAS document provided.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-meta-info",
+    "analyzer_name_id": "completeness",
+    "title": "The following fields must be present (note: list of fields depend on the OAS version)",
+    "description": "Some OpenAPI meta information are missing.",
+    "mitigation": "Please add the OpenAPI attributes identified as missing and provide values for these attributes.",
+    "severity": "error"
+  },
+  {
+    "name_id": "examples-for-every-schema",
+    "analyzer_name_id": "completeness",
+    "title": "For every schema provided in the OAS document, at least one example must be present",
+    "description": "Examples are not provided for some of the schemas.",
+    "mitigation": "Please add examples for the schemas identified.",
+    "severity": "warning"
+  }
+]

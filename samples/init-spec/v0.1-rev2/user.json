@@ -1,0 +1,2143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v0.1",
+    "contact": {
+      "name": "Tom",
+      "url": "http://test.com",
+      "email": "tom@test.com"
+    },
+    "title": "User",
+    "description": "Provide Customer login, register, retrieval, as well as card and address retrieval",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "host": "user",
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "description": "BearerAuth",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read": "Grants read access",
+        "write": "Grants write access",
+        "admin": "Grants read and write access to administrative information"
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This is a sample tag.",
+      "name": "Sample"
+    }
+  ],
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "consumes": ["application/json;charset=UTF-8"],
+  "produces": ["application/hal+json"],
+  "paths": {
+    "/login": {
+      "get": {
+        "description": "Return logged in user",
+        "operationId": "Get-Login",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getcustomersresponse"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "description": "Register new user",
+        "operationId": "Set-User",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "description": "register object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Statusresponse"
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "description": "Returns all customers",
+        "operationId": "Get-customers",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getcustomersresponse"
+            }
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "description": "Returns a customer",
+        "operationId": "Get-customer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer to fetch",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830af"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete customer",
+        "operationId": "Delete-customer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer to delete",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830b5"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Deleteresponse"
+            }
+          }
+        }
+      }
+    },
+    "/customers/{id}/cards": {
+      "get": {
+        "description": "Returns a customer",
+        "operationId": "Get-customer-cards",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer to fetch",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830af"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getcardsresponse"
+            }
+          }
+        }
+      }
+    },
+    "/customers/{id}/addresses": {
+      "get": {
+        "description": "Returns an address",
+        "operationId": "Get-customer-addresses",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of customer to fetch",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830af"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Listaddressresponse"
+            }
+          }
+        }
+      }
+    },
+    "/cards": {
+      "get": {
+        "description": "Return all cards",
+        "operationId": "Get-cards",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Getcardsresponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create new card",
+        "operationId": "Set-Card",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "card",
+            "in": "body",
+            "description": "Credit card",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Postcard"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Statusresponse"
+            }
+          }
+        }
+      }
+    },
+    "/cards/{id}": {
+      "get": {
+        "description": "Returns a card",
+        "operationId": "Get-card",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of card to fetch",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830ae"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete card",
+        "operationId": "Delete-card",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of card to delete",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830ae"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Deleteresponse"
+            }
+          }
+        }
+      }
+    },
+    "/addresses": {
+      "get": {
+        "description": "Returns all addresses",
+        "operationId": "Get-addresses",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Listaddressresponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create new address",
+        "operationId": "Set-Address",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "body",
+            "description": "Address",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Postaddress"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Statusresponse"
+            }
+          }
+        }
+      }
+    },
+    "/addresses/{id}": {
+      "get": {
+        "description": "Returns an address",
+        "operationId": "Get-address",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of address to fetch",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830ad"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete address",
+        "operationId": "Delete-address",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": ["Sample"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of address to delete",
+            "required": true,
+            "type": "string",
+            "default": "57a98d98e4b00679b4a830ad"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "TRACKINGID": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "ETag": {
+                "type": "string"
+              },
+              "If-Match": {
+                "type": "string"
+              },
+              "If-None-Match": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Deleteresponse"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Error": {
+      "example": {
+        "code": 2,
+        "message": "internal server"
+      },
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "Getcustomersresponse": {
+      "title": "Get customers response",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "embedded": {
+          "type": "object",
+          "properties": {
+            "customers": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object"
+        },
+        "page": {
+          "type": "object"
+        }
+      },
+      "required": ["embedded"],
+      "example": {
+        "embedded": {}
+      }
+    },
+    "Getcardsresponse": {
+      "title": "Get cards response",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "embedded": {
+          "type": "object",
+          "properties": {
+            "cards": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Card"
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object"
+        },
+        "page": {
+          "type": "object"
+        }
+      },
+      "required": ["embedded"],
+      "example": {
+        "embedded": {}
+      }
+    },
+    "Statusresponse": {
+      "title": "Post status response",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"],
+      "example": {
+        "id": "id"
+      }
+    },
+    "Deleteresponse": {
+      "title": "Delete status response",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        }
+      },
+      "required": ["status"],
+      "example": {
+        "status": true
+      }
+    },
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "customer": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "addresses": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "cards": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            }
+          },
+          "required": ["self", "customer"]
+        }
+      },
+      "required": ["firstName", "lastName", "username", "links"],
+      "example": {
+        "firstName": "Tom",
+        "lastName": "Green",
+        "username": "tomg",
+        "links": {
+          "self": {
+            "href": "href"
+          },
+          "customer": {
+            "href": "href"
+          }
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "longNum": {
+          "type": "string"
+        },
+        "expires": {
+          "type": "string"
+        },
+        "ccv": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "card": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            }
+          },
+          "required": ["self", "card"]
+        }
+      },
+      "required": ["longNum", "expires", "ccv", "links"],
+      "example": {
+        "longNum": "3",
+        "expires": "2h",
+        "ccv": "ffdfs",
+        "links": {
+          "self": {
+            "href": "href"
+          },
+          "card": {
+            "href": "href"
+          }
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              },
+              "required": ["href"]
+            }
+          },
+          "required": ["self", "address"]
+        }
+      },
+      "required": ["number", "street", "city", "postcode", "country", "links"],
+      "example": {
+        "number": "134",
+        "street": "Taiping",
+        "city": "Shanghai",
+        "postcode": "1255",
+        "country": "cn",
+        "links": {
+          "self": {
+            "href": "href"
+          },
+          "address": {
+            "href": "href"
+          }
+        }
+      }
+    },
+    "Listaddressresponse": {
+      "title": "List response",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "embedded": {
+          "type": "object",
+          "properties": {
+            "addresses": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object"
+        },
+        "page": {
+          "type": "object"
+        }
+      },
+      "required": ["embedded"],
+      "example": {
+        "embedded": {}
+      }
+    },
+    "Register": {
+      "title": "Register",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "Username",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email",
+          "type": "string"
+        }
+      },
+      "required": ["username", "password"],
+      "example": {
+        "username": "tomg",
+        "password": "pass"
+      }
+    },
+    "Postcard": {
+      "title": "Post Card",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "longNum": {
+          "description": "Credit card number",
+          "type": "string"
+        },
+        "expires": {
+          "description": "Card expiration",
+          "type": "string"
+        },
+        "ccv": {
+          "description": "Card ccv",
+          "type": "string"
+        },
+        "userId": {
+          "description": "User to attach this card to.",
+          "type": "string"
+        }
+      },
+      "example": {}
+    },
+    "Postaddress": {
+      "title": "Post Address",
+      "description": "desc",
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "userId": {
+          "description": "User to attach this card to.",
+          "type": "string"
+        }
+      },
+      "example": {}
+    }
+  }
+}

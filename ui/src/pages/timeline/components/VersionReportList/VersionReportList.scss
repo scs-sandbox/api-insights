@@ -1,0 +1,79 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.spec-version-report-list {
+  padding: 0;
+  margin: 0;
+
+  .version-block-item {
+    display: flex;
+    list-style: none;
+
+    .item-line {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &::before,
+      &::after {
+        content: '';
+        width: 1px;
+        background-color: #ddd;
+      }
+
+      &::before {
+        flex: 0 0 auto;
+        height: 66px;
+      }
+
+      &::after {
+        flex: 1 1 auto;
+      }
+    }
+
+    &:first-child {
+      .item-line {
+        &::before {
+          width: 0;
+        }
+      }
+    }
+
+    &:last-child {
+      .item-line {
+        &::after {
+          width: 0;
+        }
+      }
+    }
+
+    .item-content {
+      padding: 0 0 40px 10px;
+      flex: 1 1 auto;
+
+      .item-content-time .spec-time {
+        margin-bottom: 8px;
+      }
+    }
+
+    .version-report {
+      margin-top: 20px;
+    }
+  }
+}

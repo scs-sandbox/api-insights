@@ -1,0 +1,117 @@
+/*
+ * Copyright 2022 Cisco Systems, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+.compliance-dialog {
+  background-color: #222;
+  color: #f0f0f0;
+
+  .dialog-title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+
+    .main-part {
+      flex: 1 1 auto;
+      padding: 12px 10px 12px 20px;
+      display: flex;
+      align-items: center;
+
+      .env {
+        margin-right: 5px;
+        text-transform: capitalize;
+      }
+    }
+
+    .action-part {
+      flex: 0 0 auto;
+      padding: 4px;
+
+      .close-btn {
+        position: relative;
+        padding: 5px 12px;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        &::before {
+          content: '×';
+          font-size: 24px;
+          font-weight: 200;
+          position: relative;
+          top: -2px;
+        }
+      }
+    }
+  }
+
+  .dialog-body {
+    color: #aaa;
+
+    .message-block {
+      border-top: solid 1px #555;
+      border-bottom: solid 1px #555;
+      font-size: 18px;
+      padding: 15px 25px;
+    }
+
+    .row-block {
+      display: flex;
+    }
+
+    .solution-block {
+      flex: 0 0 auto;
+      width: 240px;
+      box-sizing: border-box;
+      padding: 25px;
+
+      .block-title {
+        font-size: 18px;
+      }
+
+      .solution-content {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    }
+
+    .source-code-block {
+      flex: 1 1 auto;
+      width: 0%;
+      box-sizing: border-box;
+      padding: 15px 0;
+    }
+
+    .range-block {
+      .code-viewer {
+        box-sizing: border-box;
+        height: 400px;
+        max-height: 70vh;
+      }
+    }
+
+    .diff-block {
+      .diff-viewer {
+        height: 400px;
+        max-height: 70vh;
+      }
+    }
+  }
+}

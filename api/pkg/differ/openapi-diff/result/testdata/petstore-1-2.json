@@ -1,0 +1,1824 @@
+{
+  "added": [
+    {
+      "path": "/pet/{petId}",
+      "method": "GET",
+      "description": "Find pet by ID",
+      "message": "/pet/{petId} - Added"
+    }
+  ],
+  "deleted": [
+    {
+      "path": "/pet/{petId}",
+      "method": "POST",
+      "description": "Updates a pet in the store with form data",
+      "message": "/pet/{petId} - Deleted"
+    }
+  ],
+  "deprecated": [
+    {
+      "path": "/user/logout",
+      "method": "GET",
+      "description": "Logs out current logged in user session",
+      "message": "/user/logout - Deprecated"
+    }
+  ],
+  "modified": [
+    {
+      "old": {
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "api_key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pet id to delete",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Deletes a pet",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "api_key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "newHeaderParam",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pet id to delete",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Deletes a pet",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet/{petId}",
+      "method": "DELETE",
+      "summary": "Deletes a pet",
+      "description": "",
+      "breaking": false,
+      "message": "###### Parameters:\n\nAdded: `newHeaderParam` in `header`\n\n\n",
+      "parameters": {
+        "breaking": false,
+        "message": "###### Parameters:\n\nAdded: `newHeaderParam` in `header`\n\n",
+        "details": [
+          {
+            "name": "newHeaderParam",
+            "in": "header",
+            "description": "",
+            "deprecated": false,
+            "breaking": false,
+            "action": "added",
+            "message": "Added: `newHeaderParam` in `header`\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "description": "The user name for login",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The password for login in clear text",
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "successful operation",
+            "headers": {
+              "X-Expires-After": {
+                "description": "date in UTC when token expires",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "X-Rate-Limit": {
+                "description": "calls per hour allowed by the user",
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        },
+        "summary": "Logs user into the system",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "description": "The user name for login",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "successful operation",
+            "headers": {
+              "X-Expires-After": {
+                "description": "date in UTC when token expires",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Rate-Limit-New": {
+                "description": "calls per hour allowed by the user",
+                "schema": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        },
+        "summary": "Logs user into the system",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/login",
+      "method": "GET",
+      "summary": "Logs user into the system",
+      "description": "",
+      "breaking": true,
+      "message": "###### Parameters:\n\nDeleted: `password` in `query`\n\u003e The password for login in clear text\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Added header: `X-Rate-Limit-New`\n\n* Deleted header: `X-Rate-Limit`\n\n* Modified header: `X-Expires-After`\n\n",
+      "parameters": {
+        "breaking": true,
+        "message": "###### Parameters:\n\nDeleted: `password` in `query`\n\u003e The password for login in clear text\n\n",
+        "details": [
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "deprecated": false,
+            "breaking": false,
+            "action": "deleted",
+            "message": "Deleted: `password` in `query`\n\u003e The password for login in clear text\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": {
+        "breaking": true,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Added header: `X-Rate-Limit-New`\n\n* Deleted header: `X-Rate-Limit`\n\n* Modified header: `X-Expires-After`\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "calls per hour allowed by the user",
+                "name": "X-Rate-Limit-New",
+                "action": "added",
+                "breaking": false,
+                "message": "\n* Added header: `X-Rate-Limit-New`\n",
+                "properties": null
+              },
+              {
+                "description": "calls per hour allowed by the user",
+                "name": "X-Rate-Limit",
+                "action": "deleted",
+                "breaking": false,
+                "message": "\n* Deleted header: `X-Rate-Limit`\n",
+                "properties": null
+              },
+              {
+                "description": "date in UTC when token expires",
+                "name": "X-Expires-After",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified header: `X-Expires-After`\n",
+                "properties": null
+              }
+            ],
+            "name": "200",
+            "description": "successful operation",
+            "action": "modified",
+            "breaking": true,
+            "message": "Modified response: **200 OK**\n\u003e successful operation\n\n* Added header: `X-Rate-Limit-New`\n\n* Deleted header: `X-Rate-Limit`\n\n* Modified header: `X-Expires-After`\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "logoutUser",
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Logs out current logged in user session",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "deprecated": true,
+        "operationId": "logoutUser",
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Logs out current logged in user session",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/logout",
+      "method": "GET",
+      "summary": "Logs out current logged in user session",
+      "description": "",
+      "breaking": false,
+      "message": "\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "uploadFile",
+        "parameters": [
+          {
+            "description": "ID of pet to update",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "additionalMetadata": {
+                    "description": "Additional data to pass to server",
+                    "type": "string"
+                  },
+                  "file": {
+                    "description": "file to upload",
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "uploads an image",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "operationId": "uploadFile",
+        "parameters": [
+          {
+            "description": "ID of pet to update, default false",
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "additionalMetadata": {
+                    "description": "Additional data to pass to server",
+                    "type": "string"
+                  },
+                  "file": {
+                    "description": "file to upload",
+                    "format": "binary",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "uploads an image for pet",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet/{petId}/uploadImage",
+      "method": "POST",
+      "summary": "uploads an image for pet",
+      "description": "",
+      "breaking": false,
+      "message": "###### Parameters:\n\nModified: `petId` in `path`\n\u003e ID of pet to update, default false\n\n\n",
+      "parameters": {
+        "breaking": false,
+        "message": "###### Parameters:\n\nModified: `petId` in `path`\n\u003e ID of pet to update, default false\n\n",
+        "details": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to update, default false",
+            "deprecated": false,
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified: `petId` in `path`\n\u003e ID of pet to update, default false\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "Created user object",
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Create user",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "Created user object",
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Create user",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user",
+      "method": "POST",
+      "summary": "Create user",
+      "description": "This can only be done by the logged in user.",
+      "breaking": false,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "newUserFeild",
+                "type": "integer",
+                "description": "a new user feild demo",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n",
+                "properties": null
+              },
+              {
+                "name": "phone",
+                "type": "string",
+                "description": "",
+                "action": "deleted",
+                "breaking": false,
+                "message": "* Deleted property `phone` (string)\n\n",
+                "properties": null
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "createUsersWithArrayInput",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserArray"
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "operationId": "createUsersWithArrayInput",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserArray"
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/createWithArray",
+      "method": "POST",
+      "summary": "Creates list of users with given input array",
+      "description": "",
+      "breaking": false,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "items",
+                "type": "array",
+                "description": "",
+                "action": "modified",
+                "breaking": false,
+                "message": "",
+                "properties": [
+                  {
+                    "name": "newUserFeild",
+                    "type": "integer",
+                    "description": "a new user feild demo",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "phone",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `phone` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "createUsersWithListInput",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserArray"
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "operationId": "createUsersWithListInput",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserArray"
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "Creates list of users with given input array",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/createWithList",
+      "method": "POST",
+      "summary": "Creates list of users with given input array",
+      "description": "",
+      "breaking": false,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "items",
+                "type": "array",
+                "description": "",
+                "action": "modified",
+                "breaking": false,
+                "message": "",
+                "properties": [
+                  {
+                    "name": "newUserFeild",
+                    "type": "integer",
+                    "description": "a new user feild demo",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "phone",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `phone` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "getUserByName",
+        "parameters": [
+          {
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Get user by user name",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "operationId": "getUserByName",
+        "parameters": [
+          {
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Get user by user name",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/{username}",
+      "method": "GET",
+      "summary": "Get user by user name",
+      "description": "",
+      "breaking": false,
+      "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/json`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n* Modified content type: `application/xml`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": {
+        "breaking": false,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/json`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n* Modified content type: `application/xml`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/json`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+                "properties": [
+                  {
+                    "name": "newUserFeild",
+                    "type": "integer",
+                    "description": "a new user feild demo",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "phone",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `phone` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              },
+              {
+                "description": "",
+                "name": "application/xml",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/xml`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n",
+                "properties": [
+                  {
+                    "name": "newUserFeild",
+                    "type": "integer",
+                    "description": "a new user feild demo",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "phone",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `phone` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "name": "200",
+            "description": "successful operation",
+            "action": "modified",
+            "breaking": false,
+            "message": "Modified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/json`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n* Modified content type: `application/xml`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "description": "name that need to be updated",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "Updated user object",
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Updated user",
+        "tags": [
+          "user"
+        ]
+      },
+      "new": {
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "description": "name that need to be updated",
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "description": "Updated user object",
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Updated user",
+        "tags": [
+          "user"
+        ]
+      },
+      "path": "/user/{username}",
+      "method": "PUT",
+      "summary": "Updated user",
+      "description": "This can only be done by the logged in user.",
+      "breaking": true,
+      "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": true,
+        "message": "###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "newUserFeild",
+                "type": "integer",
+                "description": "a new user feild demo",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n",
+                "properties": null
+              },
+              {
+                "name": "phone",
+                "type": "string",
+                "description": "",
+                "action": "deleted",
+                "breaking": false,
+                "message": "* Deleted property `phone` (string)\n\n",
+                "properties": null
+              }
+            ],
+            "breaking": true,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "updatePet",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Pet"
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Update an existing pet",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "operationId": "updatePet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Update an existing pet",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet",
+      "method": "PUT",
+      "summary": "Update an existing pet",
+      "description": "",
+      "breaking": true,
+      "message": "###### Request:\n\nDeleted content type: `application/xml`\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n\n",
+      "parameters": null,
+      "requestBody": {
+        "breaking": true,
+        "message": "###### Request:\n\nDeleted content type: `application/xml`\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": null,
+            "breaking": false,
+            "action": "deleted",
+            "message": "Deleted content type: `application/xml`\n\n",
+            "name": "application/xml"
+          },
+          {
+            "properties": [
+              {
+                "name": "newField",
+                "type": "string",
+                "description": "a field demo",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `newField` (string)\n    \u003e a field demo\n\n",
+                "properties": null
+              },
+              {
+                "name": "category",
+                "type": "object",
+                "description": "",
+                "action": "modified",
+                "breaking": true,
+                "message": "* Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "newCatFeild",
+                    "type": "string",
+                    "description": "",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newCatFeild` (string)\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `name` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": true,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "operationId": "addPet",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Pet"
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Add a new pet to the store",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "operationId": "addPet",
+        "parameters": [
+          {
+            "description": "add new query param demo",
+            "explode": true,
+            "in": "query",
+            "name": "tags",
+            "required": true,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Pet"
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Add a new pet to the store",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet",
+      "method": "POST",
+      "summary": "Add a new pet to the store",
+      "description": "",
+      "breaking": true,
+      "message": "###### Parameters:\n\nAdded: `tags` in `query`\n\u003e add new query param demo\n\n###### Request:\n\nModified content type: `application/xml`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n\n",
+      "parameters": {
+        "breaking": true,
+        "message": "###### Parameters:\n\nAdded: `tags` in `query`\n\u003e add new query param demo\n\n",
+        "details": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "add new query param demo",
+            "deprecated": false,
+            "breaking": false,
+            "action": "added",
+            "message": "Added: `tags` in `query`\n\u003e add new query param demo\n\n"
+          }
+        ]
+      },
+      "requestBody": {
+        "breaking": false,
+        "message": "###### Request:\n\nModified content type: `application/xml`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n",
+        "description": "",
+        "details": [
+          {
+            "properties": [
+              {
+                "name": "newField",
+                "type": "string",
+                "description": "a field demo",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `newField` (string)\n    \u003e a field demo\n\n",
+                "properties": null
+              },
+              {
+                "name": "category",
+                "type": "object",
+                "description": "",
+                "action": "modified",
+                "breaking": false,
+                "message": "* Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "newCatFeild",
+                    "type": "string",
+                    "description": "",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newCatFeild` (string)\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `name` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/xml`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n",
+            "name": "application/xml"
+          },
+          {
+            "properties": [
+              {
+                "name": "newField",
+                "type": "string",
+                "description": "a field demo",
+                "action": "added",
+                "breaking": false,
+                "message": "* Added property `newField` (string)\n    \u003e a field demo\n\n",
+                "properties": null
+              },
+              {
+                "name": "category",
+                "type": "object",
+                "description": "",
+                "action": "modified",
+                "breaking": false,
+                "message": "* Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "newCatFeild",
+                    "type": "string",
+                    "description": "",
+                    "action": "added",
+                    "breaking": false,
+                    "message": "    * Added property `newCatFeild` (string)\n\n",
+                    "properties": null
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "description": "",
+                    "action": "deleted",
+                    "breaking": false,
+                    "message": "    * Deleted property `name` (string)\n\n",
+                    "properties": null
+                  }
+                ]
+              }
+            ],
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n",
+            "name": "application/json"
+          }
+        ]
+      },
+      "responses": null,
+      "security": null
+    },
+    {
+      "old": {
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatus",
+        "parameters": [
+          {
+            "description": "Status values that need to be considered for filter",
+            "explode": true,
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "items": {
+                "default": "available",
+                "enum": [
+                  "available",
+                  "pending",
+                  "sold"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Finds Pets by status",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatus",
+        "parameters": [
+          {
+            "deprecated": true,
+            "description": "Status values that need to be considered for filter",
+            "explode": true,
+            "in": "query",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "items": {
+                "default": "available",
+                "enum": [
+                  "available",
+                  "pending",
+                  "sold"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Finds Pets by status",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet/findByStatus",
+      "method": "GET",
+      "summary": "Finds Pets by status",
+      "description": "Multiple status values can be provided with comma separated strings",
+      "breaking": false,
+      "message": "###### Parameters:\n\nModified: `status` in `query`\n\u003e Status values that need to be considered for filter\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n",
+      "parameters": {
+        "breaking": false,
+        "message": "###### Parameters:\n\nModified: `status` in `query`\n\u003e Status values that need to be considered for filter\n\n",
+        "details": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
+            "deprecated": false,
+            "breaking": false,
+            "action": "modified",
+            "message": "Modified: `status` in `query`\n\u003e Status values that need to be considered for filter\n\n"
+          }
+        ]
+      },
+      "requestBody": null,
+      "responses": {
+        "breaking": false,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/xml",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "items",
+                    "type": "array",
+                    "description": "",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "",
+                    "properties": [
+                      {
+                        "name": "newField",
+                        "type": "string",
+                        "description": "a field demo",
+                        "action": "added",
+                        "breaking": false,
+                        "message": "        * Added property `newField` (string)\n            \u003e a field demo\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "category",
+                        "type": "object",
+                        "description": "",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `category` (object)\n\n",
+                        "properties": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "items",
+                    "type": "array",
+                    "description": "",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "",
+                    "properties": [
+                      {
+                        "name": "newField",
+                        "type": "string",
+                        "description": "a field demo",
+                        "action": "added",
+                        "breaking": false,
+                        "message": "        * Added property `newField` (string)\n            \u003e a field demo\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "category",
+                        "type": "object",
+                        "description": "",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `category` (object)\n\n",
+                        "properties": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "200",
+            "description": "successful operation",
+            "action": "modified",
+            "breaking": false,
+            "message": "Modified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n"
+          }
+        ]
+      },
+      "security": null
+    },
+    {
+      "old": {
+        "deprecated": true,
+        "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "parameters": [
+          {
+            "description": "Tags to filter by",
+            "explode": true,
+            "in": "query",
+            "name": "tags",
+            "required": true,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Finds Pets by tags",
+        "tags": [
+          "pet"
+        ]
+      },
+      "new": {
+        "deprecated": true,
+        "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "parameters": [
+          {
+            "description": "Tags to filter by",
+            "explode": true,
+            "in": "query",
+            "name": "tags",
+            "required": true,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "summary": "Finds Pets by tags",
+        "tags": [
+          "pet"
+        ]
+      },
+      "path": "/pet/findByTags",
+      "method": "GET",
+      "summary": "Finds Pets by tags",
+      "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+      "breaking": false,
+      "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n",
+      "parameters": null,
+      "requestBody": null,
+      "responses": {
+        "breaking": false,
+        "message": "###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+        "details": [
+          {
+            "details": [
+              {
+                "description": "",
+                "name": "application/xml",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "items",
+                    "type": "array",
+                    "description": "",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "",
+                    "properties": [
+                      {
+                        "name": "newField",
+                        "type": "string",
+                        "description": "a field demo",
+                        "action": "added",
+                        "breaking": false,
+                        "message": "        * Added property `newField` (string)\n            \u003e a field demo\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "category",
+                        "type": "object",
+                        "description": "",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `category` (object)\n\n",
+                        "properties": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "description": "",
+                "name": "application/json",
+                "action": "modified",
+                "breaking": false,
+                "message": "\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n",
+                "properties": [
+                  {
+                    "name": "items",
+                    "type": "array",
+                    "description": "",
+                    "action": "modified",
+                    "breaking": false,
+                    "message": "",
+                    "properties": [
+                      {
+                        "name": "newField",
+                        "type": "string",
+                        "description": "a field demo",
+                        "action": "added",
+                        "breaking": false,
+                        "message": "        * Added property `newField` (string)\n            \u003e a field demo\n\n",
+                        "properties": null
+                      },
+                      {
+                        "name": "category",
+                        "type": "object",
+                        "description": "",
+                        "action": "modified",
+                        "breaking": false,
+                        "message": "        * Modified property `category` (object)\n\n",
+                        "properties": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "name": "200",
+            "description": "successful operation",
+            "action": "modified",
+            "breaking": false,
+            "message": "Modified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n"
+          }
+        ]
+      },
+      "security": null
+    }
+  ],
+  "breaking": true,
+  "message": "#### What's New\n\n##### `GET` /pet/{petId}\n\n\u003e Find pet by ID\n\n#### What's Deleted\n\n##### `POST` /pet/{petId}\n\n\u003e Updates a pet in the store with form data\n\n#### What's Deprecated\n\n##### `GET` /user/logout\n\n\u003e Logs out current logged in user session\n\n#### What's Modified\n\n##### `DELETE` /pet/{petId}\n\n\u003e Deletes a pet\n\n###### Parameters:\n\nAdded: `newHeaderParam` in `header`\n\n\n##### `GET` /user/login\n\n\u003e Logs user into the system\n\n###### Parameters:\n\nDeleted: `password` in `query`\n\u003e The password for login in clear text\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Added header: `X-Rate-Limit-New`\n\n* Deleted header: `X-Rate-Limit`\n\n* Modified header: `X-Expires-After`\n\n##### `GET` /user/logout\n\n\u003e Logs out current logged in user session\n\n\n##### `POST` /pet/{petId}/uploadImage\n\n\u003e uploads an image for pet\n\n###### Parameters:\n\nModified: `petId` in `path`\n\u003e ID of pet to update, default false\n\n\n##### `POST` /user\n\n\u003e Create user\n\n###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n\n##### `POST` /user/createWithArray\n\n\u003e Creates list of users with given input array\n\n###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n##### `POST` /user/createWithList\n\n\u003e Creates list of users with given input array\n\n###### Request:\n\nModified content type: `application/json`\n\n* Modified items (array):\n\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n##### `GET` /user/{username}\n\n\u003e Get user by user name\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/json`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n* Modified content type: `application/xml`\n    * Added property `newUserFeild` (integer)\n        \u003e a new user feild demo\n\n    * Deleted property `phone` (string)\n\n\n##### `PUT` /user/{username}\n\n\u003e Updated user\n\n###### Request:\n\nModified content type: `application/json`\n\n* Added property `newUserFeild` (integer)\n    \u003e a new user feild demo\n\n* Deleted property `phone` (string)\n\n\n##### `PUT` /pet\n\n\u003e Update an existing pet\n\n###### Request:\n\nDeleted content type: `application/xml`\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n\n##### `POST` /pet\n\n\u003e Add a new pet to the store\n\n###### Parameters:\n\nAdded: `tags` in `query`\n\u003e add new query param demo\n\n###### Request:\n\nModified content type: `application/xml`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\nModified content type: `application/json`\n\n* Added property `newField` (string)\n    \u003e a field demo\n\n* Modified property `category` (object)\n\n    * Added property `newCatFeild` (string)\n\n    * Deleted property `name` (string)\n\n\n##### `GET` /pet/findByStatus\n\n\u003e Finds Pets by status\n\n###### Parameters:\n\nModified: `status` in `query`\n\u003e Status values that need to be considered for filter\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n##### `GET` /pet/findByTags\n\n\u003e Finds Pets by tags\n\n###### Response:\n\nModified response: **200 OK**\n\u003e successful operation\n\n* Modified content type: `application/xml`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n* Modified content type: `application/json`\n    * Modified items (array):\n\n        * Added property `newField` (string)\n            \u003e a field demo\n\n        * Modified property `category` (object)\n\n\n"
+}
