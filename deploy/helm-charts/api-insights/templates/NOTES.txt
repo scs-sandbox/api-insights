@@ -1,0 +1,16 @@
+Thank you for installing {{ .Chart.Name | upper }}.
+
+Your release is named {{ .Release.Name }}.
+
+Here is how to access the API Insights UI & Service:
+
+Check deployment status
+    $ kubectl -n {{ .Release.Namespace }} wait --for=condition=ready pods --all --timeout=300s
+
+Steps to access the API Insights UI
+    $ kubectl -n {{ .Release.Namespace }} port-forward svc/{{ index .Values "api-insights" "name" }} 8080:8080
+    $ Access UI at: http://localhost:8080
+
+Steps to access the API Insights Service for CLI
+    $ kubectl -n {{ .Release.Namespace }} port-forward svc/{{ index .Values "api-insights" "name" }} 8081:80
+    $ Access Service at: http://localhost:8081/v1/apiregistry
