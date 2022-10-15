@@ -16,7 +16,7 @@
     "severity": "error"
   },
   {
-    "name_id": "oas3-missing-schema-defination",
+    "name_id": "oas3-missing-schema-definition",
     "analyzer_name_id": "completeness",
     "title": "There is no schema attribute for a component.",
     "description": "Some schema definitions are missing.",
@@ -24,7 +24,7 @@
     "severity": "error"
   },
   {
-    "name_id": "oas2-missing-schema-defination",
+    "name_id": "oas2-missing-schema-definition",
     "analyzer_name_id": "completeness",
     "title": "There is no schema attribute for a component.",
     "description": "Some schema definitions are missing.",
@@ -32,7 +32,7 @@
     "severity": "error"
   },
   {
-    "name_id": "general-schema-defination",
+    "name_id": "general-schema-definition",
     "analyzer_name_id": "completeness",
     "title": "Some of the defined schema use object as a final field when describing their object structure.",
     "description": "Some schemas are partially defined.",
