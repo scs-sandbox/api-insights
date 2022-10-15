@@ -15,7 +15,7 @@ API Insights is a tool to enable organizations to manage versioned API specifica
    - **[API Insights API guidelines](https://developer.cisco.com/api-guidelines/)**
        - Guidelines are tested using **[API guidelines linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)**
    - API Document completeness  
-   - API Drift analyzer (Integrate with [API clarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
+   - API Drift analyzer (Integrate with [APIClarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
    - API Security analyzer (Future: Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
 
 - API spec diff across multiple version/revision
