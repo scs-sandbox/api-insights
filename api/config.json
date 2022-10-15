@@ -15,6 +15,5 @@
   "panoptica-url": "http://localhost:9981",
   "panoptica-access-key": "",
   "panoptica-secret-key": "",
-  "auth-enabled": false,
-  "default-analyzers": "[\n  {\n    \"name_id\": \"drift\",\n    \"title\": \"Drift\",\n    \"description\": \"Drift\",\n    \"status\": \"active\",\n    \"config\": {\n      \"score_config\": {\n        \"analyzer_weight\": 0\n      }\n    }\n  },\n  {\n    \"name_id\": \"guidelines\",\n    \"title\": \"REST Guidelines\",\n    \"description\": \"REST Guidelines\",\n    \"status\": \"active\",\n    \"config\": {\n      \"score_config\": {\n        \"analyzer_weight\": 0.3\n      }\n    }\n  },\n  {\n    \"name_id\": \"completeness\",\n    \"title\": \"Doc Completeness\",\n    \"description\": \"Doc Completeness\",\n    \"status\": \"active\",\n    \"config\": {\n      \"score_config\": {\n        \"analyzer_weight\": 0.3\n      }\n    }\n  },\n  {\n    \"name_id\": \"inclusive-language\",\n    \"title\": \"Inclusive Language\",\n    \"description\": \"Detect non-inclusive language\",\n    \"status\": \"active\",\n    \"config\": {\n      \"score_config\": {\n        \"analyzer_weight\": 0.1\n      }\n    }\n  },\n  {\n    \"name_id\": \"security\",\n    \"title\": \"API Security\",\n    \"description\": \"API Security\",\n    \"status\": \"active\",\n    \"config\": {\n      \"service_name_id_template\": \"{{ .nameID }}.api.apiregistry\",\n      \"score_config\": {\n        \"analyzer_weight\": 0.3\n      }\n    }\n  }\n]"
+  "auth-enabled": false
 }

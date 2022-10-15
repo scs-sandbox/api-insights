@@ -59,7 +59,6 @@ func App(version string) *cli.App {
 	additionalFlags = shared.MergeFlags(additionalFlags, openapidiff.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, apiclarity.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, db.ClientFlags())
-	additionalFlags = shared.MergeFlags(additionalFlags, db.AnalyzerDAOFlags())
 	additionalFlags = shared.MergeFlags(additionalFlags, completeness.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, security.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, info.Flags())

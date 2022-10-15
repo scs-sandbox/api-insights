@@ -1,0 +1,1162 @@
+[
+  {
+    "name_id": "operation-2xx-response",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation must have at least one `2xx` response.",
+    "description": "Operation must have at least one `2xx` response.",
+    "mitigation": "Please add a 2xx status code for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-operation-formData-consume-check",
+    "analyzer_name_id": "guidelines",
+    "title": "Operations with an `in: formData` parameter must include `application/x-www-form-urlencoded` or `multipart/form-data` in their `consumes` property.",
+    "description": "Operations with an `in: formData` parameter must include `application/x-www-form-urlencoded` or `multipart/form-data` in their `consumes` property.",
+    "mitigation": "Please add content type in consumes property for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-operationId-unique",
+    "analyzer_name_id": "guidelines",
+    "title": "Every operation must have a unique `operationId`.",
+    "description": "Every operation must have a unique `operationId`.",
+    "mitigation": "Please add operationId for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-parameters",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation parameters are unique and non-repeating.",
+    "description": "Operation parameters are unique and non-repeating.",
+    "mitigation": "Please make it unique for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-tag-defined",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation tags should be defined in global tags.",
+    "description": "Operation tags should be defined in global tags.",
+    "mitigation": "Please add operation tags for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "path-params",
+    "analyzer_name_id": "guidelines",
+    "title": "Path parameters should be defined and valid.",
+    "description": "Path parameters should be defined and valid.",
+    "mitigation": "Please update path parameters for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "contact-properties",
+    "analyzer_name_id": "guidelines",
+    "title": "Contact object should have `name`, `url` and `email`.",
+    "description": "Contact object should have `name`, `url` and `email`.",
+    "mitigation": "Please update contact object.",
+    "severity": "error"
+  },
+  {
+    "name_id": "duplicated-entry-in-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "Enum values should not have duplicate entry.",
+    "description": "Enum values should not have duplicate entry.",
+    "mitigation": "Please fix enum values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "info-contact",
+    "analyzer_name_id": "guidelines",
+    "title": "Info object should contain `contact` object.",
+    "description": "Info object should contain `contact` object.",
+    "mitigation": "Please add contact in info object.",
+    "severity": "error"
+  },
+  {
+    "name_id": "info-description",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI object info `description` must be present and non-empty string.",
+    "description": "OpenAPI object info `description` must be present and non-empty string.",
+    "mitigation": "Please update description for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "info-license",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI object `info` should contain a `license` object.",
+    "description": "OpenAPI object `info` should contain a `license` object.",
+    "mitigation": "Please add license in info object",
+    "severity": "error"
+  },
+  {
+    "name_id": "license-url",
+    "analyzer_name_id": "guidelines",
+    "title": "License object should include `url`.",
+    "description": "License object should include `url`.",
+    "mitigation": "Please add url in license object",
+    "severity": "error"
+  },
+  {
+    "name_id": "no-eval-in-markdown",
+    "analyzer_name_id": "guidelines",
+    "title": "Markdown descriptions should not contain `eval(`.",
+    "description": "Markdown descriptions should not contain `eval(`.",
+    "mitigation": "Please remove `eval(` for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "no-script-tags-in-markdown",
+    "analyzer_name_id": "guidelines",
+    "title": "Markdown descriptions should not contain `<script>` tags.",
+    "description": "Markdown descriptions should not contain `<script>` tags.",
+    "mitigation": "Please remove `<script>` for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "openapi-tags-alphabetical",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI object should have alphabetical `tags`.",
+    "description": "OpenAPI object should have alphabetical `tags`.",
+    "mitigation": "Please update tags for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "openapi-tags",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI object should have non-empty `tags` array.",
+    "description": "OpenAPI object should have non-empty `tags` array.",
+    "mitigation": "Please add tag values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-default-response",
+    "analyzer_name_id": "guidelines",
+    "title": "Operations must have a default response.",
+    "description": "Operations must have a default response.",
+    "mitigation": "Please add a default response for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-description",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation `description` must be present and non-empty string.",
+    "description": "Operation `description` must be present and non-empty string.",
+    "mitigation": "Please add operation description for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-operationId",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation should have an `operationId`.",
+    "description": "Operation should have an `operationId`.",
+    "mitigation": "Please add operationId for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-operationId-valid-in-url",
+    "analyzer_name_id": "guidelines",
+    "title": "operationId may only use characters that are valid when used in a URL.",
+    "description": "operationId may only use characters that are valid when used in a URL.",
+    "mitigation": "Please update operationId for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-singular-tag",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation may only have one tag.",
+    "description": "Operation may only have one tag.",
+    "mitigation": "Please update operation tags for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "operation-tags",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation should have non-empty `tags` array.",
+    "description": "Operation should have non-empty `tags` array.",
+    "mitigation": "Please add operation tag values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "path-declarations-must-exist",
+    "analyzer_name_id": "guidelines",
+    "title": "Path parameter declarations cannot be empty, ex.`/given/{}` is invalid.",
+    "description": "Path parameter declarations cannot be empty, ex.`/given/{}` is invalid.",
+    "mitigation": "Please update path parameter for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "path-keys-no-trailing-slash",
+    "analyzer_name_id": "guidelines",
+    "title": "paths should not end with a slash.",
+    "description": "paths should not end with a slash.",
+    "mitigation": "Please remove the slash for the paths identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "path-not-include-query",
+    "analyzer_name_id": "guidelines",
+    "title": "given keys should not include a query string.",
+    "description": "given keys should not include a query string.",
+    "mitigation": "Please remove the query for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "tag-description",
+    "analyzer_name_id": "guidelines",
+    "title": "Tag object should have a `description`.",
+    "description": "Tag object should have a `description`.",
+    "mitigation": "Please add description in tag object.",
+    "severity": "error"
+  },
+  {
+    "name_id": "no-$ref-siblings",
+    "analyzer_name_id": "guidelines",
+    "title": "Property cannot be placed among $ref",
+    "description": "Property cannot be placed among $ref",
+    "mitigation": "Please update `ref` for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "typed-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "Enum values should respect the specified type.",
+    "description": "Enum values should respect the specified type.",
+    "mitigation": "Please update enum values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-api-host",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI `host` must be present and non-empty string.",
+    "description": "OpenAPI `host` must be present and non-empty string.",
+    "mitigation": "Please add host",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-api-schemes",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI host `schemes` must be present and non-empty array.",
+    "description": "OpenAPI host `schemes` must be present and non-empty array.",
+    "mitigation": "Please add schemes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-host-not-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Host URL should not point at example.com.",
+    "description": "Host URL should not point at example.com.",
+    "mitigation": "Please update host url.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-host-trailing-slash",
+    "analyzer_name_id": "guidelines",
+    "title": "Server URL should not have a trailing slash.",
+    "description": "Server URL should not have a trailing slash.",
+    "mitigation": "Please remove the trailing slash.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-parameter-description",
+    "analyzer_name_id": "guidelines",
+    "title": "Parameter objects should have a `description`.",
+    "description": "Parameter objects should have a `description`.",
+    "mitigation": "Please add description for the parameter objects identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-operation-security-defined",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation `security` values must match a scheme defined in the `securityDefinitions` object.",
+    "description": "Operation `security` values must match a scheme defined in the `securityDefinitions` object.",
+    "mitigation": "Please update operation security.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-valid-parameter-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-valid-definition-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-valid-response-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-valid-response-schema-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-anyOf",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI v3 keyword `anyOf` detected in OpenAPI v2 document.",
+    "description": "OpenAPI v3 keyword `anyOf` detected in OpenAPI v2 document.",
+    "mitigation": "Please replace `anyOf` for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-oneOf",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI v3 keyword `oneOf` detected in OpenAPI v2 document.",
+    "description": "OpenAPI v3 keyword `oneOf` detected in OpenAPI v2 document.",
+    "mitigation": "Please replace `oneof` for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-unused-definition",
+    "analyzer_name_id": "guidelines",
+    "title": "Potentially unused definition has been detected.",
+    "description": "Potentially unused definition has been detected.",
+    "mitigation": "Please remove unused definitions",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-api-servers",
+    "analyzer_name_id": "guidelines",
+    "title": "OpenAPI `servers` must be present and non-empty array.",
+    "description": "OpenAPI `servers` must be present and non-empty array.",
+    "mitigation": "Please add servers",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-examples-value-or-externalValue",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples should have either a `value` or `externalValue` field.",
+    "description": "Examples should have either a `value` or `externalValue` field.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-operation-security-defined",
+    "analyzer_name_id": "guidelines",
+    "title": "Operation `security` values must match a scheme defined in the `components.securitySchemes` object.",
+    "description": "Operation `security` values must match a scheme defined in the `components.securitySchemes` object.",
+    "mitigation": "Please update security values.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-parameter-description",
+    "analyzer_name_id": "guidelines",
+    "title": "Parameter objects should have a `description`.",
+    "description": "Parameter objects should have a `description`.",
+    "mitigation": "Please add description in parameter objects identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-server-not-example.com",
+    "analyzer_name_id": "guidelines",
+    "title": "Server URL should not point at example.com.",
+    "description": "Server URL should not point at example.com.",
+    "mitigation": "Please use a valid server url.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-server-trailing-slash",
+    "analyzer_name_id": "guidelines",
+    "title": "Server URL should not have a trailing slash.",
+    "description": "Server URL should not have a trailing slash.",
+    "mitigation": "Please remove the trailing slash in server url.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-oas-parameter-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-oas-header-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-oas-content-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-parameter-schema-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-header-schema-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-valid-schema-example",
+    "analyzer_name_id": "guidelines",
+    "title": "Examples must be valid against their defined schema.",
+    "description": "Examples must be valid against their defined schema.",
+    "mitigation": "Please update examples for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-unused-components-schema",
+    "analyzer_name_id": "guidelines",
+    "title": "Potentially unused components schema has been detected.",
+    "description": "Potentially unused components schema has been detected.",
+    "mitigation": "Please remove unused components for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-jwt-format",
+    "analyzer_name_id": "guidelines",
+    "title": "My API access tokens are passed via the HTTP 'Authorization' header, with a 'Bearer' prefix.",
+    "description": "My API access tokens are passed via the HTTP 'Authorization' header, with a 'Bearer' prefix.",
+    "mitigation": "Please update authorization for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "delete-204-success",
+    "analyzer_name_id": "guidelines",
+    "title": "DELETE operations return '204 No Content' on success.",
+    "description": "DELETE operations return '204 No Content' on success.",
+    "mitigation": "Please update the spec.",
+    "severity": "error"
+  },
+  {
+    "name_id": "patch-200-204-success",
+    "analyzer_name_id": "guidelines",
+    "title": "PATCH operations return either '200 OK' with full representation or '204 No Content'.",
+    "description": "PATCH operations return either '200 OK' with full representation or '204 No Content'.",
+    "mitigation": "Please update response for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "put-200-204-success",
+    "analyzer_name_id": "guidelines",
+    "title": "PUT operations return either '200 OK' with full representation or '204 No Content'.",
+    "description": "PUT operations return either '200 OK' with full representation or '204 No Content'.",
+    "mitigation": "Please update response for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "resource-lower-camel-case-info",
+    "analyzer_name_id": "guidelines",
+    "title": "Resource names use lowerCamelCase.",
+    "description": "Resource names use lowerCamelCase.",
+    "mitigation": "Please update resource names for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "resource-lower-camel-case-error",
+    "analyzer_name_id": "guidelines",
+    "title": "Resource names use lowerCamelCase.",
+    "description": "Resource names use lowerCamelCase.",
+    "mitigation": "Please update resource names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "status-codes-in-2xx-3xx-4xx-5xx",
+    "analyzer_name_id": "guidelines",
+    "title": "API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges.",
+    "description": "API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges.",
+    "mitigation": "Please update responses for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "status-codes-in-2xx-4xx-5xx",
+    "analyzer_name_id": "guidelines",
+    "title": "API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges.",
+    "description": "API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges.",
+    "mitigation": "Please update responses for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "post-header",
+    "analyzer_name_id": "guidelines",
+    "title": "POST operations that create resources should include a Location header.",
+    "description": "POST operations that create resources should include a Location header.",
+    "mitigation": "Please add location header for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "post-header-location",
+    "analyzer_name_id": "guidelines",
+    "title": "POST operations that create resources should include a Location header.",
+    "description": "POST operations that create resources should include a Location header.",
+    "mitigation": "Please add location header for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-post-201-created",
+    "analyzer_name_id": "guidelines",
+    "title": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
+    "description": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
+    "mitigation": "Please update responses for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-post-201-created",
+    "analyzer_name_id": "guidelines",
+    "title": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
+    "description": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
+    "mitigation": "Please update responses for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-application-json-charset-utf8-required",
+    "analyzer_name_id": "guidelines",
+    "title": "JSON representations should be declared using 'application/json' or 'application/json; charset=UTF-8' media types.",
+    "description": "JSON representations should be declared using 'application/json' or 'application/json; charset=UTF-8' media types.",
+    "mitigation": "Please update content type for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-application-json-charset-utf8-required",
+    "analyzer_name_id": "guidelines",
+    "title": "JSON representations should be declared using 'application/json' or 'application/json; charset=UTF-8' media types.",
+    "description": "JSON representations should be declared using 'application/json' or 'application/json; charset=UTF-8' media types.",
+    "mitigation": "Please update content type for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "date-response-header-requirement",
+    "analyzer_name_id": "guidelines",
+    "title": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "description": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "mitigation": "Please add a date header for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "date-response-header-format-pattern-requirement",
+    "analyzer_name_id": "guidelines",
+    "title": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "description": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "mitigation": "Please add a date header for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "date-response-header-regex-check",
+    "analyzer_name_id": "guidelines",
+    "title": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "description": "All responses include a 'Date' header in the GMT timezone and RFC 5322 format.",
+    "mitigation": "Please add a date header for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "head-operations-match-headers-with-get",
+    "analyzer_name_id": "guidelines",
+    "title": "HEAD operations must return response headers identical to the corresponding GET.",
+    "description": "HEAD operations must return response headers identical to the corresponding GET.",
+    "mitigation": "Please update response headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-head-operations-no-body",
+    "analyzer_name_id": "guidelines",
+    "title": "HEAD operations with a corresponding GET operation must return no body content.",
+    "description": "HEAD operations with a corresponding GET operation must return no body content.",
+    "mitigation": "Please update response body for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-head-operations-no-body",
+    "analyzer_name_id": "guidelines",
+    "title": "HEAD operations with a corresponding GET operation must return no body content.",
+    "description": "HEAD operations with a corresponding GET operation must return no body content.",
+    "mitigation": "Please update response body for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-field-names-camel-case",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation field names use lowerCamelCase.",
+    "description": "Representation field names use lowerCamelCase.",
+    "mitigation": "Please update field names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-field-names-camel-case",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation field names use lowerCamelCase.",
+    "description": "Representation field names use lowerCamelCase.",
+    "mitigation": "Please update field names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "tracking-id-header-requirement",
+    "analyzer_name_id": "guidelines",
+    "title": "All responses must include a 'TrackingID' header.",
+    "description": "All responses must include a 'TrackingID' header.",
+    "mitigation": "Please add a `TrackingID` response header for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-tracking-id-header-string-requirement",
+    "analyzer_name_id": "guidelines",
+    "title": "'TrackingID' header should be a string in order to accommodate a UUID.",
+    "description": "'TrackingID' header should be a string in order to accommodate a UUID.",
+    "mitigation": "Please update `TrackingID` response header for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas3-tracking-id-header-string-requirement",
+    "analyzer_name_id": "guidelines",
+    "title": "'TrackingID' header should be a string in order to accommodate a UUID.",
+    "description": "'TrackingID' header should be a string in order to accommodate a UUID.",
+    "mitigation": "Please update `TrackingID` response header for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas2-collections-returned-as-arrays",
+    "analyzer_name_id": "guidelines",
+    "title": "Collections are returned as arrays encapsulated with a named field such as 'items'.",
+    "description": "Collections are returned as arrays encapsulated with a named field such as 'items'.",
+    "mitigation": "Please update response for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-collections-returned-as-arrays",
+    "analyzer_name_id": "guidelines",
+    "title": "Collections are returned as arrays encapsulated with a named field such as 'items'.",
+    "description": "Collections are returned as arrays encapsulated with a named field such as 'items'.",
+    "mitigation": "Please update response for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-no-boolean-string-enums",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use format-native true/false values for booleans.",
+    "description": "Representation fields use format-native true/false values for booleans.",
+    "mitigation": "Please update boolean fields for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-no-boolean-string-enums",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use format-native true/false values for booleans.",
+    "description": "Representation fields use format-native true/false values for booleans.",
+    "mitigation": "Please update boolean fields for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "etag-header-match-required",
+    "analyzer_name_id": "guidelines",
+    "title": "In cases where ETag is supported, such resources should also support If-Match and If-None-Match request headers.",
+    "description": "In cases where ETag is supported, such resources should also support If-Match and If-None-Match request headers.",
+    "mitigation": "Please add `If-Match` and `If-None-Match` headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "no-etag-cache-control-header-required",
+    "analyzer_name_id": "guidelines",
+    "title": "Where caching is not appropriate, operations must include a Cache-Control header (e.g. max-age=0, no-cache, no-store, must-revalidate) and must not include an ETag header.",
+    "description": "Where caching is not appropriate, operations must include a Cache-Control header (e.g. max-age=0, no-cache, no-store, must-revalidate) and must not include an ETag header.",
+    "mitigation": "Please add a `Cache-Control` header for the items identified.",
+    "severity": "low"
+  },
+  {
+    "name_id": "oas2-order-parameter-asc-desc",
+    "analyzer_name_id": "guidelines",
+    "title": "Ordering collections is designed with an 'order' query parameter specifying 'asc' or 'desc'.",
+    "description": "Ordering collections is designed with an 'order' query parameter specifying 'asc' or 'desc'.",
+    "mitigation": "Please update `order` values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-order-parameter-asc-desc",
+    "analyzer_name_id": "guidelines",
+    "title": "Ordering collections is designed with an 'order' query parameter specifying 'asc' or 'desc'.",
+    "description": "Ordering collections is designed with an 'order' query parameter specifying 'asc' or 'desc'.",
+    "mitigation": "Please update `order` values for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "no-crud-verbs",
+    "analyzer_name_id": "guidelines",
+    "title": "Standard CRUD lifecycle operations map to HTTP verbs; Functional resources are used when non-standard CRUD are needed.",
+    "description": "Standard CRUD lifecycle operations map to HTTP verbs; Functional resources are used when non-standard CRUD are needed.",
+    "mitigation": "Please update resource names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "respond-with-recommended-get-codes",
+    "analyzer_name_id": "guidelines",
+    "title": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "description": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "mitigation": "Please update response codes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "respond-with-recommended-post-codes",
+    "analyzer_name_id": "guidelines",
+    "title": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "description": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "mitigation": "Please update response codes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "respond-with-recommended-patch-codes",
+    "analyzer_name_id": "guidelines",
+    "title": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "description": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "mitigation": "Please update response codes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "respond-with-recommended-put-codes",
+    "analyzer_name_id": "guidelines",
+    "title": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "description": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "mitigation": "Please update response codes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "respond-with-recommended-delete-codes",
+    "analyzer_name_id": "guidelines",
+    "title": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "description": "My API responds with recommended HTTP status codes in the 2xx/3xx/4xx/5xx ranges",
+    "mitigation": "Please update response codes for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "sort-recommend-order",
+    "analyzer_name_id": "guidelines",
+    "title": "Consider using 'order' with 'sort' in this operation.",
+    "description": "Consider using 'order' with 'sort' in this operation.",
+    "mitigation": "Please add `order` query for the items identified.",
+    "severity": "low"
+  },
+  {
+    "name_id": "oas2-error-message",
+    "analyzer_name_id": "guidelines",
+    "title": "Error representations include a useful human-readable message.",
+    "description": "Error representations include a useful human-readable message.",
+    "mitigation": "Please update error message for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-error-message",
+    "analyzer_name_id": "guidelines",
+    "title": "Error representations include a useful human-readable message.",
+    "description": "Error representations include a useful human-readable message.",
+    "mitigation": "Please update error message for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "error-response-identifier",
+    "analyzer_name_id": "guidelines",
+    "title": "Error representations include an identifier to help with troubleshooting.",
+    "description": "Error representations include an identifier to help with troubleshooting.",
+    "mitigation": "Please add an error identifier for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas2-request-header-date-correct-type",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-date-correct-regex",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-language-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-encoding-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-encoding-valid-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-charset-default-required",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-charset-valid-default",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-charset-enum-required",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-accept-charset-valid-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-if-match-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-if-none-match-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-request-header-if-range-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-date-correct-type",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-date-correct-regex",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-language-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-encoding-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-encoding-valid-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-charset-default-required",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-charset-valid-default",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-charset-enum-required",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-accept-charset-valid-enum",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-if-match-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-if-none-match-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-request-header-if-range-is-string",
+    "analyzer_name_id": "guidelines",
+    "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-path-based-versioning-error",
+    "analyzer_name_id": "guidelines",
+    "title": "API uses path-based versioning.",
+    "description": "API uses path-based versioning.",
+    "mitigation": "Please update headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-path-based-versioning-error",
+    "analyzer_name_id": "guidelines",
+    "title": "API uses path-based versioning.",
+    "description": "API uses path-based versioning.",
+    "mitigation": "Please update versioning.",
+    "severity": "error"
+  },
+  {
+    "name_id": "path-based-versioning-warn",
+    "analyzer_name_id": "guidelines",
+    "title": "Versioning should not be done in endpoint path.",
+    "description": "Versioning should not be done in endpoint path.",
+    "mitigation": "Please update versioning.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-path-based-versioning-major-only",
+    "analyzer_name_id": "guidelines",
+    "title": "API shows only major version numbers on the path; not the revision numbers.",
+    "description": "API shows only major version numbers on the path; not the revision numbers.",
+    "mitigation": "Please update versioning.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-path-based-versioning-major-only",
+    "analyzer_name_id": "guidelines",
+    "title": "API shows only major version numbers on the path; not the revision numbers.",
+    "description": "API shows only major version numbers on the path; not the revision numbers.",
+    "mitigation": "Please update versioning.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-get-collection-max-parameter-link-header-required-possible",
+    "analyzer_name_id": "guidelines",
+    "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-get-collection-max-parameter-link-header-required-possible",
+    "analyzer_name_id": "guidelines",
+    "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-get-collection-max-parameter-link-header-required-likely",
+    "analyzer_name_id": "guidelines",
+    "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-get-collection-max-parameter-link-header-required-likely",
+    "analyzer_name_id": "guidelines",
+    "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-https-only",
+    "analyzer_name_id": "guidelines",
+    "title": "My API supports HTTPS only.",
+    "description": "My API supports HTTPS only.",
+    "mitigation": "Please use HTTPS.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-https-only",
+    "analyzer_name_id": "guidelines",
+    "title": "My API supports HTTPS only.",
+    "description": "My API supports HTTPS only.",
+    "mitigation": "Please use HTTPS",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-acceptable-auth",
+    "analyzer_name_id": "guidelines",
+    "title": "My API authenticates requests using access tokens; NOT username/passwords.",
+    "description": "My API authenticates requests using access tokens; NOT username/passwords.",
+    "mitigation": "Please use access token.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-acceptable-auth",
+    "analyzer_name_id": "guidelines",
+    "title": "My API authenticates requests using access tokens; NOT username/passwords.",
+    "description": "My API authenticates requests using access tokens; NOT username/passwords.",
+    "mitigation": "Please use access token.",
+    "severity": "error"
+  },
+  {
+    "name_id": "resource-name-too-long",
+    "analyzer_name_id": "guidelines",
+    "title": "Resource names are consistent and succinct; do not use abbreviations.",
+    "description": "Resource names are consistent and succinct; do not use abbreviations.",
+    "mitigation": "Please update resource names for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas2-get-collection-sort-parameter",
+    "analyzer_name_id": "guidelines",
+    "title": "Sorting collections is designed with a 'sort' query parameter.",
+    "description": "Sorting collections is designed with a 'sort' query parameter.",
+    "mitigation": "Please use `sort` query parameter for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas3-get-collection-sort-parameter",
+    "analyzer_name_id": "guidelines",
+    "title": "Sorting collections is designed with a 'sort' query parameter.",
+    "description": "Sorting collections is designed with a 'sort' query parameter.",
+    "mitigation": "Please use `sort` query parameter for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "status-code-401",
+    "analyzer_name_id": "guidelines",
+    "title": "A 401 status code is returned when authentication fails.",
+    "description": "A 401 status code is returned when authentication fails.",
+    "mitigation": "Please add a 401 status code for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "status-code-403",
+    "analyzer_name_id": "guidelines",
+    "title": "A 403 status code is returned if a consumer is not authorized to access an operation.",
+    "description": "A 403 status code is returned if a consumer is not authorized to access an operation.",
+    "mitigation": "Please add a 403 status code for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-array-plural-representation",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use plural noun names for collections.",
+    "description": "Representation fields use plural noun names for collections.",
+    "mitigation": "Please update field names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas3-array-plural-representation",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use plural noun names for collections.",
+    "description": "Representation fields use plural noun names for collections.",
+    "mitigation": "Please update field names for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "oas2-date-fields-iso-format",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
+    "description": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
+    "mitigation": "Please use `iso-date-time` format for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "oas3-date-fields-iso-format",
+    "analyzer_name_id": "guidelines",
+    "title": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
+    "description": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
+    "mitigation": "Please use `iso-date-time` format for the items identified.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "authenticate-requests",
+    "analyzer_name_id": "guidelines",
+    "title": "API.REST.SECURITY.03: My API authenticates and authorizes all requests",
+    "description": "API.REST.SECURITY.03: My API authenticates and authorizes all requests",
+    "mitigation": "Please update authentication for the items identified.",
+    "severity": "error"
+  },
+  {
+    "name_id": "reason-phrase",
+    "analyzer_name_id": "guidelines",
+    "title": "Reason phrase needs to match",
+    "description": "Reason phrase needs to match",
+    "mitigation": "Please update reason phrase for the items identified.",
+    "severity": "error"
+  }
+]

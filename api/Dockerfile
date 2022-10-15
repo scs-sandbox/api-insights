@@ -47,5 +47,6 @@ COPY --from=builder ${BUILDER_DIR}/bin/api-insights /usr/local/bin/api-insights
 WORKDIR /config
 
 COPY ./*.json /config/
+COPY ./internal/data/ /config/internal/data/
 
 ENTRYPOINT ["/usr/local/bin/api-insights", "serve"]

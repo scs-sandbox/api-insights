@@ -1,0 +1,98 @@
+[
+  {
+    "name_id": "whitelist",
+    "analyzer_name_id": "inclusive-language",
+    "title": "whitelist",
+    "description": "`whitelist` may be insensitive. The underlying assumption of the whitelist/blacklist metaphor is that white = good and black = bad. Because colors in and of themselves have no predetermined meaning, any meaning we assign to them is cultural: for example, the color red in many Southeast Asian countries is lucky, and is often associated with events like marriages, whereas the color white carries the same connotations in many European countries. In the case of whitelist/blacklist, the terms originate in the publishing industry – one dominated by the USA and England, two countries which participated in slavery and which grapple with their racist legacies to this day.",
+    "mitigation": "Use `allowlist`, `inclusion list` instead.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "blacklist",
+    "analyzer_name_id": "inclusive-language",
+    "title": "blacklist",
+    "description": "`blacklist` may be insensitive. The underlying assumption of the whitelist/blacklist metaphor is that white = good and black = bad. Because colors in and of themselves have no predetermined meaning, any meaning we assign to them is cultural: for example, the color red in many Southeast Asian countries is lucky, and is often associated with events like marriages, whereas the color white carries the same connotations in many European countries. In the case of whitelist/blacklist, the terms originate in the publishing industry – one dominated by the USA and England, two countries which participated in slavery and which grapple with their racist legacies to this day.",
+    "mitigation": "Use `denylist`, `blocklist`, `exclusion list` instead.",
+    "severity": "warning"
+  },
+  {
+    "name_id": "master-slave",
+    "analyzer_name_id": "inclusive-language",
+    "title": "master-slave",
+    "description": "`master-slave` may be insensitive.",
+    "mitigation": "Use `leader/follower`, `primary/replica`, `primary/standby` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "master",
+    "analyzer_name_id": "inclusive-language",
+    "title": "master",
+    "description": "`master` may be insensitive.",
+    "mitigation": "Use `primary`, `main`, `active` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "slave",
+    "analyzer_name_id": "inclusive-language",
+    "title": "slave",
+    "description": "`slave` may be insensitive.",
+    "mitigation": "Use `follower`, `replica`, `standby` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "grandfathered",
+    "analyzer_name_id": "inclusive-language",
+    "title": "grandfathered",
+    "description": "`grandfathered` may be insensitive.",
+    "mitigation": "Use `legacy status` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "man-hours",
+    "analyzer_name_id": "inclusive-language",
+    "title": "man-hours",
+    "description": "`man-hours` may be insensitive.",
+    "mitigation": "Use `person hours`, `engineer hours` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "sanity",
+    "analyzer_name_id": "inclusive-language",
+    "title": "sanity",
+    "description": "`sanity` may be insensitive.",
+    "mitigation": "Use `confidence`, `quick check`, `coherence check` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "dummy",
+    "analyzer_name_id": "inclusive-language",
+    "title": "dummy",
+    "description": "`dummy` may be insensitive.",
+    "mitigation": "Use `placeholder`, `sample` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "guys",
+    "analyzer_name_id": "inclusive-language",
+    "title": "guys",
+    "description": "`guys` may be insensitive.",
+    "mitigation": "Use `folks`, `people`, `you all`, `y'all`, `yinz` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "whitebox",
+    "analyzer_name_id": "inclusive-language",
+    "title": "whitebox",
+    "description": "`whitebox` may be insensitive.",
+    "mitigation": "Use `open-box` instead.",
+    "severity": "error"
+  },
+  {
+    "name_id": "blackbox",
+    "analyzer_name_id": "inclusive-language",
+    "title": "blackbox",
+    "description": "`blackbox` may be insensitive.",
+    "mitigation": "Use `closed-box` instead.",
+    "severity": "error"
+  }
+]

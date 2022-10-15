@@ -18,12 +18,19 @@ package db
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"gorm.io/gorm/clause"
+	"log"
+	"os"
+	"strings"
 )
 
-const batchSize = 100
+const (
+	analyzerRulesBatchSize = 100
+)
 
 // AnalyzerRuleDAO is the interface to access database
 type AnalyzerRuleDAO interface {
@@ -36,6 +43,7 @@ type AnalyzerRuleDAO interface {
 
 // NewAnalyzerRuleDAO create AnalyzerRuleDAO
 var NewAnalyzerRuleDAO = func(config *shared.AppConfig) (AnalyzerRuleDAO, error) {
+	shared.LogInfof("init NewAnalyzerRuleDAO")
 	client, err := NewDBClient(config)
 	if err != nil {
 		return nil, err
@@ -46,6 +54,15 @@ var NewAnalyzerRuleDAO = func(config *shared.AppConfig) (AnalyzerRuleDAO, error)
 	}
 
 	dao := &blobAnalyzerRuleDAO{client: client, config: config}
+
+	err = dao.preloadDefaultAnalyzerRulesSilently(context.Background(), "internal/data", "rules")
+	shared.LogInfof("preloading rules")
+	if err != nil {
+		shared.LogWarnf("failed to preload rules: %s", err.Error())
+	} else {
+		shared.LogInfof("preloaded rules")
+	}
+
 	return dao, nil
 }
 
@@ -133,7 +150,7 @@ func (dao *blobAnalyzerRuleDAO) List(ctx context.Context, filter *ListFilter) ([
 	return ars, nil
 }
 
-func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule) error {
+func (dao *blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule) error {
 	span, ctx := shared.StartSpan(ctx)
 	defer span.Finish()
 
@@ -142,11 +159,48 @@ func (dao blobAnalyzerRuleDAO) Import(ctx context.Context, ars []*analyzer.Rule)
 			Columns:   []clause.Column{{Name: "name_id"}},
 			UpdateAll: true,
 		}).
-		CreateInBatches(ars, batchSize).Error
+		CreateInBatches(ars, analyzerRulesBatchSize).Error
 	if err != nil {
 		shared.LogErrorf("failed to import %d analyzer rules: %s", len(ars), err.Error())
 		return err
 	}
 
 	return nil
+}
+
+func (dao *blobAnalyzerRuleDAO) preloadDefaultAnalyzerRulesSilently(ctx context.Context, dir, keyword string) error {
+	var paths []string
+
+	files, err := os.ReadDir(dir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		if f.IsDir() || !strings.Contains(f.Name(), keyword) {
+			continue
+		}
+
+		paths = append(paths, fmt.Sprintf("%s/%s", strings.TrimSuffix(dir, "/"), f.Name()))
+	}
+
+	var allRules []*analyzer.Rule
+	for _, path := range paths {
+		var rules []*analyzer.Rule
+		data, err := os.ReadFile(path)
+		if err != nil {
+			shared.LogWarnf("failed to read file(%s), err: %s", path, err.Error())
+			continue
+		}
+
+		err = json.Unmarshal(data, &rules)
+		if err != nil {
+			shared.LogWarnf("failed to unmarshal data, err: %s", err.Error())
+			continue
+		}
+
+		allRules = append(allRules, rules...)
+	}
+
+	return dao.Import(ctx, allRules)
 }

@@ -21,33 +21,14 @@ import (
 	"encoding/json"
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
-	"github.com/urfave/cli/v2"
-	"github.com/urfave/cli/v2/altsrc"
+	"gorm.io/gorm/clause"
+	"os"
 )
 
-type defaultAnalyzersCfgT struct {
-	rawJSON   string // "[\n  {\n    \"name_id\": \"drift\",\n    \"title\": \"Drift\",\n    \"description\": \"Drift\",\n    \"status\": \"active\"\n  },\n  {\n    \"name_id\": \"guidelines\",\n    \"title\": \"Cisco API Guidelines\",\n    \"description\": \"Cisco API Guidelines\",\n    \"status\": \"active\"\n  },\n  {\n    \"name_id\": \"completeness\",\n    \"title\": \"Completeness\",\n    \"description\": \"Completeness\",\n    \"status\": \"active\"\n  },\n  {\n    \"name_id\": \"inclusive-language\",\n    \"title\": \"Inclusive Language\",\n    \"description\": \"Detect non-inclusive language\",\n    \"status\": \"active\"\n  }\n]"
-	analyzers []*analyzer.Analyzer
-}
-
-func (c *defaultAnalyzersCfgT) load() error { return json.Unmarshal([]byte(c.rawJSON), &c.analyzers) }
-
-var (
-	defaultAnalyzersCfg = &defaultAnalyzersCfgT{}
+const (
+	analyzersBatchSize = 50
+	analyzersDataFile  = "internal/data/analyzers.json"
 )
-
-// AnalyzerDAOFlags returns cli flags for AnalyzerDAO
-func AnalyzerDAOFlags() []cli.Flag {
-	return []cli.Flag{
-		altsrc.NewStringFlag(&cli.StringFlag{
-			Name:        "default-analyzers",
-			Usage:       "default analyzers (JSON), e.g. '[\n  {\n    \"name_id\": \"drift\",\n    \"title\": \"Drift\",\n    \"description\": \"Drift\",\n    \"status\": \"active\"\n  }\n]'",
-			Value:       defaultAnalyzersCfg.rawJSON,
-			Destination: &defaultAnalyzersCfg.rawJSON,
-			EnvVars:     []string{"DEFAULT_ANALYZERS"},
-		}),
-	}
-}
 
 // AnalyzerDAO is the interface to access database
 type AnalyzerDAO interface {
@@ -70,14 +51,7 @@ var NewAnalyzerDAO = func(config *shared.AppConfig) (AnalyzerDAO, error) {
 
 	dao := &blobAnalyzerDAO{client: client, config: config}
 
-	if defaultAnalyzersCfg != nil && defaultAnalyzersCfg.rawJSON != "" {
-		shared.LogDebugf("preloading default analyzers: %v ...", defaultAnalyzersCfg.rawJSON)
-		err = defaultAnalyzersCfg.load()
-		if err != nil {
-			return nil, err
-		}
-		dao.preloadDefaultAnalyzersSafely(context.Background(), defaultAnalyzersCfg.analyzers)
-	}
+	dao.preloadDefaultAnalyzersSilently(context.Background(), analyzersDataFile)
 
 	return dao, nil
 }
@@ -138,7 +112,7 @@ func (dao *blobAnalyzerDAO) List(ctx context.Context, filter *ListFilter, withRu
 
 	shared.LogDebugf("fetching analyzers: %#v ...", filter)
 
-	var analysers []*analyzer.Analyzer
+	var analyzers []*analyzer.Analyzer
 	db := dao.client.WithContext(ctx).Table(analyzer.AnalyzerTableName)
 	query := map[string]interface{}{}
 	for k, v := range filter.Indexes {
@@ -162,24 +136,51 @@ func (dao *blobAnalyzerDAO) List(ctx context.Context, filter *ListFilter, withRu
 	if filter.Offset > 0 {
 		db = db.Offset(filter.Offset)
 	}
-	err := db.Find(&analysers).Error
+	err := db.Find(&analyzers).Error
 	if err != nil {
 		return nil, err
 	}
 
-	return analysers, nil
+	return analyzers, nil
 }
 
-// preloadDefaultAnalyzersSafely safely (simply logs error) preloads all analyzers.
-func (dao *blobAnalyzerDAO) preloadDefaultAnalyzersSafely(ctx context.Context, analyzers []*analyzer.Analyzer) {
-	for _, defaultAnalyzer := range analyzers {
-		stored, err := dao.Get(ctx, defaultAnalyzer.NameID)
-		if stored != nil && err == nil {
-			continue
-		}
-		err = dao.Save(ctx, defaultAnalyzer)
-		if err != nil {
-			shared.LogWarnf("failed to preload default analyzer(%s): %v", defaultAnalyzer.NameID, err)
-		}
+func (dao *blobAnalyzerDAO) Import(ctx context.Context, analyzers []*analyzer.Analyzer) error {
+	span, ctx := shared.StartSpan(ctx)
+	defer span.Finish()
+
+	err := dao.client.WithContext(ctx).
+		Clauses(clause.OnConflict{
+			Columns:   []clause.Column{{Name: "name_id"}},
+			UpdateAll: true,
+		}).
+		CreateInBatches(analyzers, analyzersBatchSize).Error
+	if err != nil {
+		shared.LogErrorf("failed to import %d analyzers: %s", len(analyzers), err.Error())
+		return err
+	}
+
+	return nil
+}
+
+func (dao *blobAnalyzerDAO) preloadDefaultAnalyzersSilently(ctx context.Context, filename string) {
+	analyzersData, err := os.ReadFile(filename)
+	if err != nil {
+		shared.LogWarnf("failed to read file(%s), err: %s", filename, err.Error())
+		return
+	}
+
+	shared.LogInfof("preloading default analyzers: %v ...", string(analyzersData))
+
+	var analyzers []*analyzer.Analyzer
+	err = json.Unmarshal(analyzersData, &analyzers)
+	if err != nil {
+		shared.LogWarnf("failed to unmarshal data, err: %s", err.Error())
+		return
+	}
+
+	err = dao.Import(ctx, analyzers)
+	if err != nil {
+		shared.LogWarnf("failed to preload default analyzer(s): %v", err)
+		return
 	}
 }
