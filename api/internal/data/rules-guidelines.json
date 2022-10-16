@@ -722,8 +722,8 @@
   {
     "name_id": "authenticate-requests",
     "analyzer_name_id": "guidelines",
-    "title": "API.REST.SECURITY.03: My API authenticates and authorizes all requests",
-    "description": "API.REST.SECURITY.03: My API authenticates and authorizes all requests",
+    "title": "My API authenticates and authorizes all requests",
+    "description": "My API authenticates and authorizes all requests",
     "mitigation": "Please update authentication for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines)",
     "severity": "error"
   },
