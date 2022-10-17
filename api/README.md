@@ -3,6 +3,14 @@
 ## Prerequisites
 
 * Golang 1.18+
+* Install ruleset in the api folder
+```
+npm install @cisco-developer/api-insights-openapi-rulesets
+```
+* Install Java and `openapi-diff-cli-2.1.0-beta.3-all.jar`, and put it to some folder.
+```
+curl -OL https://repo1.maven.org/maven2/org/openapitools/openapidiff/openapi-diff-cli/2.1.0-beta.3/openapi-diff-cli-2.1.0-beta.3-all.jar
+```
 
 ## Get started locally
 
@@ -12,7 +20,7 @@ docker-compose up mysql
 ```
 * Start the backend service
 ```
-go run cmd/api-insights/main.go serve
+OPENAPI_DIFF_JAR_FILE=/some-dir/openapi-diff-cli-2.1.0-beta.3-all.jar go run cmd/api-insights/main.go serve
 ```
 * Test your service is running on port `8081`.
 ```
