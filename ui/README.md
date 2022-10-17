@@ -13,8 +13,11 @@ docker-compose up backend
 After that, the backed is running. and we can run UI part.
 
 ## How to run UI part
-### 1. Enter /ui folder
-### 2. Use the fllowing commands
+### 1. Enter /ui folder, use command in another terminal:
+```
+cd ui
+```
+### 2. Use the fllowing commands (recommend to use node v18.10.0)
 ```
 npm install
 npm start
