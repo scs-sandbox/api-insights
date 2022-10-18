@@ -46,7 +46,7 @@ type Props = {
   onSpecSelected: (spec: SpecData.Spec) => void;
   onAltSpecSelected: (spec: SpecData.Spec) => void;
   onCompare: () => void;
-  handleDownload: () => void;
+  handleDownload: (fileName: string, content: string) => void;
 };
 
 function Compare(props: Props) {
@@ -64,6 +64,15 @@ function Compare(props: Props) {
    *  true by default to show compare result, false shows markdown preview
    */
   const [tab, setTab] = useState(true);
+
+  const onDownload = () => {
+    if (props.handleDownload) {
+      const oldOne = `${props.leftSpec.version}.${props.leftSpec.revision}`;
+      const newOne = `${props.rightSpec.version}.${props.rightSpec.revision}`;
+      const fileName = `changelog-${props.selectedService.name_id}-${oldOne}-${newOne}.md`;
+      props.handleDownload(fileName, props.markDownData?.result?.markdown);
+    }
+  };
 
   /**
    *
@@ -162,6 +171,13 @@ function Compare(props: Props) {
     </div>
   );
 
+  const downloadChangelogButton = props.markDownData?.result?.markdown ? (
+    <div className="button-rc download" onClick={onDownload}>
+      <DownloadIcon />
+      Download changelog
+    </div>
+  ) : null;
+
   return (
     <PageFrame className="compare-page" header={header}>
       <HelpButton
@@ -194,10 +210,7 @@ function Compare(props: Props) {
             <DiffList data={props.compareData?.result?.json} />
           ) : (
             <div className="markdown-container">
-              <div className="button-rc download" onClick={props.handleDownload}>
-                <DownloadIcon />
-                Download changelog
-              </div>
+              {downloadChangelogButton}
               <MarkdownViewer text={props.markDownData?.result?.markdown} />
             </div>
           )}
