@@ -61,6 +61,9 @@ docker-compose up
 ````
 One docker-compose is up UI and be access at http://localhost:8080
 
+- To run API service natively outside docker refer [api/README.md](api/README.md) 
+- To run UI natively outside docker refer [ui/README.md](ui/README.md)
+
 **Note**: If need to install docker-compose, install [Rancher Desktop](https://rancherdesktop.io/) or licensed 'Docker Desktop'
 
 ## Contribution
