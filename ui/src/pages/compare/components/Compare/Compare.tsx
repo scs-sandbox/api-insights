@@ -94,7 +94,12 @@ function Compare(props: Props) {
         </div>
         <div className="summary-row">
           <div className="summary-cell">
-            <SeveritySummary data={complianceList.map((i) => i.result.summary.stats)} />
+            <SeveritySummary data={
+              (complianceList)
+                ? complianceList.map((i) => i.result.summary.stats)
+                : []
+            }
+            />
             <Link to={link} className="button-rc">
               View Report
             </Link>

@@ -39,6 +39,7 @@ import { AnalyserData, TriggerReanalyze } from '../../../../query/analyzer';
 import { SpecData } from '../../../../query/spec';
 import { ServiceData } from '../../../../query/service';
 import { ComplianceData } from '../../../../query/compliance';
+import SnackAlert from '../../../../components/SnackAlert/SnackAlert';
 import './Report.scss';
 
 type Props = {
@@ -60,6 +61,7 @@ export default function Report(props: Props) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [analyzerFilterData, setAnalyzerFilterData] = useState(null);
   const [openComplianceRow, setOpenComplianceRow] = useState(null);
+  const [reanalyzing, setReanalyzing] = useState(false);
 
   const handleMessageClose = () => {
     if (props.onClearSpecUploadingError) {
@@ -80,12 +82,14 @@ export default function Report(props: Props) {
   };
 
   const onReanalyze = async () => {
+    setReanalyzing(true);
     await TriggerReanalyze(
       props.service.id,
       props.selectedSpec.id,
       props.analyzerList.map((analyzer) => analyzer.name_id),
     );
-    props.refetchSpecDetail();
+    await props.refetchSpecDetail();
+    setReanalyzing(false);
   };
 
   const renderComplianceDialog = () => {
@@ -188,24 +192,36 @@ export default function Report(props: Props) {
 
     const complianceAnalyzerBlock = renderComplianceAnalyzerBlock(forDrift);
     const statistics = renderStatistics(list);
+    const recalcIconClass = (!reanalyzing) ? 'reanalyze-icon' : 'reanalyze-icon icn-spinner';
     const recalculateButton = props.selectedSpec && (
       <div className="reanalyze-button" onClick={onReanalyze}>
-        <span className="reanalyze-icon" />
+        <span className={recalcIconClass} />
         Recalculate
       </div>
     );
+    // const renderSuccessMessage = () => {
+    //   if (!isSpecAddingSuccess) return null;
 
+    //   return (
+    //     <SnackAlert
+    //       severity="success"
+    //       message="The spec has been uploaded"
+    //       onClose={onCloseMessage}
+    //     />
+    //   );
+    // };
     return (
       <div className={`tab-body${selectedTabIndex === index ? ' active' : ''}`}>
         <div className={`compliance-tab${forDrift ? ' for-drift' : ''}`}>
           {complianceAnalyzerBlock}
           {statistics}
           {recalculateButton}
+
           <div className="table-block">
             <ComplianceTable
               key={props.selectedSpec ? props.selectedSpec.id : ''}
               analyzerList={forDrift ? null : props.analyzerList}
-              isLoading={props.complianceListLoading}
+              isLoading={props.complianceListLoading || reanalyzing}
               specId={props.selectedSpec ? props.selectedSpec.id : ''}
               data={list}
               onClickItem={onOpenComplianceDialog}

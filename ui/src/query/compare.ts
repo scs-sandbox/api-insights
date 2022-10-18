@@ -139,6 +139,7 @@ export function useFetchMarkdown(
   spec1Id: string,
   spec2Id: string,
 ) {
+  // const url = `/services/${serviceId}/specs/diff/${spec1Id}/${spec2Id}?format=markdown`;
   const url = `/services/${serviceId}/specs/diff`;
   const payload = {
     old_spec_id: spec1Id,

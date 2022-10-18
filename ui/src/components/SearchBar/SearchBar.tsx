@@ -32,7 +32,7 @@ export default function SearchBar(props: Props) {
         className="search-input"
         value={props.searchKey}
         onChange={props.onSearchKeyChanged}
-        placeholder="Search"
+        placeholder="Search Services"
       />
       <div className="search-clear" onClick={props.onSearchKeyCleared} />
     </div>
