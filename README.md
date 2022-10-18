@@ -1,5 +1,5 @@
 # API Insights
-API Insights is a tool to enable organizations to manage versioned API specifications (Swagger2/Open API Spec-3) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, documents completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service  also supports generating API change-log including identification of backward compatibility breaking change between 2 version of API spec files.
+[API Insights](https://developer.cisco.com/site/api-insights/) is a tool to enable organizations to manage versioned API specifications (Swagger2/Open API Spec-3) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, documents completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service  also supports generating API change-log including identification of backward compatibility breaking change between 2 version of API spec files.
 
 ## API Specifications Challenges
 
@@ -12,11 +12,12 @@ API Insights is a tool to enable organizations to manage versioned API specifica
 
 - API Insights service that enables storing of multiple versions of released (& release-candidate) of API specification .
 - Validate & Score API Spec against guidelines:   
-   - **[API Insights API guidelines](https://developer.cisco.com/api-guidelines/)**
+   - [API Insights REST guidelines](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)
        - Guidelines are tested using **[API guidelines linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)**
-   - API Document completeness  
+   - [API Document completeness](https://developer.cisco.com/docs/api-insights/#!documentation-completeness-ruleset)
+   - [Inclusive Language Ruleset](https://github.com/cisco-open/inclusive-language)  
    - API Drift analyzer (Integrate with [APIClarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
-   - API Security analyzer (Future: Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
+   - API Security analyzer (*Future*: Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
 
 - API spec diff across multiple version/revision
   - Identify and alert on backward compatibility breaking changes.
@@ -44,12 +45,14 @@ API Insights user flow
 
 ## Related Projects  and resources
 - [API Insights VSCode Extension](https://github.com/cisco-developer/api-insights-extension-vscode)
-- [API Insights Guidelines Linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)
+- [API Insights OpenAPI Ruleset](https://github.com/cisco-developer/api-insights-openapi-rulesets)
+- [Inclusive Language Ruleset](https://github.com/cisco-open/inclusive-language)
 - [API Insights site](https://developer.cisco.com/site/api-insights/)
-- [API Insights Doc](https://developer.cisco.com/docs/api-insights) 
+- [API Insights Doc](https://developer.cisco.com/docs/api-insights)
+
 
 ## Getting Started
-This repo contains a helm based deployer that can be deployed in local kubernetes cluster setup using like Rancher desktop, minikube etc. The detailed instructions are found [here](https://testing-developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
+This repo contains a helm based deployer that can be deployed in local kubernetes cluster setup using like Rancher desktop, minikube etc. The detailed instructions are found [here](https://developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
 
 ## Development setup
 Build and start UI & backend services using docker-compose
@@ -57,6 +60,9 @@ Build and start UI & backend services using docker-compose
 docker-compose up 
 ````
 One docker-compose is up UI and be access at http://localhost:8080
+
+- To run API service natively outside docker refer [api/README.md](api/README.md) 
+- To run UI natively outside docker refer [ui/README.md](ui/README.md)
 
 **Note**: If need to install docker-compose, install [Rancher Desktop](https://rancherdesktop.io/) or licensed 'Docker Desktop'
 
