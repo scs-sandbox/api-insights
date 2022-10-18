@@ -1,16 +1,16 @@
 # API Insights
-[API Insights](https://developer.cisco.com/site/api-insights/) is a tool to enable organizations to manage versioned API specifications (Swagger2/Open API Spec-3) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, documents completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service  also supports generating API change-log including identification of backward compatibility breaking change between 2 version of API spec files.
+[API Insights](https://developer.cisco.com/site/api-insights/) is a tool to enable organizations to manage versioned API specifications (Swagger 2.0/OpenAPI Spec 3.x) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, document completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service also supports generating an API changelog including identification of backward compatibility breaking changes between 2 versions of API spec files.
 
 ## API Specifications Challenges
 
-- As number of service increases, no common place for storing versioned API specs.
-- Inconsistency in API specifications across teams. Make it difficult for API consumers that integrate across multiple APIs.
-- API changes across version could result in breaking backward compatibilities.
+- As the number of services increases, no common place for storing versioned API specs.
+- Inconsistency in API specifications across teams. Makes it difficult for API consumers that integrate across multiple APIs.
+- API changes across versions could result in breaking backward compatibility.
 - Lack of consistent documentation of API changes across multiple releases.
 
 ## Solution
 
-- API Insights service that enables storing of multiple versions of released (& release-candidate) of API specification .
+- API Insights service enables storing of multiple versions of released (& release candidate) API specifications.
 - Validate & Score API Spec against guidelines:   
    - [API Insights REST guidelines](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)
        - Guidelines are tested using **[API guidelines linter](https://github.com/cisco-developer/api-insights-openapi-rulesets)**
@@ -18,28 +18,26 @@
    - [Inclusive Language Ruleset](https://github.com/cisco-open/inclusive-language)  
    - API Drift analyzer (Integrate with [APIClarity](https://apiclarity.io) to identify Zombie and Shadow APIs)
    - API Security analyzer (*Future*: Integrate with [Panoptica](https://panoptica.app/) to enable API Security analyzer)
-
-- API spec diff across multiple version/revision
+- API spec diff across multiple versions/revisions
   - Identify and alert on backward compatibility breaking changes.
-  - API Insights CLI to enable runnning spec analyzer as part of API spec CICD or local commit pipleline.
+  - API Insights CLI to enable running spec analyzer as a part of API spec CI/CD or local commit pipeline.
 
-
-## User flow and Architecture
+## User Flow and Architecture
 ![API Insights](docs/API-Insights-Solution-Diagram.png)
 
-API Insights user flow
-- Developer or Tech Lead Can upload the API Specification and subsequent revisions: ​
-  - Commit new version/revision of spec in github repository
-  - CICD pipeline with analyze specs against guidelines & generate report/score.
-  - On github release tag new version/revision of spec will be upload registry by CICD task.
-  - Multiple products/services API specs can be managed in registry.  
-- On new spec upload & preconfigure analysers will run on spec in back ground
-- User can go API Insights UI to view
-  - Analyser score and issue listing with trends across releases.
-  - The user can click on view details to get a detailed report with severity, line number and remediation recommendations.
-- Users will be able to see a summary of all API the changes (New, modified, Removed & Breaking) and will be able to see the details spec diff by clicking on each changed item.​
-- Integration with APIClarity & Panoptica will allow:​
-  - Security and Compliance users to get reports on Zombie & Shadow APIs​
+**User Flow**
+- Developer or Tech Lead can upload the API Specification and subsequent revisions:
+  - Commit new version/revision of spec in GitHub repository.
+  - CI/CD pipeline with specs analysis against guidelines & generate report/score.
+  - On GitHub release tag, new version/revision of spec will be uploaded to the API Insights service by CI/CD task.
+  - Multiple API specs across products/services can be managed in the API Insights service.  
+- On new spec upload, preconfigured analyzers will run on spec in background.
+- User can go API Insights UI to view:
+  - Analyzer score and issue listing with trends across releases.
+  - Detailed report with severity, line number and remediation recommendations.
+- Users will be able to see a summary of all API changes (New, Modified, Removed & Breaking) and will be able to see the detailed spec diff by clicking on each changed item.
+- Integration with APIClarity & Panoptica will allow:
+  - Security and Compliance users to get reports on Zombie & Shadow APIs
   - Reconstructed OAPI for missing specs
   - Security Analysis of API
 
@@ -52,20 +50,20 @@ API Insights user flow
 
 
 ## Getting Started
-This repo contains a helm based deployer that can be deployed in local kubernetes cluster setup using like Rancher desktop, minikube etc. The detailed instructions are found [here](https://developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
+This repo contains a Helm based deployer that can be deployed in a local Kubernetes cluster setup using like Rancher Desktop, minikube etc. The detailed instructions are found [here](https://developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
 
 ## Development setup
-Build and start UI & backend services using docker-compose
+Build and start UI & backend services using Docker Compose
 ```
 docker-compose up 
 ````
-One docker-compose is up UI and be access at http://localhost:8080
+Once Docker Compose is up, UI and be access at http://localhost:8080
 
-- To run API service natively outside docker refer [api/README.md](api/README.md) 
-- To run UI natively outside docker refer [ui/README.md](ui/README.md)
+- To run the API service natively outside docker, refer to [api/README.md](api/README.md) 
+- To run the UI natively outside docker, refer to [ui/README.md](ui/README.md)
 
-**Note**: If need to install docker-compose, install [Rancher Desktop](https://rancherdesktop.io/) or licensed 'Docker Desktop'
+**Note**: Docker-compose requires installing [Rancher Desktop](https://rancherdesktop.io/) or licensed 'Docker Desktop'.
 
 ## Contribution
 
-We welcome contributions please find details in [CONTRIBUTING.md](CONTRIBUTING.md)
+We welcome contributions, please find details in [CONTRIBUTING.md](CONTRIBUTING.md)
