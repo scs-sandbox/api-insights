@@ -99,12 +99,15 @@ export default function ComparePage() {
     fetchMarkdown(); // fetches results in pure markdown, for markdown preview before download
   };
 
-  /**
-   * builds url to download the markdown results of the compared specs
-   */
-  const handleDownload = () => {
-    const url = `/services/${selectedService.id}/specs/diff/${leftSpec.id}/${rightSpec.id}?format=markdown`;
-    window.open(buildApiAbsoluteUrl(url));
+  const handleDownload = (fileName: string, content = '') => {
+    const eleLink = document.createElement('a');
+    eleLink.download = fileName;
+    eleLink.style.display = 'none';
+    const blob = new Blob([content]);
+    eleLink.href = URL.createObjectURL(blob);
+    document.body.appendChild(eleLink);
+    eleLink.click();
+    document.body.removeChild(eleLink);
   };
 
   const props = {
