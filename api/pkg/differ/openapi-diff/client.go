@@ -68,8 +68,7 @@ func (c *cliClient) DiffDocuments(oldDoc, newDoc models.SpecDoc, cfg *diff.Confi
 	}
 	defer func() {
 		_ = oldFile.Close()
-		// TODO Uncomment after testing.
-		//_ = os.Remove(oldFile.Name())
+		_ = os.Remove(oldFile.Name())
 	}()
 	if oldDoc == nil || *oldDoc == "" {
 		return nil, fmt.Errorf("oldDoc is nil or empty")
@@ -84,8 +83,7 @@ func (c *cliClient) DiffDocuments(oldDoc, newDoc models.SpecDoc, cfg *diff.Confi
 	}
 	defer func() {
 		_ = newFile.Close()
-		// TODO Uncomment after testing.
-		//_ = os.Remove(newFile.Name())
+		_ = os.Remove(newFile.Name())
 	}()
 	if newDoc == nil || *newDoc == "" {
 		return nil, fmt.Errorf("newDoc is nil or empty")
@@ -101,8 +99,7 @@ func (c *cliClient) DiffDocuments(oldDoc, newDoc models.SpecDoc, cfg *diff.Confi
 	}
 	defer func() {
 		_ = diffFile.Close()
-		// TODO Uncomment after testing.
-		//_ = os.Remove(diffFile.Name())
+		_ = os.Remove(diffFile.Name())
 	}()
 
 	cmd := c.commandFromOpts(context.TODO(), opts, oldFile.Name(), newFile.Name(), diffFile.Name())
