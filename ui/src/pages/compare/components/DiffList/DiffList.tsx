@@ -64,7 +64,13 @@ export default function DiffList(props: Props) {
     ...modifiedRows,
     ...deletedRows,
   ];
-
+  if (rows.length === 0) {
+    return (
+      <div className="result-table">
+        Identical Specs
+      </div>
+    );
+  }
   return (
     <div className="result-table">
       {rows}

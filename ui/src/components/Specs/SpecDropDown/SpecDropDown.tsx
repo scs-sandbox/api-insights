@@ -29,8 +29,12 @@ type Props = {
 export default function SpecDropDown(props: Props) {
   const { data, isLoading } = useFetchSpecList(props.serviceId);
   const specList = data as SpecData.Spec[];
-  const sortedSpecList = specList?.sort((a, b) => (
-    (new Date(a.created_at) > new Date(b.created_at)) ? -1 : 1));
+  const sortedSpecList = specList?.sort((a, b) => {
+    let result = 1;
+    result = (new Date(a.created_at) > new Date(b.created_at)) ? -1 : 1;
+    result = (a.version > b.version) ? -1 : result;
+    return result;
+  });
   const onChange = (value: string) => {
     const spec = data.find((i) => i.id === value);
     if (props.onChange) {
