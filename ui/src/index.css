@@ -34,6 +34,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+#root {
+  min-width: 992px;
+}
+
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;
