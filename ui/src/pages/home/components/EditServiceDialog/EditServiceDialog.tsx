@@ -84,6 +84,7 @@ export default function EditServiceDialog(props: Props) {
   const visibility = (visibilityPrivate) ? 'private' : 'public';
   const [contactName, setContactName] = useState(contact?.name || '');
   const [email, setEmail] = useState(contact?.email || '');
+  const [emailValid, setEmailValid] = useState(true);
   const [url, setUrl] = useState(contact.url || '');
   const trimmedTitle = title.trim();
   const trimmedProductTag = productTag.trim();
@@ -111,7 +112,7 @@ export default function EditServiceDialog(props: Props) {
   const blockTitle = isCreateNew ? "Let's set up your service. This will be visible on the service tile."
     : "Let's update the service. This will be visible on the service tile.";
   const editAction = isCreateNew ? 'Create' : 'Update';
-  const invalidInputs = !trimmedTitle || !trimmedProductTag || !trimmedOrganization;
+  const invalidInputs = !trimmedTitle || !trimmedProductTag || !trimmedOrganization || !emailValid;
   const onClose = props.busy ? null : props.handleClose;
 
   const visibilityField = props.authEnabled && (
@@ -126,6 +127,18 @@ export default function EditServiceDialog(props: Props) {
       />
     </FieldItem>
   );
+  const validateEmail = (emailInput: string) => emailInput
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    ) !== null;
+
+  const handleEmailInput = (e) => {
+    setEmailValid(validateEmail(e.target.value));
+    setEmail(e.target.value);
+  };
+
+  const emailInputClass = (!emailValid && email !== '') ? 'invalid' : '';
 
   return (
     <Dialog
@@ -190,9 +203,9 @@ export default function EditServiceDialog(props: Props) {
           <FieldItem label="Email">
             <input
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              className={emailInputClass}
+              type="email"
+              onChange={handleEmailInput}
             />
           </FieldItem>
           <FieldItem label="URL">

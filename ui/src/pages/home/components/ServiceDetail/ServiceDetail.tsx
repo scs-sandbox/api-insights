@@ -82,6 +82,18 @@ export default function ServiceDetail(props: Props) {
 
   const editButton = renderEditButton();
 
+  const handleMailClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (email) window.location.href = `mailto:${email}?subject=Subject&body=message%20goes%20here`;
+  };
+
+  const hadnleConnectClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (contactInfo) window.open(contactInfo, '_blank').focus();
+  };
+
   return (
     <Link
       id={`service-${props.service.id}`}
@@ -125,7 +137,8 @@ export default function ServiceDetail(props: Props) {
           <div
             className={`connect-detail ${!name && 'no-info'}`}
             title={name}
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = `mailto:${email}?subject=Subject&body=message%20goes%20here`; }}
+            data-tooltip="Contact person email"
+            onClick={handleMailClick}
           >
             <PersonIcon className="icon" />
             <span className="connect-text">{name || email || 'No Contact'}</span>
@@ -133,7 +146,8 @@ export default function ServiceDetail(props: Props) {
           <div
             className={`connect-detail ${!contactInfo && 'no-info'}`}
             title={contactInfo}
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(contactInfo, '_blank').focus(); }}
+            data-tooltip="Organization webpage"
+            onClick={hadnleConnectClick}
           >
             <LinkIcon className="icon" />
             <span className="connect-text">{contactInfo ? 'Reference' : 'No Reference'}</span>

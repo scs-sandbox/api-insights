@@ -35,10 +35,11 @@ import SpecSelect from '../../../../components/Specs/SpecDropDown/SpecDropDown';
 import PageFrame from '../../../../components/Frame/PageFrame/PageFrame';
 import Tabs from '../../../../components/Tabs/Tabs';
 import HelpButton from '../../../../components/HelpButton/HelpButton';
-import { AnalyserData, TriggerReanalyze } from '../../../../query/analyzer';
+import { AnalyserData, useTriggerReanalyze } from '../../../../query/analyzer';
 import { SpecData } from '../../../../query/spec';
 import { ServiceData } from '../../../../query/service';
 import { ComplianceData } from '../../../../query/compliance';
+import SnackAlert from '../../../../components/SnackAlert/SnackAlert';
 import './Report.scss';
 
 type Props = {
@@ -60,6 +61,21 @@ export default function Report(props: Props) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [analyzerFilterData, setAnalyzerFilterData] = useState(null);
   const [openComplianceRow, setOpenComplianceRow] = useState(null);
+  const {
+    isLoading: isReanalyzing,
+    isError: isReanalyzingError,
+    isSuccess: isReanalyzingSuccess,
+    mutate: reAnalyze,
+    reset: resetReanalyze,
+  } = useTriggerReanalyze(
+    props.service?.id || '',
+    props.selectedSpec?.id || '',
+    props.analyzerList?.map((analyzer) => analyzer.name_id),
+  );
+
+  const onCloseMessage = () => {
+    resetReanalyze();
+  };
 
   const handleMessageClose = () => {
     if (props.onClearSpecUploadingError) {
@@ -80,11 +96,15 @@ export default function Report(props: Props) {
   };
 
   const onReanalyze = async () => {
-    await TriggerReanalyze(
-      props.service.id,
-      props.selectedSpec.id,
-      props.analyzerList.map((analyzer) => analyzer.name_id),
-    );
+    // setReanalyzing(true);
+    // await TriggerReanalyze(
+    //   props.service.id,
+    //   props.selectedSpec.id,
+    //   props.analyzerList.map((analyzer) => analyzer.name_id),
+    // );
+    // await props.refetchSpecDetail();
+    // setReanalyzing(false);
+    await reAnalyze();
     props.refetchSpecDetail();
   };
 
@@ -188,24 +208,48 @@ export default function Report(props: Props) {
 
     const complianceAnalyzerBlock = renderComplianceAnalyzerBlock(forDrift);
     const statistics = renderStatistics(list);
+    const recalcIconClass = (!isReanalyzing) ? 'reanalyze-icon' : 'reanalyze-icon icn-spinner';
     const recalculateButton = props.selectedSpec && (
       <div className="reanalyze-button" onClick={onReanalyze}>
-        <span className="reanalyze-icon" />
+        <span className={recalcIconClass} />
         Recalculate
       </div>
     );
+    const renderSuccessMessage = () => {
+      if (!isReanalyzingSuccess) return null;
 
+      return (
+        <SnackAlert
+          severity="success"
+          message="The spec has been analyzed again!"
+          onClose={onCloseMessage}
+        />
+      );
+    };
+    const renderErrorMessage = () => {
+      if (!isReanalyzingError) return null;
+
+      return (
+        <SnackAlert
+          severity="error"
+          message="Failed to re-analyze!"
+          onClose={onCloseMessage}
+        />
+      );
+    };
     return (
       <div className={`tab-body${selectedTabIndex === index ? ' active' : ''}`}>
         <div className={`compliance-tab${forDrift ? ' for-drift' : ''}`}>
           {complianceAnalyzerBlock}
           {statistics}
           {recalculateButton}
+          {renderSuccessMessage()}
+          {renderErrorMessage()}
           <div className="table-block">
             <ComplianceTable
               key={props.selectedSpec ? props.selectedSpec.id : ''}
               analyzerList={forDrift ? null : props.analyzerList}
-              isLoading={props.complianceListLoading}
+              isLoading={props.complianceListLoading || isReanalyzingError}
               specId={props.selectedSpec ? props.selectedSpec.id : ''}
               data={list}
               onClickItem={onOpenComplianceDialog}

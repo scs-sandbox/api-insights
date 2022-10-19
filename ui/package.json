@@ -12,7 +12,7 @@
       "backend"
     ]
   },
-  "proxy": "http://0.0.0.0:8081/",
+  "proxy": "http://localhost:8081/",
   "scripts": {
     "prepare": "cd .. && husky install && npx husky set .husky/pre-commit \"cd ui && npm run pre-commit\"",
     "start": "HTTPS=false PORT=3000 react-scripts start",

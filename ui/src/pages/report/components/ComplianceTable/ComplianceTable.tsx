@@ -324,6 +324,7 @@ export default function ComplianceTable(props: Props) {
   return (
     <div className="compliance-table">
       {topPagination}
+      {loading}
       <table className="result-table">
         <thead>
           <tr>
@@ -337,7 +338,6 @@ export default function ComplianceTable(props: Props) {
         </thead>
         {tableRows}
       </table>
-      {loading}
       {noResult}
       {buttomPagination}
     </div>

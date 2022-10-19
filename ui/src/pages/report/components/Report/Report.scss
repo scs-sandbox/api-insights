@@ -73,7 +73,20 @@
       height: 25px;
       background: center / contain no-repeat url('../../../../assets/images/refresh-dark.svg');
     }
+    .icn-spinner {
+      animation: spin-animation 1s infinite;
+      display: inline-block;
+    }
 
+    @keyframes spin-animation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(359deg);
+      }
+    }
     .reanalyze-button {
       position: absolute;
       top: 40px;

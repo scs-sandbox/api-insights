@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import Api from './api';
 
 export namespace AnalyserData {
@@ -30,15 +30,17 @@ export namespace AnalyserData {
 export function useFetchAnalyzerList() {
   return useQuery('analyzer-list', () => Api.get('/analyzers?status=active'));
 }
-export async function TriggerReanalyze(
+
+export function useTriggerReanalyze(
   serviceId: string,
   specId: string,
   analyzers: string[],
 ) {
-  const url = `/services/${serviceId}/specs/${specId}/analyses`;
-  const payload = {
-    analyzers,
-  };
-  const result = await Api.post(url, payload);
-  return result;
+  return useMutation(() => {
+    const payload = {
+      analyzers,
+    };
+    const url = `/services/${serviceId}/specs/${specId}/analyses`;
+    return Api.post(url, payload);
+  });
 }

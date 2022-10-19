@@ -38,6 +38,9 @@
         width: fit-content;
       }
     }
+    .invalid {
+      outline: 1px solid rgb(226, 94, 94);
+    }
   }
 }
 
