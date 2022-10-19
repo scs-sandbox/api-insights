@@ -207,6 +207,18 @@ export default function Home(props: Props) {
   function renderGroup(collection: ServiceCollection, index: number) {
     // Render legend shows compliance score of the first service in the product group
     const legend = index === 0 ? renderLegend() : null;
+    const serviceTile = (service) => (
+      <div key={service.id} className="group-col">
+        <ServiceDetail
+          authEnabled={authEnabled}
+          isNewCreated={newServiceId === service.id}
+          service={service}
+          onClickEdit={onClickEdit}
+        />
+      </div>
+    );
+    const services = (collection.services || []).map(serviceTile);
+
     return (
       <div key={collection.name} className="group-container">
         <div className="group-item">
@@ -214,19 +226,7 @@ export default function Home(props: Props) {
           {legend}
         </div>
         <div className="group-list">
-          {
-            (collection.services || [])
-              .map((service) => (
-                <div key={service.id} className="group-col">
-                  <ServiceDetail
-                    authEnabled={authEnabled}
-                    isNewCreated={newServiceId === service.id}
-                    service={service}
-                    onClickEdit={onClickEdit}
-                  />
-                </div>
-              ))
-          }
+          {services}
         </div>
       </div>
     );
