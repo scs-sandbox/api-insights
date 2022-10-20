@@ -146,6 +146,7 @@
         text-align: left;
         color: #cccccc;
         display: flex;
+        align-items: center;
 
         .circle-score {
           margin-right: 16px;
@@ -187,30 +188,15 @@
       }
 
       .summary-cell {
-        padding: 15px 0px;
         text-align: center;
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        padding: 24px 42px;
+        padding: 24px 30px;
 
-        .status-list {
-          display: inline-flex;
-        }
-
-        .spec-name {
-          display: inline;
-          margin-left: 10px;
-          font-weight: 250;
-          font-size: 24px;
-          line-height: 33px;
-        }
-
-        .spec-time {
-          font-weight: 300;
-          font-size: 10px;
-          line-height: 14px;
-          padding-left: 25px;
+        .severity-summary, .button-rc {
+          margin: 5px 0;
         }
       }
     }
