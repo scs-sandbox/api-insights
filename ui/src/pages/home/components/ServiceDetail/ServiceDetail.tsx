@@ -135,7 +135,7 @@ export default function ServiceDetail(props: Props) {
         </div>
         <div className="content-connect">
           <div
-            className={`connect-detail ${!name && 'no-info'}`}
+            className={`connect-detail ${!(name || email) && 'no-info'}`}
             title={name}
             data-tooltip="Contact person email"
             onClick={handleMailClick}
