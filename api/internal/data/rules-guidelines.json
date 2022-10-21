@@ -92,7 +92,7 @@
     "analyzer_name_id": "guidelines",
     "title": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
     "description": "POST operations which create objects return 201 Created, with a full or reference-only representation.",
-    "mitigation": "Please update responses for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update responses for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/post)",
     "severity": "error"
   },
   {
@@ -268,7 +268,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Standard CRUD lifecycle operations map to HTTP verbs; Functional resources are used when non-standard CRUD are needed.",
     "description": "Standard CRUD lifecycle operations map to HTTP verbs; Functional resources are used when non-standard CRUD are needed.",
-    "mitigation": "Please update resource names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update resource names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset/no-crud-verbs)",
     "severity": "error"
   },
   {
@@ -324,7 +324,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Error representations include a useful human-readable message.",
     "description": "Error representations include a useful human-readable message.",
-    "mitigation": "Please update error message for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update error message for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-additional/error-representations)",
     "severity": "error"
   },
   {
@@ -332,7 +332,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Error representations include a useful human-readable message.",
     "description": "Error representations include a useful human-readable message.",
-    "mitigation": "Please update error message for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update error message for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-additional/error-representations)",
     "severity": "error"
   },
   {
@@ -340,7 +340,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Error representations include an identifier to help with troubleshooting.",
     "description": "Error representations include an identifier to help with troubleshooting.",
-    "mitigation": "Please add an error identifier for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please add an error identifier for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-additional.md#troubleshooting)",
     "severity": "warning"
   },
   {
@@ -348,7 +348,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Error representations include an identifier to help with troubleshooting.",
     "description": "Error representations include an identifier to help with troubleshooting.",
-    "mitigation": "Please add an error identifier for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please add an error identifier for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-additional.md#troubleshooting)",
     "severity": "warning"
   },
   {
@@ -380,7 +380,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -388,7 +388,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -396,7 +396,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -404,7 +404,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -412,7 +412,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -420,7 +420,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -428,7 +428,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -436,7 +436,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -444,7 +444,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -452,7 +452,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -460,7 +460,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -468,7 +468,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -476,7 +476,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -484,7 +484,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -492,7 +492,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -500,7 +500,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -508,7 +508,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -516,7 +516,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -524,7 +524,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -532,7 +532,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -540,7 +540,7 @@
     "analyzer_name_id": "guidelines",
     "title": "HTTP headers follow the syntax specified in the corresponding RFCs.",
     "description": "HTTP headers follow the syntax specified in the corresponding RFCs.",
-    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-tyle/standard-request-headers)",
     "severity": "error"
   },
   {
@@ -588,7 +588,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
     "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
-    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/pagination)",
     "severity": "error"
   },
   {
@@ -596,7 +596,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
     "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
-    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/pagination)",
     "severity": "error"
   },
   {
@@ -604,7 +604,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
     "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
-    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/pagination)",
     "severity": "error"
   },
   {
@@ -612,7 +612,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
     "description": "Pagination is designed using a 'max' query parameter and 'Link' headers per RFC 5988.",
-    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update `max` query and `Link` headers for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/pagination)",
     "severity": "error"
   },
   {
@@ -652,7 +652,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Resource names are consistent and succinct; do not use abbreviations.",
     "description": "Resource names are consistent and succinct; do not use abbreviations.",
-    "mitigation": "Please update resource names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update resource names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-conventions/rest-resources)",
     "severity": "warning"
   },
   {
@@ -660,7 +660,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Sorting collections is designed with a 'sort' query parameter.",
     "description": "Sorting collections is designed with a 'sort' query parameter.",
-    "mitigation": "Please use `sort` query parameter for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please use `sort` query parameter for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/sorting)",
     "severity": "warning"
   },
   {
@@ -668,7 +668,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Sorting collections is designed with a 'sort' query parameter.",
     "description": "Sorting collections is designed with a 'sort' query parameter.",
-    "mitigation": "Please use `sort` query parameter for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please use `sort` query parameter for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-style/sorting)",
     "severity": "warning"
   },
   {
@@ -692,7 +692,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Representation fields use plural noun names for collections.",
     "description": "Representation fields use plural noun names for collections.",
-    "mitigation": "Please update field names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update field names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-conventions/representation-fields)",
     "severity": "error"
   },
   {
@@ -700,7 +700,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Representation fields use plural noun names for collections.",
     "description": "Representation fields use plural noun names for collections.",
-    "mitigation": "Please update field names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please update field names for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-conventions/representation-fields)",
     "severity": "error"
   },
   {
@@ -708,7 +708,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
     "description": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
-    "mitigation": "Please use `iso-date-time` format for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please use `iso-date-time` format for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-conventions/data-types)",
     "severity": "warning"
   },
   {
@@ -716,7 +716,7 @@
     "analyzer_name_id": "guidelines",
     "title": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
     "description": "Representation fields use strings in 'iso-date-time' format (RFC-3339) for date/time.",
-    "mitigation": "Please use `iso-date-time` format for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-guidelines-ruleset)",
+    "mitigation": "Please use `iso-date-time` format for the items identified. [Reference](https://developer.cisco.com/docs/api-insights/#!rest-conventions/data-types)",
     "severity": "warning"
   },
   {
