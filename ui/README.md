@@ -23,4 +23,4 @@ npm install
 npm start
 ```
 After that, UI code is ready for use and development.
-If there are any porxy errors thrown by npm start, please try with node v16 or change proxy address in package.json from localhost to 0.0.0.0
+If there are any porxy errors thrown by npm start, please try with node v16 or change proxy address in package.json from `"proxy": "http://localhost:8081/",` to `"proxy": "http://0.0.0.0:8081/",`
