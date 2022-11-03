@@ -26,7 +26,7 @@ interface JSONObject {
 export class ApiError extends Error {
   status: number;
 
-  constructor(status, message) {
+  constructor(status: number, message: string) {
     super(message);
     this.status = status;
     this.name = 'ApiError';
@@ -35,8 +35,8 @@ export class ApiError extends Error {
 
 export function buildApiAbsoluteUrl(relativeUrl: string) {
   return (
-    process.env.REACT_APP_API_ENDPOINT_URL
-    + process.env.REACT_APP_API_BASE_PATH
+    (process.env.REACT_APP_API_ENDPOINT_URL || '')
+    + (process.env.REACT_APP_API_BASE_PATH || '')
     + relativeUrl
   );
 }
@@ -78,7 +78,7 @@ function fetchJson(
 
   const finalOptions = buildMethodOptions(method, payload, options);
 
-  return fetch(absoluteUrl, finalOptions).then(async (resp) => {
+  return fetch(absoluteUrl, finalOptions as RequestInit).then(async (resp) => {
     if (resp.ok) return resp.json();
     const errMsg = await resp.text();
     throw new ApiError(resp.status, errMsg);
@@ -87,7 +87,7 @@ function fetchJson(
 
 const API = {
   get(url: string, options?: RequestInit) {
-    return fetchJson('GET', url, null, options);
+    return fetchJson('GET', url, undefined, options);
   },
   post(url: string, payload?: JSONObject, options?: RequestInit) {
     return fetchJson('POST', url, payload, options);

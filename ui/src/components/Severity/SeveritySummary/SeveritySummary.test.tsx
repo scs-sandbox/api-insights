@@ -59,35 +59,35 @@ describe('<SeveritySummary />', () => {
 
     const errorItem = container.querySelector('.severity-item-error');
     expect(errorItem).toBeInTheDocument();
-    const errorItemCount = errorItem.querySelector('.severity-item-count');
+    const errorItemCount = errorItem?.querySelector('.severity-item-count');
     expect(errorItemCount).toBeInTheDocument();
     expect(errorItemCount).toHaveTextContent('2');
-    expect(errorItem.querySelector('.severity-item-label')).toHaveTextContent('Error');
+    expect(errorItem?.querySelector('.severity-item-label')).toHaveTextContent('Error');
 
     const warningItem = container.querySelector('.severity-item-warning');
     expect(warningItem).toBeInTheDocument();
-    const warningItemCount = warningItem.querySelector('.severity-item-count');
+    const warningItemCount = warningItem?.querySelector('.severity-item-count');
     expect(warningItemCount).toBeInTheDocument();
     expect(warningItemCount).toHaveTextContent('20');
-    expect(warningItem.querySelector('.severity-item-label')).toHaveTextContent('Warning');
+    expect(warningItem?.querySelector('.severity-item-label')).toHaveTextContent('Warning');
 
     const infoItem = container.querySelector('.severity-item-info');
     expect(infoItem).toBeInTheDocument();
-    const infoItemCount = infoItem.querySelector('.severity-item-count');
+    const infoItemCount = infoItem?.querySelector('.severity-item-count');
     expect(infoItemCount).toBeInTheDocument();
     expect(infoItemCount).toHaveTextContent('200');
-    expect(infoItem.querySelector('.severity-item-label')).toHaveTextContent('Info');
+    expect(infoItem?.querySelector('.severity-item-label')).toHaveTextContent('Info');
 
     const hintItem = container.querySelector('.severity-item-hint');
     expect(hintItem).toBeInTheDocument();
-    const hintItemCount = hintItem.querySelector('.severity-item-count');
+    const hintItemCount = hintItem?.querySelector('.severity-item-count');
     expect(hintItemCount).toBeInTheDocument();
     expect(hintItemCount).toHaveTextContent('2000');
-    expect(hintItem.querySelector('.severity-item-label')).toHaveTextContent('Hint');
+    expect(hintItem?.querySelector('.severity-item-label')).toHaveTextContent('Hint');
   });
 
   test('Data is Null', () => {
-    const data: ComplianceData.ComplianceSeveritySummary[] = null;
+    const data: ComplianceData.ComplianceSeveritySummary[] = [];
 
     const { container } = render((
       <SeveritySummary data={data} showLabel />
@@ -95,31 +95,31 @@ describe('<SeveritySummary />', () => {
 
     const errorItem = container.querySelector('.severity-item-error');
     expect(errorItem).toBeInTheDocument();
-    const errorItemCount = errorItem.querySelector('.severity-item-count');
+    const errorItemCount = errorItem?.querySelector('.severity-item-count');
     expect(errorItemCount).toBeInTheDocument();
     expect(errorItemCount).toHaveTextContent('0');
-    expect(errorItem.querySelector('.severity-item-label')).toHaveTextContent('Error');
+    expect(errorItem?.querySelector('.severity-item-label')).toHaveTextContent('Error');
 
     const warningItem = container.querySelector('.severity-item-warning');
     expect(warningItem).toBeInTheDocument();
-    const warningItemCount = warningItem.querySelector('.severity-item-count');
+    const warningItemCount = warningItem?.querySelector('.severity-item-count');
     expect(warningItemCount).toBeInTheDocument();
     expect(warningItemCount).toHaveTextContent('0');
-    expect(warningItem.querySelector('.severity-item-label')).toHaveTextContent('Warning');
+    expect(warningItem?.querySelector('.severity-item-label')).toHaveTextContent('Warning');
 
     const infoItem = container.querySelector('.severity-item-info');
     expect(infoItem).toBeInTheDocument();
-    const infoItemCount = infoItem.querySelector('.severity-item-count');
+    const infoItemCount = infoItem?.querySelector('.severity-item-count');
     expect(infoItemCount).toBeInTheDocument();
     expect(infoItemCount).toHaveTextContent('0');
-    expect(infoItem.querySelector('.severity-item-label')).toHaveTextContent('Info');
+    expect(infoItem?.querySelector('.severity-item-label')).toHaveTextContent('Info');
 
     const hintItem = container.querySelector('.severity-item-hint');
     expect(hintItem).toBeInTheDocument();
-    const hintItemCount = hintItem.querySelector('.severity-item-count');
+    const hintItemCount = hintItem?.querySelector('.severity-item-count');
     expect(hintItemCount).toBeInTheDocument();
     expect(hintItemCount).toHaveTextContent('0');
-    expect(hintItem.querySelector('.severity-item-label')).toHaveTextContent('Hint');
+    expect(hintItem?.querySelector('.severity-item-label')).toHaveTextContent('Hint');
   });
 
   test('Part of severities', () => {
@@ -145,30 +145,30 @@ describe('<SeveritySummary />', () => {
 
     const errorItem = container.querySelector('.severity-item-error');
     expect(errorItem).toBeInTheDocument();
-    const errorItemCount = errorItem.querySelector('.severity-item-count');
+    const errorItemCount = errorItem?.querySelector('.severity-item-count');
     expect(errorItemCount).toBeInTheDocument();
     expect(errorItemCount).toHaveTextContent('2');
-    expect(errorItem.querySelector('.severity-item-label')).toHaveTextContent('Error');
+    expect(errorItem?.querySelector('.severity-item-label')).toHaveTextContent('Error');
 
     const warningItem = container.querySelector('.severity-item-warning');
     expect(warningItem).toBeInTheDocument();
-    const warningItemCount = warningItem.querySelector('.severity-item-count');
+    const warningItemCount = warningItem?.querySelector('.severity-item-count');
     expect(warningItemCount).toBeInTheDocument();
     expect(warningItemCount).toHaveTextContent('10');
-    expect(warningItem.querySelector('.severity-item-label')).toHaveTextContent('Warning');
+    expect(warningItem?.querySelector('.severity-item-label')).toHaveTextContent('Warning');
 
     const infoItem = container.querySelector('.severity-item-info');
     expect(infoItem).toBeInTheDocument();
-    const infoItemCount = infoItem.querySelector('.severity-item-count');
+    const infoItemCount = infoItem?.querySelector('.severity-item-count');
     expect(infoItemCount).toBeInTheDocument();
     expect(infoItemCount).toHaveTextContent('0');
-    expect(infoItem.querySelector('.severity-item-label')).toHaveTextContent('Info');
+    expect(infoItem?.querySelector('.severity-item-label')).toHaveTextContent('Info');
 
     const hintItem = container.querySelector('.severity-item-hint');
     expect(hintItem).toBeInTheDocument();
-    const hintItemCount = hintItem.querySelector('.severity-item-count');
+    const hintItemCount = hintItem?.querySelector('.severity-item-count');
     expect(hintItemCount).toBeInTheDocument();
     expect(hintItemCount).toHaveTextContent('0');
-    expect(hintItem.querySelector('.severity-item-label')).toHaveTextContent('Hint');
+    expect(hintItem?.querySelector('.severity-item-label')).toHaveTextContent('Hint');
   });
 });

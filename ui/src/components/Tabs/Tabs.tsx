@@ -22,17 +22,19 @@ import './Tabs.scss';
 
 type Props = {
   selectedTabIndex: number;
-  headers: ReactElement[];
+  headers?: ReactElement[];
   children?: ReactElement[];
   onChangeIndex?: (index: number) => void;
 };
 
 export default function Tabs(props: Props) {
   const onClickHeader = (e: MouseEvent<HTMLElement>) => {
-    const index = Number.parseInt(e.currentTarget.dataset.index, 10);
+    const { index } = e.currentTarget.dataset;
+    if (!index) return;
 
+    const tabIndex = Number.parseInt(index, 10);
     if (props.onChangeIndex) {
-      props.onChangeIndex(index);
+      props.onChangeIndex(tabIndex);
     }
   };
 

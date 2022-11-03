@@ -20,7 +20,7 @@ import { ReactNode } from 'react';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { DialogTitle as MuiDialogTitle } from '@mui/material';
+import { DialogTitle as MuiDialogTitle, SxProps, Theme } from '@mui/material';
 import './DialogTitle.scss';
 
 type Props = {
@@ -34,7 +34,7 @@ export default function DialogTitle(props: Props) {
     icon, children, onClose, ...other
   } = props;
 
-  const sx = {
+  const sx : SxProps<Theme> = {
     position: 'absolute',
     right: 8,
     top: 8,

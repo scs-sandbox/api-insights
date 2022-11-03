@@ -101,7 +101,7 @@ function appendComplianceToSpec(
 }
 
 export function filterNotEmptyVersionList(versionList: VersionData[]) {
-  if (!versionList) return null;
+  if (!versionList) return undefined;
 
   return versionList
     .map((v) => ({

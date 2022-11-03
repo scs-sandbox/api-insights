@@ -19,16 +19,6 @@
 import buildSortedListByStringField from './order';
 
 describe('buildSortedListByStringField()', () => {
-  test('null', () => {
-    const r = buildSortedListByStringField(null, 'score');
-    expect(r.length).toEqual(0);
-  });
-
-  test('undefined', () => {
-    const r = buildSortedListByStringField(undefined, 'score');
-    expect(r.length).toEqual(0);
-  });
-
   test('not array', () => {
     const r = buildSortedListByStringField({} as unknown[], 'score');
     expect(r.length).toEqual(0);

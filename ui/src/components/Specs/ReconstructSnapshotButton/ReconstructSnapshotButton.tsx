@@ -31,7 +31,7 @@ export type ReconstructedEvent = {
 };
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  serviceId?: string;
+  serviceId: string;
   onReconstructed?: (data: ReconstructedEvent) => void;
 };
 
@@ -46,15 +46,15 @@ export default function ReconstructSnapshotButton(props: Props) {
   } = useReconstructSnapshot(props.serviceId);
 
   const onClick = () => {
-    reconstructSnapshot(null, {
+    reconstructSnapshot(undefined, {
       onSuccess: (data) => {
         if (props.onReconstructed) {
           props.onReconstructed(data);
         }
         setMessage('Succeed in reconstructing snapshot');
       },
-      onError: (data: ApiError) => {
-        if (data.status === 400) {
+      onError: (data: unknown) => {
+        if ((data as ApiError).status === 400) {
           setMessage('apiclarity: no API traffic found');
         } else {
           setMessage('apiclarity not integrated for given service');

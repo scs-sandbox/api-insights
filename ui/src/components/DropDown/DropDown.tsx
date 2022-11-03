@@ -29,7 +29,7 @@ type Props = {
   placeholder?: string;
   options?: unknown[];
   onChange?: (value: string) => void;
-  renderValue?: (value: string) => ReactNode;
+  renderValue?: (value?: string) => ReactNode;
   requestOptionValue?: (option: unknown) => string;
   renderMenuItemLabel?: (option: unknown) => ReactNode;
 };
@@ -37,22 +37,26 @@ type Props = {
 /**
  * DropDown Component, examples:
  *
- * function DropDown_Example1() {
- *  const [value, setValue] = useState('');
- *  const onChange = (e) => { setValue(e) };
- *  const options = ['hello', 'world'];
- *  return <DropDown value={value} options={options} onChange={onChange} />
- * }
- *
- * function DropDown_Example2() {
- *  const [value, setValue] = useState('');
- *  const onChange = (e) => { setValue(e) };
- *  const options = [{ id: '1', text: 'hello' }, { id: '2', text: 'world' }];
-    const requestOptionValue = (option: {id: string, text: string}) => option.id;
+   function DropDown_Example1() {
+    const [value, setValue] = useState('');
+    const onChange = (e) => { setValue(e) };
+    const options = ['hello', 'world'];
+    return <DropDown value={value} options={options} onChange={onChange} />
+   }
+
+   function DropDown_Example2() {
+    const [value, setValue] = useState('');
+    const onChange = (e) => { setValue(e) };
+    const options = [{ id: '1', text: 'hello' }, { id: '2', text: 'world' }];
+    const requestOptionValue = (option: unknown) => (option as {id: string, text: string}).id;
     const renderValue = (value: string) => (
       <div className="dropdown-value">{options.find((i) => i.id === value)?.text}</div>
     );
-    const renderMenuItemLabel = (option: {id: string, text: string}) => (<div>{option.text}</div>);
+    const renderMenuItemLabel = (option: unknown) => (
+      <div>
+        {(option as {id: string, text: string}).text}
+      </div>
+    );
 
     return (
       <DropDown
@@ -62,10 +66,10 @@ type Props = {
         renderValue={renderValue}
         renderMenuItemLabel={renderMenuItemLabel}
     );
- * }
+  }
  */
 export default function DropDown(props: Props) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement>();
 
   const onOpenMenu = (e: MouseEvent<HTMLDivElement>) => {
     if (!props.options) return;
@@ -74,14 +78,14 @@ export default function DropDown(props: Props) {
   };
 
   const onCloseMenu = () => {
-    setAnchorEl(null);
+    setAnchorEl(undefined);
   };
 
   const onChange = (e: MouseEvent<HTMLDivElement>) => {
     onCloseMenu();
 
     if (props.onChange) {
-      props.onChange(e.currentTarget.dataset.value);
+      props.onChange(e.currentTarget.dataset.value || '');
     }
   };
 
@@ -104,7 +108,7 @@ export default function DropDown(props: Props) {
     return <div className="dropdown-placeholder">{placeholder}</div>;
   };
 
-  const renderValue = (value: string) => {
+  const renderValue = (value?: string) => {
     if (props.renderValue) {
       return props.renderValue(value);
     }
@@ -136,7 +140,7 @@ export default function DropDown(props: Props) {
     );
   };
 
-  const renderMenuItems = (options: unknown[]) => {
+  const renderMenuItems = (options?: unknown[]) => {
     if (!anchorEl) return null;
 
     const rect = anchorEl.getBoundingClientRect();

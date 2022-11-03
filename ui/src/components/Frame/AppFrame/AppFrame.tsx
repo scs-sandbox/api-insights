@@ -28,7 +28,7 @@ export type AppFrameContext = {
   navStore: { [index: string]: string };
   serviceList: ServiceData.Service[];
   selectedService: ServiceData.Service;
-  specServiceSummary: ServiceData.ServiceSummary;
+  specServiceSummary?: ServiceData.ServiceSummary;
   onServiceSelected: (e: ServiceData.Service) => void;
   refetchServiceList: () => void;
   updateSpecSummary: (e: ServiceData.ServiceSummary) => void;
@@ -44,7 +44,7 @@ export default function AppFrame(props: Props) {
   const { data: sysInfo } = useFetchInfo();
   const { data: serviceList, refetch: refetchServiceList } = useFetchServiceList();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [specServiceSummary, setSpecServiceSummary] = useState(null);
+  const [specServiceSummary, setSpecServiceSummary] = useState<ServiceData.ServiceSummary>();
   const serviceId = searchParams.get('service');
   const [navStore, setNavStore] = useState(props.navStore);
   const selectedService = (serviceList || []).find(
@@ -58,7 +58,7 @@ export default function AppFrame(props: Props) {
 
   const onServiceSelected = (e: ServiceData.Service) => {
     setSearchParams({ service: e.name_id || e.id });
-    setSpecServiceSummary(null);
+    setSpecServiceSummary(undefined);
   };
 
   const updateSpecSummary = (e: ServiceData.ServiceSummary) => {

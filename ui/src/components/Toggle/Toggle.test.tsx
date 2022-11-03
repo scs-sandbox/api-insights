@@ -42,7 +42,7 @@ describe('<Toggle />', () => {
     const label = screen.getByText('Using');
     expect(label).toBeInTheDocument();
 
-    fireEvent.click(toggle);
+    if (toggle) fireEvent.click(toggle);
   });
 
   test('onToggle', () => {
@@ -55,7 +55,7 @@ describe('<Toggle />', () => {
     expect(toggle).toBeInTheDocument();
     expect(toggle).toHaveClass('checked');
 
-    fireEvent.click(toggle);
+    if (toggle) fireEvent.click(toggle);
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
 });

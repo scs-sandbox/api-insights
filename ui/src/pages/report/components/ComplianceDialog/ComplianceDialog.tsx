@@ -41,7 +41,7 @@ export default function ComplianceDialog(props: Props) {
     const row = props.data.row as ComplianceData.ComplianceRangItem;
     const codeSelections = row.range.start.line
       ? [{ start: row.range.start.line, end: row.range.end.line }]
-      : null;
+      : undefined;
 
     return (
       <div className="source-code-block range-block">

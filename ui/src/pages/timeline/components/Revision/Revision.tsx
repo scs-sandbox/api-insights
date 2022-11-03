@@ -34,7 +34,7 @@ export type RevisionData = SpecData.Spec & {
 
 type Props = {
   data: RevisionData;
-  linkTo?: string;
+  linkTo: string;
   className?: string;
   onMouseEnter?: (item: RevisionData) => void;
   onMouseLeave?: (item: RevisionData) => void;
@@ -78,13 +78,13 @@ export default function Revision(props: Props) {
 
   const onRelease = () => {
     if (props.onReleased) {
-      props.onReleased(null);
+      // props.onReleased(null);
     }
   };
 
   const onArchive = () => {
     if (props.onArchived) {
-      props.onArchived(null);
+      // props.onArchived(null);
     }
   };
 

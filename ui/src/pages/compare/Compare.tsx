@@ -16,13 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useOutletContext, useSearchParams } from 'react-router-dom';
+import { URLSearchParamsInit, useOutletContext, useSearchParams } from 'react-router-dom';
 import Compare from './components/Compare/Compare';
 import { SpecData, useFetchSpecList } from '../../query/spec';
 import { useFetchCompare, useFetchMarkdown } from '../../query/compare';
 import { useFetchSpecCompliance } from '../../query/compliance';
 import { AppFrameContext } from '../../components/Frame/AppFrame/AppFrame';
-import { buildApiAbsoluteUrl } from '../../query/api';
 
 /**
  * This file sets up the data fetching functions for the compare page
@@ -34,8 +33,8 @@ export default function ComparePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamSpec = searchParams.get('spec');
   const searchParamSpec2 = searchParams.get('spec2');
-  const leftSpec = (specData || []).find((x) => x.id === searchParamSpec);
-  const rightSpec = (specData || []).find((x) => x.id === searchParamSpec2);
+  const leftSpec = (specData || []).find((x: SpecData.Spec) => x.id === searchParamSpec);
+  const rightSpec = (specData || []).find((x: SpecData.Spec) => x.id === searchParamSpec2);
   const {
     refetch: fetchCompare,
     data: compareData,
@@ -72,7 +71,7 @@ export default function ComparePage() {
       ...changingParam, // inputing the updated params last to override any existing parameters
     };
 
-    setSearchParams(params);
+    setSearchParams(params as URLSearchParamsInit);
   };
 
   /**

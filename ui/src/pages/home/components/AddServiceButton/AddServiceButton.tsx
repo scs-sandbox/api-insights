@@ -30,7 +30,7 @@ import './AddServiceButton.scss';
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   authEnabled: boolean;
   organizationList: OrganizationData.Organization[];
-  onServiceCreated?: (data: ServiceData.CreateServiceData) => void;
+  onServiceCreated?: (data: ServiceData.Service) => void;
   tags: string[];
 };
 
@@ -79,7 +79,7 @@ export default function AddServiceButton(props: Props) {
     };
 
     addService(data, {
-      onSuccess: (createServiceData: ServiceData.CreateServiceData) => {
+      onSuccess: (createServiceData: ServiceData.Service) => {
         setOpenDialog(false);
         if (props.onServiceCreated) {
           props.onServiceCreated(createServiceData);

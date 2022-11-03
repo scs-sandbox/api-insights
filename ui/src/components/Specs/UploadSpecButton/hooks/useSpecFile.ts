@@ -27,11 +27,11 @@ export type SpecFileData = {
   };
 };
 
-type ReadSpecFunciton = (file: File) => Promise<SpecFileData>;
+export type ReadSpecFunciton = (file: File) => Promise<SpecFileData>;
 
 export default function useSpecFile() {
   const [reading, setReading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error>();
 
   const readSpec = (file: File) => {
     setReading(true);
@@ -47,7 +47,7 @@ export default function useSpecFile() {
           resolve({ text, parsedSpec: parsed });
         } catch (err) {
           setReading(false);
-          setError(err);
+          setError(err as Error);
           resolve({ text: '' });
         }
       };

@@ -37,10 +37,10 @@ export type ClickRowEvent = {
 };
 
 type Props = {
-  analyzerList: AnalyserData.Analyser[];
+  analyzerList?: AnalyserData.Analyser[];
   specId: string;
   isLoading: boolean;
-  data: ComplianceData.Compliance[];
+  data?: ComplianceData.Compliance[];
   onClickItem: (e: ClickRowEvent) => void;
 };
 
@@ -67,6 +67,8 @@ export default function ComplianceTable(props: Props) {
 
   const onSortChange = (event: MouseEvent<HTMLElement>) => {
     const { sort } = event.currentTarget.dataset;
+    if (!sort) return;
+
     if (sortBy === sort) {
       setSortDesc(!sortDesc);
     } else {
@@ -79,8 +81,10 @@ export default function ComplianceTable(props: Props) {
 
     const { id, index } = event.currentTarget.dataset;
     const item = currentPageRows.find((i) => i.id === id);
+    if (!item || index) return;
 
-    const clickItemEventData = { ...item, row: item.detail[index] };
+    const rowIndex = Number.parseInt(index || '0', 10);
+    const clickItemEventData = { ...item, row: item.detail[rowIndex] };
 
     if (props.onClickItem) {
       props.onClickItem({
@@ -94,6 +98,7 @@ export default function ComplianceTable(props: Props) {
 
     const { id } = event.currentTarget.dataset;
     const item = currentPageRows.find((i) => i.id === id);
+    if (!item) return;
 
     if (!item.detail || !item.detail.length) {
       return;
@@ -111,7 +116,7 @@ export default function ComplianceTable(props: Props) {
       return;
     }
 
-    setExpandedRow(id === expandedRow ? '' : id);
+    setExpandedRow(id === expandedRow ? '' : (id || ''));
   };
 
   const onChangePageNum = (index: number) => {

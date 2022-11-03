@@ -28,7 +28,7 @@ type Props = {
 };
 
 export default function OrganizationDropDown(props: Props) {
-  const requestOptionValue = (option: OrganizationData.Organization) => option.name_id;
+  const requestOptionValue = (option: unknown) => (option as OrganizationData.Organization).name_id;
 
   const renderValue = () => {
     const foundOrganizationItem = (props.list || []).find(
@@ -42,8 +42,8 @@ export default function OrganizationDropDown(props: Props) {
     );
   };
 
-  const renderMenuItemLabel = (option: OrganizationData.Organization) => (
-    <div className="menu-item-label">{option.title}</div>
+  const renderMenuItemLabel = (option: unknown) => (
+    <div className="menu-item-label">{(option as OrganizationData.Organization).title}</div>
   );
 
   return (

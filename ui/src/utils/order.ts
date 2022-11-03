@@ -33,7 +33,7 @@ export default function buildSortedListByStringField(
   if (!list) return [];
   if (!Array.isArray(list)) return [];
 
-  return [...list].sort((a: unknown, b: unknown) => {
+  return [...list].sort((a: any, b: any) => {
     const va = a[stringField];
     const vb = b[stringField];
     if (va === vb) return 0;

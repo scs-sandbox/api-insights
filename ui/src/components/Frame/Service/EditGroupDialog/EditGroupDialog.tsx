@@ -68,7 +68,7 @@ export default function EditGroupDialog(props: Props) {
   };
 
   const invalidInputs = !trimmedTitle || !trimmedTag;
-  const onClose = props.busy ? null : props.handleClose;
+  const onClose = props.busy ? undefined : props.handleClose;
 
   return (
     <Dialog open={props.open} fullWidth maxWidth="sm">

@@ -34,7 +34,7 @@ describe('<SearchBar />', () => {
 
     const clear = container.querySelector('.search-clear');
     expect(clear).toBeInTheDocument();
-    fireEvent.click(clear, {});
+    if (clear) fireEvent.click(clear, {});
     expect(onClear).toHaveBeenCalledTimes(1);
   });
 });

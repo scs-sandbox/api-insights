@@ -82,16 +82,16 @@ export default function ServiceDetail(props: Props) {
 
   const editButton = renderEditButton();
 
-  const handleMailClick = (e) => {
+  const handleMailClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (email) window.location.href = `mailto:${email}?subject=Subject&body=message%20goes%20here`;
   };
 
-  const hadnleConnectClick = (e) => {
+  const hadnleConnectClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (contactInfo) window.open(contactInfo, '_blank').focus();
+    if (contactInfo) window.open(contactInfo, '_blank')?.focus();
   };
 
   return (

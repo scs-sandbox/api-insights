@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useOutletContext, useSearchParams } from 'react-router-dom';
+import { URLSearchParamsInit, useOutletContext, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import {
   useFetchSpecList,
@@ -42,7 +42,7 @@ export default function ReportPage() {
   const { refetch: refetchSpecList } = useFetchSpecList(service?.id);
   const [searchParams, setSearchParams] = useSearchParams();
   // Retrieve selected API spec id from url paremeter
-  const searchParamSpec = searchParams.get('spec');
+  const searchParamSpec = searchParams.get('spec') || '';
   const { data: selectedSpec, refetch: refetchSpecDetail } = useFetchSpecDetail(
     service?.id,
     searchParamSpec,
@@ -53,12 +53,14 @@ export default function ReportPage() {
   } = useFetchSpecCompliance(service?.id, selectedSpec ? selectedSpec.id : '');
 
   const resetSpecSummary = () => {
-    const summary: ServiceData.ServiceSummary = selectedSpec ? {
+    if (!selectedSpec) return;
+
+    const summary: ServiceData.ServiceSummary = {
       score: selectedSpec.score,
       version: selectedSpec.version,
       revision: selectedSpec.revision,
       updated_at: selectedSpec.updated_at,
-    } : null;
+    };
 
     updateSpecSummary(summary);
   };
@@ -68,7 +70,7 @@ export default function ReportPage() {
       service: searchParams.get('service'),
       spec: e.id,
     };
-    await setSearchParams(params);
+    await setSearchParams(params as URLSearchParamsInit);
     refetchSpecDetail();
 
     resetSpecSummary();

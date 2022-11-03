@@ -18,7 +18,7 @@
 
 import { useState, ButtonHTMLAttributes } from 'react';
 import { useAddSpec } from '../../../query/spec';
-import useSpecFile, { SpecFileData } from './hooks/useSpecFile';
+import useSpecFile, { ReadSpecFunciton, SpecFileData } from './hooks/useSpecFile';
 import UploadSpecDialog, {
   UploadingEvent,
 } from '../UploadSpecDialog/UploadSpecDialog';
@@ -52,7 +52,9 @@ export default function UploadSpecButton(props: Props) {
     reset: resetAddSpecResult,
   } = useAddSpec();
 
-  const isUploading = specReading || isSpecAdding;
+  const isUploading = !!(specReading || isSpecAdding);
+  const setSafeSpecReadingError = setSpecReadingError as
+    React.Dispatch<React.SetStateAction<Error | undefined>>;
 
   const onOpenDialog = () => {
     setOpenDialog(true);
@@ -64,12 +66,14 @@ export default function UploadSpecButton(props: Props) {
 
   const onUploading = (uploadingEvent: UploadingEvent) => {
     const { file, revision } = uploadingEvent;
-    readSpec(file).then((specFileDataEvent: SpecFileData) => {
+    (readSpec as ReadSpecFunciton)(file).then((specFileDataEvent: SpecFileData) => {
       const valid = specFileDataEvent.parsedSpec
         && (specFileDataEvent.parsedSpec.openapi || specFileDataEvent.parsedSpec.swagger);
 
       if (!valid) {
-        setSpecReadingError(new Error('Wrong Format'));
+        if (setSpecReadingError) {
+          setSafeSpecReadingError(new Error('Wrong Format'));
+        }
         return;
       }
 
@@ -91,7 +95,7 @@ export default function UploadSpecButton(props: Props) {
   };
 
   const onCloseMessage = () => {
-    setSpecReadingError(null);
+    setSafeSpecReadingError(undefined);
     resetAddSpecResult();
   };
 

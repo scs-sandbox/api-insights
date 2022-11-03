@@ -17,7 +17,7 @@
  */
 
 import { useState, MouseEvent } from 'react';
-import { MenuItem } from '@mui/material';
+import { MenuItem, SxProps } from '@mui/material';
 import { ServiceData } from '../../../../../query/service';
 import './ServiceGroup.scss';
 
@@ -43,8 +43,8 @@ export default function ServiceGroup(props: ServiceGroupProps) {
     const sx = isSelectedService ? {
       width: '100%',
       boxSizing: 'border-box',
-      backgroundColor: ' rgba(0, 188, 235, 0.14)',
-    } : { width: '100%', boxSizing: 'border-box' };
+      backgroundColor: 'rgba(0, 188, 235, 0.14)',
+    } : { width: '100%', boxSizing: 'border-box' } as SxProps;
 
     const selectedFlag = isSelectedService
       && <div className="drop group-selected"> &#10003; </div>;
