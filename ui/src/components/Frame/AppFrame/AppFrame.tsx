@@ -70,7 +70,7 @@ export default function AppFrame(props: Props) {
       newNavStore[key] = serviceSearchParam;
     });
     setNavStore(newNavStore);
-    setSpecServiceSummary(null);
+    setSpecServiceSummary(undefined);
   }, [serviceId]);
 
   useEffect(() => {

@@ -53,7 +53,7 @@ export default function CircleScore(props: Props) {
 
   return (
     <div className="circle-score" style={style}>
-      <ScoreLevel score={value} className="circle-part">
+      <ScoreLevel score={value || 0} className="circle-part">
         <div className={`score-track${props.darkTrack ? ' dark-track' : ''}`}>
           <CircularProgress
             color="inherit"
