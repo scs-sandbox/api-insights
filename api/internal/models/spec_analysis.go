@@ -19,11 +19,12 @@ package models
 import (
 	"encoding/json"
 	"fmt"
+	"time"
+
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
-	"time"
 )
 
 const (
@@ -39,10 +40,10 @@ type SpecAnalysis struct {
 	SpecAnalysisResult
 
 	Score     *int      `json:"score" gorm:"column:score"`
-	ServiceID string    `json:"service_id" gorm:"column:service_id;index"`
-	SpecID    string    `json:"spec_id" gorm:"column:spec_id;index"`
+	ServiceID string    `json:"service_id" gorm:"column:service_id;index:svc_spec_created_idx"`
+	SpecID    string    `json:"spec_id" gorm:"column:spec_id;index;index:svc_spec_created_idx"`
 	Status    string    `json:"status" gorm:"column:status;index"` // Submitted, Invalid, Analyzed
-	CreatedAt time.Time `json:"created_at" gorm:"column:created_at"`
+	CreatedAt time.Time `json:"created_at" gorm:"column:created_at;index:svc_spec_created_idx"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at"`
 }
 
