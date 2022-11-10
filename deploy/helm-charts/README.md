@@ -19,11 +19,12 @@
     Option 2: If you want to use the images built from source code locally:
     ```shell
     # build images
-    docker-compose build
+    docker compose build
     
     # tag the images built above
-    docker tag api-insights-backend ghcr.io/cisco-developer/api-insights-api:local
-    docker tag api-insights-ui ghcr.io/cisco-developer/api-insights-ui:local
+    # note: in some docker setup, the built image name can be different, eg: api-insights-backend
+    docker tag api-insights_backend ghcr.io/cisco-developer/api-insights-api:local
+    docker tag api-insights_ui ghcr.io/cisco-developer/api-insights-ui:local
     
     # install
     helm install api-insights ./api-insights -n api-insights --create-namespace \
