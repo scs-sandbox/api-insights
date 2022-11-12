@@ -1,3 +1,6 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/cisco-developer/api-insights/api)](https://goreportcard.com/report/github.com/cisco-developer/api-insights/api)
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cisco-developer/api-insights)
+
 # API Insights
 [![API Insights Logo](https://user-images.githubusercontent.com/5516389/199577047-132e193d-2ce0-481d-b54e-c6e2729053f4.svg)](https://developer.cisco.com/site/api-insights/)
 
