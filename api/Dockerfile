@@ -26,7 +26,7 @@ ENV GOARCH=amd64
 ENV GO111MODULE=on
 RUN go build -a -tags musl -ldflags '-w' -o ./bin/api-insights github.com/cisco-developer/api-insights/api/cmd/api-insights
 
-FROM ghcr.io/cisco-developer/api-insights-tools:v0.1.1
+FROM ghcr.io/cisco-developer/api-insights-tools:v0.1.2
 ARG BUILDER_DIR=/go/src/github.com/cisco-developer/api-insights/api
 
 LABEL Description="API Insights"
