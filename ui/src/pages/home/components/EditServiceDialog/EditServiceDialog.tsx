@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import FieldItem from '../../../../components/FieldItem/FieldItem';
@@ -85,7 +85,7 @@ export default function EditServiceDialog(props: Props) {
   const [contactName, setContactName] = useState(contact?.name || '');
   const [email, setEmail] = useState(contact?.email || '');
   const [emailValid, setEmailValid] = useState(true);
-  const [url, setUrl] = useState(contact.url || '');
+  const [url, setUrl] = useState(contact?.url || '');
   const trimmedTitle = title.trim();
   const trimmedProductTag = productTag.trim();
   const trimmedOrganization = organization.trim();
@@ -113,7 +113,7 @@ export default function EditServiceDialog(props: Props) {
     : "Let's update the service. This will be visible on the service tile.";
   const editAction = isCreateNew ? 'Create' : 'Update';
   const invalidInputs = !trimmedTitle || !trimmedProductTag || !trimmedOrganization || !emailValid;
-  const onClose = props.busy ? null : props.handleClose;
+  const onClose = props.busy ? undefined : props.handleClose;
 
   const visibilityField = props.authEnabled && (
     <FieldItem label="Private Visibility">
@@ -133,7 +133,7 @@ export default function EditServiceDialog(props: Props) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     ) !== null;
 
-  const handleEmailInput = (e) => {
+  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailValid(validateEmail(e.target.value));
     setEmail(e.target.value);
   };

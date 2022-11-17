@@ -35,8 +35,8 @@ export default function ProductTagDropDown(props: Props) {
     />
   );
 
-  const renderMenuItemLabel = (option: string) => (
-    <div className="menu-item-label">{option}</div>
+  const renderMenuItemLabel = (option: unknown) => (
+    <div className="menu-item-label">{option as string}</div>
   );
 
   return (

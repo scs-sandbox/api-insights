@@ -25,7 +25,7 @@ describe('classNames', () => {
   });
 
   test('a, null, b', () => {
-    const r = classNames('a', null, 'b');
+    const r = classNames('a', undefined, 'b');
     expect(r).toEqual('a b');
   });
 

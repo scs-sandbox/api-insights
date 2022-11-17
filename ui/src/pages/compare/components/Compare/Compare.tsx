@@ -67,8 +67,8 @@ function Compare(props: Props) {
 
   const onDownload = () => {
     if (props.handleDownload) {
-      const oldOne = `${props.leftSpec.version}.${props.leftSpec.revision}`;
-      const newOne = `${props.rightSpec.version}.${props.rightSpec.revision}`;
+      const oldOne = `${props.leftSpec?.version}.${props.leftSpec?.revision}`;
+      const newOne = `${props.rightSpec?.version}.${props.rightSpec?.revision}`;
       const fileName = `changelog-${props.selectedService.name_id}-${oldOne}-${newOne}.md`;
       props.handleDownload(fileName, props.markDownData?.result?.markdown);
     }
@@ -86,6 +86,10 @@ function Compare(props: Props) {
   ) {
     const time = dayjs(spec.updated_at).format('MMM DD, HH:mm');
     const link = `/reports?service=${spec.service_id}&spec=${spec.id}`;
+    const severitySummaryData = (complianceList || [])
+      .map((i) => i.result.summary.stats)
+      .filter((i) => !!i);
+
     return (
       <div className="summary-table">
         <div className="summary-row">
@@ -103,12 +107,7 @@ function Compare(props: Props) {
         </div>
         <div className="summary-row">
           <div className="summary-cell">
-            <SeveritySummary data={
-              (complianceList)
-                ? complianceList.map((i) => i.result.summary.stats)
-                : []
-            }
-            />
+            <SeveritySummary data={severitySummaryData} />
             <Link to={link} className="button-rc">
               View Report
             </Link>
@@ -123,6 +122,13 @@ function Compare(props: Props) {
    * @returns JSX.element
    */
   function renderSpecSummaries() {
+    if (!props.leftSpec
+      || !props.rightSpec
+      || !props.leftComplianceList
+      || !props.rightComplianceList) {
+      return null;
+    }
+
     const leftSpecDetail = renderSpecDetail(props.leftSpec, props.leftComplianceList);
     const rightSpecDetail = renderSpecDetail(props.rightSpec, props.rightComplianceList);
     return (

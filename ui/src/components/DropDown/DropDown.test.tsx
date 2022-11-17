@@ -27,7 +27,7 @@ describe('<DropDown />', () => {
 
     const valueBox = container.querySelector('.dropdown-value-box');
     expect(valueBox).toBeInTheDocument();
-    fireEvent.click(valueBox);
+    if (valueBox) fireEvent.click(valueBox);
   });
 
   test('Empty options', () => {
@@ -37,7 +37,7 @@ describe('<DropDown />', () => {
 
     const valueBox = container.querySelector('.dropdown-value-box');
     expect(valueBox).toBeInTheDocument();
-    fireEvent.click(valueBox);
+    if (valueBox) fireEvent.click(valueBox);
   });
 
   test('Placeholder', () => {
@@ -62,7 +62,7 @@ describe('<DropDown />', () => {
 
     const valueBox = container.querySelector('.dropdown-value-box');
     expect(valueBox).toBeInTheDocument();
-    fireEvent.click(valueBox);
+    if (valueBox) fireEvent.click(valueBox);
 
     const menuItem = screen.getByText('world');
     expect(menuItem).toBeInTheDocument();
@@ -78,21 +78,25 @@ describe('<DropDown />', () => {
 
     const valueBox = container.querySelector('.dropdown-value-box');
     expect(valueBox).toBeInTheDocument();
-    fireEvent.click(valueBox);
+    if (valueBox) fireEvent.click(valueBox);
 
     const menuItem = document.querySelector('.menu-item-label');
     expect(menuItem).toBeInTheDocument();
     expect(menuItem).toHaveTextContent('[unknown]');
-    fireEvent.click(menuItem);
+    if (menuItem) fireEvent.click(menuItem);
   });
 
   test('Object Array', () => {
     const options = [{ id: '1', text: 'hello' }, { id: '2', text: 'world' }];
-    const requestOptionValue = (option: {id: string, text: string}) => option.id;
-    const renderValue = (value: string) => (
-      <div className="dropdown-value">{options.find((i) => i.id === value).text}</div>
+    const requestOptionValue = (option: unknown) => (option as {id: string, text: string}).id;
+    const renderValue = (value?: string) => (
+      <div className="dropdown-value">{options.find((i) => i.id === value)?.text}</div>
     );
-    const renderMenuItemLabel = (option: {id: string, text: string}) => (<div>{option.text}</div>);
+    const renderMenuItemLabel = (option: unknown) => (
+      <div>
+        {(option as {id: string, text: string}).text}
+      </div>
+    );
 
     const { container } = render((
       <DropDown
@@ -110,7 +114,7 @@ describe('<DropDown />', () => {
 
     const valueBox = container.querySelector('.dropdown-value-box');
     expect(valueBox).toBeInTheDocument();
-    fireEvent.click(valueBox);
+    if (valueBox) fireEvent.click(valueBox);
 
     const menuItem = screen.getByText('world');
     expect(menuItem).toBeInTheDocument();

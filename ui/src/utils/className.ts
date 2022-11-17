@@ -24,9 +24,9 @@ result:
     className will be "button start active" if the props.className
     is "start" and the props.active is true
 */
-export default function classNames(...args: string[]): string {
+export default function classNames(...args: (string | undefined)[]): string {
   return args
     .filter((i) => (i || '').trim())
-    .map((i) => i.trim())
+    .map((i) => (i || '').trim())
     .join(' ');
 }

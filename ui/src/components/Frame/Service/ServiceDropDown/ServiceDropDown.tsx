@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, ChangeEvent } from 'react';
 import { CircularProgress, Menu } from '@mui/material';
 import ServiceGroup from './ServiceGroup/ServiceGroup';
 import SelectedService from './SelectedService/SelectedService';
@@ -62,7 +62,7 @@ export function groupServiceByProdcut(allServices: ServiceData.Service[]) {
 }
 
 export default function ServiceDropDown(props: Props) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>();
   const openMenu = Boolean(anchorEl);
   const [searchKey, setSearchKey] = useState('');
 
@@ -76,7 +76,7 @@ export default function ServiceDropDown(props: Props) {
   };
 
   const onCloseMenu = () => {
-    setAnchorEl(null);
+    setAnchorEl(undefined);
   };
 
   const onSelectedMenuItem = (event: MouseEvent<HTMLElement>) => {
@@ -85,6 +85,8 @@ export default function ServiceDropDown(props: Props) {
     const service = props.services.find(
       (i: ServiceData.Service) => i.id === event.currentTarget.dataset.id,
     );
+
+    if (!service) return;
 
     if (props.onChange) {
       props.onChange(service);
@@ -127,7 +129,7 @@ export default function ServiceDropDown(props: Props) {
     ));
   }
 
-  const onSearchKeyChanged = (e) => {
+  const onSearchKeyChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKey(e.target.value);
   };
 

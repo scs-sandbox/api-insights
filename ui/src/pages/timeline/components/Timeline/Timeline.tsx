@@ -75,7 +75,7 @@ export default function Timeline(props: Props) {
       return <div className="data-loading">Loading...</div>;
     }
 
-    if (!filteredValidVersionList.length) {
+    if (!filteredValidVersionList || !filteredValidVersionList.length) {
       return (
         <div className="no-result">
           <UploadSpecButton

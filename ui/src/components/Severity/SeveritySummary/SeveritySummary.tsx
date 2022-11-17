@@ -21,8 +21,10 @@ import { KnownSeverity } from '../SeverityIcon/SeverityIcon';
 import SeverityItem from '../SeverityItem/SeverityItem';
 import './SeveritySummary.scss';
 
+type SummaryList = (ComplianceData.ComplianceSeveritySummary | undefined)[];
+
 type Props = {
-  data: ComplianceData.ComplianceSeveritySummary[];
+  data: SummaryList;
   showLabel?: boolean;
 };
 
@@ -40,16 +42,20 @@ export const SEVERITY_LIST: KnownSeverity[] = [
   'hint',
 ];
 
-function calcSummary(severity: string, list: ComplianceData.ComplianceSeveritySummary[]) {
+function calcSummary(severity: string, list: SummaryList) {
   const summary = {
     total: 0,
   };
 
-  list.forEach((i) => {
-    const stat: ComplianceData.ComplianceSeveritySummaryItem = i[severity] || {};
-    const count = stat.count || 0;
-    summary.total += count;
-  });
+  list
+    .forEach((i) => {
+      if (!i) return;
+
+      const stat = (i[severity as keyof ComplianceData.ComplianceSeveritySummary] || {}) as
+      ComplianceData.ComplianceSeveritySummaryItem;
+      const count = stat.count || 0;
+      summary.total += count;
+    });
 
   return summary;
 }

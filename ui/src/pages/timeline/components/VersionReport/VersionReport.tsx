@@ -43,12 +43,12 @@ type Props = {
 export default function VersionReport(props: Props) {
   const [openDetail, setOpenDetail] = useState(false);
   const [showAllRevisions, setShowAllRevisions] = useState(false);
-  const [highlightRevisionId, setHighLightRevisionId] = useState(null);
+  const [highlightRevisionId, setHighLightRevisionId] = useState<string>();
 
   const ascRevisionList = buildSortedListByStringField(
     props.data.revisions,
     'updated_at',
-  );
+  ) as RevisionData[];
   const lastRevision = props.data.revisions[0];
 
   const serviceNameId = props.service?.name_id || props.service?.id;
@@ -60,7 +60,7 @@ export default function VersionReport(props: Props) {
   };
 
   const onCancelHighlightRevision = () => {
-    setHighLightRevisionId(null);
+    setHighLightRevisionId(undefined);
   };
 
   const onEnterTrendBar = (e: MouseEvent<HTMLElement>) => {
@@ -113,7 +113,7 @@ export default function VersionReport(props: Props) {
   };
 
   const renderTrends = () => {
-    const data = ascRevisionList.map((i: RevisionData) => ({
+    const data = ascRevisionList.map((i) => ({
       'data-id': i.id,
       label: i.revision,
       score: i.score,

@@ -16,11 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import AddServiceButton from '../AddServiceButton/AddServiceButton';
 import { getScoreLevels } from '../../../../components/Frame/Service/ScoreLevel/ScoreLevel';
 import HelpButton from '../../../../components/HelpButton/HelpButton';
-import { ServiceData, usePatchService } from '../../../../query/service';
+import { PatchServiceData, ServiceData, usePatchService } from '../../../../query/service';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import { groupServiceByProdcut, groupServiceByOrg } from '../../../../components/Frame/Service/ServiceDropDown/ServiceDropDown';
 import Searchbar from '../../../../components/SearchBar/SearchBar';
@@ -92,7 +92,7 @@ export default function Home(props: Props) {
     orgName, authEnabled, newServiceId, searchKey,
     serviceList, authorizedOrganizationList, organizationList,
   } = props;
-  const [serviceToEdit, setServiceToEdit] = useState(null);
+  const [serviceToEdit, setServiceToEdit] = useState<ServiceData.Service>();
   const [showEditService, setShowEditService] = useState(false);
   const {
     isLoading: isServicePatching,
@@ -134,11 +134,11 @@ export default function Home(props: Props) {
       organization_id: e.organizationId,
       product_tag: e.productTag,
       title: e.title,
-      id: serviceToEdit.id,
+      id: serviceToEdit?.id,
       ...visibilityField,
     };
 
-    patchService(data, {
+    patchService(data as PatchServiceData, {
       onSuccess: (patchServiceData: ServiceData.Service) => {
         setShowEditService(false);
         onServiceUpdated(patchServiceData);
@@ -146,7 +146,7 @@ export default function Home(props: Props) {
     });
   };
 
-  const onSearchKeyChanged = (e) => {
+  const onSearchKeyChanged = (e: ChangeEvent<HTMLInputElement>) => {
     if (props.onSearchKeyChanged) {
       props.onSearchKeyChanged(e.target.value);
     }
@@ -207,7 +207,7 @@ export default function Home(props: Props) {
   function renderGroup(collection: ServiceCollection, index: number) {
     // Render legend shows compliance score of the first service in the product group
     const legend = index === 0 ? renderLegend() : null;
-    const serviceTile = (service) => (
+    const serviceTile = (service: ServiceData.Service) => (
       <div key={service.id} className="group-col">
         <ServiceDetail
           authEnabled={authEnabled}

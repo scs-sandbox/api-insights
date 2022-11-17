@@ -50,9 +50,12 @@ function compareRows(
     return orderB - orderA;
   }
 
-  if (a[sortBy] === b[sortBy]) return 0;
+  const aSortBy = a[sortBy as keyof AnalyseTableRowData];
+  const bSortBy = b[sortBy as keyof AnalyseTableRowData];
 
-  return a[sortBy] < b[sortBy] ? -1 : 1;
+  if (aSortBy === bSortBy) return 0;
+
+  return aSortBy < bSortBy ? -1 : 1;
 }
 
 export function sortRows(
@@ -78,16 +81,17 @@ export function sortRows(
 export function convertToTableData(
   list: ComplianceData.Compliance[],
 ): AnalyseTableRowData[] {
-  if (!list) return null;
+  if (!list) return [];
 
   return list.reduce(
     (pre: AnalyseTableRowData[], cur: ComplianceData.Compliance) => {
       const findings = cur.result?.findings;
       if (!findings) return pre;
 
-      let rows = [];
+      let rows = [] as AnalyseTableRowData[];
       Object.keys(findings).forEach((severity) => {
-        const findingItem = findings[severity] as ComplianceData.ComplianceFindingItem;
+        const findingItem = findings[severity as keyof ComplianceData.ComplianceFindings] as
+          ComplianceData.ComplianceFindingItem;
         if (!findingItem) return;
 
         const { rules } = findingItem;
@@ -104,7 +108,7 @@ export function convertToTableData(
             message: rule.message,
             mitigation: rule.mitigation,
             detail: rule.data,
-          };
+          } as AnalyseTableRowData;
 
           rows = [...rows, row];
         });

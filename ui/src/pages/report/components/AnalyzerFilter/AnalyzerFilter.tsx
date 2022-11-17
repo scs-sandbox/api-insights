@@ -29,14 +29,14 @@ type AnalyserFilterItem = AnalyserItem & {
   selected: boolean;
 };
 
-type AnalyserFilterData = {
+export type AnalyserFilterData = {
   [index: string]: AnalyserFilterItem;
 };
 
 type Props = {
   allItemEnabled?: boolean;
-  analyzerList: AnalyserItem[];
-  filterData: AnalyserFilterData;
+  analyzerList?: AnalyserItem[];
+  filterData?: AnalyserFilterData;
   onChange: (data: AnalyserFilterData) => void;
 };
 
@@ -68,8 +68,8 @@ function buildAllAnalyzerFilters(
 }
 
 function buildNewFilterData(
-  filterList: AnalyserItem[],
-  oldFilterData: AnalyserFilterData,
+  filterList?: AnalyserItem[],
+  oldFilterData?: AnalyserFilterData,
 ) {
   if (!filterList) return oldFilterData;
 
@@ -93,7 +93,7 @@ export function AnalyzerFilter(props: Props) {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newData = buildNewFilterData(props.analyzerList, props.filterData);
     const itemAll = newData['*'];
-    const itemTarget = newData[e.currentTarget.dataset.value];
+    const itemTarget = newData[e.currentTarget.dataset.value || '*'];
 
     if (itemAll === itemTarget) {
       const newDataValues = Object.values(newData) as AnalyserFilterItem[];
@@ -104,7 +104,10 @@ export function AnalyzerFilter(props: Props) {
     } else {
       itemTarget.selected = e.currentTarget.checked;
       const noUnselectedItem = !Object.values(newData).find(
-        (i: AnalyserFilterItem) => i.value !== '*' && !i.selected,
+        (i) => {
+          const filterItem = i as AnalyserFilterItem;
+          return (filterItem.value !== '*' && !filterItem.selected);
+        },
       );
       if (itemAll) {
         itemAll.selected = noUnselectedItem;

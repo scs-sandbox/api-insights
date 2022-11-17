@@ -19,10 +19,11 @@
 import { useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import ComplianceTable, {
-  ClickRowEvent,
+  ClickRowEvent, ClickRowEventData,
 } from '../ComplianceTable/ComplianceTable';
 import ComplianceDialog from '../ComplianceDialog/ComplianceDialog';
 import {
+  AnalyserFilterData,
   AnalyzerFilter,
   filterIsSelected,
 } from '../AnalyzerFilter/AnalyzerFilter';
@@ -59,8 +60,8 @@ const DRIFT_ANALYZER = 'drift';
 
 export default function Report(props: Props) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
-  const [analyzerFilterData, setAnalyzerFilterData] = useState(null);
-  const [openComplianceRow, setOpenComplianceRow] = useState(null);
+  const [analyzerFilterData, setAnalyzerFilterData] = useState<AnalyserFilterData>();
+  const [openComplianceRow, setOpenComplianceRow] = useState<ClickRowEventData>();
   const {
     isLoading: isReanalyzing,
     isError: isReanalyzingError,
@@ -88,7 +89,7 @@ export default function Report(props: Props) {
   };
 
   const onCloseComplianceDialog = () => {
-    setOpenComplianceRow(null);
+    setOpenComplianceRow(undefined);
   };
 
   const onChangeTabIndex = (index: number) => {
@@ -122,12 +123,13 @@ export default function Report(props: Props) {
     );
   };
 
-  const renderStatistics = (data: ComplianceData.Compliance[]) => {
+  const renderStatistics = (data?: ComplianceData.Compliance[]) => {
     if (!data || !data.length) return null;
 
+    const list = data.map((i) => i.result.summary.stats);
     return (
       <div className="statistics-block">
-        <SeveritySummary data={data.map((i) => i.result.summary.stats)} showLabel />
+        <SeveritySummary data={list} showLabel />
       </div>
     );
   };
@@ -144,7 +146,7 @@ export default function Report(props: Props) {
           value: i.name_id,
           status: props.complianceList?.find((x) => x.analyzer === i.name_id)?.status || 'none',
         }))
-      : null;
+      : undefined;
 
     return (
       <AnalyzerFilter
@@ -194,7 +196,7 @@ export default function Report(props: Props) {
 
   const renderComplianceTab = (forDrift: boolean, index: number) => {
     const list = (!props.complianceList || !props.analyzerList)
-      ? null
+      ? undefined
       : props.complianceList.filter((compliance) => {
         if (forDrift) return compliance.analyzer === DRIFT_ANALYZER;
 
@@ -248,7 +250,7 @@ export default function Report(props: Props) {
           <div className="table-block">
             <ComplianceTable
               key={props.selectedSpec ? props.selectedSpec.id : ''}
-              analyzerList={forDrift ? null : props.analyzerList}
+              analyzerList={forDrift ? undefined : props.analyzerList}
               isLoading={props.complianceListLoading || isReanalyzingError}
               specId={props.selectedSpec ? props.selectedSpec.id : ''}
               data={list}

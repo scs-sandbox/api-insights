@@ -52,7 +52,7 @@ describe('<Tabs />', () => {
     const tabHeader1 = container.querySelector('[data-index="1"]');
     expect(tabHeader1).toHaveClass('tab-header', 'active');
 
-    fireEvent.click(tabHeader0, {});
+    if (tabHeader0) fireEvent.click(tabHeader0, {});
     expect(onChangeIndex).toHaveBeenCalledTimes(1);
   });
 
@@ -76,7 +76,7 @@ describe('<Tabs />', () => {
 
     const tabHeader1 = container.querySelector('[data-index="1"]');
 
-    fireEvent.click(tabHeader1, {});
+    if (tabHeader1) fireEvent.click(tabHeader1, {});
     expect(onChangeIndex).toHaveBeenCalledTimes(1);
   });
 
@@ -84,7 +84,7 @@ describe('<Tabs />', () => {
     render((
       <Tabs
         selectedTabIndex={0}
-        headers={null}
+        headers={undefined}
       >
         <div>tab-0</div>
         <div>tab-1</div>

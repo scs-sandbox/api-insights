@@ -17,7 +17,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useOutletContext, useSearchParams } from 'react-router-dom';
+import { URLSearchParamsInit, useOutletContext, useSearchParams } from 'react-router-dom';
 import elementScrollTo from '../../utils/elementScrollTo';
 import { AppFrameContext } from '../../components/Frame/AppFrame/AppFrame';
 import { ServiceData } from '../../query/service';
@@ -50,7 +50,7 @@ export default function HomePage() {
   const organizationList = dynamicOrganizationList.map((orgString) => JSON.parse(orgString)) || [];
 
   const onServiceCreated = (e?: ServiceData.Service) => {
-    setNewServiceId(e?.id);
+    setNewServiceId(e?.id || '');
     refetchServiceList();
   };
 
@@ -59,15 +59,15 @@ export default function HomePage() {
   };
 
   const onClearSearchKey = () => {
-    setSearchParams({ search: '', org: orgName });
+    setSearchParams({ search: '', org: orgName } as URLSearchParamsInit);
   };
 
   const onSearchKeyChanged = (keyword: string) => {
-    setSearchParams({ search: keyword, org: orgName });
+    setSearchParams({ search: keyword, org: orgName } as URLSearchParamsInit);
   };
 
   const onOrgChanged = (org: string) => {
-    setSearchParams({ search: searchKey, org });
+    setSearchParams({ search: searchKey, org } as URLSearchParamsInit);
   };
 
   // Scroll to newly created service group upon addition into service list.
@@ -81,10 +81,10 @@ export default function HomePage() {
 
   return (
     <Home
-      orgName={orgName}
-      authEnabled={sysInfo.auth?.enabled}
+      orgName={orgName || ''}
+      authEnabled={sysInfo.auth?.enabled || false}
       newServiceId={newServiceId}
-      searchKey={searchKey}
+      searchKey={searchKey || ''}
       serviceList={serviceList}
       authorizedOrganizationList={authorizedOrganizationList}
       organizationList={organizationList}

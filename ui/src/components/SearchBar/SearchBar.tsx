@@ -16,11 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { ChangeEventHandler } from 'react';
 import './SearchBar.scss';
 
 type Props = {
   searchKey: string;
-  onSearchKeyChanged: (e) => void;
+  onSearchKeyChanged: ChangeEventHandler<HTMLInputElement>;
   onSearchKeyCleared: () => void;
 };
 

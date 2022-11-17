@@ -20,11 +20,13 @@ import PopLayer from '../../../../../../components/PopLayer/PopLayer';
 import { ChartDataItem } from '../Bar/Bar';
 import './BarTip.scss';
 
+export type Mouse = {
+  x: number;
+  y: number;
+}
+
 type Props = ChartDataItem & {
-  mouse: {
-    x: number;
-    y: number;
-  };
+  mouse?: Mouse;
 };
 
 export default function BarTip(props: Props) {

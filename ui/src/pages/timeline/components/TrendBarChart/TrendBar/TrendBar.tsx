@@ -18,7 +18,7 @@
 
 import { useState, MouseEvent } from 'react';
 import Bar, { ChartDataItem } from './Bar/Bar';
-import BarTip from './BarTip/BarTip';
+import BarTip, { Mouse } from './BarTip/BarTip';
 
 type Props = ChartDataItem & {
   onMouseEnter?: (e: MouseEvent<HTMLElement>) => void;
@@ -27,7 +27,7 @@ type Props = ChartDataItem & {
 
 export default function TipTrendBar(props: Props) {
   const [mouseMoveTimer, setMouseMoveTimer] = useState(0);
-  const [mouse, setMouse] = useState(null);
+  const [mouse, setMouse] = useState<Mouse>();
 
   const onMouseMove = (event: MouseEvent<HTMLElement>) => {
     clearTimeout(mouseMoveTimer);
@@ -44,7 +44,7 @@ export default function TipTrendBar(props: Props) {
 
   const onMouseLeave = (event: MouseEvent<HTMLElement>) => {
     clearTimeout(mouseMoveTimer);
-    setMouse(null);
+    setMouse(undefined);
     setMouseMoveTimer(0);
     if (props.onMouseLeave) {
       props.onMouseLeave(event);

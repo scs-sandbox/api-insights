@@ -42,7 +42,7 @@ type Props = {
 
 export default function UploadSpecDialog(props: Props) {
   const [revision, setRevision] = useState('');
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File>();
 
   const trimmedRevision = revision.trim();
 
@@ -51,11 +51,13 @@ export default function UploadSpecDialog(props: Props) {
   };
 
   const onFileSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const selectedFile = e.target.files[0];
+    const selectedFile = e.target.files ? e.target.files[0] : undefined;
     setFile(selectedFile);
   };
 
   const onUploading = () => {
+    if (!file) return;
+
     const e: UploadingEvent = {
       file,
       revision: trimmedRevision,
@@ -68,7 +70,7 @@ export default function UploadSpecDialog(props: Props) {
 
   const invalidInputs = !trimmedRevision || !file;
   const fileName = file ? file.name : '';
-  const onClose = props.busy ? null : props.handleClose;
+  const onClose = props.busy ? undefined : props.handleClose;
 
   return (
     <Dialog open={props.open} fullWidth maxWidth="md">

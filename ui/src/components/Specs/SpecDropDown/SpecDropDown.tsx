@@ -36,15 +36,17 @@ export default function SpecDropDown(props: Props) {
     return result;
   });
   const onChange = (value: string) => {
-    const spec = data.find((i) => i.id === value);
+    const spec = specList.find((i) => i.id === value);
     if (props.onChange) {
-      props.onChange(spec);
+      if (spec) {
+        props.onChange(spec);
+      }
     }
   };
 
-  const requestOptionValue = (option: SpecData.Spec) => option.id;
+  const requestOptionValue = (option: unknown) => (option as SpecData.Spec).id;
 
-  const renderValue = (value: string) => {
+  const renderValue = (value?: string) => {
     const spec = (specList || []).find((i) => i.id === value);
 
     if (!spec) return null;
@@ -57,10 +59,10 @@ export default function SpecDropDown(props: Props) {
     );
   };
 
-  const renderMenuItemLabel = (option: SpecData.Spec) => (
+  const renderMenuItemLabel = (option: unknown) => (
     <div className="menu-item-label">
-      <span className="version-label">{option.version}</span>
-      <span className="revision-label">{option.revision}</span>
+      <span className="version-label">{(option as SpecData.Spec).version}</span>
+      <span className="revision-label">{(option as SpecData.Spec).revision}</span>
     </div>
   );
 
