@@ -33,6 +33,7 @@ import { ServiceData } from '../../../../query/service';
 import { ComplianceData } from '../../../../query/compliance';
 import { DiffData } from '../../../../query/compare';
 import './Compare.scss';
+import ScaleIcon from '../../../../components/Icons/ScaleIcon/ScaleIcon';
 
 type Props = {
   selectedService: ServiceData.Service;
@@ -145,9 +146,7 @@ function Compare(props: Props) {
    * Renders the button for trigerring comparison, will show busy
    * if compare data fetching already in progress
    */
-  const buttonIcon = (
-    <i className={`compare-icon${props.compareDataFetching ? ' busy' : ''}`} />
-  );
+  const buttonIcon = <ScaleIcon className="compare-icon" />;
 
   const header = (
     <div className="page-header-content">

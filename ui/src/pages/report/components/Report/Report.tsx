@@ -97,14 +97,6 @@ export default function Report(props: Props) {
   };
 
   const onReanalyze = async () => {
-    // setReanalyzing(true);
-    // await TriggerReanalyze(
-    //   props.service.id,
-    //   props.selectedSpec.id,
-    //   props.analyzerList.map((analyzer) => analyzer.name_id),
-    // );
-    // await props.refetchSpecDetail();
-    // setReanalyzing(false);
     await reAnalyze();
     props.refetchSpecDetail();
   };
@@ -141,11 +133,20 @@ export default function Report(props: Props) {
       ? props.analyzerList
         // Drift analyzer will be it's own tab on the page
         .filter((i) => i.name_id !== DRIFT_ANALYZER)
-        .map((i) => ({
-          title: i.title,
-          value: i.name_id,
-          status: props.complianceList?.find((x) => x.analyzer === i.name_id)?.status || 'none',
-        }))
+        .map((i) => {
+          const complianceItem = props.complianceList?.find((x) => x.analyzer === i.name_id) || {
+            status: props.complianceList ? 'failed' : 'Analyzed',
+            score: 0,
+          };
+
+          return {
+            title: i.title,
+            value: i.name_id,
+            weight: i.config?.score_config?.analyzer_weight || 0,
+            status: complianceItem.status,
+            score: complianceItem.score,
+          };
+        })
       : undefined;
 
     return (
@@ -163,8 +164,8 @@ export default function Report(props: Props) {
       <span className="failed-warning">Warning: Analyzer Failure</span>
     ) : null;
 
-    const textPart = (
-      <div className="text-part">
+    const infoPart = (
+      <div className="info-part">
         <EnvIcon value={forDrift ? SpecData.SpecState.Release : SpecData.SpecState.Development} />
         <span className="description">
           {forDrift ? 'Spec drift' : 'Analyzing spec'}
@@ -188,7 +189,7 @@ export default function Report(props: Props) {
 
     return (
       <div className="analyzer-block">
-        {textPart}
+        {infoPart}
         {filterPart}
       </div>
     );

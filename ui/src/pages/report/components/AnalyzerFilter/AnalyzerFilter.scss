@@ -25,22 +25,86 @@
     padding: 0;
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     margin: 0 -8px;
 
     .filter-item {
       padding: 4px 8px;
+      margin-right: 6px;
 
       .item-label {
         display: flex;
+        align-items: center;
         cursor: pointer;
 
-        .text-part {
-          white-space: nowrap;
+        input {
+          margin-right: 8px;
         }
 
-        .analyze-failed {
-          font-weight: 400;
-          color: #b55f54;
+        .analyzer-item {
+          display: flex;
+          align-items: center;
+
+          &.status-failed {
+            color: #B55F54;
+            .analyzer-col-score {
+              .circle-score {
+                .score-track {
+                  color: inherit;
+                }
+              }
+            }
+
+            .analyzer-col-detail {
+              color: inherit;
+            }
+          }
+
+          .analyzer-col-score {
+            flex: 0 0 auto;
+            margin-right: 10px;
+            position: relative;
+
+            .analyzer-failed {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 15px;
+              font-weight: 800;
+              line-height: 1.2;
+              background-color: #fff;
+            }
+
+            .circle-score {
+              .score-track {
+                color: #eee;
+              }
+  
+              .value-label {
+                font-size: 20px;
+              }
+            }
+          }
+
+          .analyzer-col-detail {
+            color: #555;
+            .analyzer-title {
+              margin-bottom: 3px;
+            }
+
+            .analyzer-weight-icon {
+              display: inline-block;
+              vertical-align: middle;
+              width: 1.4em;
+              height: 1.4em;
+              margin-right: 4px;
+            }
+          }
         }
       }
     }
