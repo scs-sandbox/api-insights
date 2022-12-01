@@ -264,6 +264,10 @@ export default function Report(props: Props) {
   };
 
   const renderResult = () => {
+    if (!props.selectedSpec) {
+      return null;
+    }
+
     const headers = [
       <div key="Compliance" className="report-tab-header">
         <EnvIcon value={SpecData.SpecState.Development} />
