@@ -17,12 +17,17 @@
  */
 
 import { ChangeEvent } from 'react';
+import CircleScore from '../../../../components/Frame/Service/CircleScore/CircleScore';
+import ScaleIcon from '../../../../components/Icons/ScaleIcon/ScaleIcon';
+import classNames from '../../../../utils/className';
 import './AnalyzerFilter.scss';
 
 type AnalyserItem = {
-  status: string;
   title: string;
   value: string;
+  weight: number;
+  status: string;
+  score: number;
 };
 
 type AnalyserFilterItem = AnalyserItem & {
@@ -34,7 +39,6 @@ export type AnalyserFilterData = {
 };
 
 type Props = {
-  allItemEnabled?: boolean;
   analyzerList?: AnalyserItem[];
   filterData?: AnalyserFilterData;
   onChange: (data: AnalyserFilterData) => void;
@@ -51,20 +55,8 @@ export function filterIsSelected(
 
 function buildAllAnalyzerFilters(
   filterList: AnalyserItem[],
-  allItemEnabled?: boolean,
 ) {
-  if (!allItemEnabled) {
-    return filterList || [];
-  }
-
-  return [
-    {
-      title: 'All',
-      value: '*',
-      status: '',
-    },
-    ...(filterList || []),
-  ];
+  return filterList || [];
 }
 
 function buildNewFilterData(
@@ -125,9 +117,12 @@ export function AnalyzerFilter(props: Props) {
 
   const filterListItems = buildAllAnalyzerFilters(
     props.analyzerList,
-    props.allItemEnabled,
   ).map((i) => {
     const checked = filterIsSelected(i.value, props.filterData);
+    const failed = i.status !== 'Analyzed';
+    const failedText = failed ? (<div className="analyzer-failed">FAILED</div>) : null;
+    const analyzerItemClassName = classNames('analyzer-item', failed ? 'status-failed' : '');
+
     return (
       <li key={i.value} className="filter-item">
         <label className="item-label">
@@ -138,13 +133,21 @@ export function AnalyzerFilter(props: Props) {
             data-value={i.value}
             onChange={onChange}
           />
-          <span
-            className={`text-part ${
-              i.status !== 'Analyzed' ? '' : 'analyze-failed'
-            }`}
-          >
-            {i.status === 'Analyzed' ? i.title : `${i.title} (Failed)`}
-          </span>
+          <div className={analyzerItemClassName}>
+            <div className="analyzer-col-score">
+              <CircleScore value={i.score} size={48} />
+              {failedText}
+            </div>
+            <div className="analyzer-col-detail">
+              <div className="analyzer-title">{i.title}</div>
+              <div className="analyzer-item-weight">
+                <ScaleIcon className="analyzer-weight-icon" />
+                <span className="analyzer-weight-value">
+                  {`${i.weight * 100}%`}
+                </span>
+              </div>
+            </div>
+          </div>
         </label>
       </li>
     );

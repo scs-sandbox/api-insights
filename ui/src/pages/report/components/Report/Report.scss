@@ -73,6 +73,7 @@
       height: 25px;
       background: center / contain no-repeat url('../../../../assets/images/refresh-dark.svg');
     }
+
     .icn-spinner {
       animation: spin-animation 1s infinite;
       display: inline-block;
@@ -87,6 +88,7 @@
         transform: rotate(359deg);
       }
     }
+
     .reanalyze-button {
       position: absolute;
       top: 30px;
@@ -106,18 +108,29 @@
     }
 
     .compliance-tab {
+      &.for-drift {
+        .analyzer-block {
+          .filter-part {
+            padding-bottom: 10px;
+            border-bottom: none;
+          }
+        }
+      }
+
       .analyzer-block {
         display: grid;
         flex-wrap: wrap;
         margin: 15px 8px;
 
-        .text-part {
+        .info-part {
           display: flex;
           align-items: center;
           flex: 0 0 auto;
           font-weight: 200;
           color: #333;
           margin-right: 6px;
+          padding-bottom: 15px;
+          border-bottom: solid 1px #e8e8e8;
 
           .description {
             font-size: 28px;
@@ -145,7 +158,15 @@
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          margin-top: 6px;
+          margin-top: 15px;
+          padding-bottom: 15px;
+          border-bottom: solid 1px #e8e8e8;
+
+          .text-part {
+            font-weight: 200;
+            color: #333;
+            margin-right: 6px;
+          }
         }
       }
 
@@ -153,8 +174,18 @@
         display: flex;
         justify-content: center;
         flex: 1 0 auto;
-        margin: 20px 0;
+        margin: 15px 0;
       }
+
+      .table-block {
+        margin: 0 8px;
+
+        .compliance-pagination.top {
+          padding-top: 15px;
+          border-top: solid 1px #e8e8e8;
+        }
+      }
+
     }
   }
 }

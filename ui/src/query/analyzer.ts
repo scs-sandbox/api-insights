@@ -24,6 +24,11 @@ export namespace AnalyserData {
     status: string;
     name_id: string;
     title: string;
+    config: {
+      score_config: {
+        analyzer_weight: number;
+      }
+    }
   };
 }
 
