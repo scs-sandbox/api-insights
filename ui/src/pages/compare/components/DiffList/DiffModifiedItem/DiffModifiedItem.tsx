@@ -54,7 +54,7 @@ export default function DiffModifiedItem(props: Props) {
       </div>
       {props.data.breaking && <div className="row-breaking">Breaking</div>}
       {show && (
-        <div>
+        <div onClick={(e) => { e.stopPropagation(); }}>
           <div className="detail">
             <MarkdownViewer text={props.data.message} />
           </div>
