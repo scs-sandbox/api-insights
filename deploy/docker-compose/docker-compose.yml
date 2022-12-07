@@ -49,7 +49,9 @@ services:
       - DB_DATABASE=api-insights
 
   mysql:
-    image: mysql:latest
+    image: mysql:5.7.40
+    # There is no official arm64 image for Apple M1 for mysql-5, so choose to use x86 version.
+    platform: "linux/amd64"
     ports:
       - "3306:3306"
     environment:
