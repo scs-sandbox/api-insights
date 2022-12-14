@@ -67,8 +67,8 @@ export function useFetchSpecList(serviceId: string) {
   });
 }
 
-export function useFetchSpecDetail(serviceId: string, specId: string) {
-  return useQuery(['spec-detail', serviceId], () => {
+export function useFetchSpecDetail(serviceId: string, specId: string, queryName?: string) {
+  return useQuery([queryName || 'spec-detail', serviceId], () => {
     const url = `/services/${serviceId}/specs/${specId}?withDoc=true`;
     if (!serviceId || !specId) return null;
     return Api.get(url);

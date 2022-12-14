@@ -1,0 +1,40 @@
+.reference-button {
+	background-color: #4D67A3;
+	font-size: inherit;
+	color: #fff;
+	border: none;
+	outline: none;
+	padding: 7px 13px;
+	text-align: left;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #5474b1;
+	}
+
+	.compare-icon {
+		height: 12px;
+	}
+}
+
+.active {
+	background-color: #4668a8;
+	width: 100%;
+	border-radius: 4px 4px 0px 0px;
+}
+
+.reference-label {
+	font-size: 14px;
+	line-height: 16px;
+	display: flex;
+	align-items: center;
+	color: #ffffff;
+}
+.reference-name {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	display: flex;
+	align-items: center;
+	color: #ffffff;
+}

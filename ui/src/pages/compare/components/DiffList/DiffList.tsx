@@ -20,10 +20,13 @@ import DiffModifiedItem from './DiffModifiedItem/DiffModifiedItem';
 import DiffAddedItem from './DiffAddItem/DiffAddItem';
 import DiffDeletedItem from './DiffDeletedItem/DiffDeletedItem';
 import { DiffData } from '../../../../query/compare';
+import { SpecData } from '../../../../query/spec';
 import './DiffList.scss';
 
 type Props = {
   data: DiffData.JsonDiffResult;
+  leftSpec?: SpecData.Spec;
+  rightSpec?: SpecData.Spec;
 };
 
 export default function DiffList(props: Props) {
@@ -47,7 +50,12 @@ export default function DiffList(props: Props) {
     .map((modifiedItem, index) => {
       const key = `modified-${index}`;
       return (
-        <DiffModifiedItem data={modifiedItem} key={key} />
+        <DiffModifiedItem
+          data={modifiedItem}
+          leftSpec={props.leftSpec}
+          rightSpec={props.rightSpec}
+          key={key}
+        />
       );
     });
 

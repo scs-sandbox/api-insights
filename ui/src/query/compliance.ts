@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { ContactSupportOutlined } from '@mui/icons-material';
 import { useQuery } from 'react-query';
 import Api from './api';
 

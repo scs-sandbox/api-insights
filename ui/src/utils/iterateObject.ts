@@ -16,30 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-.severity-icon {
-  display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
-  background: center / contain no-repeat;
-  background-image: url('./images/unknown.svg');
-
-  &.severity-icon-error {
-    background-image: url('./images/errors.svg');
-  }
-
-  &.severity-icon-hint {
-    background-image: url('./images/hint.svg');
-  }
-
-  &.severity-icon-info {
-    background-image: url('./images/info.svg');
-  }
-
-  &.severity-icon-warning {
-    background-image: url('./images/warnings.svg');
-  }
-
-  &.severity-icon-breaking {
-    background-image: url('./images/breaking.svg');
-  }
+export default function iterate(obj: any, resultArray: any[]) {
+  Object.keys(obj).forEach((key) => {
+    if (key === '$ref') {
+      resultArray.push(obj[key]);
+    }
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      iterate(obj[key], resultArray);
+    }
+  });
 }
