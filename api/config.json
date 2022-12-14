@@ -15,5 +15,6 @@
   "panoptica-url": "http://localhost:9981",
   "panoptica-access-key": "",
   "panoptica-secret-key": "",
-  "auth-enabled": false
+  "auth-enabled": false,
+  "start-data-compression-at-bytes": 3145728
 }
