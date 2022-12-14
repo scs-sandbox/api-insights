@@ -71,7 +71,7 @@ func (m *Spec) BeforeSave(tx *gorm.DB) (err error) {
 	m.DocCompressed, err = compressData([]byte(*m.Doc))
 	if err != nil {
 		return err
-	} else {
+	} else if m.DocCompressed != nil {
 		m.internalDoc = m.Doc
 		m.Doc = nil
 	}
