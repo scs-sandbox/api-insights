@@ -17,6 +17,8 @@
 package utils
 
 import (
+	"bytes"
+	"compress/gzip"
 	"crypto/md5"
 	"encoding/base64"
 	"encoding/json"
@@ -102,4 +104,56 @@ func UnmarshalMapInto(m map[string]interface{}, v interface{}) error {
 		return err
 	}
 	return json.Unmarshal(mapBytes, v)
+}
+
+// GZIP compresses & outputs data in the GZIP format.
+// Optional GZIP header metadata can be passed into the compressed data.
+func GZIP(data []byte, header *gzip.Header) ([]byte, error) {
+	var b bytes.Buffer
+	w := gzip.NewWriter(&b)
+
+	if header != nil {
+		w.Comment = header.Comment
+		w.Extra = header.Extra
+		w.ModTime = header.ModTime
+		w.Name = header.Name
+		w.OS = header.OS
+	}
+
+	if _, err := w.Write(data); err != nil {
+		return nil, err
+	}
+
+	if err := w.Flush(); err != nil {
+		return nil, err
+	}
+
+	if err := w.Close(); err != nil {
+		return nil, err
+	}
+
+	return b.Bytes(), nil
+}
+
+// GUNZIP decompresses & outputs data from the GZIP format.
+// Optional GZIP header metadata passed into the compressed data is also returned.
+func GUNZIP(data []byte) ([]byte, *gzip.Header, error) {
+	r, err := gzip.NewReader(bytes.NewBuffer(data))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var b bytes.Buffer
+	_, err = b.ReadFrom(r)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return b.Bytes(), &gzip.Header{
+		Comment: r.Comment,
+		Extra:   r.Extra,
+		ModTime: r.ModTime,
+		Name:    r.Name,
+		OS:      r.OS,
+	}, nil
 }

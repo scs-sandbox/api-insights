@@ -111,7 +111,7 @@ func (dao *blobSpecDAO) List(ctx context.Context, filter *ListFilter, withDoc bo
 	db := dao.client.WithContext(ctx).Table(models.SpecTableName)
 
 	if !withDoc {
-		db.Omit("doc")
+		db.Omit("doc", "doc_compressed")
 	}
 
 	query := map[string]interface{}{}

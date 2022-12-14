@@ -21,8 +21,28 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
+	"github.com/cisco-developer/api-insights/api/pkg/utils"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2/altsrc"
 )
+
+var (
+	// 0=compress all,-1=no compression
+	startDataCompressionAtBytes int = -1
+)
+
+func Flags() []cli.Flag {
+	return []cli.Flag{
+		altsrc.NewIntFlag(&cli.IntFlag{
+			Name:        "start-data-compression-at-bytes",
+			Usage:       "Value in bytes at when to compress data; default=3145728,0=compress all,-1=no compression",
+			Value:       startDataCompressionAtBytes,
+			Destination: &startDataCompressionAtBytes,
+			EnvVars:     []string{"START_DATA_COMPRESSION_AT_BYTES"},
+		}),
+	}
+}
 
 // ModelObject defines the interface of a model
 type ModelObject interface {
@@ -89,3 +109,19 @@ func (m *Contact) Scan(value interface{}) error {
 // Value implements driver.Valuer interface.
 // See https://gorm.io/docs/data_types.html#Implements-Customized-Data-Type.
 func (m *Contact) Value() (driver.Value, error) { return json.Marshal(m) }
+
+// compressData conditionally compresses (GZIP) large-sized data, where startDataCompressionAtBytes dictates whether to & at what size to start compression.
+func compressData(data []byte) ([]byte, error) {
+
+	if startDataCompressionAtBytes == -1 {
+		return nil, nil // No Compression
+	} else if startDataCompressionAtBytes == 0 || (data != nil && len(data) >= startDataCompressionAtBytes) {
+		compressedData, err := utils.GZIP([]byte(data), nil)
+		if err != nil {
+			return nil, err
+		}
+		return compressedData, nil
+	}
+
+	return nil, nil
+}
