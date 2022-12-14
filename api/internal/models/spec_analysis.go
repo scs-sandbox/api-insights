@@ -75,7 +75,7 @@ func (m *SpecAnalysis) BeforeSave(tx *gorm.DB) (err error) {
 	m.RawResultCompressed, err = compressData(m.RawResult)
 	if err != nil {
 		return err
-	} else {
+	} else if m.RawResultCompressed != nil {
 		m.internalRawResult = m.RawResult
 		m.RawResult = nil
 	}
