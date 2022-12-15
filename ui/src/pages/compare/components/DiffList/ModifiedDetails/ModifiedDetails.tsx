@@ -35,31 +35,28 @@ export default function ModifiedDetails(props: Props) {
     let { message } = data;
     if (data.details) {
       data.details.forEach((detail) => {
-        console.log('replacing: ', detail.message);
         message = message.replaceAll(detail.message, '');
       });
     }
     return (
       <div>
-        {/* {JSON.stringify(data)} */}
         {isBreaking && <div className="breaking-container"><SeverityIcon severity="breaking" /></div>}
         <MarkdownViewer text={message} />
-        {data.details && data.details.map((detail: DiffData.DetailItem) => (
-          <Fragment key={detail.message}>
-            {renderDetail(detail)}
-          </Fragment>
-        ))}
+        <div className="markdown-children">
+          {data.details && data.details.map((detail: DiffData.DetailItem) => (
+            <Fragment key={detail.message}>
+              {renderDetail(detail)}
+            </Fragment>
+          ))}
+        </div>
       </div>
     );
   };
   const changes = changeList.map((change) => {
     if (change) {
       let { message } = change;
-      console.log('main message:', message);
-      // message.replace('\n\n', '\n');
       if (change.details) {
         change.details.forEach((detail) => {
-          console.log('replacing: ', detail.message);
           message = message.replaceAll(detail.message, '');
         });
       }

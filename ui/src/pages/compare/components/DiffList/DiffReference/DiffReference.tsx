@@ -45,9 +45,10 @@ export default function DiffReference(props: Props) {
   const [refs, setRefs] = useState<string[]>([]);
   useEffect(() => {
     iterateObject(leftSchemaSection, refs);
+    iterateObject(rightSchemaSection, refs);
   }, []);
   return (
-    <div>
+    <div id={refName}>
       <div className="reference-button" onClick={() => props.removeActive(props.data)}>
         <div className="reference-label">Viewing reference</div>
         <div className="reference-name">
@@ -67,11 +68,13 @@ export default function DiffReference(props: Props) {
           overviewRulerLanes: 0,
         }}
         editorDidMount={(diffEditor) => {
+          console.log('ref did mount:', refs);
+          if (!refs) return;
           const ogEditor = diffEditor.getOriginalEditor();
           const modEditor = diffEditor.getModifiedEditor();
           const ogMdoel = ogEditor.getModel();
           const modMdoel = modEditor.getModel();
-          function injectToEditor(
+          function injectSpaceToEditor(
             item: string,
             targetEditor: editor.IStandaloneCodeEditor,
             targetModel: editor.ITextModel | null,
@@ -87,7 +90,10 @@ export default function DiffReference(props: Props) {
                   options: {
                     isWholeLine: false,
                     after: {
-                      attachedData: item, content: '              ', inlineClassName: '', cursorStops: 1,
+                      attachedData: item,
+                      content: '              ',
+                      inlineClassName: refName,
+                      cursorStops: 1,
                     },
                   },
                 },
@@ -97,11 +103,31 @@ export default function DiffReference(props: Props) {
           let itemKey;
           new Set(refs).forEach((item: any) => {
             itemKey = `${item}"`;
-            injectToEditor(itemKey, ogEditor, ogMdoel);
-            injectToEditor(itemKey, modEditor, modMdoel);
+            injectSpaceToEditor(itemKey, ogEditor, ogMdoel);
+            injectSpaceToEditor(itemKey, modEditor, modMdoel);
           });
-          waitFor('.mtk1').then(() => {
+          waitFor(`.${refName}`).then(() => {
             injectButtonToEditor(refs, props.setActiveRefs);
+            // setRefs((updatedRefs) => {
+            //   injectButtonToEditor(updatedRefs, props.setActiveRefs);
+            //   return updatedRefs;
+            // });
+            ogEditor.onMouseDown(() => {
+              injectButtonToEditor(refs, props.setActiveRefs);
+              return undefined;
+            });
+            ogEditor.onMouseUp(() => {
+              injectButtonToEditor(refs, props.setActiveRefs);
+              return undefined;
+            });
+            ogEditor.onMouseLeave(() => {
+              injectButtonToEditor(refs, props.setActiveRefs);
+              return undefined;
+            });
+            ogEditor.onDidChangeCursorSelection(() => {
+              injectButtonToEditor(refs, props.setActiveRefs);
+              return undefined;
+            });
             ogEditor.onDidScrollChange(() => {
               injectButtonToEditor(refs, props.setActiveRefs);
             });

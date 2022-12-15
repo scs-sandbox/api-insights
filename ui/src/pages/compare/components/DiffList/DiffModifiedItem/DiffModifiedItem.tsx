@@ -199,6 +199,15 @@ export default function DiffModifiedItem(props: Props) {
                     ogEditor.onDidScrollChange(() => {
                       injectButtonToEditor(refs, setActiveRefs);
                     });
+                    ogEditor.onMouseDown(() => {
+                      injectButtonToEditor(refs, setActiveRefs);
+                    });
+                    ogEditor.onMouseUp(() => {
+                      injectButtonToEditor(refs, setActiveRefs);
+                    });
+                    ogEditor.onDidChangeCursorSelection(() => {
+                      injectButtonToEditor(refs, setActiveRefs);
+                    });
                   });
                 }}
               />
