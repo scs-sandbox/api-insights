@@ -26,7 +26,7 @@ import Blue from './images/diff-modified.png';
 import MarkdownViewer from '../../../../../components/MarkdownViewer/MarkdownViewer';
 import waitFor from '../../../../../utils/waitFor';
 import iterateObject from '../../../../../utils/iterateObject';
-import injectButtonToEditor from '../../../../../utils/injectButtonToEditor';
+import { monacoMount } from '../../../../../utils/monacoInjection';
 import DiffReference from '../DiffReference/DiffReference';
 import ModifiedDetails from '../ModifiedDetails/ModifiedDetails';
 import './DiffModifiedItem.scss';
@@ -161,54 +161,8 @@ export default function DiffModifiedItem(props: Props) {
                   overviewRulerLanes: 0,
                 }}
                 editorDidMount={(diffEditor) => {
-                  const ogEditor = diffEditor.getOriginalEditor();
-                  const modEditor = diffEditor.getModifiedEditor();
-                  const ogMdoel = ogEditor.getModel();
-                  const modMdoel = modEditor.getModel();
-                  function injectToEditor(
-                    item: string,
-                    targetEditor: editor.IStandaloneCodeEditor,
-                    targetModel: editor.ITextModel | null,
-                  ) {
-                    if (!targetModel) return;
-                    const modMatches = (modMdoel)
-                      ? targetModel.findMatches(item, false, false, false, null, true, undefined)
-                      : [];
-                    modMatches.forEach((match) => {
-                      targetEditor.createDecorationsCollection([
-                        {
-                          range: match.range,
-                          options: {
-                            isWholeLine: false,
-                            after: {
-                              attachedData: item, content: '              ', inlineClassName: '', cursorStops: 1,
-                            },
-                          },
-                        },
-                      ]);
-                    });
-                  }
-                  let itemKey;
-                  new Set(refs).forEach((item: any) => {
-                    itemKey = `${item}"`;
-                    injectToEditor(itemKey, ogEditor, ogMdoel);
-                    injectToEditor(itemKey, modEditor, modMdoel);
-                  });
-                  waitFor('.mtk1').then(() => {
-                    injectButtonToEditor(refs, setActiveRefs);
-                    ogEditor.onDidScrollChange(() => {
-                      injectButtonToEditor(refs, setActiveRefs);
-                    });
-                    ogEditor.onMouseDown(() => {
-                      injectButtonToEditor(refs, setActiveRefs);
-                    });
-                    ogEditor.onMouseUp(() => {
-                      injectButtonToEditor(refs, setActiveRefs);
-                    });
-                    ogEditor.onDidChangeCursorSelection(() => {
-                      injectButtonToEditor(refs, setActiveRefs);
-                    });
-                  });
+                  if (!refs) return;
+                  monacoMount(diffEditor, refs, setActiveRefs);
                 }}
               />
               {referenceButtons}

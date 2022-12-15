@@ -39,7 +39,7 @@ export default function ModifiedDetails(props: Props) {
       });
     }
     return (
-      <div>
+      <div key={message}>
         {isBreaking && <div className="breaking-container"><SeverityIcon severity="breaking" /></div>}
         <MarkdownViewer text={message} />
         <div className="markdown-children">
@@ -52,7 +52,7 @@ export default function ModifiedDetails(props: Props) {
       </div>
     );
   };
-  const changes = changeList.map((change) => {
+  const changes = changeList.map((change, index) => {
     if (change) {
       let { message } = change;
       if (change.details) {
@@ -61,7 +61,7 @@ export default function ModifiedDetails(props: Props) {
         });
       }
       return (
-        <div>
+        <div key={`${change.message}`}>
           <MarkdownViewer text={message} />
           {change.details && change.details.map((detail: DiffData.DetailItem) => (
             <Fragment key={detail.message}>
