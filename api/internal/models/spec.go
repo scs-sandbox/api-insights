@@ -20,6 +20,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/cisco-developer/api-insights/api/pkg/utils"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"github.com/getkin/kin-openapi/openapi3"
 	"gopkg.in/yaml.v3"
@@ -34,19 +35,22 @@ const (
 
 // Spec represents a spec
 type Spec struct {
-	ID        string    `json:"id,omitempty" gorm:"primaryKey"`
-	Doc       SpecDoc   `json:"doc" gorm:"column:doc"`
-	DocType   string    `json:"doc_type" gorm:"column:doc_type"`
-	Revision  string    `json:"revision" gorm:"column:revision;index"`
-	Score     *int      `json:"score" gorm:"column:score"`
-	ServiceID string    `json:"service_id" gorm:"column:service_id;index"`
-	State     string    `json:"state" gorm:"column:state;index"` // Archive, Release, Development, Latest
-	Valid     string    `json:"valid" gorm:"column:valid"`
-	Version   string    `json:"version" gorm:"column:version;index"`
-	CreatedAt time.Time `json:"created_at" gorm:"column:created_at"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at"`
+	ID            string    `json:"id,omitempty" gorm:"primaryKey"`
+	Doc           SpecDoc   `json:"doc" gorm:"column:doc"`
+	DocCompressed []byte    `json:"-" gorm:"column:doc_compressed"`
+	DocType       string    `json:"doc_type" gorm:"column:doc_type"`
+	Revision      string    `json:"revision" gorm:"column:revision;index"`
+	Score         *int      `json:"score" gorm:"column:score"`
+	ServiceID     string    `json:"service_id" gorm:"column:service_id;index"`
+	State         string    `json:"state" gorm:"column:state;index"` // Archive, Release, Development, Latest
+	Valid         string    `json:"valid" gorm:"column:valid"`
+	Version       string    `json:"version" gorm:"column:version;index"`
+	CreatedAt     time.Time `json:"created_at" gorm:"column:created_at"`
+	UpdatedAt     time.Time `json:"updated_at" gorm:"column:updated_at"`
 
 	DocOAS *openapi3.T `json:"-" gorm:"-"`
+	// internalDoc is an internal state variable for temporarily storing Spec.Doc between Spec.BeforeSave & Spec.AfterSave for data compression.
+	internalDoc SpecDoc
 }
 
 // TableName implements gorm Tabler interface
@@ -56,6 +60,46 @@ func (m *Spec) TableName() string {
 
 func (m *Spec) BeforeCreate(tx *gorm.DB) (err error) {
 	m.ID = shared.TimeUUID()
+	return
+}
+
+// BeforeSave is a hook called before creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large Spec.Doc(s), compressData conditionally compresses Spec.Doc into Spec.DocCompressed.
+func (m *Spec) BeforeSave(tx *gorm.DB) (err error) {
+
+	// Handle compression.
+	m.DocCompressed, err = compressData([]byte(*m.Doc))
+	if err != nil {
+		return err
+	} else if m.DocCompressed != nil {
+		m.internalDoc = m.Doc
+		m.Doc = nil
+	}
+
+	return
+}
+
+// AfterSave is a hook called after creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large Spec.Doc(s), resets the temporary staging of Spec.Doc.
+func (m *Spec) AfterSave(tx *gorm.DB) (err error) {
+	if m.DocCompressed != nil {
+		m.Doc = m.internalDoc
+		m.internalDoc = nil
+		m.DocCompressed = nil
+	}
+	return
+}
+
+// AfterFind is a hook called after querying by GORM (https://gorm.io/docs/hooks.html).
+// For handling large Spec.Doc(s), if Spec.DocCompressed contains the compression, decompresses it back into Spec.Doc.
+func (m *Spec) AfterFind(tx *gorm.DB) (err error) {
+	if m.DocCompressed != nil {
+		decompressed, _, err := utils.GUNZIP(m.DocCompressed)
+		if err != nil {
+			return err
+		}
+		m.Doc = NewSpecDocFromBytes(decompressed)
+	}
 	return
 }
 

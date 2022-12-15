@@ -19,12 +19,12 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"time"
-
 	"github.com/cisco-developer/api-insights/api/internal/models/analyzer"
+	"github.com/cisco-developer/api-insights/api/pkg/utils"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
+	"time"
 )
 
 const (
@@ -57,6 +57,8 @@ func (m *SpecAnalysis) BeforeCreate(tx *gorm.DB) (err error) {
 	return
 }
 
+// BeforeSave is a hook called before creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecAnalysisResult.RawResult(s), compressData conditionally compresses SpecAnalysisResult.RawResult into SpecAnalysisResult.RawResultCompressed.
 func (m *SpecAnalysis) BeforeSave(tx *gorm.DB) (err error) {
 	if m.Config != nil {
 		if m.RawConfig, err = json.Marshal(m.Config); err != nil {
@@ -68,14 +70,43 @@ func (m *SpecAnalysis) BeforeSave(tx *gorm.DB) (err error) {
 			return err
 		}
 	}
+
+	// Handle compression.
+	m.RawResultCompressed, err = compressData(m.RawResult)
+	if err != nil {
+		return err
+	} else if m.RawResultCompressed != nil {
+		m.internalRawResult = m.RawResult
+		m.RawResult = nil
+	}
+
 	return
 }
 
+// AfterSave is a hook called after creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecAnalysis.SpecAnalysisResult(s), resets the temporary staging of SpecAnalysis.SpecAnalysisResult.
+func (m *SpecAnalysis) AfterSave(tx *gorm.DB) (err error) {
+	if m.RawResultCompressed != nil {
+		m.RawResult = m.internalRawResult
+		m.internalRawResult = nil
+		m.RawResultCompressed = nil
+	}
+	return
+}
+
+// AfterFind is a hook called after querying by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecAnalysis.SpecAnalysisResult(s), if SpecAnalysisResult.RawResultCompressed contains the compression, decompresses it back into SpecAnalysisResult.RawResult.
 func (m *SpecAnalysis) AfterFind(tx *gorm.DB) (err error) {
 	m.Result = &analyzer.Result{}
 	if m.RawConfig != nil {
 		m.Config = analyzer.Config{}
 		if err = json.Unmarshal(m.RawConfig, &m.Config); err != nil {
+			return err
+		}
+	}
+	if m.RawResultCompressed != nil {
+		m.RawResult, _, err = utils.GUNZIP(m.RawResultCompressed)
+		if err != nil {
 			return err
 		}
 	}
@@ -182,8 +213,11 @@ type SpecAnalysisConfig struct {
 }
 
 type SpecAnalysisResult struct {
-	Result    *analyzer.Result `json:"result" gorm:"-"`
-	RawResult datatypes.JSON   `json:"-" gorm:"column:result"`
+	Result              *analyzer.Result `json:"result" gorm:"-"`
+	RawResult           datatypes.JSON   `json:"-" gorm:"column:result"`
+	RawResultCompressed []byte           `json:"-" gorm:"column:result_compressed"`
+	// internalRawResult is an internal state variable for temporarily storing SpecAnalysisResult.RawResult between SpecAnalysis.BeforeSave & SpecAnalysis.AfterSave for data compression.
+	internalRawResult datatypes.JSON
 }
 
 // SpecAnalysisRequest represents a request for a SpecAnalysis

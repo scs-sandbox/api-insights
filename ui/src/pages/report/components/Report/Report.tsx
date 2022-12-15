@@ -202,7 +202,8 @@ export default function Report(props: Props) {
         if (forDrift) return compliance.analyzer === DRIFT_ANALYZER;
 
         if (!analyzerFilterData) {
-          return props.analyzerList.find((analyzer) => analyzer.name_id === compliance.analyzer);
+          return props.analyzerList.find((analyzer) => analyzer.name_id === compliance.analyzer
+            && compliance.analyzer !== DRIFT_ANALYZER);
         }
 
         return (filterIsSelected(compliance.analyzer, analyzerFilterData)

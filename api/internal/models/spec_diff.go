@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/cisco-developer/api-insights/api/internal/models/diff"
+	"github.com/cisco-developer/api-insights/api/pkg/utils"
 	"github.com/cisco-developer/api-insights/api/pkg/utils/shared"
 	"github.com/emicklei/go-restful/v3"
 	"gorm.io/datatypes"
@@ -46,6 +47,8 @@ type SpecDiff struct {
 	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at"`
 }
 
+// BeforeSave is a hook called before creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecDiffResult.RawResult(s), compressData conditionally compresses SpecDiffResult.RawResult into SpecDiffResult.RawResultCompressed.
 func (m *SpecDiff) BeforeSave(tx *gorm.DB) (err error) {
 	if m.Config != nil {
 		if m.RawConfig, err = json.Marshal(m.Config); err != nil {
@@ -57,13 +60,42 @@ func (m *SpecDiff) BeforeSave(tx *gorm.DB) (err error) {
 			return err
 		}
 	}
+
+	// Handle compression.
+	m.RawResultCompressed, err = compressData(m.RawResult)
+	if err != nil {
+		return err
+	} else if m.RawResultCompressed != nil {
+		m.internalRawResult = m.RawResult
+		m.RawResult = nil
+	}
+
 	return
 }
 
+// AfterSave is a hook called after creation by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecDiff.SpecDiffResult(s), resets the temporary staging of SpecDiff.SpecDiffResult.
+func (m *SpecDiff) AfterSave(tx *gorm.DB) (err error) {
+	if m.RawResultCompressed != nil {
+		m.RawResult = m.internalRawResult
+		m.internalRawResult = nil
+		m.RawResultCompressed = nil
+	}
+	return
+}
+
+// AfterFind is a hook called after querying by GORM (https://gorm.io/docs/hooks.html).
+// For handling large SpecDiff.SpecDiffResult(s), if SpecDiffResult.RawResultCompressed contains the compression, decompresses it back into SpecDiffResult.RawResult.
 func (m *SpecDiff) AfterFind(tx *gorm.DB) (err error) {
 	if m.RawConfig != nil {
 		m.Config = &diff.Config{}
 		if err = json.Unmarshal(m.RawConfig, m.Config); err != nil {
+			return err
+		}
+	}
+	if m.RawResultCompressed != nil {
+		m.RawResult, _, err = utils.GUNZIP(m.RawResultCompressed)
+		if err != nil {
 			return err
 		}
 	}
@@ -169,8 +201,11 @@ type SpecDiffResponse struct {
 }
 
 type SpecDiffResult struct {
-	Result    *diff.Result   `json:"result" gorm:"-"`
-	RawResult datatypes.JSON `json:"-" gorm:"column:result"`
+	Result              *diff.Result   `json:"result" gorm:"-"`
+	RawResult           datatypes.JSON `json:"-" gorm:"column:result"`
+	RawResultCompressed []byte         `json:"-" gorm:"column:result_compressed"`
+	// internalRawResult is an internal state variable for temporarily storing SpecDiffResult.RawResult between SpecDiff.BeforeSave & SpecDiff.AfterSave for data compression.
+	internalRawResult datatypes.JSON
 }
 
 type SpecDiffRequest struct {

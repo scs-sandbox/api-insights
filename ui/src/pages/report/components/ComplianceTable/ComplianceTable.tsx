@@ -81,7 +81,7 @@ export default function ComplianceTable(props: Props) {
 
     const { id, index } = event.currentTarget.dataset;
     const item = currentPageRows.find((i) => i.id === id);
-    if (!item || index) return;
+    if (!item) return;
 
     const rowIndex = Number.parseInt(index || '0', 10);
     const clickItemEventData = { ...item, row: item.detail[rowIndex] };
