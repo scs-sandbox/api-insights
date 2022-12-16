@@ -75,6 +75,12 @@ export function useFetchSpecDetail(serviceId: string, specId: string) {
   });
 }
 
+export function fetchSpecDetail(serviceId: string, specId: string) {
+  const url = `/services/${serviceId}/specs/${specId}?withDoc=true`;
+  if (!serviceId || !specId) return null;
+  return Api.get(url);
+}
+
 export function useAddSpec() {
   return useMutation((payload: AddSpecPayload) => {
     const url = `/services/${payload.service_id}/specs`;
