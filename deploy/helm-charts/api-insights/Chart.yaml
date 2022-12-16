@@ -18,8 +18,8 @@ apiVersion: v2
 name: api-insights
 description: Charts for API Insights deployment.
 type: application
-version: 0.1.1
-appVersion: "0.1.1"
+version: 0.2.1
+appVersion: "0.2.1"
 
 home: https://github.com/cisco-developer/api-insights
 icon: ""

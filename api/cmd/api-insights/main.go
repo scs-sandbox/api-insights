@@ -20,6 +20,7 @@ import (
 	"github.com/cisco-developer/api-insights/api/internal/db"
 	"github.com/cisco-developer/api-insights/api/internal/endpoints"
 	"github.com/cisco-developer/api-insights/api/internal/info"
+	"github.com/cisco-developer/api-insights/api/internal/models"
 	"github.com/cisco-developer/api-insights/api/pkg/analyzer/completeness"
 	"github.com/cisco-developer/api-insights/api/pkg/analyzer/security"
 	"github.com/cisco-developer/api-insights/api/pkg/apiclarity"
@@ -62,6 +63,7 @@ func App(version string) *cli.App {
 	additionalFlags = shared.MergeFlags(additionalFlags, completeness.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, security.Flags())
 	additionalFlags = shared.MergeFlags(additionalFlags, info.Flags())
+	additionalFlags = shared.MergeFlags(additionalFlags, models.Flags())
 
 	return shared.HTTPApp(config, additionalFlags)
 }
