@@ -39,6 +39,8 @@ type Props = {
   selectedService: ServiceData.Service;
   leftSpec?: SpecData.Spec;
   rightSpec?: SpecData.Spec;
+  leftSpecDetail?: SpecData.Spec;
+  rightSpecDetail?: SpecData.Spec;
   leftComplianceList?: ComplianceData.Compliance[];
   rightComplianceList?: ComplianceData.Compliance[];
   compareData: DiffData.JsonDiff;
@@ -209,7 +211,11 @@ function Compare(props: Props) {
           <div className="loading-indicator">Loading...</div>
           )}
           {tab ? (
-            <DiffList data={props.compareData?.result?.json} />
+            <DiffList
+              data={props.compareData?.result?.json}
+              leftSpec={props.leftSpecDetail}
+              rightSpec={props.rightSpecDetail}
+            />
           ) : (
             <div className="markdown-container">
               {downloadChangelogButton}

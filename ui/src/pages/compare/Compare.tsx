@@ -16,9 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState } from 'react';
 import { URLSearchParamsInit, useOutletContext, useSearchParams } from 'react-router-dom';
 import Compare from './components/Compare/Compare';
-import { SpecData, useFetchSpecList } from '../../query/spec';
+import {
+  SpecData, useFetchSpecList,
+  useFetchSpecDetail,
+} from '../../query/spec';
 import { useFetchCompare, useFetchMarkdown } from '../../query/compare';
 import { useFetchSpecCompliance } from '../../query/compliance';
 import { AppFrameContext } from '../../components/Frame/AppFrame/AppFrame';
@@ -31,8 +35,18 @@ export default function ComparePage() {
   const { selectedService } = useOutletContext() as AppFrameContext;
   const { data: specData } = useFetchSpecList(selectedService?.id);
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchParamSpec = searchParams.get('spec');
-  const searchParamSpec2 = searchParams.get('spec2');
+  const searchParamSpec = searchParams.get('spec') || '';
+  const searchParamSpec2 = searchParams.get('spec2') || '';
+  const { data: leftSpecDetail, refetch: fetchLeftSpecDetail } = useFetchSpecDetail(
+    selectedService?.id,
+    searchParamSpec,
+    'left-spec-detail',
+  );
+  const { data: rightSpecDetail, refetch: fetchRightSpecDetail } = useFetchSpecDetail(
+    selectedService?.id,
+    searchParamSpec2,
+    'right-spec-detail',
+  );
   const leftSpec = (specData || []).find((x: SpecData.Spec) => x.id === searchParamSpec);
   const rightSpec = (specData || []).find((x: SpecData.Spec) => x.id === searchParamSpec2);
   const {
@@ -94,6 +108,8 @@ export default function ComparePage() {
   };
 
   const onCompare = () => {
+    fetchLeftSpecDetail(); // fetch spec docs for both specs to for schema reference
+    fetchRightSpecDetail();
     fetchCompare(); // fetches results in json, rendered with helpful icons
     fetchMarkdown(); // fetches results in pure markdown, for markdown preview before download
   };
@@ -113,6 +129,8 @@ export default function ComparePage() {
     selectedService,
     leftSpec,
     rightSpec,
+    leftSpecDetail,
+    rightSpecDetail,
     leftComplianceList,
     rightComplianceList,
     compareData,

@@ -18,7 +18,7 @@
 
 import './SeverityIcon.scss';
 
-export type KnownSeverity = 'error' | 'warning' | 'hint' | 'info';
+export type KnownSeverity = 'error' | 'warning' | 'hint' | 'info' | 'breaking';
 
 export type Severity = KnownSeverity | string;
 

@@ -37,12 +37,8 @@ export namespace DiffData {
     message: string;
   };
 
-  export type DiffModifiedItemSecurity = {
-    details: SecurityDetailItem[];
-    message: string;
-  };
-
   export type ParametersDetailItem = {
+    details: any;
     name: string;
     action: string;
     breaking: boolean;
@@ -51,7 +47,16 @@ export namespace DiffData {
     in: string;
     message: string;
   };
-
+  export type DetailItem = {
+    name: string;
+    action: string;
+    breaking: boolean;
+    deprecated: boolean;
+    description: string;
+    in: string;
+    message: string;
+    details: DetailItem[];
+  }
   export type DiffModifiedItemParameters = {
     breaking: boolean;
     details: ParametersDetailItem[];
@@ -64,12 +69,23 @@ export namespace DiffData {
     produces: string[];
     responses: unknown;
   };
+  export type DiffModifiedItemResponseBody = {
+    breaking: boolean;
+    details: ParametersDetailItem[];
+    message: string;
+  }
+
+  export type DiffModifiedItemSecurity = {
+    details: DetailItem[];
+    message: string;
+  };
 
   export type DiffModifiedItem = DiffAddedItem & {
     breaking: boolean;
     summary: string;
     description: string;
-    requestBody: string;
+    requestBody: DiffModifiedItemResponseBody;
+    responses: DiffModifiedItemResponseBody;
     security: DiffModifiedItemSecurity;
     parameters: DiffModifiedItemParameters;
     new: unknown;

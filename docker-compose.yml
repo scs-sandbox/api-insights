@@ -61,5 +61,5 @@ services:
       - MYSQL_USER=dev
       - MYSQL_PASSWORD=123456
       - MYSQL_ROOT_PASSWORD=123456
-    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci']
+    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--sort_buffer_size=1073741824']
     restart: always

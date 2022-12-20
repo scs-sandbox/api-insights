@@ -16,31 +16,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-.severity-icon {
-  display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
-  background: center / contain no-repeat;
-  background-image: url('./images/unknown.svg');
-
-  &.severity-icon-error {
-    background-image: url('./images/errors.svg');
-  }
-
-  &.severity-icon-hint {
-    background-image: url('./images/hint.svg');
-  }
-
-  &.severity-icon-info {
-    background-image: url('./images/info.svg');
-  }
-
-  &.severity-icon-warning {
-    background-image: url('./images/warnings.svg');
-  }
-
-  &.severity-icon-breaking {
-    background-image: url('./images/breaking.svg');
-    width: 20px;
-  }
+export default function waitForElm(selector: string) {
+  // eslint-disable-next-line consistent-return
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(document.querySelector(selector));
+    }
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
 }

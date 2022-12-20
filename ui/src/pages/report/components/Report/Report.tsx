@@ -341,9 +341,7 @@ export default function Report(props: Props) {
       <HelpButton
         show={!props.selectedSpec}
         title="Reports for compliance and version drift"
-        message={
-          "Manage your service' compliance speedily with comprehensive priority ratings, grouped issues and easy to navigate line-numbered issues. View the issue in context by clicking on the instance!"
-        }
+        message="Manage your service compliance speedily with comprehensive priority ratings, grouped issues and easy to navigate line-numbered issues. View the issue in context by clicking on the instance!"
       />
       <div className="page-body-content">{reportResult}</div>
       {dialog}
