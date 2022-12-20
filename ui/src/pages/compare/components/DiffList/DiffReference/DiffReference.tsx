@@ -36,12 +36,11 @@ type Props = {
 };
 
 export default function DiffReference(props: Props) {
-  const leftSchemaSection = (props.leftSpec)
-    ? JSON.parse(props.leftSpec?.doc).components.schemas : {};
-  const rightSchemaSection = (props.rightSpec)
-    ? JSON.parse(props.rightSpec?.doc).components.schemas : {};
+  const leftSchemaSection = ((props.leftSpec)
+    ? JSON.parse(props.leftSpec?.doc)?.components?.schemas : {}) || {};
+  const rightSchemaSection = ((props.rightSpec)
+    ? JSON.parse(props.rightSpec?.doc)?.components?.schemas : {}) || {};
   const refName = props.data.split('/schemas/')[1];
-  const [isOpen, toggleItemOpen] = useState<boolean | null>(null);
   const [refs, setRefs] = useState<string[]>([]);
   useEffect(() => {
     iterateObject(leftSchemaSection, refs);
@@ -59,8 +58,8 @@ export default function DiffReference(props: Props) {
       <MonacoDiffEditor
         height="400px"
         width="100%"
-        original={JSON.stringify(leftSchemaSection[refName], null, '\t')}
-        value={JSON.stringify(rightSchemaSection[refName], null, '\t')}
+        original={JSON.stringify(leftSchemaSection[refName] || {}, null, '\t')}
+        value={JSON.stringify(rightSchemaSection[refName] || {}, null, '\t')}
         options={{
           minimap: {
             enabled: false,
