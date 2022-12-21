@@ -77,6 +77,7 @@ export default function VersionReport(props: Props) {
       key={data.id}
       className={data.id === highlightRevisionId ? 'highlight' : ''}
       data={data}
+      service={props.service}
       linkTo={buildReportUrl(data.id)}
       onMouseEnter={onSetHighlightRevision}
       onMouseLeave={onCancelHighlightRevision}
