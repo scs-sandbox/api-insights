@@ -23,9 +23,11 @@ import ScoreLevel from '../../../../components/Frame/Service/ScoreLevel/ScoreLev
 import SpecStateIcon from '../../../../components/Specs/SpecStateIcon/SpecStateIcon';
 import SpecTime from '../../../../components/Specs/SpecTime/SpecTime';
 import { buildApiAbsoluteUrl } from '../../../../query/api';
-import { SpecData } from '../../../../query/spec';
+import { SpecData, fetchSpecDetail } from '../../../../query/spec';
+import { ServiceData } from '../../../../query/service';
 import { ComplianceData } from '../../../../query/compliance';
 import classNames from '../../../../utils/className';
+import handleDownload from '../../../../utils/handleDownload';
 import './Revision.scss';
 
 export type RevisionData = SpecData.Spec & {
@@ -36,6 +38,7 @@ type Props = {
   data: RevisionData;
   linkTo: string;
   className?: string;
+  service: ServiceData.Service;
   onMouseEnter?: (item: RevisionData) => void;
   onMouseLeave?: (item: RevisionData) => void;
   onReleased?: (item: RevisionData) => void;
@@ -49,8 +52,7 @@ type Props = {
  */
 export default function Revision(props: Props) {
   const [openMenu, setOpenMenu] = useState(false);
-
-  const { data } = props;
+  const { data, service } = props;
   const className = classNames(
     'revision-item block-item-light',
     props.className,
@@ -89,9 +91,12 @@ export default function Revision(props: Props) {
   };
 
   const handleSpecDownload = () => {
-    const url = `/services/${data.service_id}/specs/${data.id}/doc`;
-    window.open(buildApiAbsoluteUrl(url));
+    const fileName = `${service.name_id}-${data.version}-${data.revision}.json`;
+    fetchSpecDetail(service.id, data.id)?.then((result: any) => {
+      handleDownload(fileName, result.doc);
+    });
   };
+
   const renderScore = () => {
     if (data.score === null || data.score === undefined) {
       return <div className="loader" />;

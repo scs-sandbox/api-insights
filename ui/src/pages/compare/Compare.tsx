@@ -26,6 +26,7 @@ import {
 import { useFetchCompare, useFetchMarkdown } from '../../query/compare';
 import { useFetchSpecCompliance } from '../../query/compliance';
 import { AppFrameContext } from '../../components/Frame/AppFrame/AppFrame';
+import handleDownload from '../../utils/handleDownload';
 
 /**
  * This file sets up the data fetching functions for the compare page
@@ -112,17 +113,6 @@ export default function ComparePage() {
     fetchRightSpecDetail();
     fetchCompare(); // fetches results in json, rendered with helpful icons
     fetchMarkdown(); // fetches results in pure markdown, for markdown preview before download
-  };
-
-  const handleDownload = (fileName: string, content = '') => {
-    const eleLink = document.createElement('a');
-    eleLink.download = fileName;
-    eleLink.style.display = 'none';
-    const blob = new Blob([content]);
-    eleLink.href = URL.createObjectURL(blob);
-    document.body.appendChild(eleLink);
-    eleLink.click();
-    document.body.removeChild(eleLink);
   };
 
   const props = {
