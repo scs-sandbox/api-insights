@@ -67,7 +67,7 @@ Multiple options to get started with API Insights
 This repo contains a Helm based deployer that can be deployed in a local Kubernetes cluster setup using like Rancher Desktop, minikube etc. The detailed instructions are found [here](https://developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
 
 ### In-Browser cloud development environment
-Run project in cloud develoment environment, that provides guided steps to install API Insights and run analysis on sample OpenAPI spec document. This is hosted by Cisco Developer learning lab platform.    
+Run this project in a cloud development environment that provides guided steps to install API Insights and run analysis on sample OpenAPI spec documents. This is hosted by Cisco Developer learning lab platform.    
 [![devenv-runit](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-runable-icon.svg)](https://developer.cisco.com/learning/labs/api-insights-101)
 
 ### Docker Compose base Development setup
