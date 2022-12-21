@@ -82,7 +82,6 @@ export default function DiffReference(props: Props) {
         }}
         editorDidMount={(diffEditor) => {
           if (!refs) return;
-          console.log('did  mount', refName);
           monacoMount(diffEditor, refs, props.setActiveRefs, refName);
         }}
       />
