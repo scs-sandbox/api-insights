@@ -45,12 +45,12 @@ export default function DiffReference(props: Props) {
     let current = JSON.parse(doc);
     try {
       refNavList.forEach((ref) => {
-        if (ref !== '#' && ref in current) {
+        if (ref !== '#') {
           current = current[ref];
         }
       });
     } catch (_) {
-      return {};
+      return undefined;
     }
     return current;
   };
@@ -72,8 +72,8 @@ export default function DiffReference(props: Props) {
       <MonacoDiffEditor
         height="400px"
         width="100%"
-        original={JSON.stringify(findSchema(refList, props.leftSpec?.doc) || {}, null, '\t')}
-        value={JSON.stringify(findSchema(refList, props.rightSpec?.doc) || {}, null, '\t')}
+        original={JSON.stringify(findSchema(refList, props.leftSpec?.doc) || undefined, null, '\t')}
+        value={JSON.stringify(findSchema(refList, props.rightSpec?.doc) || undefined, null, '\t')}
         options={{
           minimap: {
             enabled: false,
