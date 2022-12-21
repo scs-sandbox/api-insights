@@ -98,6 +98,7 @@ export default function DiffModifiedItem(props: Props) {
   // };
   useEffect(() => {
     iterateObject(props.data.old, refs);
+    iterateObject(props.data.new, refs);
   }, []);
   return (
     <div
