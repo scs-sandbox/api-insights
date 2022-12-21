@@ -1,5 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/cisco-developer/api-insights/api)](https://goreportcard.com/report/github.com/cisco-developer/api-insights/api)
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cisco-developer/api-insights)
+[![devenv-runit](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-runable-icon.svg)](https://developer.cisco.com/learning/labs/api-insights-101)
 
 # API Insights
 [![API Insights Logo](https://user-images.githubusercontent.com/5516389/199577047-132e193d-2ce0-481d-b54e-c6e2729053f4.svg)](https://developer.cisco.com/site/api-insights/)
@@ -60,9 +61,16 @@ https://user-images.githubusercontent.com/5516389/200955566-95b6f53d-963a-4440-8
 
 
 ## Getting Started
+Multiple options to get started with API Insights
+
+### Helm Chart based installation
 This repo contains a Helm based deployer that can be deployed in a local Kubernetes cluster setup using like Rancher Desktop, minikube etc. The detailed instructions are found [here](https://developer.cisco.com/docs/api-insights/#!getting-started-with-an-api-insights-service).
 
-## Development setup
+### In-Browser cloud development environment
+Run project in cloud develoment environment, that provides guided steps to install API Insights and run analsis on sample OpenAPI spec document. This is hosted by Cisco Developer learning lab patform.    
+[![devenv-runit](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-runable-icon.svg)](https://developer.cisco.com/learning/labs/api-insights-101)
+
+### Docker Compose base Development setup
 Build and start UI & backend services using Docker Compose
 ```
 docker-compose up 
