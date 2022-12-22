@@ -37,11 +37,24 @@ type Props = {
 
 export default function DiffReference(props: Props) {
   const leftSchemaSection = (props.leftSpec)
-    ? JSON.parse(props.leftSpec?.doc).components.schemas : {};
+    ? JSON.parse(props.leftSpec?.doc) : {};
   const rightSchemaSection = (props.rightSpec)
-    ? JSON.parse(props.rightSpec?.doc).components.schemas : {};
+    ? JSON.parse(props.rightSpec?.doc) : {};
+  const refList = props.data.split('/');
+  const findSchema = (refNavList: string[], doc = '') => {
+    let current = JSON.parse(doc);
+    try {
+      refNavList.forEach((ref) => {
+        if (ref !== '#') {
+          current = current[ref];
+        }
+      });
+    } catch (_) {
+      return undefined;
+    }
+    return current;
+  };
   const refName = props.data.split('/schemas/')[1];
-  const [isOpen, toggleItemOpen] = useState<boolean | null>(null);
   const [refs, setRefs] = useState<string[]>([]);
   useEffect(() => {
     iterateObject(leftSchemaSection, refs);
@@ -59,8 +72,8 @@ export default function DiffReference(props: Props) {
       <MonacoDiffEditor
         height="400px"
         width="100%"
-        original={JSON.stringify(leftSchemaSection[refName], null, '\t')}
-        value={JSON.stringify(rightSchemaSection[refName], null, '\t')}
+        original={JSON.stringify(findSchema(refList, props.leftSpec?.doc) || undefined, null, '\t')}
+        value={JSON.stringify(findSchema(refList, props.rightSpec?.doc) || undefined, null, '\t')}
         options={{
           minimap: {
             enabled: false,
@@ -69,7 +82,6 @@ export default function DiffReference(props: Props) {
         }}
         editorDidMount={(diffEditor) => {
           if (!refs) return;
-          console.log('did  mount', refName);
           monacoMount(diffEditor, refs, props.setActiveRefs, refName);
         }}
       />

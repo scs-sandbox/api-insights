@@ -34,17 +34,19 @@ export default function DiffAddedItem(props: Props) {
         setShow(!show);
       }}
     >
-      <div className="row-item row-icon">
-        {' '}
-        <img className="icon" src={Green} alt="React Logo" />
+      <div className="row-container">
+        <div className="row-item row-icon">
+          {' '}
+          <img className="icon" src={Green} alt="React Logo" />
+        </div>
+        <div className="row-item row-text">Added: </div>
+        <div className="row-item row-code">
+          {props.data?.method}
+          {' '}
+          {props.data?.path}
+        </div>
+        {props.data.breaking && <div className="row-breaking">Breaking</div>}
       </div>
-      <div className="row-item row-text">Added: </div>
-      <div className="row-item row-code">
-        {props.data?.method}
-        {' '}
-        {props.data?.path}
-      </div>
-      {props.data.breaking && <div className="row-breaking">Breaking</div>}
     </div>
   );
 }
