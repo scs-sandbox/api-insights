@@ -125,10 +125,11 @@
     }
 
     .action-menu {
+      margin-top: 25px;
+      margin-left: 88px;
       position: absolute;
       z-index: 1;
       padding: 3px;
-      margin-left: 50%;
       transform: translateX(-50%);
       border-radius: 4px;
       background-color: #444;
@@ -148,16 +149,29 @@
 
         .menu-item-label {
           margin-left: 5px;
+          width: max-content;
         }
       }
     }
   }
 
+  .cog-icon {
+    background: url('../../../../assets/images/cog.svg');
+    border-radius: 5px 0px 0px 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+  }
   .revision-item-action {
     flex: 0 0 auto;
 
     .button-rc {
       font-size: 14px;
+      margin-left: 10px;
+      padding: 10px
     }
   }
 

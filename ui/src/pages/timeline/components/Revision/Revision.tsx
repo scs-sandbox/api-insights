@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import DownloadIcon from '../../../../components/DownloadIcon/DownloadIcon';
 import ScoreLevel from '../../../../components/Frame/Service/ScoreLevel/ScoreLevel';
@@ -28,6 +28,7 @@ import { ServiceData } from '../../../../query/service';
 import { ComplianceData } from '../../../../query/compliance';
 import classNames from '../../../../utils/className';
 import handleDownload from '../../../../utils/handleDownload';
+import UseClickOutside from '../../../../utils/clickOutside';
 import './Revision.scss';
 
 export type RevisionData = SpecData.Spec & {
@@ -53,6 +54,7 @@ type Props = {
 export default function Revision(props: Props) {
   const [openMenu, setOpenMenu] = useState(false);
   const { data, service } = props;
+
   const className = classNames(
     'revision-item block-item-light',
     props.className,
@@ -77,6 +79,10 @@ export default function Revision(props: Props) {
   const onCloseMenu = () => {
     setOpenMenu(false);
   };
+
+  const editMenuRef = useRef<HTMLDivElement>(null);
+
+  UseClickOutside(editMenuRef, onCloseMenu);
 
   const onRelease = () => {
     if (props.onReleased) {
@@ -114,13 +120,21 @@ export default function Revision(props: Props) {
 
     return (
       <div className="action-menu" onClick={onCloseMenu}>
+        <div className="menu-item" onClick={onArchive}>
+          <SpecStateIcon value={SpecData.SpecState.Archive} />
+          <div className="menu-item-label">Edit Revision</div>
+        </div>
         <div className="menu-item" onClick={onRelease}>
           <SpecStateIcon value={SpecData.SpecState.Release} />
-          <div className="menu-item-label">Live</div>
+          <div className="menu-item-label">Mark as Release</div>
         </div>
         <div className="menu-item" onClick={onArchive}>
           <SpecStateIcon value={SpecData.SpecState.Archive} />
-          <div className="menu-item-label">Archive</div>
+          <div className="menu-item-label">Hide Revision</div>
+        </div>
+        <div className="menu-item" onClick={onArchive}>
+          <SpecStateIcon value={SpecData.SpecState.Archive} />
+          <div className="menu-item-label">Delete Revision</div>
         </div>
       </div>
     );
@@ -146,11 +160,17 @@ export default function Revision(props: Props) {
       </div>
       <div
         className="revision-item-menu"
-        onMouseEnter={onOpenMenu}
-        onMouseLeave={onCloseMenu}
+        ref={editMenuRef}
       >
-        <div className="action-button" />
         {menu}
+      </div>
+      <div
+        className="revision-item-action"
+        onClick={onOpenMenu}
+        // onMouseEnter={onOpenMenu}
+        // onMouseLeave={onCloseMenu}
+      >
+        <div className="action-button  button-rc"><div className="cog-icon"> </div></div>
       </div>
       <div className="revision-item-action">
         <Link to={props.linkTo} className="view-report button-rc">
