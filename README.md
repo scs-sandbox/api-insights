@@ -2,7 +2,7 @@
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cisco-developer/api-insights)
 [![devenv-runit](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-runable-icon.svg)](https://developer.cisco.com/learning/labs/api-insights-101)
 
-# API Insights
+## API Insights
 [![API Insights Logo](https://user-images.githubusercontent.com/5516389/199577047-132e193d-2ce0-481d-b54e-c6e2729053f4.svg)](https://developer.cisco.com/site/api-insights/)
 
 [API Insights](https://developer.cisco.com/site/api-insights/) is a tool to enable organizations to manage versioned API specifications (Swagger 2.0/OpenAPI Spec 3.x) for services. It also does static analysis of API spec files for compliance against REST API best practices guidelines, document completeness, inclusive language check and runtime API drift from documented spec. To help API consumers and developers, API Insights service also supports generating an API changelog including identification of backward compatibility breaking changes between 2 versions of API spec files.
